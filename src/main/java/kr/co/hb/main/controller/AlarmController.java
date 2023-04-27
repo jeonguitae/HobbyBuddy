@@ -1,6 +1,6 @@
 package kr.co.hb.main.controller;
 
-public class NotiController {
+public class AlarmController {
 	
 	
 }
