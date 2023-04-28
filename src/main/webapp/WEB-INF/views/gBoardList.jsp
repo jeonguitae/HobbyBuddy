@@ -17,10 +17,7 @@
 </style>
 </head>
 <body>
-<h1>목진경</h1>
-<h1>박희준</h1>
-<h1>지웅ㅎ</h1>
-<h1>나맇</h1>
+
 	<table>
 		<thead>
 			<tr>
