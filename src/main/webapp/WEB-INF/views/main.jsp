@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-	<div>메인화면입니다</div>
+	
 </body>
 <script></script>
 </html>
