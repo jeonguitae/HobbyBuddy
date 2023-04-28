@@ -1,4 +1,4 @@
-package kr.co.hb.moim.service;
+package kr.co.hb.group.service;
 
 public class OpenChatService {
 

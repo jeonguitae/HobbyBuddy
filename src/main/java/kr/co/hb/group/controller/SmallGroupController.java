@@ -1,4 +1,4 @@
-package kr.co.hb.moim.controller;
+package kr.co.hb.group.controller;
 
 public class SmallGroupController {
 

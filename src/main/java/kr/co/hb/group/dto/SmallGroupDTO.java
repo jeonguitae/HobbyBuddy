@@ -1,4 +1,4 @@
-package kr.co.hb.moim.dto;
+package kr.co.hb.group.dto;
 
 public class SmallGroupDTO {
 

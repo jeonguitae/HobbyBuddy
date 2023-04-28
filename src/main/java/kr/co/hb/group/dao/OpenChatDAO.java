@@ -1,4 +1,4 @@
-package kr.co.hb.moim.dao;
+package kr.co.hb.group.dao;
 
 public interface OpenChatDAO {
 
