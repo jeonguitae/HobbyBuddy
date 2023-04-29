@@ -69,7 +69,7 @@
 				<tr>
 					<th>지역</th>
 					<td>
-						<select id="city">
+						<select name="city">
 						    <option value="서울특별시">서울특별시</option>
 						    <option value="인천광역시">인천광역시</option>
 						    <option value="경기도">경기도</option>
@@ -129,7 +129,7 @@
 				<tr>
 					<th>약속 날짜</th>
 					<td>
-						<input id="date" type="date">
+						<input type="date" id="date" name="date">
 					</td>
 				</tr>
 				
@@ -178,37 +178,37 @@
 		console.log(val);
 		
 		if(val == '운동'){
-			content += '<input type="checkbox" value="축구">축구';
-			content += '<input type="checkbox" value="헬스">헬스';
-			content += '<input type="checkbox" value="야구">야구';
-			content += '<input type="checkbox" value="골프">골프';
-			content += '<input type="checkbox" value="테니스">테니스';
+			content += '<input type="checkbox" name="mhobby" value="축구">축구';
+			content += '<input type="checkbox" name="mhobby" value="헬스">헬스';
+			content += '<input type="checkbox" name="mhobby" value="야구">야구';
+			content += '<input type="checkbox" name="mhobby" value="골프">골프';
+			content += '<input type="checkbox" name="mhobby" value="테니스">테니스';
 		}
 		
 		else if(val == '맛집'){
-			content += '<input type="checkbox" value="한식">한식';
-			content += '<input type="checkbox" value="중식">중식';
-			content += '<input type="checkbox" value="양식">양식';
+			content += '<input type="checkbox" name="mhobby" value="한식">한식';
+			content += '<input type="checkbox" name="mhobby" value="중식">중식';
+			content += '<input type="checkbox" name="mhobby" value="양식">양식';
 		}
 		
 		else if(val == '반려동물'){
-			content += '<input type="checkbox" value="산책">산책';
-			content += '<input type="checkbox" value="쇼핑">쇼핑';
-			content += '<input type="checkbox" value="미용">미용';
+			content += '<input type="checkbox" name="mhobby" value="산책">산책';
+			content += '<input type="checkbox" name="mhobby" value="쇼핑">쇼핑';
+			content += '<input type="checkbox" name="mhobby" value="미용">미용';
 		}
 		
 		else{
-			content += '<input type="checkbox" value="영화">영화';
-			content += '<input type="checkbox" value="게임">게임';
-			content += '<input type="checkbox" value="노래방">노래방';
-			content += '<input type="checkbox" value="보드게임">보드게임';
-			content += '<input type="checkbox" value="방탈출">방탈출';
+			content += '<input type="checkbox" name="mhobby" value="영화">영화';
+			content += '<input type="checkbox" name="mhobby" value="게임">게임';
+			content += '<input type="checkbox" name="mhobby" value="노래방">노래방';
+			content += '<input type="checkbox" name="mhobby" value="보드게임">보드게임';
+			content += '<input type="checkbox" name="mhobby" value="방탈출">방탈출';
 		}
 		
 		$('.mhobby').html(content);
 	});
 	
-	$('#city').on('change',function(){
+	$('select[name="city"]').on('change',function(){
 		var val = $(this).val();
 		var content = '';
 		
