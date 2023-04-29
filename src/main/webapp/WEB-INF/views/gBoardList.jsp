@@ -13,6 +13,20 @@
 	}
 
 </style>
+
+<script type="text/javascript">
+
+	window.onload = function() {
+		today = new Date();
+		console.log("today.toISOString() >>>" + today.toISOString());
+		today = today.toISOString().slice(0, 10);
+		console.log("today >>>> " + today);
+		bir = document.getElementById("date");
+		bir.value = today;
+	}
+	
+</script>
+
 </head>
 <body>
 	
@@ -103,6 +117,26 @@
 							<option value="강동구">강동구</option>
 						</select>
 					</td>
+				</tr>
+				
+				<tr>
+					<th>인원 수</th>
+					<td>
+						<input type="text" name="participant" value=""/>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>약속 날짜</th>
+					<td>
+						<input id="date" type="date">
+					</td>
+				</tr>
+				
+				<tr>
+					<th colspan="2">
+						<input type="submit" value="검색"/>
+					</th>
 				</tr>
 			</table>
 		</form>
