@@ -9,7 +9,17 @@
 </style>
 </head>
 <body>
-	<div>메인화면입니다</div>
+	<div>하비버디 메인화면입니다</div>
+	<input type="button" value="로그인" onclick="location.href='login.go'"/>
+	<input type="button" value="회원가입" onclick="location.href='join.go'"/>
+	
+	<input type="button" value="운동" onclick="location.href='join.go'"/>
+	<input type="button" value="반려동물" onclick="location.href='join.go'"/>	
+	<input type="button" value="맛집" onclick="location.href='join.go'"/>	
+	<input type="button" value="여가" onclick="location.href='join.go'"/>	
+	<input type="button" value="기타" onclick="location.href='join.go'"/>
+	
+	
 </body>
 <script></script>
 </html>

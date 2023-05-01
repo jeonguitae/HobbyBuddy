@@ -3,6 +3,29 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.member.dao.MemberDAO">
+<mapper namespace="kr.co.hb.member.dao.MemberDAO">
+
+	<select id="overlay" resultType="int">
+		SELECT COUNT(id) FROM member
+			WHERE id = #{param1}
+	</select>
+	
+	<insert id="join" parameterType="hashmap">
+		insert into member (id,pw,name,email,phone,age,gender,city,area,intr,chkreq,chkresp,random)
+		values(#{id},#{pw},#{name},#{email},#{phone},#{age},#{gender},#{city},#{area},#{intr},#{chkreq},#{chkresp},#{random})
+	</insert>
+	
+	<select id="city" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT city FROM city ORDER BY city
+	</select>
+	
+	<select id="area" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT area FROM area where city=#{param1} ORDER BY city
+	</select>
+	
+	<select id="login" parameterType="hashmap" resultType="int">
+		SELECT COUNT(id) FROM member
+			WHERE id=#{param1} and pw=#{param2}
+	</select>
 
 </mapper>
