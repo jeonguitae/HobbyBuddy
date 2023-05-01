@@ -12,6 +12,9 @@
 		padding : 5px 10px;
 	}
 
+	button[id="gcreate"]{
+		margin-bottom: 5px
+	}
 </style>
 
 <script type="text/javascript">
@@ -142,6 +145,8 @@
 		</form>
 	</div>
 	
+	<button onclick="location.href='gwrite.go'" id="gcreate">모임 생성하기</button>
+	
 	<div class="list">
 		<table>
 			<thead>
@@ -169,6 +174,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	
 </body>
 <script>
 	$('input[name="bhobby"]').click(function(){
@@ -189,6 +196,7 @@
 			content += '<input type="checkbox" name="mhobby" value="한식">한식';
 			content += '<input type="checkbox" name="mhobby" value="중식">중식';
 			content += '<input type="checkbox" name="mhobby" value="양식">양식';
+			content += '<input type="checkbox" name="mhobby" value="양식">일식';
 		}
 		
 		else if(val == '반려동물'){

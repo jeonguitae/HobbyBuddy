@@ -3,6 +3,6 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.moim.dao.SmallGroupDAO">
+<mapper namespace="kr.co.hb.groupreview.dao.SmallGroupDAO">
 
 </mapper>
