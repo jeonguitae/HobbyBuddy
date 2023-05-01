@@ -20,6 +20,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <h3>로그인</h3>
    <table>
       <tr>
@@ -56,7 +57,7 @@
 	         console.log(data);
 	         if (data.success==1) {
 	            alert('로그인에 성공했습니다.');
-	            location.href='/';
+	            location.href='./';
 	         }else{
 	            alert('아이디 또는 비밀번호를 확인해주세요.');
 	         }

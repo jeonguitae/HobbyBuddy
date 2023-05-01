@@ -17,4 +17,6 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> area(String city);
 
+	String adminChk(String id, String pw);
+
 }

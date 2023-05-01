@@ -27,5 +27,16 @@ public class MainController {
 	@RequestMapping(value="/")
 	public String main(Model model) {
 		return "main";
-	}	
+	}
+	
+	@RequestMapping(value="/gnb.go")
+	public String gnb(Model model) {
+		return "gnb";
+	}
+	@RequestMapping(value = "/logout.go", method = RequestMethod.GET)
+	public String logout(HttpSession session) {
+		session.removeAttribute("loginId");
+		return "redirect:/";
+	}
+
 }

@@ -31,6 +31,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
 	<h3>회원가입</h3>
 	<table>
 		<tr>

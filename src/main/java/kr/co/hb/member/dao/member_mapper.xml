@@ -27,5 +27,9 @@
 		SELECT COUNT(id) FROM member
 			WHERE id=#{param1} and pw=#{param2}
 	</select>
+	<select id="adminChk" parameterType="hashmap" resultType="string">
+		SELECT admin FROM member
+			WHERE id=#{param1} and pw=#{param2}
+	</select>
 
 </mapper>

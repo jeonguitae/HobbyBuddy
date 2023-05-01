@@ -68,14 +68,13 @@ public class MemberController {
 	@ResponseBody
 	public HashMap<String, Object> login(@RequestParam String id,@RequestParam String pw, HttpSession session){
 		logger.info(id+"/"+pw);
-		int success = service.login(id,pw);
+		int success = service.login(id,pw,session);
 		logger.info("login success : "+success);
 		if(success == 1) {
 			session.setAttribute("loginId", id);
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("success", success);
-		
 		return map;
 	}
 
