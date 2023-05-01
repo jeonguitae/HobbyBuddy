@@ -14,36 +14,36 @@ import kr.co.hb.group.service.GroupBoardService;
 
 @Controller
 public class GroupBoardController {
-	
-	@Autowired GroupBoardService service;
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@RequestMapping(value="/")
-	public String list(Model model) {		
-						
-		return "gBoardList";
-	}
-	
-	@RequestMapping(value="/sorting.do")
-	public String sorting(Model model, @RequestParam HashMap<String, String> params) {		
-				
-		logger.info("검색 조건 : " + params);
-		
-		return service.sorting(params);
-	}
-	
-	@RequestMapping(value="/gwrite.go")
-	public String gwriteform(Model model, @RequestParam HashMap<String, String> params) {		
-		
-		return "gBoardCreate";
-	}
-	
-	@RequestMapping(value="/gwrite.do")
-	public String gwrite(Model model, @RequestParam HashMap<String, String> params) {		
-				
-		logger.info("생성 데이터 : " + params);
-		
-		return service.gwrite(params);
-	}
+//	
+//	@Autowired GroupBoardService service;
+//	Logger logger = LoggerFactory.getLogger(this.getClass());
+//	
+//	@RequestMapping(value="/")
+//	public String list(Model model) {		
+//						
+//		return "gBoardList";
+//	}
+//	
+//	@RequestMapping(value="/sorting.do")
+//	public String sorting(Model model, @RequestParam HashMap<String, String> params) {		
+//				
+//		logger.info("검색 조건 : " + params);
+//		
+//		return service.sorting(params);
+//	}
+//	
+//	@RequestMapping(value="/gwrite.go")
+//	public String gwriteform(Model model, @RequestParam HashMap<String, String> params) {		
+//		
+//		return "gBoardCreate";
+//	}
+//	
+//	@RequestMapping(value="/gwrite.do")
+//	public String gwrite(Model model, @RequestParam HashMap<String, String> params) {		
+//				
+//		logger.info("생성 데이터 : " + params);
+//		
+//		return service.gwrite(params);
+//	}
 
 }
