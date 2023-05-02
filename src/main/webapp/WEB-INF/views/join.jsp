@@ -61,7 +61,7 @@
             <td><input type="email" id="email"/></td>
          </tr>
          <tr>
-            <th>전화번호</th>
+            <th>전화번호(숫자만 입력)</th>
             <td><input type="number" id="phone"/></td>
          </tr>
          <tr>
@@ -77,7 +77,7 @@
             </td>
          </tr>
          <tr>
-            <th>*지역</th> 
+            <th>지역</th> 
             <td>
                 <select id="city">
                 	<option>시-도 선택</option>
