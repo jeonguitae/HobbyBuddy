@@ -10,6 +10,24 @@
 table {
    width: 500px
 }
+table, th, td{
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px 10px;     
+      
+   }
+   button{
+      margin: 5px;
+   }
+   table {
+      width: 500px;
+   }
+   input[type="text"]{
+      width: 40%;   
+   }
+   colgroup {
+      width: 30%;
+   }
 </style>
 </head>
 <body>

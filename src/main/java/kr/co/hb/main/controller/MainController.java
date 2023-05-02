@@ -38,4 +38,10 @@ public class MainController {
 		session.removeAttribute("loginId");
 		return "redirect:/";
 	}	
+	
+	@RequestMapping(value = "/admin.go", method = RequestMethod.GET)
+	public String admin(HttpSession session) {
+
+		return "admin";
+	}
 }
