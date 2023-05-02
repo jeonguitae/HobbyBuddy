@@ -67,8 +67,7 @@
                <th>작성자</th>
                <th>제목</th>
                <th>작성일시</th>
-               <th>조회수</th>
-               <th>공지여부</th>                        
+               <th>조회수</th>                      
             </tr>            
          </thead>
          <tbody>
@@ -84,7 +83,6 @@
                <td><a href="noticeDetail.do?notice_idx=${notice.notice_idx}">${notice.notice_title}</a></td>
                <td>${notice.notice_date}</td>
                <td>${notice.notice_bHit}</td>
-               <td>${notice.notice_chk}</td>
             </tr>
             </c:forEach>      
          </tbody>

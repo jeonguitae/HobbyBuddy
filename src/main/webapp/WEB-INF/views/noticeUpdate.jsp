@@ -6,10 +6,32 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css">
-<style></style>
+<style>
+	table, th, td{
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px 10px;      
+      
+   }
+   button{
+      margin: 5px;
+   }
+   table {
+      width: 500px;
+   }
+   input[type="text"]{
+      width: 40%;   
+   }
+   #search{
+      display: inline-block;
+   }
+   colgroup {
+      width: 30%;
+   }
+</style>
 </head>
 <body>
-   <h3 align="center">공지사항 등록</h3>
+   <h3 align="center">공지사항 수정</h3>
    <form action="noticeDetail.do" method="post" enctype="multipart/form-data">
       <input type="hidden" name="notice_idx" value="${dto.notice_idx}"/>
       <table>      
@@ -43,7 +65,7 @@
                <!-- 이러면 submit 효과가 사라짐 -->
                <!-- <button type="button"></button> -->
                <button>수정</button>
-               <input type="button" onclick="location.href='noitceList.go'" value="취소">
+               <input type="button" onclick="location.href='noticeList.go'" value="취소">
             </th>
          </tr>
       </table>

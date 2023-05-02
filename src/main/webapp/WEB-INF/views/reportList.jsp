@@ -21,7 +21,7 @@
       margin: 5px;
    }
    table {
-      width: 500px;
+      width: 1000px;
    }
    input[type="text"]{
       width: 40%;   
@@ -81,7 +81,7 @@
             </c:if>                    
          </tbody>
             <tr>
-               <td colspan="6" id="paging">   
+               <td colspan="9" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
                   <div class="container">                           
                      <nav aria-label="Page navigation" style="text-align:center">
