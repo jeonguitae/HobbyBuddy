@@ -15,8 +15,8 @@
 
 </head>
 <body>
-	<div class="sort">
-		<form action="sorting.do" method="get">
+	<div class="profile">
+		<form action="random.do" method="get">
 			<table>
 				
 				<tr>
@@ -31,8 +31,8 @@
 				<tr>
 					<th>나이</th>
 					<td>
-						<input type="text" name="minage" value=""/> &nbsp; ~ &nbsp;
-						<input type="text" name="maxage" value=""/>
+						<input type="text" name="minage" value="0"/> &nbsp; ~ &nbsp;
+						<input type="text" name="maxage" value="100"/>
 					</td>
 				</tr>
 				
@@ -153,15 +153,46 @@
 					<th colspan="2">
 						<input type="submit" value="랜덤매칭"/>
 					</th>
-				</tr>			
+				</tr>	
+				
+			<!-- 	<tr>
+					<th colspan="2">
+						
+					</th>
+				</tr>	 -->			
 
 			</table>
 			
 				<h3>취미를 함께 할 사람을 찾아보세요!</h3>
+				
+				
 
 		</form>
+		<input type="button" value="신고" onclick="location.href='./report.go'"/>
 	</div>
 	
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>NAME</th>
+				<th>나이</th>
+				<th>지역</th>
+				<th>성별</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="member">
+				<tr>
+					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
+					<td>${member.name}</td>
+					<td>${member.age}</td>
+					<td>${member.area}</td>
+					<td>${member.gender}</td>
+				</tr>			
+			</c:forEach>
+		</tbody>
+	</table>
 	
 </body>
 <script>

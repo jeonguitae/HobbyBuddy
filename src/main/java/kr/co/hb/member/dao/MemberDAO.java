@@ -19,8 +19,10 @@ public interface MemberDAO {
 
 	String adminChk(String id, String pw);
 
+
 	HashMap<String, Object> myProDetail(Object id);
 
 	int memberUpdate(HashMap<String, String> params);
+
 
 }

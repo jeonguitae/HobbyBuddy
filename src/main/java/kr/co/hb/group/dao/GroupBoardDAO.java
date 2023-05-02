@@ -9,7 +9,7 @@ public interface GroupBoardDAO {
 
 	ArrayList<GroupBoardDTO> glist();
 	
-	String sorting(HashMap<String, String> params);
+	ArrayList<GroupBoardDTO> gsorting(HashMap<String, String> params);
 
 	int gwrite(HashMap<String, String> params);
 
@@ -17,7 +17,9 @@ public interface GroupBoardDAO {
 
 	GroupBoardDTO gupdate(int id);
 
-	int gupdate(HashMap<String, String> params);
+	GroupBoardDTO gupdatedo(HashMap<String, String> params);
+
+	ArrayList<GroupBoardDTO> gserch(HashMap<String, String> params);
 
 
 }

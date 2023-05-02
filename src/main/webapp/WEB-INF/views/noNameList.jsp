@@ -15,8 +15,8 @@
 
 </head>
 <body>
-	<div class="sort">
-		<form action="sorting.do" method="get">
+	<div class="profile">
+		<form action="noname.do" method="get">
 			<table>
 				
 				<tr>
@@ -31,8 +31,8 @@
 				<tr>
 					<th>나이</th>
 					<td>
-						<input type="text" name="minage" value=""/> &nbsp; ~ &nbsp;
-						<input type="text" name="maxage" value=""/>
+						<input type="text" name="minage" value="0"/> &nbsp; ~ &nbsp;
+						<input type="text" name="maxage" value="100"/>
 					</td>
 				</tr>
 				
@@ -161,6 +161,25 @@
 
 		</form>
 	</div>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>나이</th>
+				<th>지역</th>
+				<th>성별</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach items="${list}" var="member">
+				<tr>
+					<td><a href="detail.do?id=${member.age}">${member.age}</a></td>
+					<td>${member.area}</td>
+					<td>${member.gender}</td>
+				</tr>			
+			</c:forEach>
+		</tbody>
+	</table>
 	
 	
 </body>

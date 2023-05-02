@@ -8,6 +8,12 @@
 		SELECT * FROM gboardlist ORDER BY gidx DESC
 	</select>
 	
+	<select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * 
+		FROM gboardlist 
+		WHERE bhobby = #{bhobby} AND mhobby = #{mhobby} AND gender = #{gender} AND city = #{city} AND area = #{area} AND meeting_date = #{meeting_date}
+	</select>
+	
 	<insert id="gwrite" parameterType="HashMap">
 		INSERT INTO gboardlist(id, subject, content, bhobby, mhobby, minage, maxage, gender, city, area, meeting_date, maxmem, mannertp)
 		VALUES(#{id}, #{subject}, #{content}, #{bhobby}, #{mhobby}, #{minage}, #{maxage}, #{gender}, #{city}, #{area}, #{meeting_date}, #{maxmem}, #{mannertp})
@@ -21,5 +27,27 @@
 	<select id="gupdate" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * FROM gboardlist
 		WHERE gidx = #{id}
+	</select>
+	
+	<update id="gupdatedo" parameterType="hashmap">
+		UPDATE gboardlist SET 
+			subject = #{subject}
+			,content = #{content}
+			,bhobby = #{bhobby}
+			,mhobby = #{mhobby}
+			,minage = #{minage}
+			,maxage = #{maxage}
+			,gender = #{gender}
+			,city = #{city}
+			,area = #{area}
+			,meeting_date = #{meeting_date}
+			,maxmem = #{maxmem}
+			,mannertp = #{mannertp}
+		WHERE gidx = #{id}
+	</update>
+	
+	<select id="gserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist
+		WHERE  = #{serch}
 	</select>
 </mapper>

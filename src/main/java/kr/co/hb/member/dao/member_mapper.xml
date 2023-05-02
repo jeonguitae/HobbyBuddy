@@ -31,6 +31,7 @@
 		SELECT admin FROM member
 			WHERE id=#{param1} and pw=#{param2}
 	</select>
+
 	
 	<select id="myProDetail" resultType="hashmap">
 		select m.id, m.name, m.email, m.phone, m.age, m.gender, m.city, m.area, m.mannertp, m.chkreq, m.chkresp, m.intr, m.random
