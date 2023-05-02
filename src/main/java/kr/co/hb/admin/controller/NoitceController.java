@@ -53,7 +53,7 @@ public class NoitceController {
 	      
 	      String page = "redirect:/noticeList.go";
 	      
-	      NoticeDTO dto = service.noticeDetail(notice_idx, "detail");
+	      NoticeDTO dto = service.noticeDetail(notice_idx, "noticeDetail");
 	      
 	      if (dto != null) {
 	         page = "noticeDetail";

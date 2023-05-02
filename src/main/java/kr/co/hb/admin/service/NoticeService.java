@@ -91,7 +91,7 @@ public class NoticeService {
 	         noticeFileSave(idx, photo);
 	      }
 	      
-	      String page = row > 0 ? "redirect:/detail.do?idx=" + idx : "redirect:/list.go";
+	      String page = row > 0 ? "redirect:/noticeDetail.do?idx=" + idx : "redirect:/noticeList.go";
 	             
 	        return page;
 	   }
