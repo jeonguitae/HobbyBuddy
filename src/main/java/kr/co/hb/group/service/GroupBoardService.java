@@ -23,11 +23,11 @@ public class GroupBoardService {
 		return dao.glist();
 	}
 	
-	public String sorting(HashMap<String, String> params) {
+	public ArrayList<GroupBoardDTO> gsorting(HashMap<String, String> params) {
 		
 		logger.info("검색 조건 : " + params);
 		
-		return dao.sorting(params);
+		return dao.gsorting(params);
 	}
 	public int gwrite(HashMap<String, String> params) {
 		
@@ -47,10 +47,19 @@ public class GroupBoardService {
 		return dao.gupdate(id);
 	}
 
-	public int gupdate(HashMap<String, String> params) {
+	public GroupBoardDTO gupdatedo(HashMap<String, String> params) {
 
-		return dao.gupdate(params);
+		return dao.gupdatedo(params);
 		
+	}
+
+	public ArrayList<GroupBoardDTO> gserch(HashMap<String, String> params) {
+		logger.info("gserch 서비스 호출");
+		ArrayList<GroupBoardDTO> fewqtr = dao.gserch(params);
+		for (int i = 0; i < fewqtr.size(); i++) {
+			logger.info(fewqtr.get(i).getId());
+		}
+		return dao.gserch(params);
 	}
 
 }

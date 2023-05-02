@@ -20,6 +20,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="gnb.jsp"/>
 	<table>
 		<tr>
 			<th>작성자</th>
@@ -54,6 +55,12 @@
 		<tr>
 			<th colspan="2">
 				<a href="./">리스트로 돌아가기</a>
+			</th>
+		</tr>
+		
+		<tr>
+			<th colspan="2">
+				<input type="button" value="신고" onclick="location.href='./greport.go'"/>
 			</th>
 		</tr>
 	</table>	
