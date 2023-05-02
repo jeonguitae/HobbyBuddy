@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
@@ -82,5 +84,15 @@ public class RandomController {
 		model.addAttribute("list",list);
 		return "reportList";
 	}
+	
+	 @RequestMapping(value = "/proList.ajax", method = RequestMethod.POST)
+     @ResponseBody
+     public HashMap<String, Object> list(
+           @RequestParam String page, @RequestParam String cnt
+           ) {
+        
+        return Service.list(Integer.parseInt(page), Integer.parseInt(cnt));
+     }
+
 	
 }

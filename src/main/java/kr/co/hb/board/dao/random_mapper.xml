@@ -11,7 +11,10 @@
 		SELECT * FROM member
 	</select>
 	
-		<select id="nonameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
+	<select id="nonameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
 		SELECT * FROM member WHERE city=#{city} AND area=#{area} and age between #{minage} and #{maxage} 
 	</select>
+	
+
+	
 </mapper>
