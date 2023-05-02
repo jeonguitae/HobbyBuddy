@@ -20,9 +20,9 @@ public class BoardController {
 	@Autowired BoardService service;
 	
 	@RequestMapping(value="/flist.go")
-	public String list(Model model) {		
+	public String flist(Model model) {		
 		logger.info("listcall");
-		ArrayList<BoardDTO> list = service.list();
+		ArrayList<BoardDTO> list = service.flist();
 		
 		model.addAttribute("list", list);
 		return "fBoardList";
