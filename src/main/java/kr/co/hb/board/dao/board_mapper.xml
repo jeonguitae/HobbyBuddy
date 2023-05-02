@@ -3,6 +3,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.board.dao.BoardDAO">
-
+<mapper namespace="kr.co.hb.board.dao.BoardDAO">
+	<select id="list" resultType="kr.co.hb.board.dto.BoardDTO">
+	SELECT fbNo, title, id, fbTime, bhit 
+	FROM fBoard ORDER BY fbNo DESC
+	</select>
 </mapper>

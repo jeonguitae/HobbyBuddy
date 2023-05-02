@@ -19,6 +19,7 @@ public class GroupBoardController {
 	
 	@Autowired GroupBoardService service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	
 	@RequestMapping(value="/sorting.do")
 	public String sorting(Model model, @RequestParam HashMap<String, String> params) {		
@@ -38,6 +39,7 @@ public class GroupBoardController {
 	public String gwrite(Model model, @RequestParam HashMap<String, String> params) {		
 				
 		logger.info("생성 데이터 : " + params);
+
 		String msg = "모임등록 실패!";
 		int row = service.gwrite(params);
 		
@@ -80,5 +82,6 @@ public class GroupBoardController {
 			model.addAttribute("msg", msg);
 		return "gBoardDetail";
 	}
+
 
 }
