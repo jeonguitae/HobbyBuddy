@@ -4,7 +4,7 @@
 	
 <mapper namespace="kr.co.hb.group.dao.GroupBoardDAO">
 
-	<select id="list" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+	<select id="glist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * FROM gboardlist ORDER BY gidx DESC
 	</select>
 	

@@ -4,7 +4,7 @@
 	
 
 <mapper namespace="kr.co.hb.board.dao.BoardDAO">
-	<select id="list" resultType="kr.co.hb.board.dto.BoardDTO">
+	<select id="flist" resultType="kr.co.hb.board.dto.BoardDTO">
 	SELECT fbNo, title, id, fbTime, bhit 
 	FROM fBoard ORDER BY fbNo DESC
 	</select>
