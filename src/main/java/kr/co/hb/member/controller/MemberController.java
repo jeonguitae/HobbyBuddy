@@ -75,7 +75,9 @@ public class MemberController {
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("success", success);
+		logger.info("gd");
 		return map;
+		
 	}
 
 }
