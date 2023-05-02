@@ -21,4 +21,6 @@ public interface MemberDAO {
 
 	HashMap<String, Object> myProDetail(Object id);
 
+	int memberUpdate(HashMap<String, String> params);
+
 }

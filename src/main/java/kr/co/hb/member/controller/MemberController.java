@@ -77,6 +77,9 @@ public class MemberController {
 	}
 	@RequestMapping(value="/mypage.go")
 	public String mypage(Model model, HttpSession session) {
+		ArrayList<MemberDTO> city = service.city();
+		logger.info("city : " + city);
+		model.addAttribute("city",city);
 		return "myProDetail";
 	}	
 	@RequestMapping(value="/myProDetail.ajax")
@@ -88,12 +91,12 @@ public class MemberController {
 		logger.info("result : "+ map);
 		return map;
 	}
-	@RequestMapping(value="/prodetailUpdate.go")
-	public String prodetailUpdate(Model model, @RequestParam String id) {
-		logger.info("prodetailUpdate : "+id);
-		//MemberDTO prodetail = service.prodetailUpdate(id);
-		//model.addAttribute("prodetail", prodetail);
-		return "prodetailUpdate";
+	@RequestMapping(value="/memberUpdate.ajax")
+	@ResponseBody
+	public HashMap<String, Object> memberUpdate(@RequestParam HashMap<String, String> params){
+		logger.info("memberUpdate params : {}",params);
+		return service.memberUpdate(params);		
 	}
+
 
 }

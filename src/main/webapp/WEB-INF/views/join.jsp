@@ -168,9 +168,9 @@
 	          alert('질문을 선택해 주세요!');             
 	      }else if ($chkresp.val()==''){
 	          alert('답변을 선택해 주세요!');             
-	      }else if ($chkresp.val()==''){
-	          alert('답변을 선택해 주세요!');             
-	      } else{    
+	      }else if ($random.val()==null){
+	          alert('랜덤매칭여부를 선택해 주세요!');             
+	      }else{    
 	         var param = {};
 	         param.id = $id.val();
 	         param.pw = $pw.val();

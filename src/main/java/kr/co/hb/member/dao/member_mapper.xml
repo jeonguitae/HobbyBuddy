@@ -39,5 +39,12 @@
 			on m.id = p.id 
 		where m.id = #{param1};
 	</select>
+	
+	<update id="memberUpdate" parameterType="hashmap">
+		UPDATE member
+			SET name=#{name},email=#{email},phone=#{phone},age=#{age},gender=#{gender}
+			,city=#{city},area=#{area},intr=#{intr},chkreq=#{chkreq},chkresp=#{chkresp},random=#{random}
+		WHERE id=#{id}
+	</update>
 
 </mapper>
