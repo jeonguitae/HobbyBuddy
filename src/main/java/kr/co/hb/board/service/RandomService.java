@@ -28,8 +28,15 @@ public class RandomService {
 		
 		logger.info("검색 조건 : " + params);
 		
-		return dao.profileList(params);
+		return dao.randomList(params);
 
 	}
 	
+	public ArrayList<RandomDTO> nonameList(HashMap<String, String> params) {
+		
+		logger.info("검색 조건 : " + params);
+		
+		return dao.nonameList(params);
+
+	}
 }

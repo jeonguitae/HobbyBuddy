@@ -47,10 +47,40 @@ public class RandomController {
 	@RequestMapping(value="/random.do")
 	public String randomList(Model model, @RequestParam HashMap<String, String> params) {	
 		
-		ArrayList<RandomDTO> list = Service.profileList(params);
+		ArrayList<RandomDTO> list = Service.randomList(params);
 		logger.info("검색 조건 : " + params);
 		model.addAttribute("list",list);
 		return "randomList";
+	}
+	
+	@RequestMapping(value="/noname.go")
+	public String nlist(Model model) {		
+		logger.info("start");
+		return "noNameList";
+	}
+	
+	@RequestMapping(value="/noname.do")
+	public String nonameList(Model model, @RequestParam HashMap<String, String> params) {	
+		
+		ArrayList<RandomDTO> list = Service.nonameList(params);
+		logger.info("검색 조건 : " + params);
+		model.addAttribute("list",list);
+		return "noNameList";
+	}
+	
+	@RequestMapping(value="/report.go")
+	public String reList(Model model) {		
+		logger.info("start");
+		return "reportCreate";
+	}
+	
+	@RequestMapping(value="/report.do")
+	public String reportList(Model model, @RequestParam HashMap<String, String> params) {	
+		
+		ArrayList<RandomDTO> list = Service.profileList(params);
+		logger.info("검색 조건 : " + params);
+		model.addAttribute("list",list);
+		return "reportList";
 	}
 	
 }
