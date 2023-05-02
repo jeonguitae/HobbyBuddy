@@ -151,24 +151,28 @@
 		<table>
 			<thead>
 				<tr>
-					<th>번호</th>
+					<th>글 번호</th>
+					<th>지역</th>
+					<th>모임날짜</th>
 					<th>제목</th>
 					<th>작성자</th>
-					<th>조회수</th>
-					<th>삭제</th>
+					<th>작성일</th>
+					<th>조회</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:if test="${list.size() == 0 }">
+				<c:if test="${list.size() == 0}">
 					<tr><th colspan="5">게시물이 없습니다.</th></tr>
 				</c:if>
 				<c:forEach items="${list}" var="bbs">
 					<tr>
-						<td>${bbs.idx}</td>
-						<td><a href="detail.do?id=${bbs.idx}">${bbs.subject}</a></td>
-						<td>${bbs.user_name}</td>
+						<td>${bbs.gidx}</td>
+						<td>${bbs.area}</td>
+						<td>${bbs.meeting_date}</td>
+						<td><a href="gdetail.do?id=${bbs.gidx}">${bbs.subject}</a></td>
+						<td>${bbs.id}</td>
+						<td>${bbs.reg_date}</td>
 						<td>${bbs.bHit}</td>
-						<td><a href="del.do?id=${bbs.idx}">삭제</a></td>
 					</tr>			
 				</c:forEach>
 			</tbody>
@@ -178,6 +182,12 @@
 	
 </body>
 <script>
+	
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+	
 	$('input[name="bhobby"]').click(function(){
 		
 		var content = '';
