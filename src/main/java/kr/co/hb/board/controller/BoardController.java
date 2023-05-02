@@ -17,7 +17,7 @@ public class BoardController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@Autowired BoardService service;n
+	@Autowired BoardService service;
 	
 	@RequestMapping(value="/flist.go")
 	public String list(Model model) {		
