@@ -24,4 +24,12 @@ public class RandomService {
 
 	}
 	
+	public ArrayList<RandomDTO> randomList(HashMap<String, String> params) {
+		
+		logger.info("검색 조건 : " + params);
+		
+		return dao.profileList(params);
+
+	}
+	
 }

@@ -15,8 +15,8 @@
 
 </head>
 <body>
-	<div class="sort">
-		<form action="sorting.do" method="get">
+	<div class="profile">
+		<form action="random.do" method="get">
 			<table>
 				
 				<tr>

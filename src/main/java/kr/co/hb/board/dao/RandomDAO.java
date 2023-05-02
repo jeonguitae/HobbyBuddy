@@ -9,6 +9,8 @@ public interface RandomDAO {
 
 	ArrayList<RandomDTO> profileList(HashMap<String, String> params);
 	
+	ArrayList<RandomDTO> randomList(HashMap<String, String> params);
+	
 	
 	
 }

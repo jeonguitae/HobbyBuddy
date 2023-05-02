@@ -38,4 +38,19 @@ public class RandomController {
 		return "proList";
 	}
 	
+	@RequestMapping(value="/random.go")
+	public String rlist(Model model) {		
+		logger.info("start");
+		return "randomList";
+	}
+	
+	@RequestMapping(value="/random.do")
+	public String randomList(Model model, @RequestParam HashMap<String, String> params) {	
+		
+		ArrayList<RandomDTO> list = Service.profileList(params);
+		logger.info("검색 조건 : " + params);
+		model.addAttribute("list",list);
+		return "randomList";
+	}
+	
 }
