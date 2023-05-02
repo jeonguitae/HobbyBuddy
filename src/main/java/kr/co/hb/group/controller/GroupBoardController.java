@@ -38,6 +38,47 @@ public class GroupBoardController {
 	public String gwrite(Model model, @RequestParam HashMap<String, String> params) {		
 				
 		logger.info("생성 데이터 : " + params);
+		String msg = "모임등록 실패!";
+		int row = service.gwrite(params);
+		
+		if(row == 1) {
+			
+			msg = "모임등록 성공!";
+		}
+		
+		model.addAttribute("msg", msg);
+		return "redirect:/glist.go";
+	}
+	
+	@RequestMapping(value="/gdetail.do")
+	public String gdetail(Model model, @RequestParam int id) {
+		
+		logger.info("idx : " + id);
+		GroupBoardDTO dto = service.gdetail(id);
+		
+		model.addAttribute("board", dto);
+		
+		return "gBoardDetail";
+	}
+	
+	@RequestMapping(value="/gupdate.go")
+	public String gupdateForm(Model model, @RequestParam int id) {		
+			GroupBoardDTO dto = service.gupdate(id);
+			model.addAttribute("board", dto);
+		return "gBoardUpdate";
+	}
+	
+	@RequestMapping(value="/gupdate.do")
+	public String gupdate(Model model, @RequestParam HashMap<String, String> params) {		
+			String msg = "수정실패";
+			int row = service.gupdate(params);
+			
+			if(row == 1) {
+				msg = "수정완료";
+			}
+			
+			model.addAttribute("msg", msg);
+		return "gBoardDetail";
 	}
 
 }
