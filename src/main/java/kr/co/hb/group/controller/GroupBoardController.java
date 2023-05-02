@@ -11,10 +11,6 @@ public class GroupBoardController {
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="/")
-	public String list(Model model) {		
-						
-		return "gBoardList";
-	}
+	
 
 }
