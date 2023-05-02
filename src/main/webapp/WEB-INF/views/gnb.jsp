@@ -72,15 +72,15 @@
 <body>
 	<input type="button" value="하비버디" onclick="location.href='./'"/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" value="취미 모임" onclick="location.href='./'"/>
+	<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" value="프로필" onclick="location.href='./'"/>
+	<input type="button" value="프로필" onclick="location.href='.profile.go'"/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-	<input type="button" value="랜덤 매칭" onclick="location.href='./'"/>
+	<input type="button" value="랜덤 매칭" onclick="location.href='random.go'"/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	<input type="button" value="자유 게시판" onclick="location.href='./'"/>
+	<input type="button" value="자유 게시판" onclick="location.href='flist.go'"/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
-	<input type="button" value="고객센터" onclick="location.href='./'"/>
+	<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<div id="alarmIcon">알림</div>
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -93,7 +93,7 @@
 	<div class="panel">참여한 모임</div>
 	<div class="panel">쪽지방</div>
 	<div class="panel">즐겨찾기</div>
-	<div class="panel3">관리자</div>
+	<div class="panel3" onclick="location.href='admin.go'">관리자</div>
 	
 </body>
 <script>
