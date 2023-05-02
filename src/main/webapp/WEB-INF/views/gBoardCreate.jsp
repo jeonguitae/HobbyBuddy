@@ -30,7 +30,7 @@
 		<table>
 			<tr>
 				<th>*작성자</th>
-				<td><input type="text" name="user_name"/></td>
+				<td><input type="text" name="id"/></td>
 			</tr>
 			<tr>
 				<th>*제목</th>
@@ -134,7 +134,7 @@
 				<tr>
 					<th>약속 날짜</th>
 					<td>
-						<input type="date" id="date" name="date">
+						<input type="date" id="date" name="meeting_date">
 					</td>
 				</tr>
 				
@@ -161,6 +161,12 @@
 	</form>
 </body>
 <script>
+
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
+
 $('select[name="bhobby"]').on('change',function(){
 	var val = $(this).val();
 	var content = '';
