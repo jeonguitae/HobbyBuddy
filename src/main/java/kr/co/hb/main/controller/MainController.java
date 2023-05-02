@@ -36,6 +36,7 @@ public class MainController {
 	@RequestMapping(value = "/logout.go", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
+		session.removeAttribute("adminChk");
 		return "redirect:/";
 	}
 
