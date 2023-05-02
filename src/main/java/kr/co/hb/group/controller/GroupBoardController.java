@@ -78,8 +78,14 @@ public class GroupBoardController {
 	
 	@RequestMapping(value="/gupdate.do")
 	public String gupdate(Model model, @RequestParam HashMap<String, String> params) {		
-			
+			String msg = "수정실패";
 			int row = service.gupdate(params);
+			
+			if(row == 1) {
+				msg = "수정완료";
+			}
+			
+			model.addAttribute("msg", msg);
 		return "gBoardDetail";
 	}
 
