@@ -48,7 +48,8 @@ public class MemberController {
 		ArrayList<MemberDTO> area = service.area(city);
 		map.put("area", area);
 		return map;
-	}	
+	}
+	
 	@RequestMapping(value="/overlay.ajax")
 	@ResponseBody
 	public HashMap<String, Object> overlay(@RequestParam String id){
@@ -61,7 +62,8 @@ public class MemberController {
 	public HashMap<String, Object> join(@RequestParam HashMap<String, String> params){
 		logger.info("params : {}",params);
 		return service.join(params);
-	}	
+	}
+	
 	@RequestMapping(value="/login.ajax")
 	@ResponseBody
 	public HashMap<String, Object> login(@RequestParam String id,@RequestParam String pw, HttpSession session){
@@ -73,16 +75,9 @@ public class MemberController {
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("success", success);
-		return map;		
-	}
-	
-	@RequestMapping(value="/mypage.go")
-	public String myProDetail(Model model, HttpSession session) {
-		Object id = session.getAttribute("loginId");
-		logger.info("myProDetail : "+id);	
-		MemberDTO prodetail = service.myProDetail(id);
-		model.addAttribute("prodetail", prodetail);
-		return "myProDetail";
+		logger.info("gd");
+		return map;
+		
 	}
 
 }

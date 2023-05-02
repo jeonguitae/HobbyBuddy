@@ -50,10 +50,5 @@ public class MemberService {
 		return dao.area(city);
 	}
 
-	public MemberDTO myProDetail(Object id) {
-		logger.info("Service myProDetail : " + id);
-		return dao.myProDetail(id);
-	}
-
 	
 }
