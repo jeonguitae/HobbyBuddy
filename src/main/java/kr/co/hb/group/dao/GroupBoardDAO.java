@@ -7,7 +7,7 @@ import kr.co.hb.group.dto.GroupBoardDTO;
 
 public interface GroupBoardDAO {
 
-	ArrayList<GroupBoardDTO> list();
+	ArrayList<GroupBoardDTO> glist();
 	
 	String sorting(HashMap<String, String> params);
 

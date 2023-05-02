@@ -22,8 +22,4 @@
 		SELECT * FROM gboardlist
 		WHERE gidx = #{id}
 	</select>
-	
-	<update id="gupdate"> 
-		UPDATE gboardlist SET subject = ${subject}, 
-	</update>
 </mapper>

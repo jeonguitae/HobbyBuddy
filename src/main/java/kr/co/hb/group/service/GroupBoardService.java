@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.group.dao.GroupBoardDAO;
 import kr.co.hb.group.dto.GroupBoardDTO;
 
@@ -17,9 +18,9 @@ public class GroupBoardService {
 	@Autowired GroupBoardDAO dao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	public ArrayList<GroupBoardDTO> list() {
+	public ArrayList<GroupBoardDTO> glist() {
 		
-		return dao.list();
+		return dao.glist();
 	}
 	
 	public String sorting(HashMap<String, String> params) {
