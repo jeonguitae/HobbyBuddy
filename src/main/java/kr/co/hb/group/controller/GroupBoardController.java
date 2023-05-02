@@ -17,10 +17,7 @@ public class GroupBoardController {
 	
 	@Autowired GroupBoardService service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-<<<<<<< HEAD
-	
-=======
+
 	@RequestMapping(value="/")
 	public String list(Model model) {		
 						
@@ -48,6 +45,5 @@ public class GroupBoardController {
 		
 		return service.gwrite(params);
 	}
->>>>>>> origin/master
 
 }
