@@ -19,7 +19,7 @@ public class BoardController {
 	
 	@Autowired BoardService service;
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/flist.go")
 	public String list(Model model) {		
 		logger.info("listcall");
 		ArrayList<BoardDTO> list = service.list();
