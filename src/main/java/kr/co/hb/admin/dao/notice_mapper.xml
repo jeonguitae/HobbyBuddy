@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC   "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 쿼리를 xml로 등록한거임 -->
+<!-- xml과 자바의 규격을 맞춰주는거 -->
+<!-- namespace와 연결이 된다는 뜻 -->
+<mapper namespace="kr.co.hb.admin.dao.NoticeDAO">
+   
+   <select id="noticeList" resultType="kr.co.hb.admin.dto.NoticeDTO">
+      SELECT 
+         notice_idx, id, notice_title, notice_date, notice_bHit, notice_chk
+       FROM notice ORDER BY notice_idx DESC
+   </select>
+   
+   <insert 
+      useGeneratedKeys="true"
+      keyColumn="notice_idx"
+      keyProperty="notice_idx"
+   
+   
+      id="noticeWrite" parameterType="kr.co.hb.admin.dto.NoticeDTO">
+      INSERT INTO notice(id, notice_title, notice_content)
+         VALUES(#{id},#{notice_title},#{notice_content})
+   </insert>
+   
+   <insert id="noticeFileWrite">
+      INSERT INTO hbphoto(notice_idx, oriFileName, newFileName)
+         VALUES(#{param1},#{param2},#{param3})
+   </insert>
+   
+   <update id="noticeUpHit">
+      UPDATE notice SET notice_bHit = notice_bHit + 1 WHERE notice_idx = #{notice_idx}
+      
+   </update>
+      
+    <select id="noticeDetail" resultType="kr.co.hb.admin.dto.NoticeDTO">
+      select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content
+         ,p.photo_idx, p.newFileName
+      FROM notice n LEFT JOIN hbphoto p ON n.notice_idx=p.notice_idx 
+      WHERE n.notice_idx = #{param1}   
+   </select>
+   
+   <delete id="noticeDelete">
+      DELETE FROM notice WHERE notice_idx = #{param1}
+   </delete>
+   
+   <select id="noticeFindFile" resultType="String">
+      SELECT newFileName FROM hbphoto
+         WHERE notice_idx = #{param1}
+   </select>
+   
+   <update id="noticeUpdate" parameterType="HashMap">
+         UPDATE notice 
+         SET notice_title = #{notice_title}
+         , notice_content = #{notice_content}
+         WHERE notice_idx = #{notice_idx}
+   </update>
+   
+</mapper>
