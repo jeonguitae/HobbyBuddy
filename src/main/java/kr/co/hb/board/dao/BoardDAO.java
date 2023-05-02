@@ -6,6 +6,6 @@ import kr.co.hb.board.dto.BoardDTO;
 
 public interface BoardDAO {
 
-	ArrayList<BoardDTO> list();
+	ArrayList<BoardDTO> flist();
 
 }

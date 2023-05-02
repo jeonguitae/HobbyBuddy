@@ -16,8 +16,8 @@ public class BoardService {
 	
 	@Autowired BoardDAO dao;
 	
-	public ArrayList<BoardDTO> list() {
-		return dao.list();
+	public ArrayList<BoardDTO> flist() {
+		return dao.flist();
 	}
 
 }
