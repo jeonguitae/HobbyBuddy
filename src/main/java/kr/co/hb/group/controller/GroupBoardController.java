@@ -19,15 +19,7 @@ public class GroupBoardController {
 	
 	@Autowired GroupBoardService service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	
-	@RequestMapping(value="/glist.go")
-	public String first(Model model) {		
-		ArrayList<GroupBoardDTO> list = service.list();
-		
-		model.addAttribute("list", list);
 
-		return "gBoardList";
-	}
 	
 	@RequestMapping(value="/sorting.do")
 	public String sorting(Model model, @RequestParam HashMap<String, String> params) {		

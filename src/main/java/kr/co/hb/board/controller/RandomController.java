@@ -23,7 +23,7 @@ public class RandomController {
 	@Autowired RandomService Service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="/")
+	@RequestMapping(value="/profile.go")
 	public String list(Model model) {		
 		logger.info("start");
 		return "proList";
