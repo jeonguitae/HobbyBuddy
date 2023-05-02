@@ -12,7 +12,24 @@
 		padding : 5px 10px;
 	}
 
+	button[id="gcreate"]{
+		margin-bottom: 5px
+	}
 </style>
+
+<script type="text/javascript">
+
+	window.onload = function() {
+		today = new Date();
+		console.log("today.toISOString() >>>" + today.toISOString());
+		today = today.toISOString().slice(0, 10);
+		console.log("today >>>> " + today);
+		bir = document.getElementById("date");
+		bir.value = today;
+	}
+	
+</script>
+
 </head>
 <body>
 	
@@ -55,7 +72,7 @@
 				<tr>
 					<th>지역</th>
 					<td>
-						<select id="city">
+						<select name="city">
 						    <option value="서울특별시">서울특별시</option>
 						    <option value="인천광역시">인천광역시</option>
 						    <option value="경기도">경기도</option>
@@ -104,9 +121,31 @@
 						</select>
 					</td>
 				</tr>
+				
+				<tr>
+					<th>인원 수</th>
+					<td>
+						<input type="text" name="participant" value=""/>
+					</td>
+				</tr>
+				
+				<tr>
+					<th>약속 날짜</th>
+					<td>
+						<input type="date" id="date" name="date">
+					</td>
+				</tr>
+				
+				<tr>
+					<th colspan="2">
+						<input type="submit" value="검색"/>
+					</th>
+				</tr>
 			</table>
 		</form>
 	</div>
+	
+	<button onclick="location.href='gwrite.go'" id="gcreate">모임 생성하기</button>
 	
 	<div class="list">
 		<table>
@@ -135,6 +174,8 @@
 			</tbody>
 		</table>
 	</div>
+	
+	
 </body>
 <script>
 	$('input[name="bhobby"]').click(function(){
@@ -144,37 +185,38 @@
 		console.log(val);
 		
 		if(val == '운동'){
-			content += '<input type="checkbox" value="축구">축구';
-			content += '<input type="checkbox" value="헬스">헬스';
-			content += '<input type="checkbox" value="야구">야구';
-			content += '<input type="checkbox" value="골프">골프';
-			content += '<input type="checkbox" value="테니스">테니스';
+			content += '<input type="checkbox" name="mhobby" value="축구">축구';
+			content += '<input type="checkbox" name="mhobby" value="헬스">헬스';
+			content += '<input type="checkbox" name="mhobby" value="야구">야구';
+			content += '<input type="checkbox" name="mhobby" value="골프">골프';
+			content += '<input type="checkbox" name="mhobby" value="테니스">테니스';
 		}
 		
 		else if(val == '맛집'){
-			content += '<input type="checkbox" value="한식">한식';
-			content += '<input type="checkbox" value="중식">중식';
-			content += '<input type="checkbox" value="양식">양식';
+			content += '<input type="checkbox" name="mhobby" value="한식">한식';
+			content += '<input type="checkbox" name="mhobby" value="중식">중식';
+			content += '<input type="checkbox" name="mhobby" value="양식">양식';
+			content += '<input type="checkbox" name="mhobby" value="양식">일식';
 		}
 		
 		else if(val == '반려동물'){
-			content += '<input type="checkbox" value="산책">산책';
-			content += '<input type="checkbox" value="쇼핑">쇼핑';
-			content += '<input type="checkbox" value="미용">미용';
+			content += '<input type="checkbox" name="mhobby" value="산책">산책';
+			content += '<input type="checkbox" name="mhobby" value="쇼핑">쇼핑';
+			content += '<input type="checkbox" name="mhobby" value="미용">미용';
 		}
 		
 		else{
-			content += '<input type="checkbox" value="영화">영화';
-			content += '<input type="checkbox" value="게임">게임';
-			content += '<input type="checkbox" value="노래방">노래방';
-			content += '<input type="checkbox" value="보드게임">보드게임';
-			content += '<input type="checkbox" value="방탈출">방탈출';
+			content += '<input type="checkbox" name="mhobby" value="영화">영화';
+			content += '<input type="checkbox" name="mhobby" value="게임">게임';
+			content += '<input type="checkbox" name="mhobby" value="노래방">노래방';
+			content += '<input type="checkbox" name="mhobby" value="보드게임">보드게임';
+			content += '<input type="checkbox" name="mhobby" value="방탈출">방탈출';
 		}
 		
 		$('.mhobby').html(content);
 	});
 	
-	$('#city').on('change',function(){
+	$('select[name="city"]').on('change',function(){
 		var val = $(this).val();
 		var content = '';
 		
