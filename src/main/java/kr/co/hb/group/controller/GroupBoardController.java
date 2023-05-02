@@ -14,22 +14,12 @@ import kr.co.hb.group.service.GroupBoardService;
 
 @Controller
 public class GroupBoardController {
-<<<<<<< HEAD
-   
-   Logger logger = LoggerFactory.getLogger(this.getClass());
-   
-   @RequestMapping(value="/gBoardList")
-   public String list(Model model) {      
-                  
-      return "gBoardList";
-   }
-=======
 	
 	@Autowired GroupBoardService service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/")
-	public String list(Model model) {		
+	public String list(Model model) {	
 						
 		return "gBoardList";
 	}
@@ -55,6 +45,6 @@ public class GroupBoardController {
 		
 		return service.gwrite(params);
 	}
->>>>>>> origin/master
+
 
 }
