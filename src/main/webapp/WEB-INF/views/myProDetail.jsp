@@ -11,73 +11,57 @@
 	<table>
 		<tr>
 			<th>id</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.id}</td>
 		</tr>
 		<tr>
 			<th>name</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.name}</td>
 		</tr>
 		<tr>
 			<th>email</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.email}</td>
 		</tr>
 		<tr>
 			<th>phone</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.phone}</td>
 		</tr>
 		<tr>
 			<th>age</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.age}</td>
 		</tr>
 		<tr>
 			<th>city area</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.city} ${prodetail.area}</td>
 		</tr>
 		<tr>
 			<th>manner temp.</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.mannertp}</td>
 		</tr>
 		<tr>
-			<th>chkrep</th>
-			<td>${dto.subject}</td>
+			<th>chkreq</th>
+			<td>${prodetail.chkreq}</td>
 		</tr>
 		<tr>
 			<th>chkresp</th>
-			<td>${dto.subject}</td>
+			<td>${prodetail.chkresp}</td>
 		</tr>
 		<tr>
 			<th>intr</th>
-			<td>${dto.subject}</td>
-		</tr>
-		
-		
-		
-		
-		
-		
-		
-		<tr>
-			<th>작성자</th>
-			<td>${dto.user_name}</td>
+			<td>${prodetail.intr}</td>
 		</tr>
 		<tr>
-			<th>작성일</th>
-			<td>${dto.reg_date}</td>
+			<th>random</th>
+			<td>${prodetail.random}</td>
 		</tr>
-		<tr>
-			<th>내용</th>
-			<td>${dto.content}</td>
-		</tr>
-		<c:if test="${dto.newFileName ne null}">
-		<tr>
-			<th>사진</th>
-			<td><img width="500" src="/photo/${dto.newFileName}"/></td>
-		</tr>
-	</c:if>
+		<c:if test="${prodetail.newFileName ne null}">
+			<tr>
+				<th>프로필 사진</th>
+				<td><img width="300" src="/photo/${prodetail.newFileName}"/></td>
+			</tr>
+		</c:if>
 		<tr>
 			<th colspan="2">
-			<input type="button" onclick="location.href='./list.do'" value="리스트"/>
-			<input type="button" onclick="location.href='./update.go?idx=${dto.idx}'" value="수정"/>
+			<input type="button" onclick="location.href='./prodetailUpdate.go?id=${prodetail.id}'" value="수정"/>
 			</th>
 		</tr>
 	</table>	

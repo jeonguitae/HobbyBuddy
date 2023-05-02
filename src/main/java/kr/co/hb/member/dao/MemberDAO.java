@@ -19,4 +19,6 @@ public interface MemberDAO {
 
 	String adminChk(String id, String pw);
 
+	MemberDTO myProDetail(Object id);
+
 }
