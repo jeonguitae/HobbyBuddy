@@ -43,7 +43,7 @@
 			,meeting_date = #{meeting_date}
 			,maxmem = #{maxmem}
 			,mannertp = #{mannertp}
-		WHERE gidx = #{idx}
+		WHERE gidx = #{id}
 	</update>
 	
 	<select id="gsserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -60,4 +60,5 @@
 		SELECT * FROM gboardlist
 		WHERE content LIKE #{serch}
 	</select>
+	
 </mapper>

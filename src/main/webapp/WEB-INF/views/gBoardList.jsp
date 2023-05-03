@@ -18,6 +18,14 @@
 	button[id="gcreate"]{
 		margin-bottom: 5px
 	}
+	
+	#paging{
+		text-align: center;
+	}
+	
+	td[class="gserch"]{
+		margin-top: 5px;
+	}
 </style>
 
 <script type="text/javascript">
@@ -32,8 +40,6 @@
 	}
 	
 </script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
-<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 </head>
 <body>
 	
@@ -133,10 +139,7 @@
 			</table>
 		</form>
 	</div>
-	
 	<button onclick="location.href='gwrite.go'" id="gcreate">모임 생성하기</button>
-	
-	<div class="list">
 		<table>
 			<thead>
 				<tr>
@@ -164,56 +167,27 @@
 						<td>${bbs.id}</td>
 						<td>${bbs.reg_date}</td>
 						<td>${bbs.bHit}</td>
-					</tr>			
+					</tr>
+					
 				</c:forEach>
+					
+					<tr>
+						<td class="gserch" colspan="8">		
+							<form action="gserch.do">
+								<input type="text" name="serch" value=""/>
+								<select name="ssorting">
+									<option value="subject">제목</option>
+									<option value="id">작성자</option>
+									<option value="content">내용</option>
+								</select>
+								<input type="submit" value="검색"/>
+							</form>
+						</td>
+					</tr>
 			</tbody>
 		</table>
-	</div>
-	<form action="gserch.do">
-			<input type="text" name="serch" value=""/>
-			<select name="ssorting">
-				<option value="subject">제목</option>
-				<option value="id">작성자</option>
-				<option value="content">내용</option>
-			</select>
-			<input type="submit" value="검색"/>
-	</form>
 </body>
 <script>
-
-	function listCall(page){
-		$.ajax({
-			type:'post',
-			url:'list.ajax',
-			data:{
-				'page':page,
-				'cnt':$('#pagePerNum').val()
-			},
-			dataType:'json',
-			success:function(data){
-				console.log(data);
-				listPrint(data.list);			
-				
-				//paging plugin
-				$('#pagination').twbsPagination({
-					startPage:data.currPage,	//시작페이지
-					totalPages:data.pages,//총 페이지 수
-					visiblePages:5, //보여줄 페이지 [1][2][3][4][5]
-					onPageClick:function(event,page){// 페이지 클릭시 동작되는 함수(콜백)
-						console.log(page, showPage);
-						if(page != showPage){
-							showPage = page;	
-							listCall(page);							
-						}				
-					}
-				});	
-				
-			},
-			error:function(e){
-				console.log(e);
-			}
-		});
-	}
 
 	var msg = "${msg}";
 	if(msg != ""){

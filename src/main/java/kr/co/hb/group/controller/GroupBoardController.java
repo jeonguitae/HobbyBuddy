@@ -3,13 +3,17 @@ package kr.co.hb.group.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.board.dto.RandomDTO;
@@ -76,20 +80,6 @@ public class GroupBoardController {
 		
 		return "gBoardDetail";
 	}
-	
-	@RequestMapping(value="/gupdate.go")
-	public String gupdateForm(Model model, @RequestParam int idx) {		
-			GroupBoardDTO dto = service.gupdate(idx);
-			model.addAttribute("board", dto);
-		return "gBoardUpdate";
-	}
-	
-	@RequestMapping(value="/gupdate.do")
-	public String gupdate(Model model, @RequestParam HashMap<String, String> params) {		
-		int row = service.gupdatedo(params);
-		
-		return "redirect:/gdetail.do";
-	}
 
 	@RequestMapping(value="/gserch.do")
 	public String gserch(Model model, @RequestParam HashMap<String, String> params) {
@@ -101,8 +91,11 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value="/greport.go")
-	public String greList(Model model) {		
+	public String greList(Model model) {
+		
 		logger.info("start");
 		return "reportCreate";
 	}
+	
+
 }

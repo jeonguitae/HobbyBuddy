@@ -42,23 +42,11 @@ public class GroupBoardService {
 		return dao.gdetail(id);
 	}
 
-	public GroupBoardDTO gupdate(int idx) {
-		
-		return dao.gupdate(idx);
-	}
-
-	public int gupdatedo(HashMap<String, String> params) {
-
-		return dao.gupdatedo(params);
-		
-	}
-
 	public ArrayList<GroupBoardDTO> gserch(HashMap<String, String> params) {
 		
 		ArrayList<GroupBoardDTO> list = null;
 		
 		if(params.get("ssorting").equals("subject")) {
-			
 			String wildcard = "%" + params.get("serch") + "%";
 			params.replace("serch", wildcard);
 			list = dao.gsserch(params);

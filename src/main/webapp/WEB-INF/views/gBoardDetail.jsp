@@ -21,49 +21,59 @@
 </head>
 <body>
 <jsp:include page="gnb.jsp"/>
-	<table>
-		<tr>
-			<th>작성자</th>
-			<td>${board.id}</td>
-		</tr>
-		<tr>
-			<th>제목</th>
-			<td>${board.subject}</td>
-		</tr>
-		<tr>
-			<th>나이 조건</th>
-			<td>${board.minage}세 이상 ${board.maxage}세 이하</td>
-		</tr>
-		<tr>
-			<th>지역</th>
-			<td>${board.city} ${board.area}</td>
-		</tr>
-		<tr>
-			<th>약속날짜</th>
-			<td>${board.meeting_date}</td>
-		</tr>
-		<tr>
-			<th>내용</th>
-			<td>${board.content}</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<button onclick="location.href='gupdate.go?id=${board.gidx}'">수정하기</button>
-				<button onclick="location.href='report.go'">신고하기</button>
-			</td>
-		</tr>
-		<tr>
-			<th colspan="2">
-				<a href="./">리스트로 돌아가기</a>
-			</th>
-		</tr>
-		
-		<tr>
-			<th colspan="2">
-				<input type="button" value="신고" onclick="location.href='./greport.go'"/>
-			</th>
-		</tr>
-	</table>	
+		<table>
+			<tr>
+				<th>글 번호</th>
+				<td class="gidx">${board.gidx}</td>
+			</tr>
+			<tr>
+				<th>작성자</th>
+				<td>${board.id}</td>
+			</tr>
+			<tr>
+				<th>제목</th>
+				<td>${board.subject}</td>
+			</tr>
+			<tr>
+				<th>나이 조건</th>
+				<td>${board.minage}세 이상 ${board.maxage}세 이하</td>
+			</tr>
+			<tr>
+				<th>지역</th>
+				<td>${board.city} ${board.area}</td>
+			</tr>
+			<tr>
+				<th>약속날짜</th>
+				<td>${board.meeting_date}</td>
+			</tr>
+			<tr>
+				<th>내용</th>
+				<td>${board.content}</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+					<button>수정하기</button>
+					<button onclick="location.href='greport.go'">신고하기</button>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<a class="openchat" href="openchat.go?gidx=${board.gidx}">참가하기</a>
+				</th>
+			</tr>
+			<tr>
+				<th colspan="2">
+					<a href="./">리스트로 돌아가기</a>
+				</th>
+			</tr>
+		</table>
 </body>
-<script></script>
+<script>
+	$('a[class="openchat"]').click(function(){
+		var loginId = "${sessionScope.loginId}";
+		if(loginId != null){
+			$('a[class="openchat"]').attr('href', 'openchat.go?gidx=${board.gidx}&loginId=' + loginId)
+		}
+	});
+</script>
 </html>
