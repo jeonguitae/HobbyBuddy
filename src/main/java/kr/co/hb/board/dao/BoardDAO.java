@@ -8,4 +8,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> flist();
 
+	int write(BoardDTO dto);
+
+	void filewrite(int fbNo, String orifilename, String newfilename);
+
 }

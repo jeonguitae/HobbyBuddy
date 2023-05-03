@@ -8,4 +8,24 @@
 	SELECT fbNo, title, id, fbTime, bhit 
 	FROM fBoard ORDER BY fbNo DESC
 	</select>
+	
+
+	<insert useGeneratedKeys="true" keyColumn="fbNo" keyProperty="fbNo" id="write" 
+	parameterType="kr.co.hb.board.dto.BoardDTO">
+	INSERT INTO fBoard (title, id, bContent)
+	VALUES (#{title},#{id},#{bContent})
+	</insert>
+	
+	
+	<insert id="filewrite">
+	INSERT INTO hbphoto (notice_idx, oriFileName, newFileName)
+	VALUES (#{param1}, #{param2}, #{param3})
+	</insert>
+	
+	
+	
+	
+	
+	
+	
 </mapper>
