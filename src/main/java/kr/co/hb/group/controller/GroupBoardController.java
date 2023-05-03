@@ -78,24 +78,22 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value="/gupdate.go")
-	public String gupdateForm(Model model, @RequestParam int id) {		
-			GroupBoardDTO dto = service.gupdate(id);
+	public String gupdateForm(Model model, @RequestParam int idx) {		
+			GroupBoardDTO dto = service.gupdate(idx);
 			model.addAttribute("board", dto);
 		return "gBoardUpdate";
 	}
 	
 	@RequestMapping(value="/gupdate.do")
 	public String gupdate(Model model, @RequestParam HashMap<String, String> params) {		
-			String msg = "수정실패";
-			GroupBoardDTO row = service.gupdatedo(params);
-			
-			model.addAttribute("msg", msg);
-		return "gBoardDetail";
+		int row = service.gupdatedo(params);
+		
+		return "redirect:/gdetail.do";
 	}
 
 	@RequestMapping(value="/gserch.do")
 	public String gserch(Model model, @RequestParam HashMap<String, String> params) {
-		logger.info("serch : " + params.get("serch") + " / ssorting : " + params.get("ssorting"));
+		
 		ArrayList<GroupBoardDTO> list = service.gserch(params);
 		
 		model.addAttribute("list", list);

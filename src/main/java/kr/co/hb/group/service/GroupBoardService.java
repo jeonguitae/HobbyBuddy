@@ -42,24 +42,43 @@ public class GroupBoardService {
 		return dao.gdetail(id);
 	}
 
-	public GroupBoardDTO gupdate(int id) {
+	public GroupBoardDTO gupdate(int idx) {
 		
-		return dao.gupdate(id);
+		return dao.gupdate(idx);
 	}
 
-	public GroupBoardDTO gupdatedo(HashMap<String, String> params) {
+	public int gupdatedo(HashMap<String, String> params) {
 
 		return dao.gupdatedo(params);
 		
 	}
 
 	public ArrayList<GroupBoardDTO> gserch(HashMap<String, String> params) {
-		logger.info("gserch 서비스 호출");
-		ArrayList<GroupBoardDTO> fewqtr = dao.gserch(params);
-		for (int i = 0; i < fewqtr.size(); i++) {
-			logger.info(fewqtr.get(i).getId());
+		
+		ArrayList<GroupBoardDTO> list = null;
+		
+		if(params.get("ssorting").equals("subject")) {
+			
+			String wildcard = "%" + params.get("serch") + "%";
+			params.replace("serch", wildcard);
+			list = dao.gsserch(params);
 		}
-		return dao.gserch(params);
+		
+		if(params.get("ssorting").equals("id")) {
+			
+			String wildcard = "%" + params.get("serch") + "%";
+			params.replace("serch", wildcard);
+			list = dao.gwserch(params);
+		}
+		
+		if(params.get("ssorting").equals("content")) {
+			
+			String wildcard = "%" + params.get("serch") + "%";
+			params.replace("serch", wildcard);
+			list = dao.gcserch(params);
+		}
+		
+		return list;
 	}
 
 }
