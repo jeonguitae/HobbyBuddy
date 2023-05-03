@@ -4,7 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <style>
 	table, th, td{
 		border : 1px solid black;
@@ -177,7 +180,41 @@
 	</form>
 </body>
 <script>
-	
+
+	function listCall(page){
+		$.ajax({
+			type:'post',
+			url:'list.ajax',
+			data:{
+				'page':page,
+				'cnt':$('#pagePerNum').val()
+			},
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				listPrint(data.list);			
+				
+				//paging plugin
+				$('#pagination').twbsPagination({
+					startPage:data.currPage,	//시작페이지
+					totalPages:data.pages,//총 페이지 수
+					visiblePages:5, //보여줄 페이지 [1][2][3][4][5]
+					onPageClick:function(event,page){// 페이지 클릭시 동작되는 함수(콜백)
+						console.log(page, showPage);
+						if(page != showPage){
+							showPage = page;	
+							listCall(page);							
+						}				
+					}
+				});	
+				
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+
 	var msg = "${msg}";
 	if(msg != ""){
 		alert(msg);

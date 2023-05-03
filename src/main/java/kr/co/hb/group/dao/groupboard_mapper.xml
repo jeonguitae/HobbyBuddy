@@ -43,11 +43,21 @@
 			,meeting_date = #{meeting_date}
 			,maxmem = #{maxmem}
 			,mannertp = #{mannertp}
-		WHERE gidx = #{id}
+		WHERE gidx = #{idx}
 	</update>
 	
-	<select id="gserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+	<select id="gsserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * FROM gboardlist
-		WHERE  = #{serch}
+		WHERE subject LIKE #{serch}
+	</select>
+	
+	<select id="gwserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist
+		WHERE id LIKE #{serch}
+	</select>
+	
+	<select id="gcserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist
+		WHERE content LIKE #{serch}
 	</select>
 </mapper>
