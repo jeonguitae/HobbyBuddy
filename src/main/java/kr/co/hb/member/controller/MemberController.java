@@ -75,9 +75,31 @@ public class MemberController {
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("success", success);
-		logger.info("gd");
-		return map;
-		
+
+		return map;		
 	}
+	@RequestMapping(value="/mypage.go")
+	public String mypage(Model model, HttpSession session) {
+		ArrayList<MemberDTO> city = service.city();
+		logger.info("city : " + city);
+		model.addAttribute("city",city);
+		return "myProDetail";
+	}	
+	@RequestMapping(value="/myProDetail.ajax")
+	@ResponseBody
+	public HashMap<String, Object> myProDetail(Model model, HttpSession session) {
+		String loginId = (String) session.getAttribute("loginId");
+		logger.info("myProDetail : "+ loginId);			
+		HashMap<String, Object> map = service.myProDetail(loginId);
+		logger.info("result : "+ map);
+		return map;
+	}
+	@RequestMapping(value="/memberUpdate.ajax")
+	@ResponseBody
+	public HashMap<String, Object> memberUpdate(@RequestParam HashMap<String, String> params){
+		logger.info("memberUpdate params : {}",params);
+		return service.memberUpdate(params);		
+	}
+
 
 }

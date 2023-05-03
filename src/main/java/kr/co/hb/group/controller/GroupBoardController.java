@@ -31,12 +31,16 @@ public class GroupBoardController {
 		return "gBoardList";
 	}
 	
-	@RequestMapping(value="/sorting.do")
+	@RequestMapping(value="/gsorting.do")
 	public String sorting(Model model, @RequestParam HashMap<String, String> params) {		
 				
 		logger.info("검색 조건 : " + params);
 		
-		return service.sorting(params);
+		ArrayList<GroupBoardDTO> list = service.gsorting(params);
+		
+		model.addAttribute("list", list);
+		
+		return "gBoardList";
 	}
 	
 	@RequestMapping(value="/gwrite.go")
@@ -74,24 +78,31 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value="/gupdate.go")
-	public String gupdateForm(Model model, @RequestParam int id) {		
-			GroupBoardDTO dto = service.gupdate(id);
+	public String gupdateForm(Model model, @RequestParam int idx) {		
+			GroupBoardDTO dto = service.gupdate(idx);
 			model.addAttribute("board", dto);
 		return "gBoardUpdate";
 	}
 	
 	@RequestMapping(value="/gupdate.do")
 	public String gupdate(Model model, @RequestParam HashMap<String, String> params) {		
-			String msg = "수정실패";
-			int row = service.gupdate(params);
-			
-			if(row == 1) {
-				msg = "수정완료";
-			}
-			
-			model.addAttribute("msg", msg);
-		return "gBoardDetail";
+		int row = service.gupdatedo(params);
+		
+		return "redirect:/gdetail.do";
 	}
 
-
+	@RequestMapping(value="/gserch.do")
+	public String gserch(Model model, @RequestParam HashMap<String, String> params) {
+		
+		ArrayList<GroupBoardDTO> list = service.gserch(params);
+		
+		model.addAttribute("list", list);
+		return "gBoardList";
+	}
+	
+	@RequestMapping(value="/greport.go")
+	public String greList(Model model) {		
+		logger.info("start");
+		return "reportCreate";
+	}
 }

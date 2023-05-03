@@ -4,7 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <style>
 	table, th, td{
 		border : 1px solid black;
@@ -29,12 +32,13 @@
 	}
 	
 </script>
-
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+<script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 </head>
 <body>
 	
 	<div class="sort">
-		<form action="sorting.do" method="get">
+		<form action="gsorting.do" method="get">
 			<table>
 				<tr>
 					<th>대분류</th>
@@ -58,14 +62,6 @@
 						<input type="radio" name="gender" value="남성"/>남성
 						<input type="radio" name="gender" value="여성"/>여성
 						<input type="radio" name="gender" value="성별 무관"/>성별 무관
-					</td>
-				</tr>
-				
-				<tr>
-					<th>나이</th>
-					<td>
-						<input type="text" name="minage" value=""/> &nbsp; ~ &nbsp;
-						<input type="text" name="maxage" value=""/>
 					</td>
 				</tr>
 				
@@ -121,18 +117,11 @@
 						</select>
 					</td>
 				</tr>
-				
-				<tr>
-					<th>인원 수</th>
-					<td>
-						<input type="text" name="participant" value=""/>
-					</td>
-				</tr>
-				
+	
 				<tr>
 					<th>약속 날짜</th>
 					<td>
-						<input type="date" id="date" name="date">
+						<input type="date" id="date" name="meeting_date">
 					</td>
 				</tr>
 				
@@ -152,6 +141,7 @@
 			<thead>
 				<tr>
 					<th>글 번호</th>
+					<th>취미</th>
 					<th>지역</th>
 					<th>모임날짜</th>
 					<th>제목</th>
@@ -167,6 +157,7 @@
 				<c:forEach items="${list}" var="bbs">
 					<tr>
 						<td>${bbs.gidx}</td>
+						<td>${bbs.mhobby}</td>
 						<td>${bbs.area}</td>
 						<td>${bbs.meeting_date}</td>
 						<td><a href="gdetail.do?id=${bbs.gidx}">${bbs.subject}</a></td>
@@ -178,12 +169,52 @@
 			</tbody>
 		</table>
 	</div>
-
-	
-	
+	<form action="gserch.do">
+			<input type="text" name="serch" value=""/>
+			<select name="ssorting">
+				<option value="subject">제목</option>
+				<option value="id">작성자</option>
+				<option value="content">내용</option>
+			</select>
+			<input type="submit" value="검색"/>
+	</form>
 </body>
 <script>
-	
+
+	function listCall(page){
+		$.ajax({
+			type:'post',
+			url:'list.ajax',
+			data:{
+				'page':page,
+				'cnt':$('#pagePerNum').val()
+			},
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				listPrint(data.list);			
+				
+				//paging plugin
+				$('#pagination').twbsPagination({
+					startPage:data.currPage,	//시작페이지
+					totalPages:data.pages,//총 페이지 수
+					visiblePages:5, //보여줄 페이지 [1][2][3][4][5]
+					onPageClick:function(event,page){// 페이지 클릭시 동작되는 함수(콜백)
+						console.log(page, showPage);
+						if(page != showPage){
+							showPage = page;	
+							listCall(page);							
+						}				
+					}
+				});	
+				
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});
+	}
+
 	var msg = "${msg}";
 	if(msg != ""){
 		alert(msg);

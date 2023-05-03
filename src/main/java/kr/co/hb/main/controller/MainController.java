@@ -37,6 +37,11 @@ public class MainController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
 		return "redirect:/";
-	}
+	}	
+	
+	@RequestMapping(value = "/admin.go", method = RequestMethod.GET)
+	public String admin(HttpSession session) {
 
+		return "admin";
+	}
 }

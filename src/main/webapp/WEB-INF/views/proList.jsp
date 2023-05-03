@@ -16,6 +16,14 @@
 </head>
 <body>
 	<div class="profile">
+	프로필 갯수 : 
+   <select id="pagePerNum">
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="15">15</option>
+      <option value="20">20</option>
+   </select>
+	
 		<form action="profile.do" method="get">
 			<table>
 				<tr>
@@ -148,10 +156,80 @@
 				</tr>			
 			</c:forEach>
 		</tbody>
+		
+		 <tr>
+         <td colspan="6" id="paging">   
+            <!--    플러그인 사용   (twbsPagination)   -->
+            <div class="container">                           
+               <nav aria-label="Page navigation" style="text-align:center">
+                  <ul class="pagination" id="pagination"></ul>
+               </nav>               
+            </div>
+         </td>
+      </tr>
+		
 	</table>
 	
 </body>
 <script>
+
+
+var showPage=1;
+listCall(showPage);
+
+$('#pagePerNum').change(function(){
+   listCall(showPage);
+   // 페이지 처리 부분이 이미 만들어져 버려서 pagePerNum이 변경되면 수정이 안된다
+   // 그래서 pagePerNum이 변경되면 부수고 다시 만들어야한다.
+   $('#pagination').twbsPagination('destroy');
+});
+
+function listCall(page){
+   $.ajax({
+      type:'post',
+      url:'list.ajax',
+      data:{
+         'page':page,
+         'cnt':$('#pagePerNum').val()
+      },
+      dataType:'json',
+      success:function(data){
+         console.log(data)
+         listPrint(data.list);
+         
+         
+         // 총페이지 수 
+         // 현재 페이지
+         
+         //paging plugin
+         $('#pagination').twbsPagination({
+            startPage:data.currPage, // 시작페이지
+            totalPages:data.pages, // 총 페이지 수
+            visiblePages:5, //  보여줄 페이지 [1][2][3][4][5]
+            onPageClick:function(event,page){ // 페이지 클릭시 동작되는 함수(콜백)
+               console.log(page,showPage);
+               if(page!=showPage){
+                  showPage= page;
+                  listCall(page);
+               }
+            }
+            
+         });
+      },
+      error:function(e){
+         console.log(e)
+      }
+      
+   });
+}
+
+
+
+
+
+
+
+
 	$('input[name="bhobby"]').click(function(){
 		
 		var content = '';

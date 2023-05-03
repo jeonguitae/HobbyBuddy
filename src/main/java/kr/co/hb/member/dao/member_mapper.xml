@@ -32,4 +32,20 @@
 			WHERE id=#{param1} and pw=#{param2}
 	</select>
 
+	
+	<select id="myProDetail" resultType="hashmap">
+		select m.id, m.name, m.email, m.phone, m.age, m.gender, m.city, m.area, m.mannertp, m.chkreq, m.chkresp, m.intr, m.random
+			,p.photoIdx, p.new_file_name
+			from member m left join pboard p 
+			on m.id = p.id 
+		where m.id = #{param1};
+	</select>
+	
+	<update id="memberUpdate" parameterType="hashmap">
+		UPDATE member
+			SET name=#{name},email=#{email},phone=#{phone},age=#{age},gender=#{gender}
+			,city=#{city},area=#{area},intr=#{intr},chkreq=#{chkreq},chkresp=#{chkresp},random=#{random}
+		WHERE id=#{id}
+	</update>
+
 </mapper>

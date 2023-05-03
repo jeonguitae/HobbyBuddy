@@ -23,11 +23,11 @@ public class GroupBoardService {
 		return dao.glist();
 	}
 	
-	public String sorting(HashMap<String, String> params) {
+	public ArrayList<GroupBoardDTO> gsorting(HashMap<String, String> params) {
 		
 		logger.info("검색 조건 : " + params);
 		
-		return dao.sorting(params);
+		return dao.gsorting(params);
 	}
 	public int gwrite(HashMap<String, String> params) {
 		
@@ -42,15 +42,43 @@ public class GroupBoardService {
 		return dao.gdetail(id);
 	}
 
-	public GroupBoardDTO gupdate(int id) {
+	public GroupBoardDTO gupdate(int idx) {
 		
-		return dao.gupdate(id);
+		return dao.gupdate(idx);
 	}
 
-	public int gupdate(HashMap<String, String> params) {
+	public int gupdatedo(HashMap<String, String> params) {
 
-		return dao.gupdate(params);
+		return dao.gupdatedo(params);
 		
+	}
+
+	public ArrayList<GroupBoardDTO> gserch(HashMap<String, String> params) {
+		
+		ArrayList<GroupBoardDTO> list = null;
+		
+		if(params.get("ssorting").equals("subject")) {
+			
+			String wildcard = "%" + params.get("serch") + "%";
+			params.replace("serch", wildcard);
+			list = dao.gsserch(params);
+		}
+		
+		if(params.get("ssorting").equals("id")) {
+			
+			String wildcard = "%" + params.get("serch") + "%";
+			params.replace("serch", wildcard);
+			list = dao.gwserch(params);
+		}
+		
+		if(params.get("ssorting").equals("content")) {
+			
+			String wildcard = "%" + params.get("serch") + "%";
+			params.replace("serch", wildcard);
+			list = dao.gcserch(params);
+		}
+		
+		return list;
 	}
 
 }

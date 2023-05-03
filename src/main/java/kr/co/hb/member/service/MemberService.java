@@ -50,5 +50,17 @@ public class MemberService {
 		return dao.area(city);
 	}
 
+	public HashMap<String, Object> myProDetail(Object id) {
+		logger.info("Service myProDetail : " + id);
+		return dao.myProDetail(id);
+	}
+
+	public HashMap<String, Object> memberUpdate(HashMap<String, String> params) {
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("success", dao.memberUpdate(params));
+		logger.info("service.memberUpdate map : " + map);
+		return map;
+	}
+
 	
 }

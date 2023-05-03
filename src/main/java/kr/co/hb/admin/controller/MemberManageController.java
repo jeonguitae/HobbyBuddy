@@ -1,5 +1,5 @@
 package kr.co.hb.admin.controller;
 
-public class CategoryController {
+public class MemberManageController {
 
 }
