@@ -2,10 +2,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<style>
+   <meta charset="UTF-8">
+   <title>Insert title here</title>
+      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
+      <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+      <style>
+         b{
+            color:red;
+         }
 	table, th, td{
 		border : 1px solid black;
 		border-collapse: collapse;
@@ -158,7 +164,7 @@
 		</tbody>
 		
 		 <tr>
-         <td colspan="6" id="paging">   
+         <td colspan="5" id="paging">   
             <!--    플러그인 사용   (twbsPagination)   -->
             <div class="container">                           
                <nav aria-label="Page navigation" style="text-align:center">
@@ -172,7 +178,6 @@
 	
 </body>
 <script>
-
 
 var showPage=1;
 listCall(showPage);
@@ -222,12 +227,6 @@ function listCall(page){
       
    });
 }
-
-
-
-
-
-
 
 
 	$('input[name="bhobby"]').click(function(){

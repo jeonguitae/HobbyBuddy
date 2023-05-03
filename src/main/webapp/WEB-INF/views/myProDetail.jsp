@@ -262,7 +262,5 @@
 		$('#area').append(content);
 	}
 	
-
-
 </script>
 </html>
