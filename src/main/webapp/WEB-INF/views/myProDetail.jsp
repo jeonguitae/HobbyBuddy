@@ -6,7 +6,6 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-<<<<<<< HEAD
 	table, tr, td{
 	 border: 1px solid black;
 	 border-collapse: collapse;
@@ -98,16 +97,15 @@
 		<tr>
 			<th colspan="2">
 			<button onclick="memberUpdate()">수정하기</button>
-			
+			<button id="dropOut">중복체크</button>
 			</th>
 		</tr>
 	</table>	
-=======
+
 </style>
 </head>
 <body>
 
->>>>>>> origin/master
 </body>
 <script>
 	$.ajax({
@@ -266,6 +264,29 @@
 		$('#area').empty();
 		$('#area').append(content);
 	}
+	
+	$('#dropOut').on('click', function(e){   
+		   console.log("중복체크 요청 : " + chkId);      
+		   $.ajax({
+		      type: 'get'
+		      ,url: 'overlay.ajax'
+		      ,data:{'id':chkId}
+		      ,dataType:'json'
+		      ,success:function(data){
+		         console.log(data);
+		         if(data.overlay==0){
+		            alert('사용 가능한 아이디 입니다.');
+		            overlayChk=true;
+		         } else {
+		            alert('이미 사용중인 아이디 입니다.');
+		            $('#id').val('');
+		         }
+		      }
+		      ,error:function(e){
+		         console.log(e);
+		      }
+		   });      
+		});
 	
 
 
