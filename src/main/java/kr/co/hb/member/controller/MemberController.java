@@ -99,7 +99,6 @@ public class MemberController {
 	public HashMap<String, Object> memberUpdate(@RequestParam HashMap<String, String> params){
 		logger.info("memberUpdate params : {}",params);
 		return service.memberUpdate(params);		
-
 	}
 
 
