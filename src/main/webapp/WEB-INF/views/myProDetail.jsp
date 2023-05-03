@@ -267,6 +267,8 @@
 		$('#area').append(content);
 	}
 	
+<<<<<<< HEAD
+=======
 	$('#dropOut').on('click', function(e){   
 		   console.log("중복체크 요청 : " + chkId);      
 		   $.ajax({
@@ -292,5 +294,6 @@
 	
 
 
+>>>>>>> origin/master
 </script>
 </html>

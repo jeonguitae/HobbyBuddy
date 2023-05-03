@@ -154,12 +154,6 @@
 						<input type="submit" value="랜덤매칭"/>
 					</th>
 				</tr>	
-				
-			<!-- 	<tr>
-					<th colspan="2">
-						
-					</th>
-				</tr>	 -->			
 
 			</table>
 			

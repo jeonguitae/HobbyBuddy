@@ -6,7 +6,16 @@ public class RandomDTO {
 	private int age;
 	private String gender;
 	private String area;
+	private String intr;
+	
+	
 
+	public String getIntr() {
+		return intr;
+	}
+	public void setIntr(String intr) {
+		this.intr = intr;
+	}
 	public String getId() {
 		return id;
 	}
