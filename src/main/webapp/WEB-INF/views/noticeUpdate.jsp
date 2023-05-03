@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -32,7 +33,7 @@
 </head>
 <body>
    <h3 align="center">공지사항 수정</h3>
-   <form action="noticeDetail.do" method="post" enctype="multipart/form-data">
+   <form action="noticeUpdate.do" method="post" enctype="multipart/form-data">
       <input type="hidden" name="notice_idx" value="${dto.notice_idx}"/>
       <table>      
          
@@ -56,7 +57,7 @@
                   <input type="file" name="photo">
                </c:if>
                <c:if test="${dto.newFileName ne null}">
-                  <img src="${dto.newFileName}" width="100"/>
+                  <img src="${dto.newFileName}" width="100"/>                                   
                </c:if>         
             </td>
          </tr>         

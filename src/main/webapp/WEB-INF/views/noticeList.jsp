@@ -5,10 +5,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
-<link rel="stylesheet" href="resources/css/commons.css" type="text/css">
 <style>
    table, th, td{
       border: 1px solid black;
@@ -67,24 +67,12 @@
                <th>작성자</th>
                <th>제목</th>
                <th>작성일시</th>
+               <th>공개여부</th>
                <th>조회수</th>                      
             </tr>            
          </thead>
-         <tbody>
-            <c:if test="${list eq null}">
-               <tr>
-                  <th colspan="7">등록된 글이 없습니다.</th>
-               </tr>
-            </c:if>   
-            <c:forEach items="${list}" var="notice">
-            <tr>
-               <td>${notice.notice_idx}</td>
-               <td>${notice.id}</td>
-               <td><a href="noticeDetail.do?notice_idx=${notice.notice_idx}">${notice.notice_title}</a></td>
-               <td>${notice.notice_date}</td>
-               <td>${notice.notice_bHit}</td>
-            </tr>
-            </c:forEach>      
+         <tbody id="list">
+             
          </tbody>
             <tr>
                <td colspan="6" id="paging">   
@@ -99,6 +87,7 @@
       </table>
 </body>
 <script>
+
 var showPage = 1;
 
 listCall(showPage);
@@ -114,7 +103,7 @@ $('#pagePerNum').change(function() {
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'list.ajax',
+      url:'noticeList.ajax',
       data:{
           'page':page,
             'cnt':$('#pagePerNum').val()
@@ -122,7 +111,7 @@ function listCall(page){
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.list);
+         listPrint(data.noticePageList);
          
          // 총 페이지 수
          // 현재 페이지 
@@ -157,13 +146,14 @@ function listPrint(list){
    // 해결방법 2. js 에서 변환
    list.forEach(function(item,idx){
       content += '<tr>';
-      content += '<td>'+item.idx+'</td>';
-      content += '<td>'+item.subject+'</td>';
-      content += '<td>'+item.user_name+'</td>';
-      var date = new Date(item.reg_date);
+      content += '<td>'+item.notice_idx+'</td>';
+      content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';
+      content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.notice_title+'</a></td>';
+      var date = new Date(item.notice_date);
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.bHit+'</td>';
+      content += '<td>'+item.notice_chk+'</td>';
+      content += '<td>'+item.notice_bHit+'</td>';
       content += '</tr>';
    });
    $('#list').empty();

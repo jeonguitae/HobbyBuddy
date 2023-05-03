@@ -10,9 +10,7 @@
 	table, th, td{
       border: 1px solid black;
       border-collapse: collapse;
-      padding: 5px 10px;
-      
-      
+      padding: 5px 10px;     
    }
    button{
       margin: 5px;
@@ -65,5 +63,10 @@
       </table>
    </form>
 </body>
-<script></script>
+<script>
+var msg = "${msg}";
+if (msg != "") {
+	alert(msg);
+}
+</script>
 </html>
