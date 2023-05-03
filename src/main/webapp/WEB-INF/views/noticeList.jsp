@@ -67,7 +67,6 @@
                <th>작성자</th>
                <th>제목</th>
                <th>작성일시</th>
-               <th>공개여부</th>
                <th>조회수</th>                      
             </tr>            
          </thead>
@@ -138,6 +137,7 @@ function listCall(page){
    });
 }
 
+
 function listPrint(list){
    
    var content='';
@@ -152,12 +152,13 @@ function listPrint(list){
       var date = new Date(item.notice_date);
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.notice_chk+'</td>';
       content += '<td>'+item.notice_bHit+'</td>';
       content += '</tr>';
    });
    $('#list').empty();
    $('#list').append(content);
 }
+
+
 </script>
 </html>

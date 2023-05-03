@@ -71,5 +71,15 @@
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(notice_idx) FROM notice 
 	</select>
+	<select id="noticeTitle" resultType="kr.co.hb.admin.dto.NoticeDTO">
+		SELECT * FROM notice
+		WHERE notice_title LIKE #{notice_Search}
+	</select>
+	
+	<select id="noticeId" resultType="kr.co.hb.admin.dto.NoticeDTO">
+		SELECT * FROM notice
+		WHERE id LIKE #{notice_Search}
+	</select>
+	
    
 </mapper>

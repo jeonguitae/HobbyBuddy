@@ -28,5 +28,9 @@ public interface NoticeDAO {
 	int totalCount();
 
 	ArrayList<NoticeDTO> noticePageList(int cnt, int offset);
+
+	ArrayList<NoticeDTO> noticeTitle(HashMap<String, String> params);
+
+	ArrayList<NoticeDTO> noticeId(HashMap<String, String> params);
 	
 }
