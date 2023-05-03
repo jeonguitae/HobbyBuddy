@@ -6,7 +6,30 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css">
-<style></style>
+<style>
+	table, th, td{
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px 10px;
+      
+      
+   }
+   button{
+      margin: 5px;
+   }
+   table {
+      width: 500px;
+   }
+   input[type="text"]{
+      width: 40%;   
+   }
+   #search{
+      display: inline-block;
+   }
+   colgroup {
+      width: 30%;
+   }
+</style>
 </head>
 <body>
    <h3 align="center">공지사항 등록</h3>

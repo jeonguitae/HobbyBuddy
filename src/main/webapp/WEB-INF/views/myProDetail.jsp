@@ -106,6 +106,8 @@
 </head>
 <body>
 
+</head>
+<body>
 </body>
 <script>
 	$.ajax({
