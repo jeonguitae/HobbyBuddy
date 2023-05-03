@@ -88,7 +88,7 @@
 	<div id="profileIcon">프로필</div>
 	<div class="panel2" onclick="location.href='login.go'">로그인</div>
 	<div class="panel" onclick="location.href='logout.go'">로그아웃</div>
-	<div class="panel">마이페이지</div>
+	<div class="panel" onclick="location.href='mypage.go'">마이페이지</div>
 	<div class="panel">작성 글/댓글</div>
 	<div class="panel">참여한 모임</div>
 	<div class="panel">쪽지방</div>
