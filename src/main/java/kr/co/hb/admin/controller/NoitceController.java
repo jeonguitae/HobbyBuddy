@@ -3,12 +3,15 @@ package kr.co.hb.admin.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.admin.dto.NoticeDTO;
@@ -16,22 +19,33 @@ import kr.co.hb.admin.service.NoticeService;
 
 @Controller
 public class NoitceController {
+
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired NoticeService service;
 	
+	@RequestMapping(value = "/noticeList.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> noticeList(
+			@RequestParam String page,
+			@RequestParam String cnt			
+			){
+		
+		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt));
+	}	
+	
 	@RequestMapping(value = "/noticeList.go")
-	public String noticeList(Model model) {
-		
-		ArrayList<NoticeDTO> list = service.noticeList();
-		model.addAttribute("list",list);
-		
-		return "noticeList";		
+	public String noticePage() {
+		return "noticeList";
 	}
 	
+	
 	@RequestMapping(value = "/search.do")
-	   public String noticeSearch(Model model) {      
+	   public String noticeSearch(Model model, @RequestParam HashMap<String, String> params) {      
 	      
+		ArrayList<NoticeDTO> list = service.noticeSearch(params);
 	      
+		model.addAttribute("list",list);
 	      return "noticeList.go";
 	   }
 	   
@@ -43,9 +57,20 @@ public class NoitceController {
 	   }
 	   // 등록에서 등록버튼 눌렀을떄
 	   @RequestMapping(value = "/noticeWrite.do", method = RequestMethod.POST)
-	   public String noticeWrite(MultipartFile photo, @RequestParam HashMap<String, String> params) {
+	   public String noticeWrite(Model model,MultipartFile photo, @RequestParam HashMap<String, String> params) {
 	      
-	      return service.noticeWrite(photo, params);
+		   String page = "noticeCreate";
+		  
+		   if (params.get("notice_title").equals("")) {
+			model.addAttribute("msg","제목을 입력하세요.");
+		   }else if (params.get("notice_content").equals("")) {
+			   model.addAttribute("msg","내용을 입력하세요.");
+		   }else {
+			   service.noticeWrite(photo, params);
+			page = "redirect:/noticeList.go";
+		}
+		   
+	      return page;
 	   }
 	   
 	   @RequestMapping(value = "/noticeDetail.do")
@@ -79,16 +104,18 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/noticeUpdate.do", method = RequestMethod.POST)
-	   public String noticeUpdate(MultipartFile photo, 
-	         @RequestParam HashMap<String, String> params) {
+	   public String noticeUpdate(@RequestParam HashMap<String, String> params) {
 	      
-	      return service.noticeUpdate(photo, params);
+	      return service.noticeUpdate(params);
 	   }
 	   
 	   @RequestMapping(value = "/noticeDelete.go")
-	   public String noticeDelete(@RequestParam String notice_idx) {
-	      service.noticeDelete(notice_idx);
+	   public String noticeDelete(Model model,@RequestParam HashMap<String, String> params) {
+	      		   
+		   service.noticeDelete(params.get("notice_idx"));
 	      return "redirect:/noticeList.go";
 	   }
+	   
+	   
 	
 }

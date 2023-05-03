@@ -11,8 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.co.hb.board.dto.BoardDTO;
-import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.group.service.GroupBoardService;
 
