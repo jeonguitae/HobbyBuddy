@@ -3,8 +3,6 @@ package kr.co.hb.group.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,6 +92,16 @@ public class GroupBoardController {
 		logger.info("start");
 		return "reportCreate";
 	}
+	
+	@RequestMapping(value = "/gboardlist.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> gboardpagelist(
+			@RequestParam String page,
+			@RequestParam String cnt			
+			){
+		
+		return service.gboardpagelist(Integer.parseInt(page), Integer.parseInt(cnt));
+	}	
 	
 
 }

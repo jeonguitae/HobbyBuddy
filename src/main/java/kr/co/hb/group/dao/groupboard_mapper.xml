@@ -61,4 +61,13 @@
 		WHERE content LIKE #{serch}
 	</select>
 	
+	<select id="gboardpagelist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT *
+			FROM gboardlist ORDER BY gidx DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(gidx) FROM gboardlist 
+	</select>
+	
 </mapper>
