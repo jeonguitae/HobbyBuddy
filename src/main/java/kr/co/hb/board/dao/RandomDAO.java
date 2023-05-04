@@ -13,9 +13,12 @@ public interface RandomDAO {
 
 	ArrayList<RandomDTO> nonameList(HashMap<String, String> params);
 
-	ArrayList<RandomDTO> list(int cnt, int offset);
+	RandomDTO detail(String id);
 
 	int totalCount();
+
+	ArrayList<RandomDTO> list(int cnt, int offset);
+
 	
 	
 	

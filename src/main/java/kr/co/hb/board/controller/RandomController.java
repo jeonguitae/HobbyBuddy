@@ -4,11 +4,12 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 
 @Controller
@@ -26,7 +28,7 @@ public class RandomController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/profile.go")
-	public String list(Model model) {		
+	public String plist(Model model) {		
 		logger.info("start");
 		return "proList";
 	}
@@ -85,14 +87,33 @@ public class RandomController {
 		return "reportList";
 	}
 	
-	 @RequestMapping(value = "/proList.ajax", method = RequestMethod.POST)
-     @ResponseBody
-     public HashMap<String, Object> list(
-           @RequestParam String page, @RequestParam String cnt
-           ) {
-        
-        return Service.list(Integer.parseInt(page), Integer.parseInt(cnt));
-     }
+		@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
+		public String detail(@RequestParam String id,Model model) {
+			
+			String page = "redirect:/list.do";
+			
+			RandomDTO dto= Service.detail(id);
+			if(dto != null) {
+				page = "proDetail";
+				model.addAttribute("member",dto);
+			}
+			return "proDetail";
+		}
+		
+		
+		   @RequestMapping(value = "/list.ajax", method = RequestMethod.POST)
+		      @ResponseBody
+		      public HashMap<String, Object> list(
+		            @RequestParam String page, @RequestParam String cnt
+		            ) {
+		         
+		         return Service.list(Integer.parseInt(page), Integer.parseInt(cnt));
+		      }
+
+
+
+	 
+
 
 	
 }

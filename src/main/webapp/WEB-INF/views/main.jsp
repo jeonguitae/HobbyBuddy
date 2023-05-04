@@ -9,7 +9,7 @@
 </style>
 </head>
 <body>
-
+	<jsp:include page="gnb.jsp"/>
 	<div>하비버디 메인화면입니다</div>
 	<input type="button" value="로그인" class="loginIdChk" onclick="location.href='login.go'"/>
 	<input type="button" value="회원가입" class="loginIdChk" onclick="location.href='join.go'"/>

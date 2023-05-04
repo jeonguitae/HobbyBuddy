@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.hb.board.dto.RandomDTO;
+import kr.co.hb.admin.dto.NoticeDTO;
 import kr.co.hb.group.dao.GroupBoardDAO;
 import kr.co.hb.group.dto.GroupBoardDTO;
 
@@ -42,23 +42,11 @@ public class GroupBoardService {
 		return dao.gdetail(id);
 	}
 
-	public GroupBoardDTO gupdate(int idx) {
-		
-		return dao.gupdate(idx);
-	}
-
-	public int gupdatedo(HashMap<String, String> params) {
-
-		return dao.gupdatedo(params);
-		
-	}
-
 	public ArrayList<GroupBoardDTO> gserch(HashMap<String, String> params) {
 		
 		ArrayList<GroupBoardDTO> list = null;
 		
 		if(params.get("ssorting").equals("subject")) {
-			
 			String wildcard = "%" + params.get("serch") + "%";
 			params.replace("serch", wildcard);
 			list = dao.gsserch(params);
@@ -79,6 +67,33 @@ public class GroupBoardService {
 		}
 		
 		return list;
+	}
+
+	public HashMap<String, Object> gboardpagelist(int page, int cnt) {
+HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		// 1page = offset : 0
+		// 2page = offset : offset + 5
+		// 3page = offset : 10
+		
+		int offset = (page - 1) * cnt;
+		
+		// 만들 수 있는 총 페이지 수 
+		// 전체 게시물 / 페이지 당 보여줄 수 
+		int total = dao.totalCount();
+		int range = total%cnt == 0 ? total/cnt : (total/cnt) + 1;
+		
+		
+		page = page > range ? range : page;
+		
+		map.put("currPage", page);
+		map.put("pages", range);
+		
+		ArrayList<GroupBoardDTO> gboardpagelist = dao.gboardpagelist(cnt, offset);
+		
+		map.put("gboardpagelist", gboardpagelist);
+		
+		return map;
 	}
 
 }

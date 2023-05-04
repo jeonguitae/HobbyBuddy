@@ -15,15 +15,15 @@ public interface GroupBoardDAO {
 
 	GroupBoardDTO gdetail(int id);
 
-	GroupBoardDTO gupdate(int idx);
-
-	int gupdatedo(HashMap<String, String> params);
-
 	ArrayList<GroupBoardDTO> gwserch(HashMap<String, String> params);
 
 	ArrayList<GroupBoardDTO> gsserch(HashMap<String, String> params);
 
 	ArrayList<GroupBoardDTO> gcserch(HashMap<String, String> params);
+
+	ArrayList<GroupBoardDTO> gboardpagelist(int cnt, int offset);
+
+	int totalCount();
 
 
 }

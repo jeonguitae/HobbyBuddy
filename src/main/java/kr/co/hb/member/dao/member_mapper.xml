@@ -47,5 +47,50 @@
 			,city=#{city},area=#{area},intr=#{intr},chkreq=#{chkreq},chkresp=#{chkresp},random=#{random}
 		WHERE id=#{id}
 	</update>
+	
+	<delete id="dropOut">
+	Delete FROM member where id=#{param1}
+	</delete>
+	
+	<select id="big_hb" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT big_hb FROM big_hb ORDER BY big_hb
+	</select>
+	
+	<select id="small_hb" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT small_hb FROM small_hb where big_hb=#{param1} ORDER BY big_hb
+	</select>
+	
+	<insert id="hbPlus" parameterType="hashmap">
+		insert into my_hobby_list (id,big_hb,small_hb)
+		values(#{id},#{big_hb},#{small_hb})
+	</insert>
+	
+	<select id="myHobbyList" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT my_hobby_no,id, big_hb,small_hb FROM my_hobby_list WHERE id = #{param1}
+	</select>
+	
+	<delete id="myHobbyDelList">
+		DELETE FROM my_hobby_list WHERE my_hobby_no = #{param1}
+	</delete>
+	
+	<insert id="proPhotoSave">
+		INSERT INTO pBoard(id, new_file_name, ori_file_name, file_class)
+			VALUES(#{param1},#{param4},#{param3},#{param2})
+	</insert>
+	
+	<select id="myProPhotoList" resultType="kr.co.hb.member.dto.MemberDTO">
+		select photoIdx,id,new_file_name,ori_file_name,file_class
+		from pBoard
+		where id = #{param1} and file_class = #{param2}
+	</select>
+	
+	<delete id="myProPhotoDel">
+		DELETE FROM pBoard WHERE id = #{param1} and file_class = #{param2}
+	</delete>
+	
+	
+	<select id="findFile" resultType="String">
+		SELECT new_file_name FROM pBoard WHERE id = #{param1} and file_class = #{param2}
+	</select>
 
 </mapper>

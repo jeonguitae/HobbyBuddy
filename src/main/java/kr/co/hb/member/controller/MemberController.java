@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.hb.main.controller.MainController;
 
 import kr.co.hb.member.dto.MemberDTO;
 import kr.co.hb.member.service.MemberService;
@@ -26,6 +28,7 @@ public class MemberController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired MemberService service;
+	@Autowired MainController mainCont;
 
 	@RequestMapping(value="/login.go")
 	public String login() {
@@ -92,6 +95,11 @@ public class MemberController {
 		logger.info("myProDetail : "+ loginId);			
 		HashMap<String, Object> map = service.myProDetail(loginId);
 		logger.info("result : "+ map);
+		
+		MemberDTO dto = service.myProPhotoList(loginId);
+		model.addAttribute("dto"+ dto);
+		logger.info("dto",dto);
+		
 		return map;
 	}
 	@RequestMapping(value="/memberUpdate.ajax")
@@ -100,6 +108,93 @@ public class MemberController {
 		logger.info("memberUpdate params : {}",params);
 		return service.memberUpdate(params);		
 	}
+	@RequestMapping(value="/dropOut.ajax")
+	@ResponseBody
+	public void dropOut(@RequestParam String id, HttpSession session){
+		logger.info("dropOut : "+id);
+		service.dropOut(id);
+		mainCont.logout(session);
+	}
+	
+	@RequestMapping(value="/myHobbyList.go")
+	public String myHobbyList(Model model) {
+		logger.info("취미 등록 페이지 이동");
+		ArrayList<MemberDTO> big_hb = service.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);		
+		return "myHobbyList";
+	}	
+	
+	@RequestMapping(value="/big_hb.ajax")
+	@ResponseBody
+	public HashMap<String, Object> big_hb(Model model, @RequestParam String big_hb) {
+		logger.info("대분류 취미 변경 : "+big_hb);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		ArrayList<MemberDTO> small_hb = service.small_hb(big_hb);
+		map.put("small_hb", small_hb);
+		return map;
+	}
 
+	@RequestMapping(value="/hbPlus.ajax")
+	@ResponseBody
+	public HashMap<String, Object> hbPlus(@RequestParam HashMap<String, String> params){
+		logger.info("params : {}",params);
+		return service.hbPlus(params);
+	}
+	
+	@RequestMapping(value = "/myHobbyList.ajax")
+	@ResponseBody
+	public HashMap<String, Object> myHobbyList(HttpSession session, @RequestParam String id){		
+		boolean login = false;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(session.getAttribute("loginId")!= null) {
+			login = true;
+			logger.info("session.getAttribute(\"loginId\") : " + session.getAttribute("loginId"));
+			ArrayList<MemberDTO> myHobbyList = service.myHobbyList(id);
+			map.put("myHobbyList", myHobbyList);
+		}
+		map.put("login", login);
+		return map;
+	}
+	
+	@RequestMapping(value="/myHobbyDel.ajax")
+	@ResponseBody
+	public HashMap<String, Object> myHobbyDel(@RequestParam(value="myHobbyDelList[]") ArrayList<String> myHobbyDelList){
+		//array 로 받을 경우 @RequestParam 에 value 를 반드시 명시해야함
+		logger.info("myHobbyDelList : "+myHobbyDelList);
+		return service.myHobbyDel(myHobbyDelList);
+	}
+	
+	@RequestMapping(value="/myProPhotoList.go")
+	public String myProPhotoList(Model model, HttpSession session) {
+		logger.info("프로필 사진 관리 페이지 이동");
+		String id = (String) session.getAttribute("loginId");
+		logger.info("myProPhotoList ID_session : " + session.getAttribute("loginId"));
+		logger.info("myProPhotoList ID : " + id );
+		
+		MemberDTO dto = service.myProPhotoList(id);
+		model.addAttribute("dto",dto);
+		
+		return "myProPhotoList";
+	}
+	
+	@RequestMapping(value="/proPhotoUpload.do", method = RequestMethod.POST)
+	public String proPhotoUpload(MultipartFile photo, @RequestParam HashMap<String, String> params) {
+		logger.info("params : "+ params + " / photo : "+ photo);
+		
+		if(photo != null) {
+			service.proPhotoUpload(photo, params);
+		}
+		return "redirect:/myProPhotoList.go";
+	}
+	
+	
+	@RequestMapping(value="/myProPhotoDel.do")
+	public String myProPhotoDel(HttpSession session) {
+		String id = (String) session.getAttribute("loginId");
+		String file_class = "프로필";
+		service.myProPhotoDel(id,file_class);
+		return "redirect:/myProPhotoList.go";
+	}
 
 }
