@@ -67,6 +67,20 @@ public class NoticeService {
 	         }
 
 	      }
+	   
+	   
+	   public String notice_ChkUpdate(String notice_idx, String flag) {
+		
+		   if (flag.equals("notice_ChkOn")) {
+			   dao.notice_ChkOn(notice_idx);
+			   flag = "공개";
+		   }else if (flag.equals("notice_ChkOff")) {
+			   dao.notice_ChkOff(notice_idx);
+			   flag = "해제";
+		   }
+		return flag;		   
+		   
+	   }
 
 	   public NoticeDTO noticeDetail(String notice_idx, String flag) {
 	      
@@ -160,6 +174,22 @@ public class NoticeService {
 		
 		return map;
 	}
+
+	public void updatePDelete(String file, String photo_idx) {
+		
+		
+		 String newFileName = dao.noticeFindFile(file);
+		    int row = dao.updatePDelete(photo_idx); // photo_idx 파라미터 사용
+		    if (newFileName != null) {
+		        if (row > 0) {
+		            File files = new File("C:/img/upload/" + newFileName);
+		            if (files.exists()) {
+		                files.delete();
+		            }
+		        }
+		    }
+	}
+
 
 
 }

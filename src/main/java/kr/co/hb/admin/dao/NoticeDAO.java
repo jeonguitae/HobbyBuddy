@@ -33,4 +33,13 @@ public interface NoticeDAO {
 
 	ArrayList<NoticeDTO> noticeId(HashMap<String, String> params);
 	
+	void notice_ChkOn(String notice_idx);
+	
+	void notice_ChkOff(String notice_idx);
+
+	int updatePDelete(String photo_idx);
+
+	
+	
+	
 }

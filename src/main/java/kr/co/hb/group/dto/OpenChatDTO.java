@@ -3,7 +3,7 @@ package kr.co.hb.group.dto;
 public class OpenChatDTO {
 	
 	private int gidx;
-	private String loginId;
+	private String id;
 	
 	public int getGidx() {
 		return gidx;
@@ -11,11 +11,11 @@ public class OpenChatDTO {
 	public void setGidx(int gidx) {
 		this.gidx = gidx;
 	}
-	public String getLoginId() {
-		return loginId;
+	public String getId() {
+		return id;
 	}
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

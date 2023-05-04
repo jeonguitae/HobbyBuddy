@@ -9,26 +9,84 @@
 </style>
 </head>
 <body>
-	<form action="openlist.do" method="post">
-		<button>참가자</button>
-	</form>
-		<table>
-			<thead>
-				<tr>
-					<th>방 번호</th>
-					<th>아이디</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<c:forEach items="${list}" var="bbs">
+		<div class="memlist">
+			<table>
+				<thead>
 					<tr>
-						<td>${bbs.gidx}</td>
-						<td>${bbs.loginId}</td>
+						<th>아이디</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				
+				<tbody>
+					<c:forEach items="${list}" var="bbs">
+						<tr>
+							<td>${bbs.gidx}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+
+		
+		<div class="chatting">
+				<table>
+				<tr id="list">
+				
+				</tr>
+				<tr>
+					<td>
+						<input type="text" id="msg" value=""/>
+						<button class="sendmsg">전송</button>
+					</td>
+				</tr>
+				</table>
+				
+		</div>
 </body>
-<script></script>
+<script>
+$('button[class="sendmsg"]').click(function(){
+	var loginId = "${sessionScope.loginId}";
+	var gidx = "";
+	var $msg = $('input[id="msg"]').val();
+	
+	console.log(loginId, $msg, gidx);
+	
+	$.ajax({
+		type:'post',
+		url:'sendmsg.ajax',
+		data:{
+			id: loginId,
+			msg: $msg
+		},
+		dataType:'json',
+		success:function(data){},
+		error:function(e){}
+	});
+});
+
+/* function realTime(){
+	setInterval(function(){
+		list();
+	},1000);
+}
+
+list();
+function list(){
+	$.ajax({
+		type:'post',
+		url:'opclist.ajax',
+		data:{},
+		dataType:'json',
+		success:function(data){
+			}else{
+				listDraw(data.list);
+			}
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});	
+} */
+
+</script>
 </html>

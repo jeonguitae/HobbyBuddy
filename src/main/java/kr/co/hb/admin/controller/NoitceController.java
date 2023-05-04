@@ -1,5 +1,6 @@
 package kr.co.hb.admin.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -33,6 +34,16 @@ public class NoitceController {
 		
 		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt));
 	}	
+	
+	@RequestMapping(value = "/update_chk.ajax", method = RequestMethod.POST)
+	  @ResponseBody
+	  public String update_chk(Model model,
+			  @RequestParam("notice_idx") String notice_idx,
+	                           @RequestParam("flag") String flag) {	    
+	    
+	    return service.notice_ChkUpdate(notice_idx, flag);
+	  }
+	
 	
 	@RequestMapping(value = "/noticeList.go")
 	public String noticePage() {
@@ -115,6 +126,8 @@ public class NoitceController {
 		   service.noticeDelete(params.get("notice_idx"));
 	      return "redirect:/noticeList.go";
 	   }
+	   
+	   
 	   
 	   
 	

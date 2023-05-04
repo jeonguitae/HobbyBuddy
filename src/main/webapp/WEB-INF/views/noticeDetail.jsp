@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
 <style>
 	table, th, td{
       border: 1px solid black;
@@ -28,6 +27,15 @@
    }
    colgroup {
       width: 30%;
+   }
+   #chk{
+   	 float: left;
+   }
+   #rightt{
+   	float: right;
+   }
+   #listBack{
+   	background: aqua;
    }
 </style>
 </head>
@@ -69,13 +77,69 @@
          </c:if>            
          <tr>
             <th colspan="2">
-               <input type="button" onclick="location.href='noticeList.go'" value="리스트">
-               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정">               
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제">
+               <input type="button" value="${dto.notice_chk }" id="chk"> 
+               <input type="button" onclick="location.href='noticeList.go'" value="리스트로 돌아가기" id="listBack">
+               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="rightt">               
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="rightt">
             </th>
          </tr>
+         
                
       </table>
 </body>
-<script></script>
+<script>
+
+if ($("#chk").val() == 'false') {
+	$("#chk").val('비공개');
+}else{
+	$("#chk").val('공개');
+}
+
+
+$("#chk").on("click", function() {
+  var notice_idx = ${dto.notice_idx};
+  var flag = '${dto.notice_chk}' === 'false' ? 'notice_ChkOn' : 'notice_ChkOff';
+  
+  if(flag === 'notice_ChkOn') {
+    if(confirm('해당 글을 공개하시겠습니까?')) {
+      $.ajax({
+        type: 'POST',
+        url: 'update_chk.ajax',
+        data: { notice_idx: notice_idx, flag: flag },
+        success: function(response) {
+          console.log(response);
+          var newChk = flag === 'notice_ChkOn' ? '공개' : '비공개';
+          $("#chk").val(newChk);
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
+    } else {
+      $("#chk").val('비공개');
+    }
+  } else {
+    if(confirm('해당 글을 비공개하시겠습니까?')) {
+      $.ajax({
+        type: 'POST',
+        url: 'update_chk.ajax',
+        data: { notice_idx: notice_idx, flag: flag },
+        success: function(response) {
+          console.log(response);
+          var newChk = flag === 'notice_ChkOn' ? '공개' : '비공개';
+          $("#chk").val(newChk);
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
+    } else {
+      $("#chk").val('공개');
+    }
+  }
+});
+
+
+
+</script>
 </html>
