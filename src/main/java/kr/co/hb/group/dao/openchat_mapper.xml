@@ -5,10 +5,18 @@
 <mapper namespace="kr.co.hb.group.dao.OpenChatDAO">
 	
 	<insert id="openlist" parameterType="HashMap">
-		INSERT INTO openlist(gidx, id) VALUES(#{gidx}, #{loginId})
+		INSERT INTO openlist(id, gidx) VALUES(#{param1}, #{param2})
 	</insert>
 	
 	<select id="openchatlist" resultType="kr.co.hb.group.dto.OpenChatDTO">
-		SELECT * FROM openlist
+		SELECT * FROM openlist WHERE gidx = #{gidx}
 	</select>
+	
+	<select id="memchk" resultType="int">
+		SELECT COUNT(id) FROM openlist WHERE id = #{param1} AND gidx = #{param2}
+	</select>
+	
+	<insert id="sendmsg" parameterType="HashMap">
+		INSERT INTO chat(id, chatting) VALUES(#{param1}, #{param2})
+	</insert>
 </mapper>
