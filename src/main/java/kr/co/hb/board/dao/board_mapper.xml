@@ -4,28 +4,44 @@
 	
 
 <mapper namespace="kr.co.hb.board.dao.BoardDAO">
-	<select id="flist" resultType="kr.co.hb.board.dto.BoardDTO">
+	<select id="list" resultType="kr.co.hb.board.dto.BoardDTO">
 	SELECT fbNo, title, id, fbTime, bhit 
 	FROM fBoard ORDER BY fbNo DESC
 	</select>
 	
-
-	<insert useGeneratedKeys="true" keyColumn="fbNo" keyProperty="fbNo" id="write" 
-	parameterType="kr.co.hb.board.dto.BoardDTO">
+	<insert useGeneratedKeys="true" keyColumn="fbNo"
+	keyProperty="fbNo" id="fwrite" 
+	parameterType="kr.co.hb.board.dto.BoardDTO"> 
 	INSERT INTO fBoard (title, id, bContent)
 	VALUES (#{title},#{id},#{bContent})
 	</insert>
 	
-	
-	<insert id="filewrite">
-	INSERT INTO hbphoto (notice_idx, oriFileName, newFileName)
-	VALUES (#{param1}, #{param2}, #{param3})
+	<insert id="filesave">
+	INSERT INTO hbphoto (fbNo, oriFileName, newFileName)
+	VALUES (#{param1},#{param2},#{param3})
 	</insert>
 	
+	<update id="uphit">
+	UPDATE fBoard SET bhit = bhit+1
+	WHERE fbNo = #{fbNo}
+	</update>
+	
+	<select id="detail" resultType="kr.co.hb.board.dto.BoardDTO">
+	SELECT f.fbNo, f.id, f.title, f.fbTime, f.bContent, f.bhit,
+	h.photo_idx, h.newFileName FROM fBoard f
+	LEFT JOIN hbphoto h ON f.fbNo = h.fbNo WHERE f.fbNo = #{fbNo}
+	</select>
+	
+	<delete id="fdelete">
+	DELETE FROM fBoard WHERE fbNo=#{param1}
+	</delete>
+	
+	<select id="findFile" resultType="String">
+	SELECT newFileName FROM hbphoto WHERE fbNo=#{param1}
+	</select>
 	
 	
-	
-	
-	
-	
+	<update id="fupdate" parameterType="hashmap">
+	UPDATE fBoard SET title=#{title}, id=#{id}, bContent=#{bContent} WHERE fbNo = #{fbNo}
+	</update>
 </mapper>

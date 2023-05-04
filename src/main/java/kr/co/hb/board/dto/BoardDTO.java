@@ -14,11 +14,19 @@ public class BoardDTO {
 	private String newfilename;
 	private String orifilename;
 	
+	
+
 	public int getFbNo() {
 		return fbNo;
 	}
 	public void setFbNo(int fbNo) {
 		this.fbNo = fbNo;
+	}
+	public Date getFbTime() {
+		return fbTime;
+	}
+	public void setFbTime(Date fbTime) {
+		this.fbTime = fbTime;
 	}
 	public String getTitle() {
 		return title;
@@ -32,12 +40,7 @@ public class BoardDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Date getFbTime() {
-		return fbTime;
-	}
-	public void setFbTime(Date fbTime) {
-		this.fbTime = fbTime;
-	}
+
 	public int getBhit() {
 		return bhit;
 	}

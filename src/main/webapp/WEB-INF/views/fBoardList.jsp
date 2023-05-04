@@ -76,7 +76,7 @@
 			<c:forEach items="${list}" var="bbs">
 				<tr>
 					<td>${bbs.fbNo}</td>
-					<td><a href="detail.do?idx=${bbs.fbNo}">${bbs.title}</a></td>
+					<td><a href="fdetail.do?fbNo=${bbs.fbNo}">${bbs.title}</a></td>
 					<td>${bbs.id}</td>
 					<td>${bbs.fbTime}</td>
 					<td>${bbs.bhit}</td>
