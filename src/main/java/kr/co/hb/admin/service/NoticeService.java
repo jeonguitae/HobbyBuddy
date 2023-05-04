@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.admin.dao.NoticeDAO;
 import kr.co.hb.admin.dto.NoticeDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 @Service
 public class NoticeService {
@@ -114,7 +115,22 @@ public class NoticeService {
 
 	public ArrayList<NoticeDTO> noticeSearch(HashMap<String, String> params) {
 		
-		return dao.noticeSearch(params);
+		ArrayList<NoticeDTO> list = null;
+		
+		if(params.get("notice").equals("notice_title")) {
+			String wildcard = "%" + params.get("notice_Search") + "%";
+			params.replace("notice_Search", wildcard);
+			list = dao.noticeTitle(params);
+		}
+		
+		if(params.get("notice").equals("id")) {
+			
+			String wildcard = "%" + params.get("notice_Search") + "%";
+			params.replace("notice_Search", wildcard);
+			list = dao.noticeId(params);
+		}		
+		
+		return list;
 	}
 
 	public HashMap<String, Object> noticePageList(int page, int cnt) {

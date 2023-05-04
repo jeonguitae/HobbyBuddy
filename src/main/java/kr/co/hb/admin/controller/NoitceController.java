@@ -45,8 +45,8 @@ public class NoitceController {
 	      
 		ArrayList<NoticeDTO> list = service.noticeSearch(params);
 	      
-		model.addAttribute("list",list);
-	      return "noticeList.go";
+		model.addAttribute("noticePageList",list);
+	      return "noticeList";
 	   }
 	   
 	   // 관리에서 등록 눌렀을떄
