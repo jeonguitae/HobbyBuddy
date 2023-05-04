@@ -57,8 +57,11 @@
                   <input type="file" name="photo">
                </c:if>
                <c:if test="${dto.newFileName ne null}">
-                  <img src="${dto.newFileName}" width="100"/>                                   
-               </c:if>         
+				  <img src="/photo/${dto.newFileName}" width="100"/>
+				  ${dto.newFileName}
+				  <input type="hidden" name="photo_idx" value="${dto.photo_idx}">
+				  <button type="button" id="deleteBtn">사진 삭제</button>
+				</c:if>      
             </td>
          </tr>         
          <tr>            
@@ -68,9 +71,11 @@
                <button>수정</button>
                <input type="button" onclick="location.href='noticeList.go'" value="취소">
             </th>
-         </tr>
+         </tr> 
       </table>
    </form>
 </body>
-<script></script>
+<script>
+
+</script>
 </html>

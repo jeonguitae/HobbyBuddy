@@ -51,6 +51,10 @@
       DELETE FROM notice WHERE notice_idx = #{param1}
    </delete>
    
+   <delete id="updatePDelete">
+      DELETE FROM hbphoto WHERE photo_idx = #{param1}
+   </delete>
+   
    <select id="noticeFindFile" resultType="String">
       SELECT newFileName FROM hbphoto
          WHERE notice_idx = #{param1}
@@ -80,6 +84,20 @@
 		SELECT * FROM notice
 		WHERE id LIKE #{notice_Search}
 	</select>
+	
+	<update id="notice_ChkOn">
+	
+      update notice set notice_chk  = true where notice_idx = #{notice_idx}
+
+   </update>
+   
+	<update id="notice_ChkOff">     
+ 
+ 	  update notice set notice_chk  = false where notice_idx = #{notice_idx}
+      
+   </update>
+   
+   
 	
    
 </mapper>
