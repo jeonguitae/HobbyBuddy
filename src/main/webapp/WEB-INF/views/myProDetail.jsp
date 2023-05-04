@@ -13,6 +13,8 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
+	<h3>마이페이지</h3>
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -88,24 +90,28 @@
 				<input id="no" type="radio" name="random" value="0"/>미동의
 			</td>
 		</tr>
-		<c:if test="${prodetail.new_file_name ne null}">
-			<tr>
-				<th>프로필 사진</th>
-				<td><img width="300" src="/photo/${prodetail.newFileName}"/></td>
-			</tr>
-		</c:if>
+		
+				
+		<tbody id="myHobbyList">		
+		</tbody>
+		
+		<tr>
+			<th colspan="2">
+			<button onclick="location.href='myHobbyList.go'">취미 관리</button>
+			<button onclick="location.href='myProPhotoList.go'">사진 관리</button>
+			</th>
+		</tr>
 		<tr>
 			<th colspan="2">
 			<button onclick="memberUpdate()">수정하기</button>
-			<button id="dropOut">중복체크</button>
+			<button id="dropOut">탈퇴하기</button>
 			</th>
 		</tr>
-	</table>	
+	</table>
 
 </style>
 </head>
 <body>
-
 </head>
 <body>
 </body>
@@ -219,7 +225,7 @@
 		                 console.log(data);
 		                 if(data.success==1){
 		                    alert('수정 성공');
-		                    location.href='./';
+		                    location.href='./mypage.go';
 		                 }else{
 		                    alert('수정 실패');
 		                 }
@@ -267,30 +273,57 @@
 		$('#area').append(content);
 	}
 	
-	$('#dropOut').on('click', function(e){   
-		   console.log("중복체크 요청 : " + chkId);      
+	$('#dropOut').on('click', function(e){
+		var dropId = $('#id').val();
+   		console.log("회원탈퇴 요청 : " + dropId);
+		const dropChk = confirm('탈퇴 하시겠습니까?');
+		if(dropChk){
 		   $.ajax({
 		      type: 'get'
-		      ,url: 'overlay.ajax'
-		      ,data:{'id':chkId}
+		      ,url: 'dropOut.ajax'
+		      ,data:{'id':dropId}
 		      ,dataType:'json'
-		      ,success:function(data){
-		         console.log(data);
-		         if(data.overlay==0){
-		            alert('사용 가능한 아이디 입니다.');
-		            overlayChk=true;
-		         } else {
-		            alert('이미 사용중인 아이디 입니다.');
-		            $('#id').val('');
-		         }
-		      }
-		      ,error:function(e){
-		         console.log(e);
-		      }
-		   });      
-		});
+	    	  ,success:function(){
+	    		  location.href='./';
+			  }
+		   });   
+		}
+	});
 	
+	myHobbyList();
+	function myHobbyList(){
+		console.log("loginId : " + loginId);
+		$.ajax({
+			type:'get',
+			url:'myHobbyList.ajax',
+			data:{id:loginId},
+			dataType:'json',
+			success:function(data){
+				console.log("data, myHobbyList : " + data.myHobbyList);
+				console.log("data, login : " + data.login);
+				if(!data.login){
+					alert('로그인이 필요한 서비스 입니다.');
+					location.href='./';
+				}else{
+					myHobbyListDraw(data.myHobbyList);
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}	
 
-
+	function myHobbyListDraw(myHobbyList){
+		console.log("myHobbyList : " + myHobbyList);
+		var content = '<tr><th>취미</th><td>';
+		myHobbyList.forEach(function(item,index){
+			content+=item.big_hb + " / " + item.small_hb+'<br/>';
+		});
+		content += '</td></tr>';
+		$('#myHobbyList').empty();
+		$('#myHobbyList').append(content);
+	}
+	
 </script>
 </html>

@@ -19,10 +19,32 @@ public interface MemberDAO {
 
 	String adminChk(String id, String pw);
 
-
 	HashMap<String, Object> myProDetail(Object id);
 
 	int memberUpdate(HashMap<String, String> params);
+
+	void dropOut(String id);
+	
+	ArrayList<MemberDTO> big_hb();
+
+	ArrayList<MemberDTO> small_hb(String big_hb);
+
+	int hbPlus(HashMap<String, String> params);
+
+	ArrayList<MemberDTO> myHobbyList(String id);
+
+	int myHobbyDelList(String id);
+
+	void proPhotoSave(String id, String file_class, String oriFileName, String newFileName);
+
+	MemberDTO myProPhotoList(String id, String file_class);
+
+	int myProPhotoDel(String id, String file_class);
+
+	String findFile(String id, String file_class);
+
+	
+
 
 
 }

@@ -36,12 +36,23 @@ public class MainController {
 	@RequestMapping(value = "/logout.go", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
-		return "redirect:/";
+		session.removeAttribute("adminChk");
+		return "main";
 	}	
 	
 	@RequestMapping(value = "/admin.go", method = RequestMethod.GET)
 	public String admin(HttpSession session) {
 
 		return "admin";
+	}
+	@RequestMapping(value = "/RandomList.go", method = RequestMethod.GET)
+	public String random(HttpSession session) {
+
+		return "randomList";
+	}
+	@RequestMapping(value = "/noNameList.go", method = RequestMethod.GET)
+	public String noNameRandom(HttpSession session) {
+
+		return "noNameList";
 	}
 }
