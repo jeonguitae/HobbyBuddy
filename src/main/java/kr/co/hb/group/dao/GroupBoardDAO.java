@@ -21,5 +21,9 @@ public interface GroupBoardDAO {
 
 	ArrayList<GroupBoardDTO> gcserch(HashMap<String, String> params);
 
+	ArrayList<GroupBoardDTO> gboardpagelist(int cnt, int offset);
+
+	int totalCount();
+
 
 }
