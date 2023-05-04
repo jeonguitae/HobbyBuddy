@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import kr.co.hb.admin.dto.NoticeDTO;
 import kr.co.hb.group.dao.GroupBoardDAO;
 import kr.co.hb.group.dto.GroupBoardDTO;
 

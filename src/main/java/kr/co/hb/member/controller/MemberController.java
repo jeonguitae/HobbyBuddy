@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -71,23 +72,108 @@ public class MemberController {
 	@ResponseBody
 	public HashMap<String, Object> login(@RequestParam String id,@RequestParam String pw, HttpSession session){
 		logger.info(id+"/"+pw);
-		int success = service.login(id,pw,session);
-		logger.info("login success : "+success);
-		if(success == 1) {
-			session.setAttribute("loginId", id);
-		}
+		
+		MemberDTO dto = service.findLoginPw(id);		
+		logger.info(dto.getPw());
+		
+		String encodedPassword = dto.getPw();
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		boolean isMatched = encoder.matches(pw, encodedPassword);
+		
+		logger.info("비번 같음 ? " + isMatched);
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("success", success);
+		
+		if(isMatched) {
+			dto = service.login(id);
+			logger.info("dto : " + dto.getId());
+			session.setAttribute("loginId", id);
+			map.put("member", dto);
+		}
 
 		return map;		
 	}
+	
+	@RequestMapping(value="/pwChk.go")
+	public String pwChk(Model model, HttpSession session) {
+		return "pwChk";
+	}
+	
+	@RequestMapping(value="/myProPwUpdate.go")
+	public String myProPwUpdate(Model model, HttpSession session) {
+		
+		String page = "redirect:/";
+		
+		if(session.getAttribute("loginId") != null) {
+			MemberDTO dto = service.myProPwUpdate(session.getAttribute("loginId"));			
+			session.setAttribute("pw", dto.getPw());			
+			page="myProPwUpdate";
+		}
+		
+		return page;
+	}
+	
+	@RequestMapping(value="/overlayNowPw.ajax")
+	@ResponseBody
+	public HashMap<String, Object> overlayNowPw(@RequestParam String nowPw, HttpSession session){
+		logger.info("overlayNowPw nowPw : " + nowPw);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String pw = (String) session.getAttribute("pw");		
+		logger.info("overlayNowPw pw : " + pw);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		boolean isMatched = encoder.matches(nowPw, pw);
+		if(isMatched) {
+			map.put("overlayNowPw", isMatched);
+		}
+		return map;		
+	}
+	
+	@RequestMapping(value="/changePw.ajax")
+	@ResponseBody
+	public HashMap<String, Object> changePw(@RequestParam String changePw, HttpSession session){
+		logger.info("changePw : " + changePw);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		String id = (String)session.getAttribute("loginId");
+		
+		if(id != null) {
+			logger.info("changePw id null..? : " + changePw + id);
+			int success = service.changePw(id,changePw);
+			map.put("success", success);
+		}
+		return map;		
+	}
+	
+	@RequestMapping(value="/pwChk.ajax")
+	@ResponseBody
+	public HashMap<String, Object> pwChk2(@RequestParam String pw, HttpSession session){
+		String id = (String) session.getAttribute("loginId");	
+		logger.info(id+"/"+pw);		
+		MemberDTO dto = service.findLoginPw(id);		
+		logger.info(dto.getPw());		
+		String encodedPassword = dto.getPw();		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();		
+		boolean isMatched = encoder.matches(pw, encodedPassword);
+		logger.info("비번 같음 ? " + isMatched);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(isMatched) {
+			dto = service.login(id);
+			logger.info("dto : " + dto.getId());
+			session.setAttribute("loginId", id);
+			map.put("member", dto);
+		}
+		return map;		
+	}
+	
 	@RequestMapping(value="/mypage.go")
 	public String mypage(Model model, HttpSession session) {
 		ArrayList<MemberDTO> city = service.city();
 		logger.info("city : " + city);
 		model.addAttribute("city",city);
 		return "myProDetail";
-	}	
+	}
 	@RequestMapping(value="/myProDetail.ajax")
 	@ResponseBody
 	public HashMap<String, Object> myProDetail(Model model, HttpSession session) {

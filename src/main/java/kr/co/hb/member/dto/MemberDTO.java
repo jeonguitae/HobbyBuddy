@@ -10,8 +10,15 @@ public class MemberDTO {
 	private String id;
 	private String file_class;
 	private String new_file_name;
+	private String pw;
 	
 	
+	public String getPw() {
+		return pw;
+	}
+	public void setPw(String pw) {
+		this.pw = pw;
+	}
 	public String getNew_file_name() {
 		return new_file_name;
 	}

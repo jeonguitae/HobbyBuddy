@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -35,18 +36,27 @@ public class MemberService {
 
 	public HashMap<String, Object> join(HashMap<String, String> params) {
 		HashMap<String, Object> map = new HashMap<>();
+		
+		String pw = params.get("pw");
+		logger.info("pw : " + pw);
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodedPassword = encoder.encode(pw);
+		
+		params.replace("pw", pw, encodedPassword);
+		
 		map.put("success", dao.join(params));
 		logger.info("service.join map : " + map);
 		return map;
 	}
-
+/*
 	public int login(String id, String pw, HttpSession session) {
 		String adminChk = dao.adminChk(id,pw);
 		session.setAttribute("adminChk", adminChk);
 		logger.info("adminChk : " + adminChk);
 		return dao.login(id,pw);
 	}
-
+*/
 	public ArrayList<MemberDTO> city() {
 		return dao.city();
 	}
@@ -54,6 +64,10 @@ public class MemberService {
 	public ArrayList<MemberDTO> area(String city) {
 		logger.info("Service city : " + city);
 		return dao.area(city);
+	}
+	
+	public int pwChk2(String id, String pw) {
+		return dao.pwChk2(id,pw);
 	}
 
 	public HashMap<String, Object> myProDetail(Object id) {
@@ -169,6 +183,26 @@ public class MemberService {
 		
 		}
 	}
+
+	public MemberDTO findLoginPw(String id) {
+		return dao.findLoginPw(id);
+	}
+
+	public MemberDTO login(String id) {
+		return dao.login(id);
+	}
+
+	public MemberDTO myProPwUpdate(Object attribute) {
+		return dao.myProPwUpdate(attribute);
+	}
+
+	public int changePw(String id, String changePw) {
+		logger.info("changePw service" + id + " ? "+ changePw);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String changePw2 = encoder.encode(changePw);
+		return dao.changePw(id,changePw2);
+	}
+
 	
 	
 	

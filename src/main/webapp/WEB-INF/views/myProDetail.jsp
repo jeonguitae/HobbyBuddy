@@ -99,6 +99,7 @@
 			<th colspan="2">
 			<button onclick="location.href='myHobbyList.go'">취미 관리</button>
 			<button onclick="location.href='myProPhotoList.go'">사진 관리</button>
+			<button onclick="location.href='myProPwUpdate.go'">비밀번호 변경</button>
 			</th>
 		</tr>
 		<tr>
@@ -274,26 +275,22 @@
 	}
 	
 
-	$('#dropOut').on('click', function(e){
-		var dropId = $('#id').val();
-   		console.log("회원탈퇴 요청 : " + dropId);
-		const dropChk = confirm('탈퇴 하시겠습니까?');
-		if(dropChk){
-
 	$('#dropOut').on('click', function(e){   
-		   console.log("중복체크 요청 : " + chkId);      
-
-		   $.ajax({
-		      type: 'get'
-		      ,url: 'dropOut.ajax'
-		      ,data:{'id':dropId}
-		      ,dataType:'json'
-	    	  ,success:function(){
-	    		  location.href='./';
-			  }
-		   });   
+		const dropOutConfirm = confirm("탈퇴하시겠습니까?");
+		var dropId = $('#id').val();
+		console.log(dropId);
+		if(dropOutConfirm){
+			$.ajax({
+			      type: 'get'
+			      ,url: 'dropOut.ajax'
+			      ,data:{id:dropId}
+			      ,dataType:'json'
+			   	  
+	   		}); 
+			location.href='./logout.go';
 		}
-	});
+	})
+
 	
 	myHobbyList();
 	function myHobbyList(){

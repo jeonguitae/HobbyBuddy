@@ -21,45 +21,35 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3>로그인</h3>
+   <h3>비밀번호 확인</h3>
    <table>
-      <tr>
-         <th>ID</th>
-         <td><input type="text" id="id"></td>
-      </tr>
       <tr>
          <th>PW</th>
          <td><input type="password" id="pw"></td>
       </tr>
       <tr>
          <th colspan="2">
-            <button onclick="login()">login</button>
-            <button onclick="location.href='join.go'">회원가입</button>
-            <button onclick="location.href='idFind.go'">아이디 찾기</button>
-            <button onclick="location.href='pwFind.go'">비밀번호 찾기</button>
+            <button onclick="pwChk()">마이페이지 이동</button>
          </th>         
       </tr>
    </table>
 </body>
 <script>
-	function login(){
-	   var id = $('#id').val();
+	function pwChk(){
 	   var pw = $('#pw').val();
 	   
-	   console.log(id,pw);
+	   console.log(pw);
 	   $.ajax({
 	      type:'post',
-	      url : 'login.ajax',
+	      url : 'pwChk.ajax',
 	      data:{
-	         id:$('#id').val(),
 	         pw:$('#pw').val()
 	      },
 	      dataType:'json',
 	      success : function(data){
 	         console.log(data);
-	         if (data.member != null) {
-	            alert('로그인에 성공했습니다.');
-	            location.href='./';
+	         if (data.member!= null) {
+	            location.href='./mypage.go';
 	         }else{
 	            alert('아이디 또는 비밀번호를 확인해주세요.');
 	         }
