@@ -7,7 +7,7 @@ import kr.co.hb.admin.dto.NoticeDTO;
 
 public interface NoticeDAO {
 	 
-		void noticeWrite(NoticeDTO dto);
+	   void noticeWrite(NoticeDTO dto);
 
 	   void noticeFileWrite(int idx, String oriFileName, String newFileName);
 
@@ -22,4 +22,15 @@ public interface NoticeDAO {
 	   String noticeFindFile(String notice_idx);
 
 	   int noticeDelete(String notice_idx);
+
+	ArrayList<NoticeDTO> noticeSearch(HashMap<String, String> params);
+
+	int totalCount();
+
+	ArrayList<NoticeDTO> noticePageList(int cnt, int offset);
+
+	ArrayList<NoticeDTO> noticeTitle(HashMap<String, String> params);
+
+	ArrayList<NoticeDTO> noticeId(HashMap<String, String> params);
+	
 }

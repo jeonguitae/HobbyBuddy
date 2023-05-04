@@ -273,11 +273,16 @@
 		$('#area').append(content);
 	}
 	
+
 	$('#dropOut').on('click', function(e){
 		var dropId = $('#id').val();
    		console.log("회원탈퇴 요청 : " + dropId);
 		const dropChk = confirm('탈퇴 하시겠습니까?');
 		if(dropChk){
+
+	$('#dropOut').on('click', function(e){   
+		   console.log("중복체크 요청 : " + chkId);      
+
 		   $.ajax({
 		      type: 'get'
 		      ,url: 'dropOut.ajax'
@@ -314,6 +319,7 @@
 		});	
 	}	
 
+
 	function myHobbyListDraw(myHobbyList){
 		console.log("myHobbyList : " + myHobbyList);
 		var content = '<tr><th>취미</th><td>';
@@ -325,5 +331,6 @@
 		$('#myHobbyList').append(content);
 	}
 	
+
 </script>
 </html>

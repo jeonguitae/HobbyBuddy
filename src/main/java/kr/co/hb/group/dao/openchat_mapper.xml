@@ -3,5 +3,12 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="kr.co.hb.group.dao.OpenChatDAO">
-
+	
+	<insert id="openlist" parameterType="HashMap">
+		INSERT INTO openlist(gidx, id) VALUES(#{gidx}, #{loginId})
+	</insert>
+	
+	<select id="openchatlist" resultType="kr.co.hb.group.dto.OpenChatDTO">
+		SELECT * FROM openlist
+	</select>
 </mapper>

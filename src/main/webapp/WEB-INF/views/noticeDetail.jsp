@@ -64,14 +64,14 @@
          <c:if test="${dto.newFileName ne null }">
             <tr>
                <th>사진</th>
-               <td> <img src="${dto.newFileName}" width="100"/></td>         
+               <td> <img src="/photo/${dto.newFileName}" width="100"/></td>         
             </tr>
          </c:if>            
          <tr>
             <th colspan="2">
                <input type="button" onclick="location.href='noticeList.go'" value="리스트">
-               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정">
-               <input type="button" onclick="location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}'" value="삭제">
+               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정">               
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제">
             </th>
          </tr>
                

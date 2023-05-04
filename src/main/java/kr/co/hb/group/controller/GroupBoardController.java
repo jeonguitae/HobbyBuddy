@@ -9,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.hb.board.dto.BoardDTO;
-import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.group.service.GroupBoardService;
 
@@ -76,20 +76,6 @@ public class GroupBoardController {
 		
 		return "gBoardDetail";
 	}
-	
-	@RequestMapping(value="/gupdate.go")
-	public String gupdateForm(Model model, @RequestParam int idx) {		
-			GroupBoardDTO dto = service.gupdate(idx);
-			model.addAttribute("board", dto);
-		return "gBoardUpdate";
-	}
-	
-	@RequestMapping(value="/gupdate.do")
-	public String gupdate(Model model, @RequestParam HashMap<String, String> params) {		
-		int row = service.gupdatedo(params);
-		
-		return "redirect:/gdetail.do";
-	}
 
 	@RequestMapping(value="/gserch.do")
 	public String gserch(Model model, @RequestParam HashMap<String, String> params) {
@@ -101,8 +87,21 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value="/greport.go")
-	public String greList(Model model) {		
+	public String greList(Model model) {
+		
 		logger.info("start");
 		return "reportCreate";
 	}
+	
+	@RequestMapping(value = "/gboardlist.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> gboardpagelist(
+			@RequestParam String page,
+			@RequestParam String cnt			
+			){
+		
+		return service.gboardpagelist(Integer.parseInt(page), Integer.parseInt(cnt));
+	}	
+	
+
 }

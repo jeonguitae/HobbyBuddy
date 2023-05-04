@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.admin.dao.NoticeDAO;
 import kr.co.hb.admin.dto.NoticeDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 @Service
 public class NoticeService {
@@ -26,7 +27,7 @@ public class NoticeService {
 	      
 	      NoticeDTO dto = new NoticeDTO();
 	      
-	      dto.setId(params.get("id"));
+	      dto.setId(params.get("id"));	      
 	      dto.setNotice_title(params.get("notice_title"));
 	      dto.setNotice_content(params.get("notice_content"));
 	      
@@ -54,7 +55,7 @@ public class NoticeService {
 	            byte[] bytes = file.getBytes();
 
 	            Path path = Paths.get("C:/img/upload/" + newFileName);
-	    
+	            	            	    
 	            Files.write(path, bytes);
 	            
 	            dao.noticeFileWrite(idx,oriFileName,newFileName);
@@ -82,16 +83,13 @@ public class NoticeService {
 	      return dao.noticeList();
 	   }
 
-	   public String noticeUpdate(MultipartFile photo, HashMap<String, String> params) {
+	   public String noticeUpdate(HashMap<String, String> params) {
 	      
 	      int row = dao.noticeUpdate(params);
-	      int idx = Integer.parseInt(params.get("notice_idx"));
+	      int idx = Integer.parseInt(params.get("notice_idx"));	      
 	      
-	      if (!photo.getOriginalFilename().equals("")) {
-	         noticeFileSave(idx, photo);
-	      }
 	      
-	      String page = row > 0 ? "redirect:/noticeDetail.do?idx=" + idx : "redirect:/noticeList.go";
+	      String page = row > 0 ? "redirect:/noticeDetail.do?notice_idx=" + idx : "redirect:/noticeList.go";
 	             
 	        return page;
 	   }
@@ -114,6 +112,54 @@ public class NoticeService {
 	      
 	      
 	   }
+
+	public ArrayList<NoticeDTO> noticeSearch(HashMap<String, String> params) {
+		
+		ArrayList<NoticeDTO> list = null;
+		
+		if(params.get("notice").equals("notice_title")) {
+			String wildcard = "%" + params.get("notice_Search") + "%";
+			params.replace("notice_Search", wildcard);
+			list = dao.noticeTitle(params);
+		}
+		
+		if(params.get("notice").equals("id")) {
+			
+			String wildcard = "%" + params.get("notice_Search") + "%";
+			params.replace("notice_Search", wildcard);
+			list = dao.noticeId(params);
+		}		
+		
+		return list;
+	}
+
+	public HashMap<String, Object> noticePageList(int page, int cnt) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		// 1page = offset : 0
+		// 2page = offset : offset + 5
+		// 3page = offset : 10
+		
+		int offset = (page - 1) * cnt;
+		
+		// 만들 수 있는 총 페이지 수 
+		// 전체 게시물 / 페이지 당 보여줄 수 
+		int total = dao.totalCount();
+		int range = total%cnt == 0 ? total/cnt : (total/cnt) + 1;
+		
+		
+		page = page > range ? range : page;
+		
+		map.put("currPage", page);
+		map.put("pages", range);
+		
+		ArrayList<NoticeDTO> noticePageList = dao.noticePageList(cnt, offset);
+		
+		map.put("noticePageList", noticePageList);
+		
+		return map;
+	}
 
 
 }

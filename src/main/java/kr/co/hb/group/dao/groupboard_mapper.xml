@@ -43,7 +43,7 @@
 			,meeting_date = #{meeting_date}
 			,maxmem = #{maxmem}
 			,mannertp = #{mannertp}
-		WHERE gidx = #{idx}
+		WHERE gidx = #{id}
 	</update>
 	
 	<select id="gsserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -60,4 +60,14 @@
 		SELECT * FROM gboardlist
 		WHERE content LIKE #{serch}
 	</select>
+	
+	<select id="gboardpagelist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT *
+			FROM gboardlist ORDER BY gidx DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(gidx) FROM gboardlist 
+	</select>
+	
 </mapper>
