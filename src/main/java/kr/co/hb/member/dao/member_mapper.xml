@@ -119,9 +119,7 @@
 	
 	
 	<select id="myBoardList" resultType="kr.co.hb.member.dto.MemberDTO">
-	SELECT fbNo, title, id, fbTime, bhit 
-	FROM fBoard ORDER BY fbNo DESC
-	WHERE id=#{param1}
+	SELECT * FROM fBoard WHERE id=#{param1} ORDER BY fbNo DESC
 	</select>
 
 </mapper>

@@ -293,9 +293,10 @@ public class MemberController {
 		logger.info("myBoardList call : " + id);
 		
 		ArrayList<MemberDTO> myBoardList = service.myBoardList(id);
-		if(myBoardList != null) {
-			model.addAttribute("myBoardList", myBoardList);			
-		}
+		logger.info("myBoardList"+myBoardList);
+
+		model.addAttribute("myBoardList", myBoardList);			
+		
 		
 		return "myBoardList";
 	}

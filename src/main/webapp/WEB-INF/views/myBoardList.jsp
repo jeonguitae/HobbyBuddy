@@ -34,22 +34,23 @@
 				<th>조회수</th>
 			</tr>
 		</thead>		
-		<tbody>
-			<c:if test="${myBoarList eq null}">
+		<tbody> 
+			<c:if test="${myBoardList.size() == 0}">
 				<tr>
 					<th colspan="6">등록된 글이 없습니다.</th>
 				</tr>
 			</c:if>
 			
-			<c:forEach items="${myBoarList}" var="bbs">
-				<tr>
-					<td>${bbs.fbNo}</td>
-					<td><a href="fdetail.do?fbNo=${bbs.fbNo}">${bbs.title}</a></td>
-					<td>${bbs.id}</td>
-					<td>${bbs.fbTime}</td>
-					<td>${bbs.bhit}</td>
-				</tr>
-			</c:forEach>
+				<c:forEach items="${myBoardList}" var="bbs">
+					<tr>
+						<td>${bbs.fbNo}</td>
+						<td><a href="fdetail.do?fbNo=${bbs.fbNo}">${bbs.title}</a></td>
+						<td>${bbs.id}</td>
+						<td>${bbs.fbTime}</td>
+						<td>${bbs.bhit}</td>
+					</tr>
+				</c:forEach>
+			
 		</tbody>
 	</table>
 </body>
