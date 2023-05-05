@@ -41,7 +41,7 @@
    </update>
       
     <select id="noticeDetail" resultType="kr.co.hb.admin.dto.NoticeDTO">
-      select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content
+      select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content,n.notice_chk
          ,p.photo_idx, p.newFileName
       FROM notice n LEFT JOIN hbphoto p ON n.notice_idx=p.notice_idx 
       WHERE n.notice_idx = #{param1}   
@@ -96,6 +96,10 @@
  	  update notice set notice_chk  = false where notice_idx = #{notice_idx}
       
    </update>
+   
+   <delete id="deletePhoto">
+   			delete from hbphoto where photo_idx = 1;
+   </delete>
    
    
 	

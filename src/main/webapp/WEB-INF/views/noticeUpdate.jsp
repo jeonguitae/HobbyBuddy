@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
 <style>
 	table, th, td{
       border: 1px solid black;
@@ -54,13 +53,13 @@
             <td>
                
                <c:if test="${dto.newFileName eq null}">
-                  <input type="file" name="photo">
+                  <input type="file" name="photo" multiple="multiple">
                </c:if>
                <c:if test="${dto.newFileName ne null}">
 				  <img src="/photo/${dto.newFileName}" width="100"/>
 				  ${dto.newFileName}
 				  <input type="hidden" name="photo_idx" value="${dto.photo_idx}">
-				  <button type="button" id="deleteBtn">사진 삭제</button>
+				  <a href="/deletePhoto/${dto.photo_idx}">사진 삭제</a>
 				</c:if>      
             </td>
          </tr>         

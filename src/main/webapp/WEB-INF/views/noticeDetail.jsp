@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Date" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -10,8 +13,6 @@
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
-      
-      
    }
    button{
       margin: 5px;
@@ -28,7 +29,7 @@
    colgroup {
       width: 30%;
    }
-   #chk{
+   #chkBtn{
    	 float: left;
    }
    #rightt{
@@ -57,12 +58,12 @@
             <td>${dto.id}</td>
          </tr>
          <tr>
-            <th>작성일시</th>
-            <td>${dto.notice_date}</td>
-         </tr>
-         <tr>
+			  <th>작성일시</th>
+			  <td><fmt:formatDate value="${dto.notice_date}" pattern="yyyy/MM/dd" /></td>  
+		  </tr>
+		 <tr>
             <th>제목</th>
-            <td>${dto.notice_title}</td>
+            <td >${dto.notice_title}</td>
          </tr>
          <tr>
             <th>내용</th>
@@ -77,69 +78,52 @@
          </c:if>            
          <tr>
             <th colspan="2">
-               <input type="button" value="${dto.notice_chk }" id="chk"> 
+            	<button id="chkBtn">${dto.notice_chk ? '비공개 설정' : '공개 설정'}</button>          	
                <input type="button" onclick="location.href='noticeList.go'" value="리스트로 돌아가기" id="listBack">
-               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="rightt">               
                <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="rightt">
+               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="rightt">              
+               
             </th>
          </tr>
-         
-               
-      </table>
+      </table>      
 </body>
 <script>
+$(document).ready(function() {
+  var btnText = $("#chkBtn").text();
+  $("#chkBtn").on("click", function() {
+    var notice_idx = ${dto.notice_idx};
+    var flag = $("#chkBtn").text() == '공개 설정' ? 'true' : 'false';
 
-if ($("#chk").val() == 'false') {
-	$("#chk").val('비공개');
-}else{
-	$("#chk").val('공개');
-}
-
-
-$("#chk").on("click", function() {
-  var notice_idx = ${dto.notice_idx};
-  var flag = '${dto.notice_chk}' === 'false' ? 'notice_ChkOn' : 'notice_ChkOff';
-  
-  if(flag === 'notice_ChkOn') {
-    if(confirm('해당 글을 공개하시겠습니까?')) {
+    if (confirm('해당 글을 ' + (flag == 'true' ? '공개' : '비공개') + '하시겠습니까?')) {
       $.ajax({
         type: 'POST',
         url: 'update_chk.ajax',
         data: { notice_idx: notice_idx, flag: flag },
         success: function(response) {
           console.log(response);
-          var newChk = flag === 'notice_ChkOn' ? '공개' : '비공개';
-          $("#chk").val(newChk);
+          var newBtnText = flag == 'true' ? '비공개 설정' : '공개 설정';
+          $("#chkBtn").text(newBtnText);
         },
         error: function(error) {
           console.error(error);
         }
       });
     } else {
-      $("#chk").val('비공개');
+      $("#chkBtn").text(btnText);
     }
+  });
+/* // 페이지 로드될 때 버튼 텍스트 초기화
+  if ($("#chkBtn").text() == 'false') {
+    $("#chkBtn").text('공개 설정');
   } else {
-    if(confirm('해당 글을 비공개하시겠습니까?')) {
-      $.ajax({
-        type: 'POST',
-        url: 'update_chk.ajax',
-        data: { notice_idx: notice_idx, flag: flag },
-        success: function(response) {
-          console.log(response);
-          var newChk = flag === 'notice_ChkOn' ? '공개' : '비공개';
-          $("#chk").val(newChk);
-        },
-        error: function(error) {
-          console.error(error);
-        }
-      });
-    } else {
-      $("#chk").val('공개');
-    }
+    $("#chkBtn").text('비공개 설정');
   }
+  if ($("#chkText").text() == 'false') {
+	    $("#chkText").text('비공개 설정');
+	  } else {
+	    $("#chkText").text('공개 설정');
+  } */
+  
 });
-
-
-
 </script>
 </html>

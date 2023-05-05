@@ -13,9 +13,7 @@
    table, th, td{
       border: 1px solid black;
       border-collapse: collapse;
-      padding: 5px 10px;
-      
-      
+      padding: 5px 10px; 
    }
    button{
       margin: 5px;
@@ -48,17 +46,16 @@
             <option value="15">15</option>
             <option value="20">20</option>
          </select>
+    
       <form action="search.do">
-      
-         <select name="notice">
+      	<select name="sSearch">
             <option value="default">선택</option>
             <option value="notice_title">제목</option>
             <option value="id">작성자</option>
-         </select>
-      
+         </select>      
          <input type="text" name="notice_Search">
-         <button>검색</button>
-      </form>               
+         <button id="search_btn">검색</button>
+      </form>                    
       <button onclick="location.href='noticeWrite.go'" >공지사항 작성</button>         
       <table>
          <thead>
@@ -68,10 +65,10 @@
                <th>제목</th>
                <th>작성일시</th>
                <th>조회수</th>                      
+               <th>공개여부</th>                      
             </tr>            
          </thead>
-         <tbody id="list">
-             
+         <tbody id="list">             
          </tbody>
             <tr>
                <td colspan="6" id="paging">   
@@ -84,7 +81,8 @@
                </td>
             </tr>                     
       </table>
-</body>
+      
+	</body>
 <script>
 
 var showPage = 1;
@@ -105,12 +103,13 @@ function listCall(page){
       url:'noticeList.ajax',
       data:{
           'page':page,
-            'cnt':$('#pagePerNum').val()
+            'cnt':$('#pagePerNum').val()          
       },
       dataType:'json',
       success:function(data){
          console.log(data);
          listPrint(data.noticePageList);
+
          
          // 총 페이지 수
          // 현재 페이지 
@@ -139,12 +138,12 @@ function listCall(page){
 
 
 function listPrint(list){
-   
    var content='';
    // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
    // 해결방법 1. DTO 에서 Date 를 String 으로 반환
    // 해결방법 2. js 에서 변환
    list.forEach(function(item,idx){
+	  
       content += '<tr>';
       content += '<td>'+item.notice_idx+'</td>';
       content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';
@@ -153,10 +152,13 @@ function listPrint(list){
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
       content += '<td>'+item.notice_bHit+'</td>';
+      content += '<td>'+item.notice_chk+'</td>';
       content += '</tr>';
    });
    $('#list').empty();
    $('#list').append(content);
+   
+   
 }
 
 

@@ -37,7 +37,9 @@ public interface NoticeDAO {
 	
 	void notice_ChkOff(String notice_idx);
 
-	int updatePDelete(String photo_idx);
+	int updatePDelete(int photo_idx);
+
+	void deletePhoto(String photo_idx);
 
 	
 	

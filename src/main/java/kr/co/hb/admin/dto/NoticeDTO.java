@@ -1,6 +1,5 @@
 package kr.co.hb.admin.dto;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class NoticeDTO {
