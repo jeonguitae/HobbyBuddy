@@ -24,7 +24,7 @@
 	</select>
 	
 	<select id="login" resultType="kr.co.hb.member.dto.MemberDTO">
-		SELECT id FROM member
+		SELECT id,admin FROM member
 			WHERE id=#{param1} and ban=false
 	</select>
 	
@@ -111,6 +111,12 @@
 	
 	<select id="findFile" resultType="String">
 		SELECT new_file_name FROM pBoard WHERE id = #{param1} and file_class = #{param2}
+	</select>
+	
+	<select id="myBoardList" parameterType="String" resultType="kr.co.hb.member.dto.MemberDTO">
+	SELECT fbNo, title, id, fbTime, bhit 
+	FROM fBoard ORDER BY fbNo DESC
+	WHERE id=#{param1}
 	</select>
 
 </mapper>

@@ -83,7 +83,7 @@
 	<div class="panel2" onclick="location.href='login.go'">로그인</div>
 	<div class="panel" onclick="location.href='logout.go'">로그아웃</div>
 	<div class="panel" onclick="location.href='pwChk.go'">마이페이지</div>
-	<div class="panel">작성 글/댓글</div>
+	<div class="panel" onclick="location.href='myBoardList.go'">작성 글/댓글</div>
 	<div class="panel">참여한 모임</div>
 	<div class="panel">쪽지방</div>
 	<div class="panel">즐겨찾기</div>
@@ -99,7 +99,7 @@
 		}else{
 			$('.panel').slideToggle('slow');
 	   }
-		if(adminChk == "1"){
+		if(adminChk == "1" || adminChk == "true"){
 			$('.panel3').slideToggle('slow');
 		}
 		

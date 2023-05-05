@@ -39,7 +39,7 @@ public class MainController {
 		session.removeAttribute("adminChk");
 		session.invalidate();
 		return "main";
-	}	
+	}
 	
 	@RequestMapping(value = "/admin.go", method = RequestMethod.GET)
 	public String admin(HttpSession session) {
@@ -57,7 +57,7 @@ public class MainController {
 	public String idFind(HttpSession session) {
 		return "idFind";
 	}
-	@RequestMapping(value = "pwFind.go", method = RequestMethod.GET)
+	@RequestMapping(value = "/pwFind.go", method = RequestMethod.GET)
 	public String pwFind(HttpSession session) {
 		return "pwFind";
 	}
@@ -107,8 +107,6 @@ public class MainController {
 	public String idFind2(@RequestParam HashMap<String, String> params, Model model){
 		logger.info("idFind2 : "+ params);
 		ArrayList<MainDTO> findId = service.idFind2(params);
-		
-		
 		
 		logger.info("findId : "+ findId);
 		model.addAttribute("findId",findId);

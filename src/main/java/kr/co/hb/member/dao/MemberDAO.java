@@ -53,6 +53,8 @@ public interface MemberDAO {
 
 	int changePw(String id, String changePw2);
 
+	ArrayList<MemberDTO> myBoardList(String id);
+
 	
 
 	

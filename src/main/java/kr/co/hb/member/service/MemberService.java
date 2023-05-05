@@ -203,6 +203,10 @@ public class MemberService {
 		return dao.changePw(id,changePw2);
 	}
 
+	public ArrayList<MemberDTO> myBoardList(String id) {
+		return dao.myBoardList(id);
+	}
+
 	
 	
 	

@@ -1,5 +1,7 @@
 package kr.co.hb.member.dto;
 
+import java.sql.Date;
+
 public class MemberDTO {
 
 	private String city;
@@ -11,7 +13,42 @@ public class MemberDTO {
 	private String file_class;
 	private String new_file_name;
 	private String pw;
+	private boolean admin;
 	
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
+	public int getFbNo() {
+		return fbNo;
+	}
+	public void setFbNo(int fbNo) {
+		this.fbNo = fbNo;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Date getFbTime() {
+		return fbTime;
+	}
+	public void setFbTime(Date fbTime) {
+		this.fbTime = fbTime;
+	}
+	public int getBhit() {
+		return bhit;
+	}
+	public void setBhit(int bhit) {
+		this.bhit = bhit;
+	}
+	private int fbNo;
+	private String title;
+	private Date fbTime;
+	private int bhit;
 	
 	public String getPw() {
 		return pw;

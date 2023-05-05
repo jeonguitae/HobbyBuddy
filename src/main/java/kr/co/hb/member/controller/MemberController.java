@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.main.controller.MainController;
 
 import kr.co.hb.member.dto.MemberDTO;
@@ -90,6 +91,7 @@ public class MemberController {
 			dto = service.login(id);
 			logger.info("dto : " + dto.getId());
 			session.setAttribute("loginId", id);
+			session.setAttribute("adminChk", dto.isAdmin());
 			map.put("member", dto);
 		}
 
@@ -281,6 +283,17 @@ public class MemberController {
 		String file_class = "프로필";
 		service.myProPhotoDel(id,file_class);
 		return "redirect:/myProPhotoList.go";
+	}
+	
+	@RequestMapping(value = "/myBoardList.go", method = RequestMethod.GET)
+	public String myBoardList(HttpSession session, Model model) {
+		logger.info("myBoardList call");
+		String id = (String) session.getAttribute("loginId");
+		
+		ArrayList<MemberDTO> myBoardList = service.myBoardList(id);
+		model.addAttribute("myBoardList", myBoardList);
+		
+		return "myBoardList";
 	}
 
 }
