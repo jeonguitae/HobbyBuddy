@@ -59,7 +59,7 @@
 				  <img src="/photo/${dto.newFileName}" width="100"/>
 				  ${dto.newFileName}
 				  <input type="hidden" name="photo_idx" value="${dto.photo_idx}">
-				  <a href="/deletePhoto/${dto.photo_idx}">사진 삭제</a>
+				  <a href="deletePhoto.do?photo_idx=${dto.photo_idx}&notice_idx=${dto.notice_idx}">사진 삭제</a>				  		  
 				</c:if>      
             </td>
          </tr>         

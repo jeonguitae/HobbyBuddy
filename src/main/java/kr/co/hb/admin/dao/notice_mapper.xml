@@ -60,6 +60,11 @@
          WHERE notice_idx = #{param1}
    </select>
    
+   <select id="noticeFindFile2" resultType="String">
+      SELECT newFileName FROM hbphoto
+         WHERE photo_idx = #{param1}
+   </select>
+   
    <update id="noticeUpdate" parameterType="HashMap">
          UPDATE notice 
          SET notice_title = #{notice_title}
@@ -98,7 +103,7 @@
    </update>
    
    <delete id="deletePhoto">
-   			delete from hbphoto where photo_idx = 1;
+   		DELETE from hbphoto where photo_idx = #{param1} AND notice_idx = #{param2};
    </delete>
    
    

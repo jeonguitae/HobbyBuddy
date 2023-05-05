@@ -26,7 +26,7 @@ public class MainController {
 	
 	@RequestMapping(value="/")
 	public String main(Model model) {
-		return "main";
+		return "admin";
 	}
 	
 	@RequestMapping(value="/gnb.go")

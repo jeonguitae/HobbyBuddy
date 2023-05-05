@@ -178,15 +178,18 @@ public class NoticeService {
 		return map;
 	}
 
-	public void deletePhoto(String photo_idx) {
-		String newFileName = dao.noticeFindFile(photo_idx);
+	public void deletePhoto(String photo_idx, String notice_idx) {
+		
+		logger.info(photo_idx);
+		String newFileName = dao.noticeFindFile2(photo_idx);
 		
 	    if (newFileName != null) {
 	        	
 	        File files = new File("C:/img/upload/" + newFileName);
 	        if (files.exists()) {
+	        	logger.info("2");
 	            files.delete();
-	            dao.deletePhoto(photo_idx); // photo_idx 파라미터 사용
+	            dao.deletePhoto(photo_idx,notice_idx); // photo_idx 파라미터 사용
 	        }
 	        
 	    }
