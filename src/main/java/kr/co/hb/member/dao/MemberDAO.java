@@ -36,14 +36,18 @@ public interface MemberDAO {
 	ArrayList<MemberDTO> myHobbyList(String id);
 
 	int myHobbyDelList(String id);
+	
+	
 
-	void proPhotoSave(String id, String file_class, String oriFileName, String newFileName);
+	void proPhotoSave(String id, String board_class, String ori_photo_name, String new_photo_name, int board_num);
 
-	MemberDTO myProPhotoList(String id, String file_class);
+	MemberDTO myProPhotoList(String id, String board_class);
 
-	int myProPhotoDel(String id, String file_class);
+	int myProPhotoDel(String id, String board_class);
 
-	String findFile(String id, String file_class);
+	String findFile(String id, String board_class);
+	
+	
 
 	MemberDTO findLoginPw(String id);
 

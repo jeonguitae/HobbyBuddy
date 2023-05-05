@@ -93,27 +93,32 @@
 		DELETE FROM my_hobby_list WHERE my_hobby_no = #{param1}
 	</delete>
 	
+	
+	
 	<insert id="proPhotoSave">
-		INSERT INTO pBoard(id, new_file_name, ori_file_name, file_class)
-			VALUES(#{param1},#{param4},#{param3},#{param2})
+		INSERT INTO hbPhoto(id, new_photo_name, ori_photo_name, board_class, board_num)
+			VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})
 	</insert>
 	
 	<select id="myProPhotoList" resultType="kr.co.hb.member.dto.MemberDTO">
-		select photoIdx,id,new_file_name,ori_file_name,file_class
-		from pBoard
-		where id = #{param1} and file_class = #{param2}
+		select photoIdx,id,new_photo_name,ori_photo_name,board_class
+		from hbPhoto
+		where id = #{param1} and board_class = #{param2}
 	</select>
 	
 	<delete id="myProPhotoDel">
-		DELETE FROM pBoard WHERE id = #{param1} and file_class = #{param2}
+		DELETE FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</delete>
 	
 	
 	<select id="findFile" resultType="String">
-		SELECT new_file_name FROM pBoard WHERE id = #{param1} and file_class = #{param2}
+		SELECT new_photo_name FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</select>
 	
-	<select id="myBoardList" parameterType="String" resultType="kr.co.hb.member.dto.MemberDTO">
+	
+	
+	
+	<select id="myBoardList" resultType="kr.co.hb.member.dto.MemberDTO">
 	SELECT fbNo, title, id, fbTime, bhit 
 	FROM fBoard ORDER BY fbNo DESC
 	WHERE id=#{param1}

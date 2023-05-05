@@ -68,10 +68,10 @@
 			<tr>
 				<th>사진</th>
 				<td>
-					<c:if test="${dto.newfilename eq null}">
+					<c:if test="${dto.new_photo_name eq null}">
 						<input type="file" name="photo"/>
 					</c:if>
-					<c:if test="${dto.newfilename ne null }">
+					<c:if test="${dto.new_photo_name ne null }">
 						<img src="/photo/${dto.newfilename}"/>
 					</c:if>					
 				</td>

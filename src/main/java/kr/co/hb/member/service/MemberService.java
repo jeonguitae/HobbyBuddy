@@ -121,41 +121,36 @@ public class MemberService {
 
 		MemberDTO dto = new MemberDTO();
 		dto.setId(params.get("id"));
-		dto.setFile_class("프로필");
+		dto.setBoard_class("프로필");
+		dto.setBoard_num(0);
 
 		String id = dto.getId();
-		String file_class = dto.getFile_class();
+		String board_class = dto.getBoard_class();
+		int board_num = dto.getBoard_num();
 
 		logger.info("방금 insert 한 id : "+id);
-		logger.info("방금 insert 한 file_class : "+ file_class);
+		logger.info("방금 insert 한 board_class : "+ board_class);
 		
 		String page = "myProPhotoList";
 		
 		if(!photo.getOriginalFilename().equals("")) {
 			logger.info("파일 업로드 작업");
-			proPhotoSave(id,file_class, photo);
+			proPhotoSave(id,board_class, photo,board_num);
 		}	
 		return page;
 	}
 	
-	private void proPhotoSave(String id, String file_class, MultipartFile file) {
-		// 1. 파일을 C:/img/upload/ 에 저장
-		//1-1. 원본 이름 추출
-		String oriFileName = file.getOriginalFilename();
-		//1-2. 확장자 추출
-		String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
-		//1-3. 새이름 생성 + 확장자
-		String newFileName = System.currentTimeMillis()+ext;
-		logger.info(oriFileName+" => "+newFileName);		
+	private void proPhotoSave(String id, String board_class, MultipartFile file, int board_num) {
+		String ori_photo_name = file.getOriginalFilename();
+		String ext = ori_photo_name.substring(ori_photo_name.lastIndexOf("."));
+		String new_photo_name = System.currentTimeMillis()+ext;
+		
 		try {
-			byte[] bytes = file.getBytes();//1-4. 바이트 추출
-			//1-5. 추출한 바이트 저장
-			Path path = Paths.get("C:/img/upload/"+newFileName);
+			byte[] bytes = file.getBytes();
+			Path path = Paths.get("C:/img/upload/"+new_photo_name);
 			Files.write(path, bytes);
-			logger.info(newFileName+" save OK");
-			// 2. 저장 정보를 DB 에 저장
-			//2-1. 가져온 id, oriFileName, newFileName insert
-			dao.proPhotoSave(id,file_class,oriFileName,newFileName);						
+			logger.info(new_photo_name+" save OK");
+			dao.proPhotoSave(id,board_class,ori_photo_name,new_photo_name,board_num);						
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -164,19 +159,19 @@ public class MemberService {
 
 	public MemberDTO myProPhotoList(String id) {
 		logger.info("myProPhotoList id : " + id);
-		String file_class = "프로필";
-		return dao.myProPhotoList(id,file_class);
+		String Board_class = "프로필";
+		return dao.myProPhotoList(id,Board_class);
 	}
 
-	public void myProPhotoDel(String id, String file_class) {
-		String new_file_name = dao.findFile(id,file_class);
-		logger.info("file name : "+new_file_name);
+	public void myProPhotoDel(String id, String board_class, int board_num) {
+		String new_photo_name = dao.findFile(id,board_class);
+		logger.info("file name : "+new_photo_name);
 		// 2. 없다면?
-		int row = dao.myProPhotoDel(id,file_class);
+		int row = dao.myProPhotoDel(id,board_class);
 		logger.info("delete data : "+row);		
 		
-		if(new_file_name != null && row >0) {// 3. 있다면? AND bbs 와  photo 가 확실히 삭제 되었는지?			
-			File file = new File("C:/img/upload/"+new_file_name);
+		if(new_photo_name != null && row >0) {// 3. 있다면? AND bbs 와  photo 가 확실히 삭제 되었는지?			
+			File file = new File("C:/img/upload/"+new_photo_name);
 			if(file.exists()) {// 2. 해당 파일이 존재 하는지?
 				file.delete();
 			}

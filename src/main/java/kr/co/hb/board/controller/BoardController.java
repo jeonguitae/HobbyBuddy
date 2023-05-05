@@ -3,6 +3,8 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,14 +33,16 @@ public class BoardController {
 		return "fBoardList";
 	}
 	@RequestMapping(value="/fwrite.go")
-	public String fBoardCreate(){
+	public String fBoardCreate(HttpSession session){
 		logger.info("write");
+		String id = (String) session.getAttribute("loginId");
+		
 		return "fBoardCreate";
 	}
 	@RequestMapping(value="/fwrite.do")
 	public String fwrite(MultipartFile photo,@RequestParam HashMap<String, String> params){
 		logger.info("fwrite"+params);
-		return service.fwrite(photo,params);
+		return service.fwrite(photo,params, null);
 	}
 	@RequestMapping(value="/fdetail.do")
 	public String fBoardDetail(Model model, @RequestParam int fbNo) {
@@ -72,11 +76,13 @@ public class BoardController {
 		logger.info("업뎃가기 전"+dto);
 		return page;
 	}
+	/*
 	@RequestMapping(value="fupdate.do")
 	public String fupdate(MultipartFile photo ,@RequestParam HashMap<String, String> params) {
 		logger.info("업뎃 두 하기 전이양");
 		return service.fupdate(photo, params);
 	}
+	*/
 	
 }
 

@@ -15,7 +15,7 @@
 		<table>
 			<tr>
 				<th>분류</th>
-				<td></td>
+				<td>${dto.big_hb} - ${dto.small_hb}</td>
 			
 			</tr>
 			<tr>
@@ -30,10 +30,10 @@
 				<th>작성일</th>
 				<td>${dto.fbTime}</td>
 			</tr>
-			<c:if test="${dto.newfilename ne null}">
+			<c:if test="${dto.new_photo_name ne null}">
 			<tr>
 				<th>사진</th>
-				<td><img width="500" src="/photo/${dto.newfilename}"/></td>
+				<td><img width="500" src="/photo/${dto.new_photo_name}"/></td>
 			</tr>
 			</c:if>
 			<tr>

@@ -19,13 +19,14 @@ public interface BoardDAO {
 
 	BoardDTO detail(int fbNo);
 
-	void filesave(int fbNo, String orifilename, String newfilename);
 
 	String findFile(int fbNo);
 
 	int fdelete(int fbNo);
 
 	int fupdate(HashMap<String, String> params);
+
+	void filesave(String id, String board_class, String ori_photo_name, String new_photo_name, int board_num);
 
 	
 

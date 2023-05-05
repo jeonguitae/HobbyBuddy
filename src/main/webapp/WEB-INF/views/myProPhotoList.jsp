@@ -18,7 +18,7 @@
 	<h3>마이페이지 : 사진 관리</h3>
 	<input type="button" onclick="location.href='./mypage.go'" value="마이 페이지로 이동"/><br/><br/>
 	
-	<c:if test="${dto.new_file_name eq null}">	
+	<c:if test="${dto.new_photo_name eq null}">	
 		<form action="proPhotoUpload.do" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
@@ -34,7 +34,7 @@
 		</form>
 	</c:if>
 	
-	<c:if test="${dto.new_file_name ne null}">	
+	<c:if test="${dto.new_photo_name ne null}">	
 		<form action="myProPhotoDel.do" method="post" enctype="multipart/form-data">
 			<table>
 				<tr>
@@ -44,7 +44,7 @@
 				<tr>
 					<th>사진</th>
 					<td>
-						<img width="500" src="/photo/${dto.new_file_name}"/>
+						<img width="500" src="/photo/${dto.new_photo_name}"/>
 						<br/><br/><button>사진 삭제</button>
 					</td>
 			    </tr>

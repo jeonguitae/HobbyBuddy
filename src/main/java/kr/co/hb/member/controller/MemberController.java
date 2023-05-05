@@ -280,8 +280,9 @@ public class MemberController {
 	@RequestMapping(value="/myProPhotoDel.do")
 	public String myProPhotoDel(HttpSession session) {
 		String id = (String) session.getAttribute("loginId");
-		String file_class = "프로필";
-		service.myProPhotoDel(id,file_class);
+		String board_class = "프로필";
+		int board_num = 0;
+		service.myProPhotoDel(id,board_class,board_num);
 		return "redirect:/myProPhotoList.go";
 	}
 	
@@ -289,9 +290,12 @@ public class MemberController {
 	public String myBoardList(HttpSession session, Model model) {
 		logger.info("myBoardList call");
 		String id = (String) session.getAttribute("loginId");
+		logger.info("myBoardList call : " + id);
 		
 		ArrayList<MemberDTO> myBoardList = service.myBoardList(id);
-		model.addAttribute("myBoardList", myBoardList);
+		if(myBoardList != null) {
+			model.addAttribute("myBoardList", myBoardList);			
+		}
 		
 		return "myBoardList";
 	}
