@@ -4,7 +4,7 @@
 	
 
 <mapper namespace="kr.co.hb.main.dao.MainDAO">
-	<select id="idFind2" parameterType="hashmap" resultType="String">
+	<select id="idFind2" parameterType="hashmap" resultType="kr.co.hb.main.dto.MainDTO">
 		SELECT id FROM member WHERE email=#{email} and phone=#{phone}
 	</select>
 	

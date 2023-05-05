@@ -33,8 +33,15 @@
 	         <td><input type="text" name="phone"></td>
 	      </tr>
 	      <tr>
-	         <th>아이디 찾기 결과 :</th>
-	         <td>${findId}</td>
+	         <th>번호와 이메일에 맞는 아이디 리스트 :</th>
+	         <td>
+	         	<c:if test="${findId.size() == 0}">
+              		번호와 이메일에 맞는 아이디가 없습니다.
+            	</c:if>
+	         	<c:forEach items="${findId}" var="findId">
+	         		${findId.id} <br/>
+	         	</c:forEach>
+	         </td>
 	      </tr>
 	      <tr>
 	         <th colspan="2">

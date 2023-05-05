@@ -1,6 +1,7 @@
 
 package kr.co.hb.main.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.co.hb.main.dto.MainDTO;
@@ -9,7 +10,7 @@ public interface MainDAO {
 
 	HashMap<String, Object> idFind2(String email, String phone);
 
-	Object idFind2(HashMap<String, String> params);
+	ArrayList<MainDTO> idFind2(HashMap<String, String> params);
 
 	MainDTO pwFind2(String id, String phone);
 

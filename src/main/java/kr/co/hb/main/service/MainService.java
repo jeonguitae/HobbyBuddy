@@ -1,5 +1,6 @@
 package kr.co.hb.main.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ public class MainService {
 	@Autowired MainDAO dao;
 
 
-	public Object idFind2(HashMap<String, String> params) {
+	public ArrayList<MainDTO> idFind2(HashMap<String, String> params) {
 		return dao.idFind2(params);
 	}
 

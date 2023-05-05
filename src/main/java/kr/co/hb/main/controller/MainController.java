@@ -1,5 +1,6 @@
 package kr.co.hb.main.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
@@ -36,6 +37,7 @@ public class MainController {
 	public String logout(HttpSession session) {
 		session.removeAttribute("loginId");
 		session.removeAttribute("adminChk");
+		session.invalidate();
 		return "main";
 	}	
 	
@@ -104,11 +106,10 @@ public class MainController {
 	@RequestMapping(value="/idFind.do", method = RequestMethod.GET)
 	public String idFind2(@RequestParam HashMap<String, String> params, Model model){
 		logger.info("idFind2 : "+ params);
-		String findId = (String) service.idFind2(params);
+		ArrayList<MainDTO> findId = service.idFind2(params);
 		
-		if(findId == null) {
-			findId = "해당 전화번호와 이메일에 맞는 아이디가 없습니다.";
-		}
+		
+		
 		logger.info("findId : "+ findId);
 		model.addAttribute("findId",findId);
 		return "idFind";
