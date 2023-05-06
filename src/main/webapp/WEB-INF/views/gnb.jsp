@@ -108,7 +108,6 @@
 		if(adminChk == "1"){
 			$('.panel3').slideToggle('slow');
 		}
-		
 	});
 
 </script>

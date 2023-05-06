@@ -4,20 +4,15 @@
 <head>
    <meta charset="UTF-8">
    <title>Insert title here</title>
-      <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
       <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-      <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
-      <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
-      <style>
-         b{
-            color:red;
-         }
-	table, th, td{
-		border : 1px solid black;
-		border-collapse: collapse;
-		padding : 5px 10px;
-	}
-</style>
+
+   <style>
+		table, th, td{
+			border : 1px solid black;
+			border-collapse: collapse;
+			padding : 5px 10px;
+		}
+	</style>
 
 </head>
 <body>
@@ -144,90 +139,33 @@
 	<table>
 		<thead>
 			<tr>
+				<th>프로필 사진</th>
 				<th>ID</th>
 				<th>NAME</th>
 				<th>나이</th>
 				<th>지역</th>
+				<th>취미</th>
 				<th>성별</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
+					<td>프로필 사진 자리</td>
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>
 					<td>${member.area}</td>
+					<td>취미 자리</td>
 					<td>${member.gender}</td>
 				</tr>			
 			</c:forEach>
 		</tbody>
 		
-		 <tr>
-         <td colspan="5" id="paging">   
-            <!--    플러그인 사용   (twbsPagination)   -->
-            <div class="container">                           
-               <nav aria-label="Page navigation" style="text-align:center">
-                  <ul class="pagination" id="pagination"></ul>
-               </nav>               
-            </div>
-         </td>
-      </tr>
-		
 	</table>
 	
 </body>
 <script>
-
-var showPage=1;
-listCall(showPage);
-
-$('#pagePerNum').change(function(){
-   listCall(showPage);
-   // 페이지 처리 부분이 이미 만들어져 버려서 pagePerNum이 변경되면 수정이 안된다
-   // 그래서 pagePerNum이 변경되면 부수고 다시 만들어야한다.
-   $('#pagination').twbsPagination('destroy');
-});
-
-function listCall(page){
-   $.ajax({
-      type:'post',
-      url:'list.ajax',
-      data:{
-         'page':page,
-         'cnt':$('#pagePerNum').val()
-      },
-      dataType:'json',
-      success:function(data){
-         console.log(data)
-         listPrint(data.list);
-         
-         
-         // 총페이지 수 
-         // 현재 페이지
-         
-         //paging plugin
-         $('#pagination').twbsPagination({
-            startPage:data.currPage, // 시작페이지
-            totalPages:data.pages, // 총 페이지 수
-            visiblePages:5, //  보여줄 페이지 [1][2][3][4][5]
-            onPageClick:function(event,page){ // 페이지 클릭시 동작되는 함수(콜백)
-               console.log(page,showPage);
-               if(page!=showPage){
-                  showPage= page;
-                  listCall(page);
-               }
-            }
-            
-         });
-      },
-      error:function(e){
-         console.log(e)
-      }
-      
-   });
-}
-
 
 	$('input[name="bhobby"]').click(function(){
 		

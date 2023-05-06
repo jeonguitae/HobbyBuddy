@@ -7,9 +7,22 @@ public class RandomDTO {
 	private String gender;
 	private String area;
 	private String intr;
-	
+	private int mannertp;
+	private boolean ban;
 	
 
+	public boolean isBan() {
+		return ban;
+	}
+	public void setBan(boolean ban) {
+		this.ban = ban;
+	}
+	public int getMannertp() {
+		return mannertp;
+	}
+	public void setMannertp(int mannertp) {
+		this.mannertp = mannertp;
+	}
 	public String getIntr() {
 		return intr;
 	}

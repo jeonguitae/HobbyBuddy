@@ -21,46 +21,55 @@
    <form action="myp.do" method="post">
       <table>
       
-         <tr>
-            <th>ID</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-        
-         <tr>
-            <th>이름</th>
+      	<tr>
+      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;사진&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;사진&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      		<th>아이디</th>
+      		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      		<th>정지 상태</th>
+      		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.ban}&nbsp;&nbsp;&nbsp;&nbsp;</td>		
+      	</tr>
+      	<tr>
+      		<th>이름</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.name}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
-         <tr>
+            <th>랜덤매칭 동의 여부</th>
+      		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      	</tr>
+      	<tr>
             <th>나이</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.age}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
-         <tr>
+      		<th rowspan="2">신고 당한 횟수</th>
+      		<td rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      	</tr>
+      	<tr>
             <th>성별</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.gender}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
-         <tr>
+      	</tr>
+      	<tr>
             <th>지역</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.area}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
-         <tr>
+      		<th rowspan="2">경고 당한 횟수</th>
+      		<td rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      	</tr>
+      	<tr>
             <th>취미</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
-         <tr>
+      	</tr>
+      	<tr>
+            <th>매너온도</th>
+            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.mannertp}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      		<th rowspan="2">현재 방 생성 갯수</th>
+      		<td rowspan="2">&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      	</tr>
+      	<tr>
             <th>자기소개</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
-         <tr>
-            <th>
+      	</tr>
+      	<tr>
+      		<th colspan="2">
                <input type="submit" value="즐겨찾기"/>
             </th>
-            <th>
+            <th colspan="2">
                <input type="submit" value="쪽지 보내기"/>
             </th>
             <th>
@@ -69,10 +78,22 @@
             <th>
                <input type="button" value="뒤로가기" onclick="location.href='./'"/>
             </th>
-         </tr>
+      	</tr>
+      	<tr>
+      		<td colspan="3">
+      			<input type="button" value="경고"/> 
+      		</td>
+      		<td colspan="3">
+      			<input type="button" value="정지"/> 
+      		</td>
+      	</tr>
       </table>
+      
    </form>
 </body>
+
 <script>
+
+
 </script>
 </html>

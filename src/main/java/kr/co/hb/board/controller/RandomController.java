@@ -87,32 +87,19 @@ public class RandomController {
 		return "reportList";
 	}
 	
-		@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
-		public String detail(@RequestParam String id,Model model) {
+	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
+	public String detail(@RequestParam String id,Model model) {
 			
-			String page = "redirect:/list.do";
+		String page = "redirect:/list.do";
 			
-			RandomDTO dto= Service.detail(id);
-			if(dto != null) {
-				page = "proDetail";
-				model.addAttribute("member",dto);
-			}
-			return "proDetail";
+		RandomDTO dto= Service.detail(id);
+		if(dto != null) {
+			page = "proDetail";
+			model.addAttribute("member",dto);
 		}
+		return "proDetail";
+	}
 		
-		
-		   @RequestMapping(value = "/list.ajax", method = RequestMethod.POST)
-		      @ResponseBody
-		      public HashMap<String, Object> list(
-		            @RequestParam String page, @RequestParam String cnt
-		            ) {
-		         
-		         return Service.list(Integer.parseInt(page), Integer.parseInt(cnt));
-		      }
-
-
-
-	 
 
 
 	
