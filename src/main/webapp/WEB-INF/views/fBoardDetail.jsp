@@ -5,11 +5,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
-<style></style>
+<style>
+	table, th, td{
+	border : 1px solid black;
+	}
+</style>
 </head>
 <body>
 		<table>
+			<tr>
+				<th>분류</th>
+				<td>${dto.big_hb} - ${dto.small_hb}</td>
+			
+			</tr>
 			<tr>
 				<th>제목</th>
 				<td>${dto.title}</td>
@@ -20,29 +28,27 @@
 			</tr>
 			<tr>
 				<th>작성일</th>
-				<td>${dto.fbTIme}</td>
+				<td>${dto.fbTime}</td>
 			</tr>
+			<c:if test="${dto.new_photo_name ne null}">
 			<tr>
 				<th>사진</th>
-				<td>${dto. }</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>${dto.content}</td>
-			</tr>
-			<c:if test="${dto.newFileName ne null}">
-			<tr>
-				<th>사진</th>
-				<td><img width="500" src="/photo/${dto.newFileName}"/></td>
+				<td><img width="500" src="/photo/${dto.new_photo_name}"/></td>
 			</tr>
 			</c:if>
 			<tr>
+				<th>내용</th>
+				<td>${dto.bContent}</td>
+			</tr>
+			
+			<tr>
 				<th colspan="2">
-					<input type="button" onclick="location.href='./list.do'" value="리스트"/>
-					<input type="button" onclick="location.href='./update.go?idx=${dto.idx}'" value="수정"/>
+					<input type="button" onclick="location.href='./fupdate.go?fbNo=${dto.fbNo}'" value="수정"/>
+					<input type="button" onclick="location.href='./fdelete.do?fbNo=${dto.fbNo}'" value="삭제"/>
 				</th>
 			</tr>
 		</table>	
+		<input type="button" onclick="location.href='./flist.go'" value="리스트"/>
 </body>
 <script></script>
 </html>

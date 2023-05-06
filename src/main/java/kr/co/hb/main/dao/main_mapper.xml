@@ -4,5 +4,20 @@
 	
 
 <mapper namespace="kr.co.hb.main.dao.MainDAO">
+	<select id="idFind2" parameterType="hashmap" resultType="kr.co.hb.main.dto.MainDTO">
+		SELECT id FROM member WHERE email=#{email} and phone=#{phone}
+	</select>
+	
+	<select id="pwFind2" parameterType="String" resultType="kr.co.hb.main.dto.MainDTO">
+		SELECT chkreq FROM member WHERE id=#{param1} and phone=#{param2}
+	</select>
+	
+	<select id="pwFind3" parameterType="String" resultType="kr.co.hb.main.dto.MainDTO">
+		SELECT id FROM member WHERE id=#{param1} and chkresp=#{param2}
+	</select>
+	
+	<update id="pwFind4">
+		UPDATE member SET pw=#{param2} WHERE id=#{param1}
+	</update>
 
 </mapper>

@@ -7,9 +7,13 @@ import kr.co.hb.group.dto.OpenChatDTO;
 
 public interface OpenChatDAO {
 
-	int openlist(HashMap<String, String> params);
+	int openlist(String loginId, int gidx);
 
-	ArrayList<OpenChatDTO> openchatlist();
+	ArrayList<OpenChatDTO> openchatlist(int gidx);
+
+	int memchk(String loginId, int gidx);
+
+	int sendmsg(HashMap<String, Object> params);
 
 
 }

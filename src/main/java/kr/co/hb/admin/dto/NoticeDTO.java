@@ -13,6 +13,7 @@ public class NoticeDTO {
 	   private String newFileName;
 	   private int notice_bHit;
 	   private boolean notice_chk;
+	
 	   
 	   public int getNotice_idx() {
 	      return notice_idx;

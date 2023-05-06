@@ -23,15 +23,35 @@
 		SELECT area FROM area where city=#{param1} ORDER BY city
 	</select>
 	
-	<select id="login" parameterType="hashmap" resultType="int">
-		SELECT COUNT(id) FROM member
-			WHERE id=#{param1} and pw=#{param2}
+	<select id="login" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT id,admin FROM member
+			WHERE id=#{param1} and ban=false
 	</select>
+	
+	<select id="myProPwUpdate" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT pw FROM member
+			WHERE id=#{param1} AND ban=false
+	</select>
+	
+	<update id="changePw">
+		UPDATE member SET pw=#{param2} WHERE id=#{param1}
+	</update>
+	
+	<select id="findLoginPw" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT pw FROM member
+			WHERE id=#{param1} AND ban=false
+	</select>
+	
+	
 	<select id="adminChk" parameterType="hashmap" resultType="string">
 		SELECT admin FROM member
 			WHERE id=#{param1} and pw=#{param2}
 	</select>
 
+	<select id="pwChk2" parameterType="hashmap" resultType="int">
+		SELECT COUNT(id) FROM member
+			WHERE id=#{param1} and pw=#{param2}
+	</select>
 	
 	<select id="myProDetail" resultType="hashmap">
 		select m.id, m.name, m.email, m.phone, m.age, m.gender, m.city, m.area, m.mannertp, m.chkreq, m.chkresp, m.intr, m.random
@@ -47,5 +67,59 @@
 			,city=#{city},area=#{area},intr=#{intr},chkreq=#{chkreq},chkresp=#{chkresp},random=#{random}
 		WHERE id=#{id}
 	</update>
+	
+	<delete id="dropOut">
+	Delete FROM member where id=#{param1}
+	</delete>
+	
+	<select id="big_hb" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT big_hb FROM big_hb ORDER BY big_hb
+	</select>
+	
+	<select id="small_hb" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT small_hb FROM small_hb where big_hb=#{param1} ORDER BY big_hb
+	</select>
+	
+	<insert id="hbPlus" parameterType="hashmap">
+		insert into my_hobby_list (id,big_hb,small_hb)
+		values(#{id},#{big_hb},#{small_hb})
+	</insert>
+	
+	<select id="myHobbyList" resultType="kr.co.hb.member.dto.MemberDTO">
+		SELECT my_hobby_no,id, big_hb,small_hb FROM my_hobby_list WHERE id = #{param1}
+	</select>
+	
+	<delete id="myHobbyDelList">
+		DELETE FROM my_hobby_list WHERE my_hobby_no = #{param1}
+	</delete>
+	
+	
+	
+	<insert id="proPhotoSave">
+		INSERT INTO hbPhoto(id, new_photo_name, ori_photo_name, board_class, board_num)
+			VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})
+	</insert>
+	
+	<select id="myProPhotoList" resultType="kr.co.hb.member.dto.MemberDTO">
+		select photoIdx,id,new_photo_name,ori_photo_name,board_class
+		from hbPhoto
+		where id = #{param1} and board_class = #{param2}
+	</select>
+	
+	<delete id="myProPhotoDel">
+		DELETE FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
+	</delete>
+	
+	
+	<select id="findFile" resultType="String">
+		SELECT new_photo_name FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
+	</select>
+	
+	
+	
+	
+	<select id="myBoardList" resultType="kr.co.hb.member.dto.MemberDTO">
+	SELECT * FROM fBoard WHERE id=#{param1} ORDER BY fbNo DESC
+	</select>
 
 </mapper>

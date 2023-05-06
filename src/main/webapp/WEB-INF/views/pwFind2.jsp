@@ -21,37 +21,33 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-	<h3>아이디 찾기</h3>
-	<form action="idFind.do" method="get">	   
+	<h3>비밀번호 찾기 (2/3)</h3>
+	<form action="pwFind3.go" method="get">	   
 	   <table>
-	      <tr>
-	         <th>이메일</th>
-	         <td><input type="text" name="email"></td>
+		  <tr>
+	         <th>아이디</th>
+	         <td><input type="text" name="id" value="${sessionScope.id}" readonly></td>
 	      </tr>
 	      <tr>
-	         <th>전화번호</th>
-	         <td><input type="text" name="phone"></td>
+	         <th>본인확인 질문</th>
+	         <td><input type="text" name="chkreq" value="${sessionScope.chkreq}" readonly></td>
 	      </tr>
 	      <tr>
-	         <th>번호와 이메일에 맞는 아이디 리스트 :</th>
-	         <td>
-	         	<c:if test="${findId.size() == 0}">
-              		번호와 이메일에 맞는 아이디가 없습니다.
-            	</c:if>
-	         	<c:forEach items="${findId}" var="findId">
-	         		${findId.id} <br/>
-	         	</c:forEach>
-	         </td>
+	         <th>본인확인 답변</th>
+	         <td><input type="text" name="chkresp"></td>
 	      </tr>
 	      <tr>
 	         <th colspan="2">
-	            <button>아이디 찾기</button>
+	            <button>비밀번호 확인</button>
 	         </th>         
 	      </tr>
 	   </table>
    </form>
 </body>
 <script>
-
+	var msg = "${msg}";
+	if(msg!=""){
+		alert(msg);
+	}
 </script>
 </html>

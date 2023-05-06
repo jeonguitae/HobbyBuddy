@@ -48,7 +48,7 @@
 			
 		</tbody>
 	</table>
-		<button>검색</button>
+		<button class="fbutton">검색</button>
 	<table class="second">
 		<colgroup>
 			<col width="10%"/>
@@ -76,7 +76,7 @@
 			<c:forEach items="${list}" var="bbs">
 				<tr>
 					<td>${bbs.fbNo}</td>
-					<td><a href="detail.do?idx=${bbs.fbNo}">${bbs.title}</a></td>
+					<td><a href="fdetail.do?fbNo=${bbs.fbNo}">${bbs.title}</a></td>
 					<td>${bbs.id}</td>
 					<td>${bbs.fbTime}</td>
 					<td>${bbs.bhit}</td>
@@ -84,10 +84,20 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<button onclick="location.href='write.go'">글쓰기</button>
+	<input type="submit" value="필터링검색"/>
+	<button onclick="location.href='fwrite.go'">글쓰기</button>
 </body>
 <script>
+	//선택이 안 됐다고 value가 null은 아닌가봐
+	var count = 0;
+	$('.fbutton').click(function(){
+		if(count == 0){
+			alert('대분류는 필수 선택 항목입니다.');
+		}
+	})
+	
 	$('input[name="bhobby"]').click(function(){
+		count = 1;
 	var content='';
 	var val = $(this).val();
 	console.log(val);

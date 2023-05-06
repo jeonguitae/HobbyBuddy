@@ -28,5 +28,22 @@ public interface NoticeDAO {
 	int totalCount();
 
 	ArrayList<NoticeDTO> noticePageList(int cnt, int offset);
+
+	ArrayList<NoticeDTO> noticeTitle(HashMap<String, String> params);
+
+	ArrayList<NoticeDTO> noticeId(HashMap<String, String> params);
+	
+	void notice_ChkOn(String notice_idx);
+	
+	void notice_ChkOff(String notice_idx);
+
+	int updatePDelete(int photo_idx);
+
+	void deletePhoto(String photo_idx, String notice_idx);
+
+	String noticeFindFile2(String photo_idx);
+
+	
+	
 	
 }

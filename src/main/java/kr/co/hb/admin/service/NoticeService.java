@@ -8,17 +8,36 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.admin.dao.NoticeDAO;
 import kr.co.hb.admin.dto.NoticeDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 @Service
 public class NoticeService {
 
 	@Autowired NoticeDAO dao;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
+	 	public String noticeUpdate(MultipartFile photo, HashMap<String, String> params) {
+	      
+	      int row = dao.noticeUpdate(params);
+	      int idx = Integer.parseInt(params.get("notice_idx"));	
+	      
+	      if (!photo.getOriginalFilename().equals("")) {
+		         noticeFileSave(idx, photo);
+		      }	      
+	      
+	      String page = row > 0 ? "redirect:/noticeDetail.do?notice_idx=" + idx : "redirect:/noticeList.go";
+	             
+	        return page;
+	   }
 
 	   public String noticeWrite(MultipartFile photo, HashMap<String, String> params) {
 	      
@@ -66,6 +85,16 @@ public class NoticeService {
 	         }
 
 	      }
+	   
+	   
+	   public String notice_ChkUpdate(String notice_idx, String flag) {
+		   if (flag.equals("true")) {
+		     dao.notice_ChkOn(notice_idx);
+		   } else {
+		     dao.notice_ChkOff(notice_idx);
+		   }
+		   return flag;
+		 }
 
 	   public NoticeDTO noticeDetail(String notice_idx, String flag) {
 	      
@@ -80,18 +109,7 @@ public class NoticeService {
 	   public ArrayList<NoticeDTO> noticeList() {
 	      
 	      return dao.noticeList();
-	   }
-
-	   public String noticeUpdate(HashMap<String, String> params) {
-	      
-	      int row = dao.noticeUpdate(params);
-	      int idx = Integer.parseInt(params.get("notice_idx"));	      
-	      
-	      
-	      String page = row > 0 ? "redirect:/noticeDetail.do?notice_idx=" + idx : "redirect:/noticeList.go";
-	             
-	        return page;
-	   }
+	   }  
 
 	   public void noticeDelete(String notice_idx) {
 	      
@@ -114,7 +132,22 @@ public class NoticeService {
 
 	public ArrayList<NoticeDTO> noticeSearch(HashMap<String, String> params) {
 		
-		return dao.noticeSearch(params);
+		ArrayList<NoticeDTO> list = null;
+		
+		if(params.get("sSearch").equals("notice_title")) {
+			String wildcard = "%" + params.get("notice_Search") + "%";
+			params.replace("notice_Search", wildcard);
+			list = dao.noticeTitle(params);
+		}
+		
+		if(params.get("sSearch").equals("id")) {
+			
+			String wildcard = "%" + params.get("notice_Search") + "%";
+			params.replace("notice_Search", wildcard);
+			list = dao.noticeId(params);
+		}		
+		
+		return list;
 	}
 
 	public HashMap<String, Object> noticePageList(int page, int cnt) {
@@ -144,6 +177,25 @@ public class NoticeService {
 		
 		return map;
 	}
+
+	public void deletePhoto(String photo_idx, String notice_idx) {
+		
+		logger.info(photo_idx);
+		String newFileName = dao.noticeFindFile2(photo_idx);
+		
+	    if (newFileName != null) {
+	        	
+	        File files = new File("C:/img/upload/" + newFileName);
+	        if (files.exists()) {
+	        	logger.info("2");
+	            files.delete();
+	            dao.deletePhoto(photo_idx,notice_idx); // photo_idx 파라미터 사용
+	        }
+	        
+	    }
+	}
+	
+
 
 
 }

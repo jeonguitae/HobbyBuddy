@@ -6,7 +6,6 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="resources/css/commons.css">
 <style>
 	table, th, td{
       border: 1px solid black;
@@ -54,11 +53,14 @@
             <td>
                
                <c:if test="${dto.newFileName eq null}">
-                  <input type="file" name="photo">
+                  <input type="file" name="photo" multiple="multiple">
                </c:if>
                <c:if test="${dto.newFileName ne null}">
-                  <img src="${dto.newFileName}" width="100"/>                                   
-               </c:if>         
+				  <img src="/photo/${dto.newFileName}" width="100"/>
+				  ${dto.newFileName}
+				  <input type="hidden" name="photo_idx" value="${dto.photo_idx}">
+				  <a href="deletePhoto.do?photo_idx=${dto.photo_idx}&notice_idx=${dto.notice_idx}">사진 삭제</a>				  		  
+				</c:if>      
             </td>
          </tr>         
          <tr>            
@@ -68,9 +70,11 @@
                <button>수정</button>
                <input type="button" onclick="location.href='noticeList.go'" value="취소">
             </th>
-         </tr>
+         </tr> 
       </table>
    </form>
 </body>
-<script></script>
+<script>
+
+</script>
 </html>

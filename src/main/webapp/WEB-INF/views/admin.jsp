@@ -164,6 +164,5 @@ table, th, td{
    </table>
 </body>
 <script>
-
 </script>
 </html>

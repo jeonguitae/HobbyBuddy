@@ -1,5 +1,6 @@
 package kr.co.hb.admin.controller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -34,6 +35,14 @@ public class NoitceController {
 		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt));
 	}	
 	
+	@RequestMapping(value = "/update_chk.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public String update_chk(@RequestParam("notice_idx") String notice_idx,
+	                         @RequestParam("flag") String flag) {
+	  return service.notice_ChkUpdate(notice_idx, flag);
+	}
+	
+	
 	@RequestMapping(value = "/noticeList.go")
 	public String noticePage() {
 		return "noticeList";
@@ -43,10 +52,17 @@ public class NoitceController {
 	@RequestMapping(value = "/search.do")
 	   public String noticeSearch(Model model, @RequestParam HashMap<String, String> params) {      
 	      
+		logger.info("검색 컨트롤러");
+		String page = "noticeResult";
+		
+		if (params.get("sSearch").equals("default") || params.get("notice_Search").equals("")) {
+		    page = "noticeList";
+		}
+		
 		ArrayList<NoticeDTO> list = service.noticeSearch(params);
 	      
-		model.addAttribute("list",list);
-	      return "noticeList.go";
+		model.addAttribute("noticePageList",list);
+	      return page;
 	   }
 	   
 	   // 관리에서 등록 눌렀을떄
@@ -71,6 +87,12 @@ public class NoitceController {
 		}
 		   
 	      return page;
+	   }
+	   
+	   @RequestMapping(value = "/noticeUpdate.do", method = RequestMethod.POST)
+	   public String noticeUpdate(MultipartFile photo,@RequestParam HashMap<String, String> params) {
+	      
+	      return service.noticeUpdate(photo,params);
 	   }
 	   
 	   @RequestMapping(value = "/noticeDetail.do")
@@ -101,19 +123,24 @@ public class NoitceController {
 	      }
 	      
 	      return page;
-	   }
-	   
-	   @RequestMapping(value = "/noticeUpdate.do", method = RequestMethod.POST)
-	   public String noticeUpdate(@RequestParam HashMap<String, String> params) {
-	      
-	      return service.noticeUpdate(params);
-	   }
+	   }	   
 	   
 	   @RequestMapping(value = "/noticeDelete.go")
 	   public String noticeDelete(Model model,@RequestParam HashMap<String, String> params) {
 	      		   
 		   service.noticeDelete(params.get("notice_idx"));
 	      return "redirect:/noticeList.go";
+	   }
+	   
+	   @RequestMapping(value = "/deletePhoto.do")
+	   public String deletePhoto(@RequestParam String photo_idx, @RequestParam String notice_idx) {
+		   
+		   logger.info(photo_idx,notice_idx);
+		     
+		   service.deletePhoto(photo_idx, notice_idx);
+				   
+	       return "noticeUpdate";
+	       
 	   }
 	   
 	   

@@ -11,7 +11,7 @@ public interface MemberDAO {
 
 	int join(HashMap<String, String> params);
 
-	int login(String id, String pw);
+	//int login(String id, String pw);
 
 	ArrayList<MemberDTO> city();
 
@@ -19,10 +19,50 @@ public interface MemberDAO {
 
 	String adminChk(String id, String pw);
 
-
+	int pwChk2(String id, String pw);
+	
 	HashMap<String, Object> myProDetail(Object id);
 
 	int memberUpdate(HashMap<String, String> params);
+
+	void dropOut(String id);
+	
+	ArrayList<MemberDTO> big_hb();
+
+	ArrayList<MemberDTO> small_hb(String big_hb);
+
+	int hbPlus(HashMap<String, String> params);
+
+	ArrayList<MemberDTO> myHobbyList(String id);
+
+	int myHobbyDelList(String id);
+	
+	
+
+	void proPhotoSave(String id, String board_class, String ori_photo_name, String new_photo_name, int board_num);
+
+	MemberDTO myProPhotoList(String id, String board_class);
+
+	int myProPhotoDel(String id, String board_class);
+
+	String findFile(String id, String board_class);
+	
+	
+
+	MemberDTO findLoginPw(String id);
+
+	MemberDTO login(String id);
+
+	MemberDTO myProPwUpdate(Object attribute);
+
+	int changePw(String id, String changePw2);
+
+	ArrayList<MemberDTO> myBoardList(String id);
+
+	
+
+	
+
 
 
 }

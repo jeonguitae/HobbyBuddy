@@ -14,14 +14,24 @@ public class OpenChatService {
 	
 	@Autowired OpenChatDAO dao;
 
-	public int openlist(HashMap<String, String> params) {
+	public int openlist(String loginId, int gidx) {
 		
-		return dao.openlist(params);
+		return dao.openlist(loginId, gidx);
 	}
 
-	public ArrayList<OpenChatDTO> openchatlist() {
+	public int memchk(String loginId, int gidx) {
 		
-		return dao.openchatlist();
+		return dao.memchk(loginId, gidx);
+	}
+
+	public ArrayList<OpenChatDTO> openchatlist(int gidx) {
+		
+		return dao.openchatlist(gidx);
+	}
+
+	public int sendmsg(HashMap<String, Object> params) {
+		
+		return dao.sendmsg(params);
 	}
 
 	

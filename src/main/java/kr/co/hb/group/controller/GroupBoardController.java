@@ -1,9 +1,8 @@
 package kr.co.hb.group.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,11 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.group.service.GroupBoardService;
+import kr.co.hb.group.service.OpenChatService;
 
 @Controller
 public class GroupBoardController {
 	
 	@Autowired GroupBoardService service;
+	@Autowired OpenChatService oservice;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value="/glist.go")
@@ -53,18 +55,11 @@ public class GroupBoardController {
 	
 	@RequestMapping(value="/gwrite.do")
 	public String gwrite(Model model, @RequestParam HashMap<String, String> params) {		
-				
+		
 		logger.info("생성 데이터 : " + params);
-
-		String msg = "모임등록 실패!";
+		
 		int row = service.gwrite(params);
 		
-		if(row == 1) {
-			
-			msg = "모임등록 성공!";
-		}
-		
-		model.addAttribute("msg", msg);
 		return "redirect:/glist.go";
 	}
 	
@@ -94,6 +89,16 @@ public class GroupBoardController {
 		logger.info("start");
 		return "reportCreate";
 	}
+	
+	@RequestMapping(value = "/gboardlist.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> gboardpagelist(
+			@RequestParam String page,
+			@RequestParam String cnt			
+			){
+		
+		return service.gboardpagelist(Integer.parseInt(page), Integer.parseInt(cnt));
+	}	
 	
 
 }

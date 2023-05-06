@@ -41,7 +41,7 @@
    </update>
       
     <select id="noticeDetail" resultType="kr.co.hb.admin.dto.NoticeDTO">
-      select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content
+      select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content,n.notice_chk
          ,p.photo_idx, p.newFileName
       FROM notice n LEFT JOIN hbphoto p ON n.notice_idx=p.notice_idx 
       WHERE n.notice_idx = #{param1}   
@@ -51,9 +51,18 @@
       DELETE FROM notice WHERE notice_idx = #{param1}
    </delete>
    
+   <delete id="updatePDelete">
+      DELETE FROM hbphoto WHERE photo_idx = #{param1}
+   </delete>
+   
    <select id="noticeFindFile" resultType="String">
       SELECT newFileName FROM hbphoto
          WHERE notice_idx = #{param1}
+   </select>
+   
+   <select id="noticeFindFile2" resultType="String">
+      SELECT newFileName FROM hbphoto
+         WHERE photo_idx = #{param1}
    </select>
    
    <update id="noticeUpdate" parameterType="HashMap">
@@ -71,5 +80,33 @@
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(notice_idx) FROM notice 
 	</select>
+	<select id="noticeTitle" resultType="kr.co.hb.admin.dto.NoticeDTO">
+		SELECT * FROM notice
+		WHERE notice_title LIKE #{notice_Search}
+	</select>
+	
+	<select id="noticeId" resultType="kr.co.hb.admin.dto.NoticeDTO">
+		SELECT * FROM notice
+		WHERE id LIKE #{notice_Search}
+	</select>
+	
+	<update id="notice_ChkOn">
+	
+      update notice set notice_chk  = true where notice_idx = #{notice_idx}
+
+   </update>
+   
+	<update id="notice_ChkOff">     
+ 
+ 	  update notice set notice_chk  = false where notice_idx = #{notice_idx}
+      
+   </update>
+   
+   <delete id="deletePhoto">
+   		DELETE from hbphoto where photo_idx = #{param1} AND notice_idx = #{param2};
+   </delete>
+   
+   
+	
    
 </mapper>
