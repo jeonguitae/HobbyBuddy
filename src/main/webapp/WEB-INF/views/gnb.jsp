@@ -97,7 +97,7 @@
 	<c:if test="${alarmList.size() == 0}">
 	<div class="noAlarmList">알림이 없습니다.</div>
 	</c:if>
-			
+	<!-- 		
 	<c:forEach items="${alarmList}" var="alarm">
 		<div>
 			<a href="fdetail.do?fbNo=${alarm.fbNo}">
@@ -106,7 +106,7 @@
 			</a>
 		</div>		
 	</c:forEach>
-		
+	 -->	
 	
 	<div id="profileIcon">프로필</div>
 	<div class="panel2" onclick="location.href='login.go'">로그인</div>
