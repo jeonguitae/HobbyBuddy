@@ -20,9 +20,6 @@
    button{
       margin: 5px;
    }
-   table {
-      width: 500px;
-   }
    input[type="text"]{
       width: 40%;   
    }
@@ -43,10 +40,10 @@
       <h2 align="center">공지사항 리스트</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="200">200</option>
          </select>
     
       <form action="search.do">
@@ -63,7 +60,12 @@
          <thead>
             <tr>
                <th>번호</th>
-               <th>작성자</th>
+               <th>
+               	  <select id="id_drop">
+				    <option value="작성자">작성자</option>
+				    <option value="d">d</option>
+				  </select>
+			   </th>
                <th>제목</th>
                <th id="sortDate">작성일<i class="fas fa-sort"></i></th>
                <th>조회수</th>                      
