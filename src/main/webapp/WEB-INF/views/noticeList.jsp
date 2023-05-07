@@ -9,6 +9,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 <style>
    table, th, td{
       border: 1px solid black;
@@ -63,9 +65,9 @@
                <th>번호</th>
                <th>작성자</th>
                <th>제목</th>
-               <th>작성일시</th>
+               <th id="sortDate">작성일<i class="fas fa-sort"></i></th>
                <th>조회수</th>                      
-               <th>공개여부</th>                      
+               <th id="sortChk">공개여부<i class="fas fa-sort"></i></th>                      
             </tr>            
          </thead>
          <tbody id="list">             
@@ -152,7 +154,7 @@ function listPrint(list){
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
       content += '<td>'+item.notice_bHit+'</td>';
-      content += '<td>'+item.notice_chk+'</td>';
+      content += '<td>'+ (item.notice_chk ? '공개' : '비공개') +'</td>';
       content += '</tr>';
    });
    $('#list').empty();
@@ -161,6 +163,58 @@ function listPrint(list){
    
 }
 
+var dateSortOrder = -1; 
+var chkSortOrder = -1; 
+
+$('#sortDate').click(function() {
+   dateSortOrder *= -1; 
+   $.ajax({
+      type:'post',
+      url:'noticeList.ajax',
+      data:{
+         'page':showPage,
+         'cnt':$('#pagePerNum').val(),
+         'sort':'date'
+      },
+      dataType:'json',
+      success:function(data){
+         list = data.noticePageList;
+         list.sort(function(a, b) {
+            var dateA = new Date(a.notice_date);
+            var dateB = new Date(b.notice_date);
+            return dateSortOrder * (dateB - dateA); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
+         });
+         listPrint(list);
+      },
+      error:function(e){
+         console.log(e);
+      }
+   });
+});
+
+$('#sortChk').click(function() {
+   chkSortOrder *= -1; // 클릭할 때마다 정렬 방식을 변경
+   $.ajax({
+      type:'post',
+      url:'noticeList.ajax',
+      data:{
+         'page':showPage,
+         'cnt':$('#pagePerNum').val(),
+         'sort':'chk'
+      },
+      dataType:'json',
+      success:function(data){
+         list = data.noticePageList;
+         list.sort(function(a, b) {
+            return chkSortOrder * (b.notice_chk - a.notice_chk); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
+         });
+         listPrint(list);
+      },
+      error:function(e){
+         console.log(e);
+      }
+   });
+});
 
 </script>
 </html>
