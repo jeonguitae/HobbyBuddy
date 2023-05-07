@@ -42,13 +42,13 @@ public class RandomController {
 		return "proList";
 	}
 	
-	@RequestMapping(value="/random.go")
+	@RequestMapping(value="/randomList.go")
 	public String rlist(Model model) {		
 		logger.info("start");
 		return "randomList";
 	}
 	
-	@RequestMapping(value="/random.do")
+	@RequestMapping(value="/randomList.do")
 	public String randomList(Model model, @RequestParam HashMap<String, String> params) {	
 		
 		ArrayList<RandomDTO> list = Service.randomList(params);
@@ -57,16 +57,16 @@ public class RandomController {
 		return "randomList";
 	}
 	
-	@RequestMapping(value="/noname.go")
+	@RequestMapping(value="/noNameList.go")
 	public String nlist(Model model) {		
 		logger.info("start");
 		return "noNameList";
 	}
 	
-	@RequestMapping(value="/noname.do")
+	@RequestMapping(value="/noNameList.do")
 	public String nonameList(Model model, @RequestParam HashMap<String, String> params) {	
 		
-		ArrayList<RandomDTO> list = Service.nonameList(params);
+		ArrayList<RandomDTO> list = Service.noNameList(params);
 		logger.info("검색 조건 : " + params);
 		model.addAttribute("list",list);
 		return "noNameList";
@@ -99,8 +99,5 @@ public class RandomController {
 		}
 		return "proDetail";
 	}
-		
-
-
 	
 }

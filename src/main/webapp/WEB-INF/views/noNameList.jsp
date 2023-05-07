@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="profile">
-		<form action="noname.do" method="get">
+		<form action="noNameList.do" method="get">
 			<table>
 				
 				<tr>

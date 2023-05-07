@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.hb.admin.dto.MemberManageDTO;
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
 
@@ -21,7 +22,7 @@ public class MemberManageController {
 	@Autowired RandomService Service;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
-	@RequestMapping(value="/memberlist.go")
+	@RequestMapping(value="/memberList.go")
 	public String mlist(Model model) {		
 		logger.info("start");
 		return "memberList";

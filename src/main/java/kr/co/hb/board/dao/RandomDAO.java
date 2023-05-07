@@ -12,15 +12,11 @@ public interface RandomDAO {
 	
 	ArrayList<RandomDTO> randomList(HashMap<String, String> params);
 
-	ArrayList<RandomDTO> nonameList(HashMap<String, String> params);
+	ArrayList<RandomDTO> noNameList(HashMap<String, String> params);
 
 	RandomDTO detail(String id);
 
-	ArrayList<RandomDTO> pssearch(HashMap<String, String> params);
 
-	ArrayList<RandomDTO> pwsearch(HashMap<String, String> params);
-
-	ArrayList<RandomDTO> pcsearch(HashMap<String, String> params);
 
 
 	

@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="profile">
-		<form action="random.do" method="get">
+		<form action="randomList.do" method="get">
 			<table>
 				<tr>
 					<th>성별</th>

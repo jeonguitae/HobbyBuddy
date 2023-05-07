@@ -66,26 +66,24 @@
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
       	</tr>
       	<tr>
-      		<th colspan="2">
+      		<th>
                <input type="submit" value="즐겨찾기"/>
             </th>
-            <th colspan="2">
+            <th>
                <input type="submit" value="쪽지 보내기"/>
             </th>
             <th>
-               <input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
+      			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
+      		</th>
+      		<th>
+      			<input type="button" value="뒤로가기" onclick="location.href='./'"/>
+      		</th>
+            <th>
+               <input type="button" value="경고"/> 
             </th>
             <th>
-               <input type="button" value="뒤로가기" onclick="location.href='./'"/>
+               <input type="button" value="정지"/> 
             </th>
-      	</tr>
-      	<tr>
-      		<td colspan="3">
-      			<input type="button" value="경고"/> 
-      		</td>
-      		<td colspan="3">
-      			<input type="button" value="정지"/> 
-      		</td>
       	</tr>
       </table>
       

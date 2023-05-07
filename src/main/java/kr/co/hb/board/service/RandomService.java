@@ -33,11 +33,11 @@ public class RandomService {
 
 	}
 	
-	public ArrayList<RandomDTO> nonameList(HashMap<String, String> params) {
+	public ArrayList<RandomDTO> noNameList(HashMap<String, String> params) {
 		
 		logger.info("검색 조건 : " + params);
 		
-		return dao.nonameList(params);
+		return dao.noNameList(params);
 
 	}
 	public RandomDTO detail(String id) {

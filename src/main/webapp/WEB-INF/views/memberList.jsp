@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="memberList">
-		<form action="memberlist.do" method="get">
+		<form action="memberList.do" method="get">
 			<table>
 				
 				<tr>

@@ -11,8 +11,8 @@
 		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} 
 	</select>
 	
-	<select id="nonameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member WHERE WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}  
+	<select id="noNameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
+		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}  
 	</select>
 	
 	<select id="detail" resultType="kr.co.hb.board.dto.RandomDTO">
