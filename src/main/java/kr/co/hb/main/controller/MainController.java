@@ -61,6 +61,10 @@ public class MainController {
 	public String pwFind(HttpSession session) {
 		return "pwFind";
 	}
+	@RequestMapping(value = "/qboard.go", method = RequestMethod.GET)
+	public String qboard(HttpSession session) {
+		return "qBoardList";
+	}
 
 	@RequestMapping(value = "pwFind2.go", method = RequestMethod.GET)
 	public String pwFind2(Model model, HttpSession session, @RequestParam String id, @RequestParam String phone) {

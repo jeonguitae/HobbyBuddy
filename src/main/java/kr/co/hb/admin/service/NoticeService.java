@@ -16,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.admin.dao.NoticeDAO;
 import kr.co.hb.admin.dto.NoticeDTO;
-import kr.co.hb.group.dto.GroupBoardDTO;
 
 @Service
 public class NoticeService {
