@@ -69,6 +69,7 @@
 		</table>
 </body>
 <script>
+	session.setAttribute("gidx", params.get("gidx"));
 	$('a[class="openchat"]').click(function(){
 		var loginId = "${sessionScope.loginId}";
 		if(loginId != null){

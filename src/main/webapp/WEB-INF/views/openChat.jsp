@@ -6,87 +6,75 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
+	table[class="memlist"]{
+     	float: left;
+     	border: 1px, solid, black;
+	}
+	
+	table[class="chatting"]{
+		border: 1px, solid, black;
+		width: 400px;
+		height: 250px;
+		max-width: 450px;
+     	position: absolute;
+     	top : 10%;
+     	left : 30%;
+	}
+	
 </style>
 </head>
 <body>
-		<div class="memlist">
-			<table>
+			<table class="memlist">
 				<thead>
 					<tr>
-						<th>아이디</th>
+						<th hidden>방 번호</th>
+						<th>참가중인 아이디</th>
 					</tr>
 				</thead>
 				
 				<tbody>
 					<c:forEach items="${list}" var="bbs">
 						<tr>
-							<td>${bbs.gidx}</td>
+							<td class="gidx" hidden>${bbs.gidx}</td>
+							<th class="id">${bbs.id}</th>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
-		</div>
 
-		
-		<div class="chatting">
-				<table>
-				<tr id="list">
-				
-				</tr>
+			<table class="chatting">
+				<colgroup>
+					<col width="30%"/>
+					<col width="50%"/>
+					<col width="20%"/>
+				</colgroup>
+				<c:forEach items="${listmsg}" var="chat">
+					<tr>
+						<td>${chat.id}</td>
+						<td>${chat.chatting}</td>
+						<td>${chat.chattime}</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td>
-						<input type="text" id="msg" value=""/>
-						<button class="sendmsg">전송</button>
+						<form action="sendmsg.do" method="post">
+							<input type="text" name="gidx" value="" hidden/>
+							<input type="text" name="id" value="${sessionScope.loginId}" hidden/>
+							<input type="text" name="msg" value=""/>
+							<button class="send">전송</button>
+						</form>	
 					</td>
-				</tr>
-				</table>
-				
-		</div>
+				</tr>		
+			</table>
+			
 </body>
 <script>
-$('button[class="sendmsg"]').click(function(){
-	var loginId = "${sessionScope.loginId}";
-	var gidx = "";
-	var $msg = $('input[id="msg"]').val();
-	
-	console.log(loginId, $msg, gidx);
-	
-	$.ajax({
-		type:'post',
-		url:'sendmsg.ajax',
-		data:{
-			id: loginId,
-			msg: $msg
-		},
-		dataType:'json',
-		success:function(data){},
-		error:function(e){}
-	});
+var $gidx = $('td[class="gidx"]').html();
+console.log($gidx);
+
+$('button[class="send"]').click(function(){
+	$('input[name="gidx"]').val($gidx);
 });
-
-/* function realTime(){
-	setInterval(function(){
-		list();
-	},1000);
-}
-
-list();
-function list(){
-	$.ajax({
-		type:'post',
-		url:'opclist.ajax',
-		data:{},
-		dataType:'json',
-		success:function(data){
-			}else{
-				listDraw(data.list);
-			}
-		},
-		error:function(e){
-			console.log(e);
-		}
-	});	
-} */
 
 </script>
 </html>
