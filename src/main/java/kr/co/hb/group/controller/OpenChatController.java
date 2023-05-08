@@ -3,7 +3,6 @@ package kr.co.hb.group.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -14,8 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.group.dto.OpenChatDTO;
 import kr.co.hb.group.service.OpenChatService;
 
@@ -51,9 +50,11 @@ public class OpenChatController {
 		
 		model.addAttribute("list", list);
 		
-		ArrayList<GroupBoardDTO> listmsg = service.clist(gidx);
-		
-		model.addAttribute("listmsg", listmsg);
+		/*
+		 * ArrayList<OpenChatDTO> listmsg = service.clist(gidx);
+		 * 
+		 * model.addAttribute("listmsg", listmsg);
+		 */
 		
 		}
 		
@@ -61,9 +62,15 @@ public class OpenChatController {
 			
 		logger.info("addr : " + addr);
 		
-		ArrayList<GroupBoardDTO> listmsg = service.clist(gidx);
+		ArrayList<OpenChatDTO> list = service.openchatlist(gidx);
 		
-		model.addAttribute("listmsg", listmsg);
+		model.addAttribute("list", list);
+		
+		/*
+		 * ArrayList<OpenChatDTO> listmsg = service.clist(gidx);
+		 * 
+		 * model.addAttribute("listmsg", listmsg);
+		 */
 		
 		}
 		
@@ -75,27 +82,26 @@ public class OpenChatController {
 		
 		logger.info("params : " + params);
 		int gidx = (int) session.getAttribute("gidx");
-		int row = service.sendmsg(params, gidx);
+		String id = params.get("id");
+		String msg = params.get("msg");
+		int row = service.sendmsg(gidx, id, msg);
 		
 		
 		return "redirect:/listmsg.go";
 	}
 	
-	/*
-	 * @RequestMapping(value="/clist") public String list(Model model) {
-	 * logger.info("listcall"); ArrayList<GroupBoardDTO> listmsg = service.clist();
-	 * 
-	 * model.addAttribute("listmsg", listmsg); return "openChat"; }
-	 */
-	/*
-	 * @RequestMapping(value="/listmsg.ajax") public HashMap<String, Object>
-	 * listmsg(HashMap<String, Object> params) {
-	 * 
-	 * HashMap<String, Object> map = new HashMap<String, Object>();
-	 * ArrayList<OpenChatDTO> listmsg = service.listmsg(); map.put("listmsg",
-	 * listmsg);
-	 * 
-	 * return map; }
-	 */
+	@RequestMapping(value = "/clist.ajax")
+	@ResponseBody
+	public HashMap<String, Object> clistCall(HttpSession session){
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			int gidx = (int) session.getAttribute("gidx");
+			
+			ArrayList<OpenChatDTO> clist = service.clist(gidx);
+			map.put("clist", clist);
+		
+		return map;
+	}
 	 
 }

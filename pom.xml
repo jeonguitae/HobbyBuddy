@@ -111,8 +111,6 @@
 		    <artifactId>spring-security-crypto</artifactId>
 		    <version>5.5.0</version>
 		</dependency>
-		
-		
 				
 		<!-- AspectJ -->
 		<dependency>
