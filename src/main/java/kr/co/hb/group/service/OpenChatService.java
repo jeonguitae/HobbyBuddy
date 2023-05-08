@@ -1,7 +1,6 @@
 package kr.co.hb.group.service;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.co.hb.group.dao.OpenChatDAO;
-import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.group.dto.OpenChatDTO;
 
 @Service
@@ -33,17 +31,18 @@ public class OpenChatService {
 		return dao.openchatlist(gidx);
 	}
 
-	public int sendmsg(HashMap<String, String> params, int gidx) {
+	public int sendmsg(int gidx, String id, String msg) {
 		
-		return dao.sendmsg(params, gidx);
+		return dao.sendmsg(gidx, id, msg);
 	}
 
-	public ArrayList<OpenChatDTO> listmsg() {
-	
-		return dao.listmsg();
-	}
+	/*
+	 * public ArrayList<OpenChatDTO> listmsg() {
+	 * 
+	 * return dao.listmsg(); }
+	 */
 
-	public ArrayList<GroupBoardDTO> clist(int gidx) {
+	public ArrayList<OpenChatDTO> clist(int gidx) {
 		
 		return dao.clist(gidx);
 	}

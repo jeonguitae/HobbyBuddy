@@ -4,7 +4,7 @@
 	
 <mapper namespace="kr.co.hb.group.dao.OpenChatDAO">
 	
-	<insert id="openlist" parameterType="HashMap">
+	<insert id="openlist">
 		INSERT INTO openlist(id, gidx) VALUES(#{param1}, #{param2})
 	</insert>
 	
@@ -17,7 +17,7 @@
 	</select>
 	
 	<insert id="sendmsg">
-		INSERT INTO chat(gidx, id, chatting) VALUES(#{param3}, #{}, #{msg})
+		INSERT INTO chat(gidx, id, chatting) VALUES(#{param1}, #{param2}, #{param3})
 	</insert>
 	
 	<select id="clist" resultType="kr.co.hb.group.dto.OpenChatDTO">

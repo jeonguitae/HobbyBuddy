@@ -1,21 +1,20 @@
 package kr.co.hb.group.dto;
 
-import java.sql.Date;
+import java.sql.Time;
 
 public class OpenChatDTO {
 	
 	private int gidx;
 	private String id;
 	private String chatting;
-	private Date chattime;
+	private Time chattime;
 	
-	public Date getChattime() {
+	public Time getChattime() {
 		return chattime;
 	}
-	public void setChattime(Date chattime) {
+	public void setChattime(Time chattime) {
 		this.chattime = chattime;
 	}
-	
 	public String getChatting() {
 		return chatting;
 	}
