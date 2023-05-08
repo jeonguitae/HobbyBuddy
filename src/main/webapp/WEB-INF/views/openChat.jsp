@@ -9,8 +9,8 @@
 	table[class="memlist"]{
      	position: relative;
      	border: 1px, solid, black;
-     	left: 60%;
-     	top: 17%;
+     	left: 710px;
+     	top: 70px;
 	}
 	
 	table[class="chatting"]{
@@ -33,8 +33,6 @@
 	
 	button[class="send"]{
 		position: absolute;
-		top: 1%;
-		left: 53%;
 		width: 62px;
 		height: 70px;
 	}
