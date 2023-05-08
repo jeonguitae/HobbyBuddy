@@ -133,13 +133,13 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/deletePhoto.do")
-	   public String deletePhoto(@RequestParam String photo_idx, @RequestParam String notice_idx) {
-		   
-		   logger.info(photo_idx,notice_idx);
+       public String deletePhoto(@RequestParam String photo_idx, @RequestParam String notice_idx) {
+		   logger.info("photo_idx={}, notice_idx={}", photo_idx, notice_idx);
+
 		     
 		   service.deletePhoto(photo_idx, notice_idx);
 				   
-	       return "noticeUpdate";
+	       return "redirect:/noticeUpdate.go?notice_idx=" + notice_idx;
 	       
 	   }
 	   

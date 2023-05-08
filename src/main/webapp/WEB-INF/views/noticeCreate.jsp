@@ -36,7 +36,7 @@
       
          <tr>
             <th>작성자 아이디</th>
-            <td><input type="text" name="id"></td>
+            <td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
          </tr>               
          <tr>
             <th>공지사항 제목</th>

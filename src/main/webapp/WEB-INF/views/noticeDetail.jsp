@@ -111,7 +111,7 @@ $(document).ready(function() {
     } else {
       $("#chkBtn").text(btnText);
     }
-  });
+});
 /* // 페이지 로드될 때 버튼 텍스트 초기화
   if ($("#chkBtn").text() == 'false') {
     $("#chkBtn").text('공개 설정');
