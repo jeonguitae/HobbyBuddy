@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import kr.co.hb.board.dto.RandomDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 public interface RandomDAO {
 
@@ -11,13 +12,15 @@ public interface RandomDAO {
 	
 	ArrayList<RandomDTO> randomList(HashMap<String, String> params);
 
-	ArrayList<RandomDTO> nonameList(HashMap<String, String> params);
+	ArrayList<RandomDTO> noNameList(HashMap<String, String> params);
 
 	RandomDTO detail(String id);
 
-	int totalCount();
+	RandomDTO proPhotoList(String id, String board_class);
 
-	ArrayList<RandomDTO> list(int cnt, int offset);
+
+
+
 
 	
 	

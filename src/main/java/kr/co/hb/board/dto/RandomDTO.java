@@ -7,9 +7,30 @@ public class RandomDTO {
 	private String gender;
 	private String area;
 	private String intr;
+	private int mannertp;
+	private boolean ban;
+	private String new_photo_name;
 	
 	
 
+	public String getNew_photo_name() {
+		return new_photo_name;
+	}
+	public void setNew_photo_name(String new_photo_name) {
+		this.new_photo_name = new_photo_name;
+	}
+	public boolean isBan() {
+		return ban;
+	}
+	public void setBan(boolean ban) {
+		this.ban = ban;
+	}
+	public int getMannertp() {
+		return mannertp;
+	}
+	public void setMannertp(int mannertp) {
+		this.mannertp = mannertp;
+	}
 	public String getIntr() {
 		return intr;
 	}

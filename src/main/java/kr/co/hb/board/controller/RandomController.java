@@ -4,8 +4,6 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
-import kr.co.hb.group.dto.GroupBoardDTO;
+
 
 
 @Controller
 public class RandomController {
 		
 	@Autowired RandomService Service;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/profile.go")
@@ -42,13 +41,13 @@ public class RandomController {
 		return "proList";
 	}
 	
-	@RequestMapping(value="/random.go")
+	@RequestMapping(value="/randomList.go")
 	public String rlist(Model model) {		
 		logger.info("start");
 		return "randomList";
 	}
 	
-	@RequestMapping(value="/random.do")
+	@RequestMapping(value="/randomList.do")
 	public String randomList(Model model, @RequestParam HashMap<String, String> params) {	
 		
 		ArrayList<RandomDTO> list = Service.randomList(params);
@@ -57,16 +56,16 @@ public class RandomController {
 		return "randomList";
 	}
 	
-	@RequestMapping(value="/noname.go")
+	@RequestMapping(value="/noNameList.go")
 	public String nlist(Model model) {		
 		logger.info("start");
 		return "noNameList";
 	}
 	
-	@RequestMapping(value="/noname.do")
+	@RequestMapping(value="/noNameList.do")
 	public String nonameList(Model model, @RequestParam HashMap<String, String> params) {	
 		
-		ArrayList<RandomDTO> list = Service.nonameList(params);
+		ArrayList<RandomDTO> list = Service.noNameList(params);
 		logger.info("검색 조건 : " + params);
 		model.addAttribute("list",list);
 		return "noNameList";
@@ -87,33 +86,22 @@ public class RandomController {
 		return "reportList";
 	}
 	
-		@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
-		public String detail(@RequestParam String id,Model model) {
+	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
+	public String detail(@RequestParam String id,Model model) {
 			
-			String page = "redirect:/list.do";
+		String page = "redirect:/list.do";
 			
-			RandomDTO dto= Service.detail(id);
-			if(dto != null) {
-				page = "proDetail";
-				model.addAttribute("member",dto);
-			}
-			return "proDetail";
+		RandomDTO dto= Service.detail(id);
+		RandomDTO dto_photo = Service.proPhotoList(id);
+		if(dto != null) {
+			page = "proDetail";
+			model.addAttribute("member",dto);
+			model.addAttribute("dto_photo",dto);
 		}
-		
-		
-		   @RequestMapping(value = "/list.ajax", method = RequestMethod.POST)
-		      @ResponseBody
-		      public HashMap<String, Object> list(
-		            @RequestParam String page, @RequestParam String cnt
-		            ) {
-		         
-		         return Service.list(Integer.parseInt(page), Integer.parseInt(cnt));
-		      }
-
-
-
-	 
-
+		return "proDetail";
+	}
+	
+	
 
 	
 }

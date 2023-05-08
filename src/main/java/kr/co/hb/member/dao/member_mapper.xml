@@ -93,8 +93,6 @@
 		DELETE FROM my_hobby_list WHERE my_hobby_no = #{param1}
 	</delete>
 	
-	
-	
 	<insert id="proPhotoSave">
 		INSERT INTO hbPhoto(id, new_photo_name, ori_photo_name, board_class, board_num)
 			VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})

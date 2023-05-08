@@ -174,6 +174,11 @@ public class MemberController {
 		ArrayList<MemberDTO> city = service.city();
 		logger.info("city : " + city);
 		model.addAttribute("city",city);
+		
+		String id = (String) session.getAttribute("loginId");
+		MemberDTO dto = service.myProPhotoList(id);
+		model.addAttribute("dto",dto);
+		
 		return "myProDetail";
 	}
 	@RequestMapping(value="/myProDetail.ajax")

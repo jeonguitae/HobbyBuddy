@@ -1,35 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-	#alarmIcon{
-		text-align: center;
-		background-color: yellow;
-		border: 1px solid green;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 100px;
-		height: 20px;
-		display:inline;
-	}
-	
-	.noAlarmList{
-		padding: 20px 10px;
-		display: none;
-		text-align: center;
-		background-color: gray;
-		border: 1px solid red;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 300px;
-		height: 20px;	
-	}
-	
-	
 	#profileIcon{
 		text-align: center;
 		background-color: yellowgreen;
@@ -37,7 +11,7 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 		display:inline;
 	}
@@ -50,7 +24,7 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 	}
 	.panel2{
@@ -62,7 +36,7 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 	}
 	.panel3{
@@ -74,9 +48,50 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 	}
+	
+	#alarmIcon{
+		text-align: center;
+		background-color: green;
+		border: 1px solid green;
+		padding: 5px;
+		margin: 2px;
+		cursor: pointer;
+		width: 100px;
+		height: 20px;
+		display:inline;
+	}
+	
+	.beforeAlarm{
+		padding: 20px 10px;
+		display: none;
+		text-align: center;
+		background-color: gray;
+		border: 1px solid gray;
+		padding: 5px;
+		margin: 2px;
+		cursor: pointer;
+		width: 300px;
+		height: 20px;	
+	}
+
+	.alarmList{
+		padding: 20px 10px;
+		display: none;
+		text-align: center;
+		background-color: gray;
+		border: 1px solid red;
+		padding: 5px;
+		margin: 2px;
+		cursor: pointer;
+		width: 565px;
+		height: 20px;	
+	}
+	
+	
+	
 	
 </style>
 <head>
@@ -84,7 +99,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	접속중인 ID : ${sessionScope.loginId} <br/>
+	${sessionScope.loginId} 님 안녕하세요 ? / 새로운 알림의 갯수는 <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 입니다.<br/>
 	<input type="button" value="하비버디" onclick="location.href='./'"/>
 	<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
 	<input type="button" value="프로필" onclick="location.href='profile.go'"/>
@@ -94,19 +109,11 @@
 	<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
 	
 	<div id="alarmIcon">알림</div>
-	<c:if test="${alarmList.size() == 0}">
-	<div class="noAlarmList">알림이 없습니다.</div>
-	</c:if>
-	<!-- 		
-	<c:forEach items="${alarmList}" var="alarm">
-		<div>
-			<a href="fdetail.do?fbNo=${alarm.fbNo}">
-				${alarm.sendId}님이 알림을 보냈습니다.<br/>
-				${alarm.subject}
-			</a>
-		</div>		
-	</c:forEach>
-	 -->	
+	<div class="beforeAlarm"><input type="button" value="모든 알림 보기" onclick="location.href='beforeAlarm.go'"/></div>
+	<input type="hidden"/>
+	
+	<span id="alarmList" class="alarmList"></span>
+	 		
 	
 	<div id="profileIcon">프로필</div>
 	<div class="panel2" onclick="location.href='login.go'">로그인</div>
@@ -122,6 +129,8 @@
 <script>
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
+	var alarmCount = "${sessionScope.alarmCount}";
+	
 	$('#profileIcon').on('click',function(){
 		if(loginId == ""){
 			$('.panel2').slideToggle('slow');
@@ -130,9 +139,82 @@
 	   }
 		if(adminChk == "1" || adminChk == "true"){
 			$('.panel3').slideToggle('slow');
-		}
-		
+		}		
+	}
+
+
+	
+	
+	$('#alarmIcon').on('click',function(){		
+		$('.beforeAlarm').slideToggle('slow');
+		$('.alarmList').slideToggle('slow');				
 	});
+	
+	
+	if(alarmCount != 0){
+		$('#alarmIcon').css('background-color', 'red');
+	}
+	
+	alarmList();
+	function alarmList(){
+		console.log("loginId : " + loginId);
+		$.ajax({
+			type:'get',
+			url:'alarmList.ajax',
+			data:{},
+			dataType:'json',
+			success:function(data){
+				console.log("data : " + data.alarmList);
+				alarmListDraw(data.alarmList);			
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}	
+	
+	function alarmListDraw(alarmList){
+		console.log("alarmList : " + alarmList);
+		var content = '';
+		alarmList.forEach(function(item,index){
+			content += '<div class="alarmList">';
+			content += '<input type="checkbox" value="'+item.alarm_num+'"/>';
+			content+= item.alarm_title + " / " + item.alarm_content;
+			content += '</div>';
+			console.log(item.alarm_content);
+		});
+		
+		$('#alarmList').empty();
+		$('#alarmList').append(content);
+	}
+	
+	// 읽음 처리
+	function alarmListRead(){
+		var checkArr = [];
+		$('input[type="checkbox"]:checked').each(function(idx,item){		
+			//checkbox 에 value 를 지정하지 않으면 기본값을 on 으로 스스로 지정한다.
+			if($(this).val()!='on'){
+				console.log(idx,$(this).val());
+				checkArr.push($(this).val());
+			}	
+		});
+		console.log(checkArr);			
+		$.ajax({
+			type:'get',
+			url:'alarmListRead.ajax',
+			data:{'alarmListRead':checkArr},
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				if(data.success){
+					location.reload();
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}		
+		});		
+	}
 
 </script>
 </html>

@@ -3,5 +3,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.hb.board.dao.AlarmDAO">
+<mapper namespace="kr.co.hb.alarm.dao.AlarmDAO">
+
+	<select id="alarmList" resultType="kr.co.hb.alarm.dto.AlarmDTO">
+		SELECT * FROM alarm_list WHERE id_receive = #{param1}
+	</select>
+
+	<select id="alarmCount" resultType="int">
+		SELECT count(#{param1}) FROM alarm_list WHERE id_receive = #{param1}
+	</select>
 </mapper>

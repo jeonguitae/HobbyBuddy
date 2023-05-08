@@ -126,17 +126,8 @@ table, th, td{
 			}		
 		});		
 	}
-
-
-
-
-
-
-
-
-
-
-
+	
+	
 	function hbPlus(){
 		   var id = "${sessionScope.loginId}";
 		   var big_hb = $('#big_hb').val();
