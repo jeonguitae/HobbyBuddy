@@ -16,7 +16,11 @@
 		SELECT COUNT(id) FROM openlist WHERE id = #{param1} AND gidx = #{param2}
 	</select>
 	
-	<insert id="sendmsg" parameterType="HashMap">
-		INSERT INTO chat(id, chatting) VALUES(#{param1}, #{param2})
+	<insert id="sendmsg">
+		INSERT INTO chat(gidx, id, chatting) VALUES(#{param3}, #{}, #{msg})
 	</insert>
+	
+	<select id="clist" resultType="kr.co.hb.group.dto.OpenChatDTO">
+		SELECT id, chatting, chattime FROM chat WHERE gidx = #{param1}
+	</select>
 </mapper>

@@ -30,7 +30,7 @@
 		<table>
 			<tr>
 				<th>*작성자</th>
-				<td><input type="text" name="id"/></td>
+				<td><input type="text" name="id" readonly/></td>
 			</tr>
 			<tr>
 				<th>*제목</th>
@@ -161,6 +161,9 @@
 	</form>
 </body>
 <script>
+
+var loginId = "${sessionScope.loginId}";
+$('input[name=id]').val(loginId)
 
 var msg = "${msg}";
 if(msg != ""){
