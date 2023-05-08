@@ -16,7 +16,7 @@
 </head>
 <body>
 	<div class="profile">
-		<form action="noname.do" method="get">
+		<form action="noNameList.do" method="get">
 			<table>
 				
 				<tr>
@@ -167,6 +167,7 @@
 			<tr>
 				<th>나이</th>
 				<th>지역</th>
+				<th>취미</th>
 				<th>성별</th>
 			</tr>
 		</thead>
@@ -175,6 +176,7 @@
 				<tr>
 					<td><a href="detail.do?id=${member.age}">${member.age}</a></td>
 					<td>${member.area}</td>
+					<td>취미 자리</td>
 					<td>${member.gender}</td>
 				</tr>			
 			</c:forEach>

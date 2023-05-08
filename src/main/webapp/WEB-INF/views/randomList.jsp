@@ -16,9 +16,8 @@
 </head>
 <body>
 	<div class="profile">
-		<form action="random.do" method="get">
+		<form action="randomList.do" method="get">
 			<table>
-				
 				<tr>
 					<th>성별</th>
 					<td>
@@ -168,20 +167,24 @@
 	<table>
 		<thead>
 			<tr>
+				<th>프로필 사진</th>
 				<th>ID</th>
 				<th>NAME</th>
 				<th>나이</th>
 				<th>지역</th>
+				<th>취미</th>
 				<th>성별</th>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
+					<td>프로필 사진 자리</td>
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>
 					<td>${member.area}</td>
+					<td>취미 자리</td>
 					<td>${member.gender}</td>
 				</tr>			
 			</c:forEach>

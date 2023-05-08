@@ -140,7 +140,9 @@
 		if(adminChk == "1" || adminChk == "true"){
 			$('.panel3').slideToggle('slow');
 		}		
-	});
+	}
+
+
 	
 	
 	$('#alarmIcon').on('click',function(){		
