@@ -60,12 +60,7 @@
          <thead>
             <tr>
                <th>번호</th>
-               <th>
-               	  <select id="id_drop">
-				    <option value="작성자">작성자</option>
-				    <option value="d">d</option>
-				  </select>
-			   </th>
+               <th>작성자</th>
                <th>제목</th>
                <th id="sortDate">작성일<i class="fas fa-sort"></i></th>
                <th>조회수</th>                      

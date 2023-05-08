@@ -75,8 +75,8 @@
             <c:forEach items="${noticePageList}" var="bbs">
                <tr>
                   <td>${bbs.notice_idx}</td>
-                  <td><a href="noticeDetail.do?notice_idx='notice_idx'">${bbs.id}</a></td>
-                  <td><a href="noticeDetail.do?notice_idx='notice_idx'">${bbs.notice_title}</a></td>                 
+                  <td><a href="noticeDetail.do?notice_idx='${bbs.notice_idx}'">${bbs.id}</a></td>
+                  <td><a href="noticeDetail.do?notice_idx='${bbs.notice_idx}'">${bbs.notice_title}</a></td>                 
                   <td><fmt:formatDate value="${bbs.notice_date}" pattern="yyyy/MM/dd" /></td> 
                   <td>${bbs.notice_bHit}</td>
                </tr>               

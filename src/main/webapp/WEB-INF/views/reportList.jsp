@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
@@ -80,6 +80,7 @@
                </tr>
             </c:if>                    
          </tbody>
+         
             <tr>
                <td colspan="9" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
@@ -108,7 +109,7 @@ $('#pagePerNum').change(function() {
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'list.ajax',
+      url:'reportList.ajax',
       data:{
           'page':page,
             'cnt':$('#pagePerNum').val()
@@ -151,12 +152,14 @@ function listPrint(list){
    // 해결방법 2. js 에서 변환
    list.forEach(function(item,idx){
       content += '<tr>';
-      content += '<td>'+item.idx+'</td>';
-      content += '<td>'+item.subject+'</td>';
-      content += '<td>'+item.user_name+'</td>';
-      var date = new Date(item.reg_date);
+      content += '<td>'+item.rept_no+'</td>';
+      content += '<td>'+item.reptboard_class+'</td>';
+      content += '<td>'+item.reporter+'</td>';
+      content += '<td>'+item.rept_title+'</td>';
+      var date = new Date(item.rept_date);
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+      content += '<td>'+item.rept_state+'</td>';
       content += '<td>'+item.bHit+'</td>';
       content += '</tr>';
    });
