@@ -151,7 +151,9 @@
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
+					
 					<td>프로필 사진 자리</td>
+					
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>
