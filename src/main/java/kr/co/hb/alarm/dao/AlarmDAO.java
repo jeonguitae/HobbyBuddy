@@ -1,5 +1,13 @@
 package kr.co.hb.alarm.dao;
 
-public class AlarmDAO {
+import java.util.ArrayList;
+
+import kr.co.hb.alarm.dto.AlarmDTO;
+
+public interface AlarmDAO {
+
+	ArrayList<AlarmDTO> alarmList(String id_receive);
+
+
 
 }

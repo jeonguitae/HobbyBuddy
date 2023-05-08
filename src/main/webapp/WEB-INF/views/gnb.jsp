@@ -1,35 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-	#alarmIcon{
-		text-align: center;
-		background-color: yellow;
-		border: 1px solid green;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 100px;
-		height: 20px;
-		display:inline;
-	}
-	
-	.noAlarmList{
-		padding: 20px 10px;
-		display: none;
-		text-align: center;
-		background-color: gray;
-		border: 1px solid red;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 300px;
-		height: 20px;	
-	}
-	
-	
 	#profileIcon{
 		text-align: center;
 		background-color: yellowgreen;
@@ -78,13 +52,56 @@
 		height: 20px;
 	}
 	
+		#alarmIcon{
+		text-align: center;
+		background-color: green;
+		border: 1px solid green;
+		padding: 5px;
+		margin: 2px;
+		cursor: pointer;
+		width: 100px;
+		height: 20px;
+		display:inline;
+	}
+	
+	.beforeAlarm{
+		padding: 20px 10px;
+		display: none;
+		text-align: center;
+		background-color: gray;
+		border: 1px solid red;
+		padding: 5px;
+		margin: 2px;
+		cursor: pointer;
+		width: 300px;
+		height: 20px;	
+	}
+
+	.alarmList{
+		padding: 20px 10px;
+		display: none;
+		text-align: center;
+		background-color: gray;
+		border: 1px solid red;
+		padding: 5px;
+		margin: 2px;
+		cursor: pointer;
+		width: 300px;
+		height: 20px;	
+	}
+	
+	.alarmCount2{
+		color: red;
+	}
+	
+	
 </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	접속중인 ID : ${sessionScope.loginId} <br/>
+	${sessionScope.loginId} 님 안녕하세요 ? / 새로운 알림의 갯수는 <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 입니다.<br/>
 	<input type="button" value="하비버디" onclick="location.href='./'"/>
 	<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
 	<input type="button" value="프로필" onclick="location.href='profile.go'"/>
@@ -94,19 +111,19 @@
 	<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
 	
 	<div id="alarmIcon">알림</div>
-	<c:if test="${alarmList.size() == 0}">
-	<div class="noAlarmList">알림이 없습니다.</div>
+	<div class="beforeAlarm"><input type="button" value="모든 알림 보기" onclick="location.href='beforeAlarm.go'"/></div>
+	
+	<c:if test="${fList ne null}">
+		<div>자유게시판 댓글 알림</div>
 	</c:if>
-	<!-- 		
-	<c:forEach items="${alarmList}" var="alarm">
-		<div>
-			<a href="fdetail.do?fbNo=${alarm.fbNo}">
-				${alarm.sendId}님이 알림을 보냈습니다.<br/>
-				${alarm.subject}
+	<c:forEach items="${fList}" var="bbs">
+		<div class="alarmList">
+			<input type="checkbox" value="${bbs.alarm_no}"/>
+			<a href="fdetail.do?fbNo=${bbs.alarm_num}">
+				${bbs.id_send} 님이 ${bbs.alarm_title} 에 댓글을 남겼습니다.(${bbs.alarm_content})
 			</a>
-		</div>		
-	</c:forEach>
-	 -->	
+		</div>
+	</c:forEach>		
 	
 	<div id="profileIcon">프로필</div>
 	<div class="panel2" onclick="location.href='login.go'">로그인</div>
@@ -122,6 +139,8 @@
 <script>
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
+	var alarmCount = "${sessionScope.alarmCount}";
+	
 	$('#profileIcon').on('click',function(){
 		if(loginId == ""){
 			$('.panel2').slideToggle('slow');
@@ -130,9 +149,49 @@
 	   }
 		if(adminChk == "1" || adminChk == "true"){
 			$('.panel3').slideToggle('slow');
-		}
-		
+		}		
 	});
+	
+	
+	$('#alarmIcon').on('click',function(){
+		location.href='alarmList.go';
+		$('.beforeAlarm').slideToggle('slow');
+		$('.alarmList').slideToggle('slow');
+				
+	});
+
+	
+	if(alarmCount != 0){
+		$('#alarmIcon').style.setProperty('background-color', 'red');
+	}
+	
+	// 읽음 처리
+	function alarmListRead(){
+		var checkArr = [];
+		$('input[type="checkbox"]:checked').each(function(idx,item){		
+			//checkbox 에 value 를 지정하지 않으면 기본값을 on 으로 스스로 지정한다.
+			if($(this).val()!='on'){
+				console.log(idx,$(this).val());
+				checkArr.push($(this).val());
+			}	
+		});
+		console.log(checkArr);			
+		$.ajax({
+			type:'get',
+			url:'alarmListRead.ajax',
+			data:{'alarmListRead':checkArr},
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				if(data.success){
+					location.reload()
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}		
+		});		
+	}
 
 </script>
 </html>

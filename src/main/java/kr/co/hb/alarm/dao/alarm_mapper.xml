@@ -4,4 +4,9 @@
 	
 
 <mapper namespace="kr.co.hb.board.dao.AlarmDAO">
+
+	<select id="alarmList" parameterType="hashmap" resultType="kr.co.hb.main.dto.AlarmDTO">
+		SELECT * FROM alarm_list WHERE id = #{param1}
+	</select>
+
 </mapper>

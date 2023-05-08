@@ -89,11 +89,29 @@
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<input id="no" type="radio" name="random" value="0"/>미동의
 			</td>
-		</tr>
-		
-				
+		</tr>	
 		<tbody id="myHobbyList">		
 		</tbody>
+		
+		<c:if test="${dto.new_photo_name ne null}">	
+			<tr>
+				<th>프로필 사진</th>
+				<td>
+					<img width="500" src="/photo/${dto.new_photo_name}"/>
+				</td>
+			</tr>
+		</c:if>
+		
+		<c:if test="${dto.new_photo_name eq null}">	
+			<tr>
+				<th>프로필 사진</th>
+				<td>
+					등록된 사진이 없습니다.<br/>
+					(아래 사진관리 버튼을 통해 등록 할 수 있습니다.)
+				</td>
+			</tr>
+		</c:if>
+		
 		
 		<tr>
 			<th colspan="2">
