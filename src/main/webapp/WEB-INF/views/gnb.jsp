@@ -11,7 +11,7 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 		display:inline;
 	}
@@ -24,7 +24,7 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 	}
 	.panel2{
@@ -36,7 +36,7 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 	}
 	.panel3{
@@ -48,11 +48,11 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 100px;
+		width: 150px;
 		height: 20px;
 	}
 	
-		#alarmIcon{
+	#alarmIcon{
 		text-align: center;
 		background-color: green;
 		border: 1px solid green;
@@ -69,7 +69,7 @@
 		display: none;
 		text-align: center;
 		background-color: gray;
-		border: 1px solid red;
+		border: 1px solid gray;
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
@@ -86,13 +86,11 @@
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
-		width: 300px;
+		width: 565px;
 		height: 20px;	
 	}
 	
-	.alarmCount2{
-		color: red;
-	}
+	
 	
 	
 </style>
@@ -112,18 +110,10 @@
 	
 	<div id="alarmIcon">알림</div>
 	<div class="beforeAlarm"><input type="button" value="모든 알림 보기" onclick="location.href='beforeAlarm.go'"/></div>
+	<input type="hidden"/>
 	
-	<c:if test="${fList ne null}">
-		<div>자유게시판 댓글 알림</div>
-	</c:if>
-	<c:forEach items="${fList}" var="bbs">
-		<div class="alarmList">
-			<input type="checkbox" value="${bbs.alarm_no}"/>
-			<a href="fdetail.do?fbNo=${bbs.alarm_num}">
-				${bbs.id_send} 님이 ${bbs.alarm_title} 에 댓글을 남겼습니다.(${bbs.alarm_content})
-			</a>
-		</div>
-	</c:forEach>		
+	<span id="alarmList" class="alarmList"></span>
+	 		
 	
 	<div id="profileIcon">프로필</div>
 	<div class="panel2" onclick="location.href='login.go'">로그인</div>
@@ -153,16 +143,47 @@
 	});
 	
 	
-	$('#alarmIcon').on('click',function(){
-		location.href='alarmList.go';
+	$('#alarmIcon').on('click',function(){		
 		$('.beforeAlarm').slideToggle('slow');
-		$('.alarmList').slideToggle('slow');
-				
+		$('.alarmList').slideToggle('slow');				
 	});
-
+	
 	
 	if(alarmCount != 0){
-		$('#alarmIcon').style.setProperty('background-color', 'red');
+		$('#alarmIcon').css('background-color', 'red');
+	}
+	
+	alarmList();
+	function alarmList(){
+		console.log("loginId : " + loginId);
+		$.ajax({
+			type:'get',
+			url:'alarmList.ajax',
+			data:{},
+			dataType:'json',
+			success:function(data){
+				console.log("data : " + data.alarmList);
+				alarmListDraw(data.alarmList);			
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}	
+	
+	function alarmListDraw(alarmList){
+		console.log("alarmList : " + alarmList);
+		var content = '';
+		alarmList.forEach(function(item,index){
+			content += '<div class="alarmList">';
+			content += '<input type="checkbox" value="'+item.alarm_num+'"/>';
+			content+= item.alarm_title + " / " + item.alarm_content;
+			content += '</div>';
+			console.log(item.alarm_content);
+		});
+		
+		$('#alarmList').empty();
+		$('#alarmList').append(content);
 	}
 	
 	// 읽음 처리
@@ -184,7 +205,7 @@
 			success:function(data){
 				console.log(data);
 				if(data.success){
-					location.reload()
+					location.reload();
 				}
 			},
 			error:function(e){

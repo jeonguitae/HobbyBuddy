@@ -8,6 +8,8 @@ public interface AlarmDAO {
 
 	ArrayList<AlarmDTO> alarmList(String id_receive);
 
+	int alarmCount(String id_receive);
+
 
 
 }

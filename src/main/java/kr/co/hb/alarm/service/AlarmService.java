@@ -21,4 +21,8 @@ public class AlarmService {
 		return dao.alarmList(id_receive);
 	}
 
+	public int alarmCount(String id_receive) {
+		return dao.alarmCount(id_receive);
+	}
+
 }
