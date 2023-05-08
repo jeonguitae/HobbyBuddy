@@ -89,29 +89,30 @@
 </body>
 <script>
 $(document).ready(function() {
-  var btnText = $("#chkBtn").text();
-  $("#chkBtn").on("click", function() {
-    var notice_idx = ${dto.notice_idx};
-    var flag = $("#chkBtn").text() == '공개 설정' ? 'true' : 'false';
+	  var btnText = $("#chkBtn").text();
+	  $("#chkBtn").on("click", function() {
+	    var notice_idx = ${dto.notice_idx};
+	    var flag = $("#chkBtn").text() == '공개 설정' ? 'true' : 'false';
 
-    if (confirm('해당 글을 ' + (flag == 'true' ? '공개' : '비공개') + '하시겠습니까?')) {
-      $.ajax({
-        type: 'POST',
-        url: 'update_chk.ajax',
-        data: { notice_idx: notice_idx, flag: flag },
-        success: function(response) {
-          console.log(response);
-          var newBtnText = flag == 'true' ? '비공개 설정' : '공개 설정';
-          $("#chkBtn").text(newBtnText);
-        },
-        error: function(error) {
-          console.error(error);
-        }
-      });
-    } else {
-      $("#chkBtn").text(btnText);
-    }
-});
+	    if (confirm('해당 글을 ' + (flag == 'true' ? '공개' : '비공개') + '하시겠습니까?')) {
+	      $.ajax({
+	        type: 'POST',
+	        url: 'update_chk.ajax',
+	        data: { notice_idx: notice_idx, flag: flag },
+	        success: function(response) {
+	          console.log(response);
+	          var newBtnText = flag == 'true' ? '비공개 설정' : '공개 설정';
+	          $("#chkBtn").text(newBtnText);
+	        },
+	        error: function(error) {
+	          console.error(error);
+	        }
+	      });
+	    } else {
+
+	    }
+	  });
+	});
 /* // 페이지 로드될 때 버튼 텍스트 초기화
   if ($("#chkBtn").text() == 'false') {
     $("#chkBtn").text('공개 설정');
@@ -124,6 +125,6 @@ $(document).ready(function() {
 	    $("#chkText").text('공개 설정');
   } */
   
-});
+
 </script>
 </html>

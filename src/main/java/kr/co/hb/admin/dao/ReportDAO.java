@@ -10,4 +10,10 @@ public interface ReportDAO {
 
 	ArrayList<ReportDTO> reportPageList(int cnt, int offset);
 
+	ReportDTO reportDetail(String rept_no);
+
+	void commentWrite(ReportDTO dto);
+
+	ReportDTO reportCommentDetail(int rept_no);
+
 }

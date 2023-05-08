@@ -41,4 +41,30 @@ public class ReportService {
 		return map;
 	}
 
+	public ReportDTO reportDetail(String rept_no) {
+		return dao.reportDetail(rept_no);
+	}
+
+	public String commentWrite(HashMap<String, String> params) {
+		  String page = "redirect:/reportCommentDetail.go";
+	      
+	      ReportDTO dto = new ReportDTO();
+	      
+	      dto.setAdmin_id(params.get("id"));	
+	      dto.setProc_content(params.get("proc_content"));
+	      dto.setRept_state(params.get("rept_state"));
+	      
+	      
+	      dao.commentWrite(dto);
+	      
+	      int idx = dto.getRept_no();	      
+	      
+	      return page;
+		
+	}
+
+	public ReportDTO reportCommentDetail(int rept_no) {
+		return dao.reportCommentDetail(rept_no);
+	}
+
 }

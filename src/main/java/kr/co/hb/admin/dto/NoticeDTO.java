@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class NoticeDTO {
 
-	private int notice_idx;
+	   private int notice_idx;
 	   private String id;
 	   private String notice_title;
 	   private String notice_content;   

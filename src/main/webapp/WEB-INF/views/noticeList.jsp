@@ -45,16 +45,16 @@
             <option value="150">150</option>
             <option value="200">200</option>
          </select>
-    
-      <form action="search.do">
-      	<select name="sSearch">
+       <div>
+ 	   	<select id="search_Class">
             <option value="default">선택</option>
             <option value="notice_title">제목</option>
             <option value="id">작성자</option>
          </select>      
-         <input type="text" name="notice_Search">
+         <input type="text" id="search_text">
          <button id="search_btn">검색</button>
-      </form>                    
+ 	   </div> 
+ 	             
       <button onclick="location.href='noticeWrite.go'" >공지사항 작성</button>         
       <table>
          <thead>
@@ -88,12 +88,21 @@ var showPage = 1;
 
 listCall(showPage);
 
-$('#pagePerNum').change(function() {
+ $('#pagePerNum').change(function() {
    listCall(showPage);
    // 페이지 처리 부분이 이미 만들어져 버려서 pagePerNum 이 변경되면 수정이 안된다.
    // 그래서 pagePerNum이 변경되면 부수고 다시 만들어야 한다.
    $('#pagination').twbsPagination('destroy');
-});
+}); 
+
+ 
+
+/* $('#search_btn').click(function() {
+	var searchClass = $("#search_Class").val();
+    var searchText = $("#search_text").val();
+	   listCall(showPage, searchClass, searchText);
+	   $('#pagination').twbsPagination('destroy');
+}); */
 
 
 function listCall(page){
@@ -145,8 +154,8 @@ function listPrint(list){
 	  
       content += '<tr>';
       content += '<td>'+item.notice_idx+'</td>';
-      content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';
-      content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.notice_title+'</a></td>';
+      content += '<td><a href="noticeDetail.go?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';
+      content += '<td><a href="noticeDetail.go?notice_idx='+item.notice_idx+'">'+item.notice_title+'</a></td>';
       var date = new Date(item.notice_date);
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
