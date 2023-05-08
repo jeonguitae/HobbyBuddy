@@ -46,21 +46,21 @@
       <table>
          
          <tr>
-            <th>문의종류</th>
+            <th>작성일</th>
             <td>${dto.notice_idx}</td>
          </tr>
          <tr>
-            <th>작성자</th>
+            <th>작성종류</th>
             <td>${dto.notice_bHit}</td>
          </tr>
          <tr>
-            <th>작성일</th>
+            <th>작성자</th>
             <td>${dto.id}</td>
          </tr>
          <tr>
 			  <th>문의제목</th>
 			  <td><fmt:formatDate value="${dto.notice_date}" pattern="yyyy/MM/dd" /></td>  
-		  </tr>
+		 </tr>
 		 <tr>
             <th>문의내용</th>
             <td >${dto.notice_title}</td>

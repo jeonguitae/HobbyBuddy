@@ -1,6 +1,5 @@
 package kr.co.hb.admin.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -95,7 +94,7 @@ public class NoitceController {
 	      return service.noticeUpdate(photo,params);
 	   }
 	   
-	   @RequestMapping(value = "/noticeDetail.do")
+	   @RequestMapping(value = "/noticeDetail.go")
 	   public String noticeDetail(Model model, @RequestParam String notice_idx) {
 	      
 	      String page = "redirect:/noticeList.go";

@@ -3,6 +3,35 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.admin.dao.ReportDAO">
-
+<mapper namespace="kr.co.hb.admin.dao.ReportDAO">
+	
+	<select id="reportPageList" resultType="kr.co.hb.admin.dto.ReportDTO">
+		SELECT *
+			FROM report ORDER BY rept_no DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(rept_no) FROM report 
+	</select>
+	
+	<select id="reportDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT rept_no, preporter, reptboard_class, rept_title, rept_content, rept_state, proc_content, rept_date 
+	  FROM report WHERE rept_no = #{param1};  
+   </select>
+   
+   <update 
+      useGeneratedKeys="true"
+      keyColumn="rept_no"
+      keyProperty="rept_no"
+   
+   
+      id="commentWrite" parameterType="kr.co.hb.admin.dto.ReportDTO">
+      UPDATE report SET admin_id = #{admin_id}, proc_content = #{proc_content}, rept_state = #{rept_state}, proc_date = now() WHERE rept_no = #{rept_no};
+   </update>
+   
+   <select id="reportCommentDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT rept_no, preporter, reptboard_class, rept_title, rept_content, rept_state, proc_content, rept_date 
+	  FROM report WHERE rept_no = #{param1};  
+   </select>
+	
 </mapper>

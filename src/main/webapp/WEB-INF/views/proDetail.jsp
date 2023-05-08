@@ -17,12 +17,11 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
-   
    <form action="myp.do" method="post">
       <table>
       
       	<tr>
-      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;${dto_photo.new_photo_name}&nbsp;&nbsp;&nbsp;&nbsp;
+      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;<img width="500" src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
       		</th>
       		<th>아이디</th>
       		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>

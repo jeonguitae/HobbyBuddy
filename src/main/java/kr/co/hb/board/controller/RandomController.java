@@ -90,13 +90,15 @@ public class RandomController {
 	public String detail(@RequestParam String id,Model model) {
 			
 		String page = "redirect:/list.do";
-			
+		
 		RandomDTO dto= Service.detail(id);
-		RandomDTO dto_photo = Service.proPhotoList(id);
+		RandomDTO photo = Service.proPhotoList(id);
+		logger.info("dto"+dto);
+		logger.info("photo"+photo);
 		if(dto != null) {
 			page = "proDetail";
 			model.addAttribute("member",dto);
-			model.addAttribute("dto_photo",dto);
+			model.addAttribute("photo",photo);
 		}
 		return "proDetail";
 	}

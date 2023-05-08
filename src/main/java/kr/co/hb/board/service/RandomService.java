@@ -44,6 +44,8 @@ public class RandomService {
 
 	public RandomDTO proPhotoList(String id) {
 		String Board_class = "프로필";
+		
+		logger.info("검색 조건 : " + id + " / " + Board_class);
 		return dao.proPhotoList(id, Board_class);
 	}
 

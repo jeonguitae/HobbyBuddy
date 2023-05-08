@@ -43,38 +43,31 @@
 </style>
 </head>
 <body>
-   <h3 align="center">신고 상세</h3>
-   
-      <table>
-         
-         <tr>
-            <th>신고 번호</th>
-            <td><a href="fBoardDetail.go?reptboard_num='+item.notice_idx+'"></a>${dto.rept_no}</td>
-         </tr>
-         <tr>
-            <th>피신고자 아이디</th>
-            <td>${dto.preporter}</td>
-         </tr>
-         <tr>
-            <th>신고 게시판 종류</th>
-            <td>${dto.reptboard_class}</td>
-         </tr>
-         <tr>
-		  	<th>신고 제목</th>
-		  	<td>${dto.rept_title}</td>  
-		  </tr>
-		 <tr>
-            <th>신고 내용</th>
-            <td >${dto.rept_content}</td>
-         </tr>
-         <tr>
-            <th>신고 일시</th>
-            <td><fmt:formatDate value="${dto.rept_date}" pattern="yyyy/MM/dd" /></td>
-         </tr>
-          
-      </table> 
-      <hr>	    
-	  <jsp:include page="report_CommentBox.jsp"/>  
+   	     <form action="report_CommentWrite.do" method="post">
+		   <input type="hidden" name="rept_no" value="${dto.rept_no}">
+		   <table>
+		   		<tr>
+		   			<th>관리자 아이디</th>
+		   			<td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
+		   		</tr>
+		   		<tr>
+		   			<th>처리사유</th>
+		   			<td><textarea name="proc_content"></textarea></td>
+		   		</tr>
+		   		<tr>
+		   			<th>처리상태</th>
+		   			<td>
+			   			<select name="rept_state">
+					   	  	<option value="처리중">처리중</option>
+					   	  	<option value="처리완료">처리완료</option>
+					   	  	<option value="반려">반려</option>
+					   	</select>
+		   	  		</td>
+		   		</tr>		   		
+		   </table>		   	
+		   <button>신고처리</button>
+		   <input type="button" onclick="location.href='reportList.go'" value="취소">
+		</form>
 </body>
 <script>
 

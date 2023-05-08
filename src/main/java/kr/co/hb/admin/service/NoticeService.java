@@ -29,9 +29,9 @@ public class NoticeService {
 	      int row = dao.noticeUpdate(params);
 	      int idx = Integer.parseInt(params.get("notice_idx"));	
 	      
-	      if (!photo.getOriginalFilename().equals("")) {
-		         noticeFileSave(idx, photo);
-		      }	      
+	      if (photo != null && !photo.getOriginalFilename().equals("")) {
+	    	    noticeFileSave(idx, photo);
+	    	}     
 	      
 	      String page = row > 0 ? "redirect:/noticeDetail.do?notice_idx=" + idx : "redirect:/noticeList.go";
 	             

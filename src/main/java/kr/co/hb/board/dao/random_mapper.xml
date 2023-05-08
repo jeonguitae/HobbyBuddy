@@ -20,7 +20,7 @@
 	</select>
 	
 		<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT new_photo_name FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
+		SELECT * FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</select>
 	
 
