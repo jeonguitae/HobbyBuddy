@@ -29,10 +29,10 @@
 				<tr>
 					<th>경고횟수</th>
 					<td>
-						<input type="checkbox" name="number" value="0회">0회
-						<input type="checkbox" name="number" value="1회">1회
-						<input type="checkbox" name="number" value="2회">2회
-						<input type="checkbox" name="number" value="3회">3회
+						<input type="checkbox" name="number" value="0">0회
+						<input type="checkbox" name="number" value="1">1회
+						<input type="checkbox" name="number" value="2">2회
+						<input type="checkbox" name="number" value="3">3회
 					</td>
 				</tr>
 				<tr>
@@ -47,21 +47,30 @@
 						<input type="submit" value="검색"/>
 					</th>
 				</tr>
-		</table>	
-		<table>
-		<thead>
-			<tr>
-				<th>구분</th>
-				<th>아이디</th>
-				<th>경고횟수</th>
-				<th>정지여부</th>
-			</tr>
-		</thead>		
-
-	</table>
-	</form>
+			</table>
+		</form>
 	</div>
-	
+		<table>
+			<thead>
+					<tr>
+						<th>구분</th>
+						<th>아이디</th>
+						<th>경고횟수</th>
+						<th>정지여부</th>	
+					</tr>
+               </thead>
+               
+         	<tbody>
+				<c:forEach items="${list}" var="member">
+					<tr>
+						<td>${member.admin}</td>
+						<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
+						<td>경고횟수 자리</td>
+						<td>${member.ban}</td>
+					</tr>			
+				</c:forEach>
+			</tbody>
+	</table>
 </body>
 <script>
 

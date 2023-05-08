@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import kr.co.hb.board.dao.RandomDAO;
 import kr.co.hb.board.dto.RandomDTO;
-import kr.co.hb.group.dto.GroupBoardDTO;
 
 @Service
 public class RandomService {
@@ -36,7 +35,6 @@ public class RandomService {
 	public ArrayList<RandomDTO> noNameList(HashMap<String, String> params) {
 		
 		logger.info("검색 조건 : " + params);
-		
 		return dao.noNameList(params);
 
 	}
@@ -44,6 +42,10 @@ public class RandomService {
 		return dao.detail(id);
 	}
 
+	public RandomDTO proPhotoList(String id) {
+		String Board_class = "프로필";
+		return dao.proPhotoList(id, Board_class);
+	}
 
 
 

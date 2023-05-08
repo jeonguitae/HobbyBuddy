@@ -140,7 +140,7 @@
 		<thead>
 			<tr>
 				<th>프로필 사진</th>
-				<th>ID</th>
+				<th>아이디</th>
 				<th>NAME</th>
 				<th>나이</th>
 				<th>지역</th>

@@ -9,8 +9,16 @@ public class RandomDTO {
 	private String intr;
 	private int mannertp;
 	private boolean ban;
+	private String new_photo_name;
+	
 	
 
+	public String getNew_photo_name() {
+		return new_photo_name;
+	}
+	public void setNew_photo_name(String new_photo_name) {
+		this.new_photo_name = new_photo_name;
+	}
 	public boolean isBan() {
 		return ban;
 	}

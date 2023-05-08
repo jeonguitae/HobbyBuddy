@@ -22,8 +22,8 @@
       <table>
       
       	<tr>
-      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;사진&nbsp;&nbsp;&nbsp;&nbsp;</th>
-      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;사진&nbsp;&nbsp;&nbsp;&nbsp;</th>
+      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;${dto_photo.new_photo_name}&nbsp;&nbsp;&nbsp;&nbsp;
+      		</th>
       		<th>아이디</th>
       		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
       		<th>정지 상태</th>
@@ -76,7 +76,7 @@
       			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
       		</th>
       		<th>
-      			<input type="button" value="뒤로가기" onclick="location.href='./'"/>
+      			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
       		</th>
             <th>
                <input type="button" value="경고"/> 
@@ -91,7 +91,5 @@
 </body>
 
 <script>
-
-
 </script>
 </html>

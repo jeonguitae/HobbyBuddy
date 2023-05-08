@@ -5,4 +5,8 @@
 
 <mapper namespace="kr.co.hb.admin.dao.MemberManageDAO">
 
+	<select id="memberList" parameterType="hashmap" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT * FROM member
+	</select>
+	
 </mapper>

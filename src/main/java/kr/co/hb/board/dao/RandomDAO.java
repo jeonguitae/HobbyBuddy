@@ -16,6 +16,9 @@ public interface RandomDAO {
 
 	RandomDTO detail(String id);
 
+	RandomDTO proPhotoList(String id, String board_class);
+
+
 
 
 

@@ -4,8 +4,6 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +16,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
-import kr.co.hb.group.dto.GroupBoardDTO;
+
 
 
 @Controller
 public class RandomController {
 		
 	@Autowired RandomService Service;
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/profile.go")
@@ -93,11 +92,16 @@ public class RandomController {
 		String page = "redirect:/list.do";
 			
 		RandomDTO dto= Service.detail(id);
+		RandomDTO dto_photo = Service.proPhotoList(id);
 		if(dto != null) {
 			page = "proDetail";
 			model.addAttribute("member",dto);
+			model.addAttribute("dto_photo",dto);
 		}
 		return "proDetail";
 	}
+	
+	
+
 	
 }
