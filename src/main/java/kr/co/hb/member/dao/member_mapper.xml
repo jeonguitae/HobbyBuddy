@@ -47,8 +47,8 @@
 	
 	<select id="myProDetail" resultType="hashmap">
 		select m.id, m.name, m.email, m.phone, m.age, m.gender, m.city, m.area, m.mannertp, m.chkreq, m.chkresp, m.intr, m.random
-			,p.photoIdx, p.new_file_name
-			from member m left join pboard p 
+			,p.photoIdx, p.new_photo_name
+			from member m left join hbPhoto p 
 			on m.id = p.id 
 		where m.id = #{param1};
 	</select>

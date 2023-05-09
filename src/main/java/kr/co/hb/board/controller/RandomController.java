@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
+import kr.co.hb.member.dto.MemberDTO;
+import kr.co.hb.member.service.MemberService;
 
 
 
@@ -23,12 +25,18 @@ import kr.co.hb.board.service.RandomService;
 public class RandomController {
 		
 	@Autowired RandomService Service;
+	@Autowired MemberService service2;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/profile.go")
 	public String plist(Model model) {		
 		logger.info("start");
+
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
 		return "proList";
 	}
 	
