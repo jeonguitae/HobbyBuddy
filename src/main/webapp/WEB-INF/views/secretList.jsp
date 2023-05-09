@@ -120,7 +120,7 @@ function listCall(page){
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.reportPageList);
+         listPrint(data.secretPageList);
 
          
          // 총 페이지 수
@@ -156,17 +156,17 @@ function listPrint(list){
    // 해결방법 2. js 에서 변환
    list.forEach(function(item,idx){
 	  
-      content += '<tr>';
-      content += '<td>'+item.sboard_class+'</td>';
-      content += '<td>'+item.sboard_num+'</td>';
-      content += '<td><a href="reportDetail.go?rept_no='+item.rept_no+'">'+item.sboard_title+'</td>';
-      content += '<td>'+item.writer_id+'</td>';
-      content += '<td>'+item.admin_id+'</td>';
-      content += '<td>'+item.secret_state+'</td>';      
-      var date = new Date(item.secret_time);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '</tr>';
+	   content += '<tr>';
+	   content += '<td>'+item.sboard_class+'</td>';
+	   content += '<td>'+item.sboard_num+'</td>';
+	   content += '<td><a href="reportDetail.go?rept_no='+item.sboard_num+'">'+item.sboard_title+'</a></td>';
+	   content += '<td>'+item.writer_id+'</td>';
+	   content += '<td>'+item.admin_id+'</td>';
+	   content += '<td><button id="chkBtn">'+ (item.secret_state ? '비밀글 해제' : '비밀글 설정') + '</button></td>';	   
+	   var date = new Date(item.secret_time);
+	   // 기본은 en-US
+	   content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+	   content += '</tr>';
    });
    $('#list').empty();
    $('#list').append(content);
