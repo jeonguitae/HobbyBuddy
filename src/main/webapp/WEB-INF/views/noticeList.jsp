@@ -36,6 +36,7 @@
 </style>
 </head>
 <body>      
+	<jsp:include page="gnb.jsp"/>
       <img src="../img/하비버디.png" width="100" height="100">
       <h2 align="center">공지사항 리스트</h2>
       게시물 갯수 : 
@@ -46,15 +47,15 @@
             <option value="200">200</option>
          </select>
        <div>
- 	   	<select id="search_Class">
+          <select id="search_Class">
             <option value="default">선택</option>
             <option value="notice_title">제목</option>
             <option value="id">작성자</option>
          </select>      
          <input type="text" id="search_text">
          <button id="search_btn">검색</button>
- 	   </div> 
- 	             
+       </div> 
+                 
       <button onclick="location.href='noticeWrite.go'" >공지사항 작성</button>         
       <table>
          <thead>
@@ -81,7 +82,7 @@
             </tr>                     
       </table>
       
-	</body>
+   </body>
 <script>
 
 var showPage = 1;
@@ -98,10 +99,10 @@ listCall(showPage);
  
 
 /* $('#search_btn').click(function() {
-	var searchClass = $("#search_Class").val();
+   var searchClass = $("#search_Class").val();
     var searchText = $("#search_text").val();
-	   listCall(showPage, searchClass, searchText);
-	   $('#pagination').twbsPagination('destroy');
+      listCall(showPage, searchClass, searchText);
+      $('#pagination').twbsPagination('destroy');
 }); */
 
 
@@ -151,7 +152,7 @@ function listPrint(list){
    // 해결방법 1. DTO 에서 Date 를 String 으로 반환
    // 해결방법 2. js 에서 변환
    list.forEach(function(item,idx){
-	  
+     
       content += '<tr>';
       content += '<td>'+item.notice_idx+'</td>';
       content += '<td><a href="noticeDetail.go?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';

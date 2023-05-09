@@ -31,6 +31,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <h3 align="center">공지사항 수정</h3>
    <form action="noticeUpdate.do" method="post" enctype="multipart/form-data">
       <input type="hidden" name="notice_idx" value="${dto.notice_idx}"/>

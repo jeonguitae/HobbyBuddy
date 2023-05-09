@@ -41,6 +41,7 @@
 </style>
 </head>
 <body>   
+	<jsp:include page="gnb.jsp"/>
      <input type="hidden" name="rept_no" value="${dto.rept_no}">
 	   <table>
 	   		<tr>

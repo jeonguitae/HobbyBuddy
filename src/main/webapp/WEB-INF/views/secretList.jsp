@@ -15,8 +15,6 @@
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
-      
-      
    }
    button{
       margin: 5px;
@@ -39,44 +37,44 @@
    
 </style>
 </head>
-<body>      
+<body>     
+	 <jsp:include page="gnb.jsp"/> 
       <img src="../img/하비버디.png" width="100" height="100">
       <h2 align="center">비밀글 처리 관리</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
-            <option value="5">100</option>
-            <option value="10">150</option>
-            <option value="15">200</option>
-            <option value="20">250</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="200">200</option>
+            <option value="250">250</option>
          </select>
       <form action="search.do">
       
          <select name="secret">
             <option value="default">선택</option>
-            <option value="">제목</option>
-            <option value="reporter">작성자</option>
+            <option value="sobard_title">제목</option>
+            <option value="writer_id">작성자</option>
          </select>
       
-         <input type="text" name="report_Search">
+         <input type="text" name="secret_Search">
          <button>검색</button>
       </form>                            
       <table>
          <thead>
             <tr>
-               <th>신고 번호</th>
-               <th>신고 분류</th>
-               <th>신고자 아이디</th>
-               <th>신고 제목</th>
-               <th>신고 일시</th>
-               <th>처리 상태</th>                        
-               <th>처리 일시</th>                        
-               <th>처리자</th>                        
+               <th>게시판 종류</th>
+               <th>게시판 번호</th>
+               <th>게시판 제목</th>
+               <th>작성자</th>
+               <th>처리한 관리자</th>
+               <th>비밀글 여부</th>                        
+               <th>처리 일시</th>                       
             </tr>            
          </thead>
          <tbody id="list">             
          </tbody>
             <tr>
-               <td colspan="8" id="paging">   
+               <td colspan="7" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
                   <div class="container">                           
                      <nav aria-label="Page navigation" style="text-align:center">
@@ -114,7 +112,7 @@ listCall(showPage);
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'reportList.ajax',
+      url:'secretList.ajax',
       data:{
           'page':page,
             'cnt':$('#pagePerNum').val()          
@@ -159,19 +157,15 @@ function listPrint(list){
    list.forEach(function(item,idx){
 	  
       content += '<tr>';
-      content += '<td>'+item.rept_no+'</td>';
-      content += '<td>'+item.reptboard_class+'</td>';
-      content += '<td>'+item.reporter+'</td>';
-      content += '<td><a href="reportDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
-      var date = new Date(item.rept_date);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.rept_state+'</td>';
-      var date = new Date(item.proc_date);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+      content += '<td>'+item.sboard_class+'</td>';
+      content += '<td>'+item.sboard_num+'</td>';
+      content += '<td><a href="reportDetail.go?rept_no='+item.rept_no+'">'+item.sboard_title+'</td>';
+      content += '<td>'+item.writer_id+'</td>';
       content += '<td>'+item.admin_id+'</td>';
-      
+      content += '<td>'+item.secret_state+'</td>';      
+      var date = new Date(item.secret_time);
+      // 기본은 en-US
+      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
       content += '</tr>';
    });
    $('#list').empty();

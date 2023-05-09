@@ -74,6 +74,7 @@ public class NoticeService {
 	            Path path = Paths.get("C:/img/upload/" + newFileName);
 	            	            	    
 	            Files.write(path, bytes);
+	            logger.info("a" +file);
 	            
 	            dao.noticeFileWrite(idx,oriFileName,newFileName);
 	            

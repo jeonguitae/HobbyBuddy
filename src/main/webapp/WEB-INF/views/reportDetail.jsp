@@ -43,6 +43,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <h3 align="center">신고 상세</h3>
    
       <table>
