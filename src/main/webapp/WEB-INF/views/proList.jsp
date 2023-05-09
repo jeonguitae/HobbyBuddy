@@ -27,21 +27,18 @@
 	
 		<form action="profile.do" method="get">
 			<table>
-				<tr>
-					<th>대분류</th>
-					<td class="bhobby">
-						<input type="radio" name="bhobby" value="운동"/>운동
-						<input type="radio" name="bhobby" value="맛집"/>맛집
-						<input type="radio" name="bhobby" value="반려동물"/>반려동물
-						<input type="radio" name="bhobby" value="여가"/>여가
-					</td>
-				</tr>
-				
-				<tr>
-					<th>중분류</th>
-					<td class="mhobby">
-					</td>
-				</tr>
+            <tr>
+	         <td colspan="2">
+	            <select id=big_hb>
+	               <c:forEach items="${big_hb}" var="b">
+	                  <option value="${b.big_hb}">${b.big_hb}</option>      
+	               </c:forEach>
+	            </select>
+	            <select id="small_hb">
+	           		 <option>x</option>
+	            </select>
+	           </td>
+      		</tr>
 				
 				<tr>
 					<th>성별</th>
@@ -169,43 +166,86 @@
 </body>
 <script>
 
-	$('input[name="bhobby"]').click(function(){
-		
-		var content = '';
-		var val = $(this).val();
-		console.log(val);
-		
-		if(val == '운동'){
-			content += '<input type="checkbox" name="mhobby" value="축구">축구';
-			content += '<input type="checkbox" name="mhobby" value="헬스">헬스';
-			content += '<input type="checkbox" name="mhobby" value="야구">야구';
-			content += '<input type="checkbox" name="mhobby" value="골프">골프';
-			content += '<input type="checkbox" name="mhobby" value="테니스">테니스';
-		}
-		
-		else if(val == '맛집'){
-			content += '<input type="checkbox" name="mhobby" value="한식">한식';
-			content += '<input type="checkbox" name="mhobby" value="중식">중식';
-			content += '<input type="checkbox" name="mhobby" value="양식">양식';
-			content += '<input type="checkbox" name="mhobby" value="양식">일식';
-		}
-		
-		else if(val == '반려동물'){
-			content += '<input type="checkbox" name="mhobby" value="산책">산책';
-			content += '<input type="checkbox" name="mhobby" value="쇼핑">쇼핑';
-			content += '<input type="checkbox" name="mhobby" value="미용">미용';
-		}
-		
-		else{
-			content += '<input type="checkbox" name="mhobby" value="영화">영화';
-			content += '<input type="checkbox" name="mhobby" value="게임">게임';
-			content += '<input type="checkbox" name="mhobby" value="노래방">노래방';
-			content += '<input type="checkbox" name="mhobby" value="보드게임">보드게임';
-			content += '<input type="checkbox" name="mhobby" value="방탈출">방탈출';
-		}
-		
-		$('.mhobby').html(content);
-	});
+var msg = "${msg}";
+if(msg != ""){
+   alert(msg);
+}
+
+var loginId = "${sessionScope.loginId}";   
+myHobbyList();
+function myHobbyList(){
+   console.log("loginId : " + loginId);
+   $.ajax({
+      type:'get',
+      url:'myHobbyList.ajax',
+      data:{id:loginId},
+      dataType:'json',
+      success:function(data){
+         console.log("data, myHobbyList : " + data.myHobbyList);
+         console.log("data, login : " + data.login);
+         if(!true){
+            alert('로그인이 필요한 서비스 입니다.');
+            location.href='./';
+         }else{
+            myHobbyListDraw(data.myHobbyList);
+         }
+      },
+      error:function(e){
+         console.log(e);
+      }
+   });   
+}
+
+
+function myHobbyListDraw(myHobbyList){
+   console.log("myHobbyList : " + myHobbyList);
+   var content = '';
+   myHobbyList.forEach(function(item,index){
+      content += '<tr>';
+      content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
+      content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
+      content += '</tr>';
+      console.log(item.my_hobby_no);
+   });
+   
+   $('#myHobbyList').empty();
+   $('#myHobbyList').append(content);
+}
+
+$('#big_hb').on('change', function(e){
+    var big_hb = $('#big_hb').val();      
+    console.log("big_hb ? " + big_hb);      
+    $.ajax({
+       type: 'get'
+       ,url: 'big_hb.ajax'
+       ,data:{'big_hb':big_hb}
+       ,dataType:'json'
+       ,success:function(data){
+          console.log("big_hb data : " + data.small_hb);
+          if(data != ""){
+             console.log("big_hb 취미 호출");
+             small_hbDraw(data.small_hb);
+          } else {
+             alert('오류가 발생하였습니다.');
+          }
+       }
+       ,error:function(e){
+          console.log(e);
+       }
+    });
+})
+
+function small_hbDraw(small_hb){
+ console.log("small_hb : " + small_hb);
+ var content = '';
+ small_hb.forEach(function(item,index){
+    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+ });
+ $('#small_hb').empty();
+ $('#small_hb').append(content);
+}
+
+
 	
 	$('select[name="city"]').on('change',function(){
 		var val = $(this).val();
