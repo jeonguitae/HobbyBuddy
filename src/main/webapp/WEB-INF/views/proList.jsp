@@ -112,7 +112,7 @@
 						</select>
 					</td>
 				</tr>
-				
+
 				<tr>
 					<th>프로필</th>
 					<td>
