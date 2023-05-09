@@ -65,7 +65,7 @@
 		   	  		</td>
 		   		</tr>		   		
 		   </table>		   	
-		   <button>신고처리</button>
+		   <button>신고 처리 하기</button>
 		   <input type="button" onclick="location.href='reportList.go'" value="취소">
 		</form>
 </body>
