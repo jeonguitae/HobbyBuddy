@@ -71,15 +71,15 @@
          <tr>
             <th>성별</th>
             <td>
-            	<input type="radio" name="gender" value="남"/>남자
+            	<input type="radio" name="gender" value="남성"/>남성
             	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input type="radio" name="gender" value="여"/>여자
+            	<input type="radio" name="gender" value="여성"/>남성
             </td>
          </tr>
          <tr>
                <th>지역</th>
                <td>
-                  <select name="city">
+                  <select id="city" name="city">
                       <option value="서울특별시">서울특별시</option>
                       <option value="인천광역시">인천광역시</option>
                       <option value="경기도">경기도</option>
@@ -99,7 +99,7 @@
                       <option value="제주특별자치도">제주특별자치도</option>
                   </select>
                
-                  <select name="area">
+                  <select id="area" name="area">
                      <option value="종로구">종로구</option>
                      <option value="중구">중구</option>
                      <option value="용산구">용산구</option>

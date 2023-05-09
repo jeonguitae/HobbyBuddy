@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
-	table, th, td{
+   table, th, td{
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
@@ -32,42 +32,42 @@
       width: 30%;
    }
    #chkBtn{
-   	 float: left;
+       float: left;
    }
    #rightt{
-   	float: right;
+      float: right;
    }
    #listBack{
-   	background: aqua;
+      background: aqua;
    }
 </style>
 </head>
 <body>
-   	     <form action="report_CommentWrite.do" method="post">
-		   <input type="hidden" name="rept_no" value="${dto.rept_no}">
-		   <table>
-		   		<tr>
-		   			<th>관리자 아이디</th>
-		   			<td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
-		   		</tr>
-		   		<tr>
-		   			<th>처리사유</th>
-		   			<td><textarea name="proc_content"></textarea></td>
-		   		</tr>
-		   		<tr>
-		   			<th>처리상태</th>
-		   			<td>
-			   			<select name="rept_state">
-					   	  	<option value="처리중">처리중</option>
-					   	  	<option value="처리완료">처리완료</option>
-					   	  	<option value="반려">반려</option>
-					   	</select>
-		   	  		</td>
-		   		</tr>		   		
-		   </table>		   	
-		   <button>신고 처리 하기</button>
-		   <input type="button" onclick="location.href='reportList.go'" value="취소">
-		</form>
+           <form action="report_CommentWrite.do" method="post">
+         <input type="hidden" name="rept_no" value="${dto.rept_no}">
+         <table>
+               <tr>
+                  <th>관리자 아이디</th>
+                  <td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
+               </tr>
+               <tr>
+                  <th>처리사유</th>
+                  <td><textarea name="proc_content"></textarea></td>
+               </tr>
+               <tr>
+                  <th>처리상태</th>
+                  <td>
+                     <select name="rept_state">
+                          <option value="처리중">처리중</option>
+                          <option value="처리완료">처리완료</option>
+                          <option value="반려">반려</option>
+                     </select>
+                    </td>
+               </tr>               
+         </table>            
+         <button>신고 처리 하기</button>
+         <input type="button" onclick="location.href='reportList.go'" value="취소">
+      </form>
 </body>
 <script>
 

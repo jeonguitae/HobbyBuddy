@@ -19,17 +19,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.group.service.GroupBoardService;
 import kr.co.hb.group.service.OpenChatService;
+import kr.co.hb.member.dto.MemberDTO;
+import kr.co.hb.member.service.MemberService;
 
 @Controller
 public class GroupBoardController {
 	
 	@Autowired GroupBoardService service;
 	@Autowired OpenChatService oservice;
+	@Autowired MemberService mservice;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 
 	@RequestMapping(value="/glist.go")
-	public String list(Model model) {		
+	public String list(Model model) {
+		
+		logger.info("Gboard 이동");
+		ArrayList<MemberDTO> big_hb = mservice.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
+		
 		logger.info("listcall");
 		ArrayList<GroupBoardDTO> list = service.glist();
 		
