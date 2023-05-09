@@ -17,28 +17,21 @@
 </head>
 <body>
 	<div class="profile">
-	프로필 갯수 : 
-   <select id="pagePerNum">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
-   </select>
-	
 		<form action="profile.do" method="get">
 			<table>
-            <tr>
-	         <td colspan="2">
-	            <select id=big_hb>
-	               <c:forEach items="${big_hb}" var="b">
-	                  <option value="${b.big_hb}">${b.big_hb}</option>      
-	               </c:forEach>
-	            </select>
-	            <select id="small_hb">
-	           		 <option>x</option>
-	            </select>
-	           </td>
-      		</tr>
+	            <tr>
+		            <th>취미</th>
+			         <td>
+			            <select id=big_hb>
+			               <c:forEach items="${big_hb}" var="b">
+			                  <option value="${b.big_hb}">${b.big_hb}</option>      
+			               </c:forEach>
+			            </select>
+			            <select id="small_hb">
+			           		 <option>x</option>
+			            </select>
+			           </td>
+	      		</tr>
 				
 				<tr>
 					<th>성별</th>
@@ -109,17 +102,7 @@
 						</select>
 					</td>
 				</tr>
-
-				<tr>
-					<th>프로필</th>
-					<td>
-						<input type="radio" name="profile" value="유"/>유
-						<input type="radio" name="profile" value="무"/>무
-						<input type="radio" name="profile" value="무관"/>무관
-					</td>
-				</tr>
-				
-								
+					
 				<tr>
 					<th colspan="2">
 						<input type="submit" value="검색"/>
@@ -150,7 +133,6 @@
 				<tr>
 					
 					<td>프로필 사진 자리</td>
-					
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>

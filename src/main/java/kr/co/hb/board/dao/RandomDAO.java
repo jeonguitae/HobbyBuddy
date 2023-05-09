@@ -18,6 +18,8 @@ public interface RandomDAO {
 
 	RandomDTO proPhotoList(String id, String board_class);
 
+	ArrayList<RandomDTO> plist();
+
 
 
 

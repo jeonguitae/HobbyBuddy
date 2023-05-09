@@ -14,6 +14,8 @@
 </style>
 
 </head>
+
+sssssssssssss
 <body>
 	<div class="profile">
 		<form action="randomList.do" method="get">
@@ -88,65 +90,47 @@
 					</td>
 				</tr>
 				
-				<tr>
-					<th>취미 1</th>
-					<td>
-						<select name="bhobby1">
-							<option value="운동">운동</option>
-						    <option value="맛집">맛집</option>
-						    <option value="반려동물">반려동물</option>
-						    <option value="여가">여가</option>
-						</select>
-						
-						<select name="shobby1">
-							<option value="축구">축구</option>
-							<option value="헬스">헬스</option>
-							<option value="야구">야구</option>
-							<option value="골프">골프</option>
-							<option value="테니스">테니스</option>
-						</select>
-					</td>
-				</tr>
+				 <tr>
+		            <th>취미1</th>
+			         <td>
+			            <select id=big_hb1>
+			               <c:forEach items="${big_hb}" var="b">
+			                  <option value="${b.big_hb}">${b.big_hb}</option>      
+			               </c:forEach>
+			            </select>
+			            <select id="small_hb1">
+			           		 <option>x</option>
+			            </select>
+			           </td>
+	      		</tr>
 				
-				<tr>
-					<th>취미 2</th>
-					<td>
-						<select name="bhobby2">
-							<option value="운동">운동</option>
-						    <option value="맛집">맛집</option>
-						    <option value="반려동물">반려동물</option>
-						    <option value="여가">여가</option>
-						</select>
-						
-						<select name="shobby2">
-							<option value="축구">축구</option>
-							<option value="헬스">헬스</option>
-							<option value="야구">야구</option>
-							<option value="골프">골프</option>
-							<option value="테니스">테니스</option>
-						</select>
-					</td>
-				</tr>
+				 <tr>
+		            <th>취미2</th>
+			         <td>
+			            <select id=big_hb2>
+			               <c:forEach items="${big_hb}" var="b">
+			                  <option value="${b.big_hb}">${b.big_hb}</option>      
+			               </c:forEach>
+			            </select>
+			            <select id="small_hb2">
+			           		 <option>x</option>
+			            </select>
+			           </td>
+	      		</tr>
 				
-				<tr>
-					<th>취미 3</th>
-					<td>
-						<select name="bhobby3">
-							<option value="운동">운동</option>
-						    <option value="맛집">맛집</option>
-						    <option value="반려동물">반려동물</option>
-						    <option value="여가">여가</option>
-						</select>
-						
-						<select name="shobby3">
-							<option value="축구">축구</option>
-							<option value="헬스">헬스</option>
-							<option value="야구">야구</option>
-							<option value="골프">골프</option>
-							<option value="테니스">테니스</option>
-						</select>
-					</td>
-				</tr>
+				 <tr>
+		            <th>취미3</th>
+			         <td>
+			            <select id=big_hb3>
+			               <c:forEach items="${big_hb}" var="b">
+			                  <option value="${b.big_hb}">${b.big_hb}</option>      
+			               </c:forEach>
+			            </select>
+			            <select id="small_hb3">
+			           		 <option>x</option>
+			            </select>
+			           </td>
+	      		</tr>
 								
 				<tr>
 					<th colspan="2">
@@ -161,7 +145,6 @@
 				
 
 		</form>
-		<input type="button" value="신고" onclick="location.href='./report.go'"/>
 	</div>
 	
 	<table>
@@ -193,43 +176,136 @@
 	
 </body>
 <script>
-	$('input[name="bhobby"]').click(function(){
-		
-		var content = '';
-		var val = $(this).val();
-		console.log(val);
-		
-		if(val == '운동'){
-			content += '<input type="checkbox" name="mhobby" value="축구">축구';
-			content += '<input type="checkbox" name="mhobby" value="헬스">헬스';
-			content += '<input type="checkbox" name="mhobby" value="야구">야구';
-			content += '<input type="checkbox" name="mhobby" value="골프">골프';
-			content += '<input type="checkbox" name="mhobby" value="테니스">테니스';
-		}
-		
-		else if(val == '맛집'){
-			content += '<input type="checkbox" name="mhobby" value="한식">한식';
-			content += '<input type="checkbox" name="mhobby" value="중식">중식';
-			content += '<input type="checkbox" name="mhobby" value="양식">양식';
-			content += '<input type="checkbox" name="mhobby" value="양식">일식';
-		}
-		
-		else if(val == '반려동물'){
-			content += '<input type="checkbox" name="mhobby" value="산책">산책';
-			content += '<input type="checkbox" name="mhobby" value="쇼핑">쇼핑';
-			content += '<input type="checkbox" name="mhobby" value="미용">미용';
-		}
-		
-		else{
-			content += '<input type="checkbox" name="mhobby" value="영화">영화';
-			content += '<input type="checkbox" name="mhobby" value="게임">게임';
-			content += '<input type="checkbox" name="mhobby" value="노래방">노래방';
-			content += '<input type="checkbox" name="mhobby" value="보드게임">보드게임';
-			content += '<input type="checkbox" name="mhobby" value="방탈출">방탈출';
-		}
-		
-		$('.mhobby').html(content);
-	});
+
+	var msg = "${msg}";
+	if(msg != ""){
+	   alert(msg);
+	}
+	
+	var loginId = "${sessionScope.loginId}";   
+	myHobbyList();
+	function myHobbyList(){
+	   console.log("loginId : " + loginId);
+	   $.ajax({
+	      type:'get',
+	      url:'myHobbyList.ajax',
+	      data:{id:loginId},
+	      dataType:'json',
+	      success:function(data){
+	         console.log("data, myHobbyList : " + data.myHobbyList);
+	         console.log("data, login : " + data.login);
+	         if(!true){
+	            alert('로그인이 필요한 서비스 입니다.');
+	            location.href='./';
+	         }else{
+	         }
+	      },
+	      error:function(e){
+	         console.log(e);
+	      }
+	   });   
+	}
+	
+	
+	
+	$('#big_hb1').on('change', function(e){
+	    var big_hb = $('#big_hb1').val();      
+	    console.log("big_hb ? " + big_hb);      
+	    $.ajax({
+	       type: 'get'
+	       ,url: 'big_hb.ajax'
+	       ,data:{'big_hb':big_hb}
+	       ,dataType:'json'
+	       ,success:function(data){
+	          console.log("big_hb data : " + data.small_hb);
+	          if(data != ""){
+	             console.log("big_hb 취미 호출");
+	             small_hbDraw1(data.small_hb);
+	          } else {
+	             alert('오류가 발생하였습니다.');
+	          }
+	       }
+	       ,error:function(e){
+	          console.log(e);
+	       }
+	    });
+	})
+	
+	function small_hbDraw1(small_hb){
+	 console.log("small_hb : " + small_hb);
+	 var content = '';
+	 small_hb.forEach(function(item,index){
+	    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	 });
+	 $('#small_hb1').empty();
+	 $('#small_hb1').append(content);
+	}
+	
+	$('#big_hb2').on('change', function(e){
+	    var big_hb = $('#big_hb2').val();      
+	    console.log("big_hb ? " + big_hb);      
+	    $.ajax({
+	       type: 'get'
+	       ,url: 'big_hb.ajax'
+	       ,data:{'big_hb':big_hb}
+	       ,dataType:'json'
+	       ,success:function(data){
+	          console.log("big_hb data : " + data.small_hb);
+	          if(data != ""){
+	             console.log("big_hb 취미 호출");
+	             small_hbDraw2(data.small_hb);
+	          } else {
+	             alert('오류가 발생하였습니다.');
+	          }
+	       }
+	       ,error:function(e){
+	          console.log(e);
+	       }
+	    });
+	})
+	
+	function small_hbDraw2(small_hb){
+	 console.log("small_hb : " + small_hb);
+	 var content = '';
+	 small_hb.forEach(function(item,index){
+	    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	 });
+	 $('#small_hb2').empty();
+	 $('#small_hb2').append(content);
+	}
+	
+	$('#big_hb3').on('change', function(e){
+	    var big_hb = $('#big_hb3').val();      
+	    console.log("big_hb ? " + big_hb);      
+	    $.ajax({
+	       type: 'get'
+	       ,url: 'big_hb.ajax'
+	       ,data:{'big_hb':big_hb}
+	       ,dataType:'json'
+	       ,success:function(data){
+	          console.log("big_hb data : " + data.small_hb);
+	          if(data != ""){
+	             console.log("big_hb 취미 호출");
+	             small_hbDraw3(data.small_hb);
+	          } else {
+	             alert('오류가 발생하였습니다.');
+	          }
+	       }
+	       ,error:function(e){
+	          console.log(e);
+	       }
+	    });
+	})
+	
+	function small_hbDraw3(small_hb){
+	 console.log("small_hb : " + small_hb);
+	 var content = '';
+	 small_hb.forEach(function(item,index){
+	    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	 });
+	 $('#small_hb3').empty();
+	 $('#small_hb3').append(content);
+	}
 	
 	$('select[name="city"]').on('change',function(){
 		var val = $(this).val();
@@ -529,110 +605,6 @@
 	});
 	
 	
-	$('select[name="bhobby1"]').on('change',function(){
-		var val = $(this).val();
-		var content = '';
-		
-		if(val == '운동'){
-			content += '<option value="축구">축구</option>';
-			content += '<option value="헬스">헬스</option>';
-			content += '<option value="헬스">야구</option>';
-			content += '<option value="헬스">골프</option>';
-			content += '<option value="헬스">테니스</option>';
-		}
-		
-		else if(val == '맛집'){
-			content += '<option value="한식">한식</option>';
-			content += '<option value="중식">중식</option>';
-			content += '<option value="양식">양식</option>';
-			content += '<option value="일식">일식</option>';
-		}
-		
-		else if(val == '반려동물'){
-			content += '<option value="산책">산책</option>';
-			content += '<option value="쇼핑">쇼핑</option>';
-			content += '<option value="미용">미용</option>';
-		}
-		
-		else{
-			content += '<option value="영화">영화</option>';
-			content += '<option value="게임">게임</option>';
-			content += '<option value="노래방">노래방</option>';
-			content += '<option value="보드게임">보드게임</option>';
-			content += '<option value="방탈출">방탈출</option>';
-		}
-	$('select[name="shobby1"]').html(content);
-});
-	
-	$('select[name="bhobby2"]').on('change',function(){
-		var val = $(this).val();
-		var content = '';
-		
-		if(val == '운동'){
-			content += '<option value="축구">축구</option>';
-			content += '<option value="헬스">헬스</option>';
-			content += '<option value="헬스">야구</option>';
-			content += '<option value="헬스">골프</option>';
-			content += '<option value="헬스">테니스</option>';
-		}
-		
-		else if(val == '맛집'){
-			content += '<option value="한식">한식</option>';
-			content += '<option value="중식">중식</option>';
-			content += '<option value="양식">양식</option>';
-			content += '<option value="일식">일식</option>';
-		}
-		
-		else if(val == '반려동물'){
-			content += '<option value="산책">산책</option>';
-			content += '<option value="쇼핑">쇼핑</option>';
-			content += '<option value="미용">미용</option>';
-		}
-		
-		else{
-			content += '<option value="영화">영화</option>';
-			content += '<option value="게임">게임</option>';
-			content += '<option value="노래방">노래방</option>';
-			content += '<option value="보드게임">보드게임</option>';
-			content += '<option value="방탈출">방탈출</option>';
-		}
-	$('select[name="shobby2"]').html(content);
-});
-	
-	$('select[name="bhobby3"]').on('change',function(){
-		var val = $(this).val();
-		var content = '';
-		
-		if(val == '운동'){
-			content += '<option value="축구">축구</option>';
-			content += '<option value="헬스">헬스</option>';
-			content += '<option value="헬스">야구</option>';
-			content += '<option value="헬스">골프</option>';
-			content += '<option value="헬스">테니스</option>';
-		}
-		
-		else if(val == '맛집'){
-			content += '<option value="한식">한식</option>';
-			content += '<option value="중식">중식</option>';
-			content += '<option value="양식">양식</option>';
-			content += '<option value="일식">일식</option>';
-		}
-		
-		else if(val == '반려동물'){
-			content += '<option value="산책">산책</option>';
-			content += '<option value="쇼핑">쇼핑</option>';
-			content += '<option value="미용">미용</option>';
-		}
-		
-		else{
-			content += '<option value="영화">영화</option>';
-			content += '<option value="게임">게임</option>';
-			content += '<option value="노래방">노래방</option>';
-			content += '<option value="보드게임">보드게임</option>';
-			content += '<option value="방탈출">방탈출</option>';
-		}
-	$('select[name="shobby3"]').html(content);
-});
 
 </script>
 </html>

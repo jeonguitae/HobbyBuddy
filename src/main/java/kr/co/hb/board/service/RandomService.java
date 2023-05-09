@@ -49,6 +49,10 @@ public class RandomService {
 		return dao.proPhotoList(id, Board_class);
 	}
 
+	public ArrayList<RandomDTO> plist() {
+		return dao.plist();
+	}
+
 
 
 
