@@ -202,6 +202,10 @@ public class MemberService {
 		return dao.myBoardList(id);
 	}
 
+	public ArrayList<MemberDTO> myReplyList(String id) {
+		return dao.myReplyList(id);
+	}
+
 	
 	
 	

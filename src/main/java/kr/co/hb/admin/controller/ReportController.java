@@ -2,6 +2,8 @@ package kr.co.hb.admin.controller;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,8 @@ import kr.co.hb.admin.service.ReportService;
 @Controller
 public class ReportController {
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired ReportService service;
 	
 	@RequestMapping(value="/reportList.go")
@@ -49,19 +53,23 @@ public class ReportController {
 	   }
 	
 	@RequestMapping(value = "/report_CommentWrite.do", method = RequestMethod.POST)
-	   public String report_CommentWrite(Model model, @RequestParam HashMap<String, String> params) {
-	      
-		   String page = "report_CommentBox";
-		  
-		   if (params.get("proc_content").equals("")) {
-			model.addAttribute("msg","처리사유를 입력하세요.");
-		   }else {
-			   service.commentWrite(params);
-			page = "redirect:/reportCommentDetail.go";
-		}
-		   
-	      return page;
-	   }
+	public String report_CommentWrite(Model model, @RequestParam HashMap<String, String> params) {
+
+	    String page = "reportDetail";
+
+	    logger.info("컨트롤러 입장");
+	    if (params.get("proc_content").equals("")) {
+	        
+	        page = "redirect:/reportDetail.go?rept_no=" + params.get("rept_no");
+	        model.addAttribute("msg","처리사유를 입력하세요.");
+	    } else {
+	        logger.info("업데이트 컨트롤러 메소드 실행");
+	        service.commentWrite(params);
+	        page = "redirect:/reportList.go";
+	    }
+
+	    return page;
+	}
 	
 	@RequestMapping(value = "/reportCommentDetail.go")
 	public String reportCommentDetail(Model model, @RequestParam int rept_no) {

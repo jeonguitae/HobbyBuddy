@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 확인</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
    table, th, td{

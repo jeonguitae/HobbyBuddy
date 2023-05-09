@@ -10,6 +10,14 @@ public interface AlarmDAO {
 
 	int alarmCount(String id_receive);
 
+	ArrayList<AlarmDTO> beforeAlarm(String id);
+
+	int alarmListRead(String id);
+
+	AlarmDTO alarmListRead_select(String id);
+
+	void alarmListRead_insert(AlarmDTO dto);
+
 
 
 }

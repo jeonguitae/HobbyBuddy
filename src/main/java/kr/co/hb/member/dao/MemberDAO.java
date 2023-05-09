@@ -59,6 +59,8 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> myBoardList(String id);
 
+	ArrayList<MemberDTO> myReplyList(String id);
+
 	
 
 	

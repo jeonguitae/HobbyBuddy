@@ -55,7 +55,7 @@
 	#alarmIcon{
 		text-align: center;
 		background-color: green;
-		border: 1px solid green;
+		border: 1px solid black;
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
@@ -74,7 +74,8 @@
 		margin: 2px;
 		cursor: pointer;
 		width: 300px;
-		height: 20px;	
+		height: 20px;
+		
 	}
 
 	.alarmList{
@@ -82,50 +83,49 @@
 		display: none;
 		text-align: center;
 		background-color: gray;
-		border: 1px solid red;
+		border: 1px solid gray;
 		padding: 5px;
 		margin: 2px;
 		cursor: pointer;
 		width: 565px;
-		height: 20px;	
+		height: 20px;		
 	}
-	
-	
-	
-	
 </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
-	${sessionScope.loginId} 님 안녕하세요 ? / 새로운 알림의 갯수는 <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 입니다.<br/>
-	<input type="button" value="하비버디" onclick="location.href='./'"/>
+	${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 <br/><br/>
+	
+	<input type="button" value="하비버디" onclick="location.href='./'"/><br/><br/><br/>
+	
+	<div id="profileIcon">프로필</div>
+	<div class="panel2" onclick="location.href='login.go'">로그인</div>
+	<div class="panel" onclick="location.href='logout.go'">로그아웃</div>
+	<div class="panel" onclick="location.href='pwChk.go'">마이페이지</div>
+	<div class="panel" onclick="location.href='myBoardList.go'">작성한 글/댓글</div>
+	<div class="panel">참여한 모임</div>
+	<div class="panel">쪽지방</div>
+	<div class="panel">즐겨찾기</div>
+	<div class="panel3" onclick="location.href='admin.go'">관리자</div>
+	
+	<div id="alarmIcon">알림</div>
+	<div id="beforeAlarm" class="beforeAlarm">
+		<input type="button" value="알림 읽음 처리" onclick="alarmListRead()"/>
+		<input type="button" value="이전 알림 보기" onclick="location.href='beforeAlarm.go'"/>	
+	</div>
+
+	
 	<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
 	<input type="button" value="프로필" onclick="location.href='profile.go'"/>
 	<input type="button" value="랜덤 매칭" onclick="location.href='randomList.go'"/>
 	<input type="button" value="익명 매칭" onclick="location.href='noNameList.go'"/>
 	<input type="button" value="자유 게시판" onclick="location.href='flist.go'"/>
 	<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
-	
-	<div id="alarmIcon">알림</div>
-	<div class="beforeAlarm"><input type="button" value="모든 알림 보기" onclick="location.href='beforeAlarm.go'"/></div>
-	<input type="hidden"/>
-	
-	<span id="alarmList" class="alarmList"></span>
-	 		
-	
-	<div id="profileIcon">프로필</div>
-	<div class="panel2" onclick="location.href='login.go'">로그인</div>
-	<div class="panel" onclick="location.href='logout.go'">로그아웃</div>
-	<div class="panel" onclick="location.href='pwChk.go'">마이페이지</div>
-	<div class="panel" onclick="location.href='myBoardList.go'">작성 글/댓글</div>
-	<div class="panel">참여한 모임</div>
-	<div class="panel">쪽지방</div>
-	<div class="panel">즐겨찾기</div>
-	<div class="panel3" onclick="location.href='admin.go'">관리자</div>
-	
 </body>
+
 <script>
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
@@ -141,31 +141,28 @@
 			$('.panel3').slideToggle('slow');
 		}		
 	})
-
-
-	
 	
 	$('#alarmIcon').on('click',function(){		
 		$('.beforeAlarm').slideToggle('slow');
 		$('.alarmList').slideToggle('slow');				
 	});
 	
-	
 	if(alarmCount != 0){
 		$('#alarmIcon').css('background-color', 'red');
 	}
 	
-	alarmList();
+	alarmList();	
 	function alarmList(){
 		console.log("loginId : " + loginId);
 		$.ajax({
-			type:'get',
+			type:'post',
 			url:'alarmList.ajax',
 			data:{},
 			dataType:'json',
 			success:function(data){
 				console.log("data : " + data.alarmList);
-				alarmListDraw(data.alarmList);			
+				alarmListDraw(data.alarmList);
+				
 			},
 			error:function(e){
 				console.log(e);
@@ -178,14 +175,13 @@
 		var content = '';
 		alarmList.forEach(function(item,index){
 			content += '<div class="alarmList">';
-			content += '<input type="checkbox" value="'+item.alarm_num+'"/>';
-			content+= item.alarm_title + " / " + item.alarm_content;
-			content += '</div>';
-			console.log(item.alarm_content);
+			content += '<input type="checkbox" value="'+item.alarm_no+'"/>';
+			content += '<a href="alarmDetail.do?alarm_num='+item.alarm_num+'&alarm_class='+item.alarm_class+'&alarm_no='+item.alarm_no+'">';
+			content += item.alarm_title + " / " + item.alarm_content;
+			content += '</a></div>';
 		});
-		
-		$('#alarmList').empty();
-		$('#alarmList').append(content);
+	    $(content).insertBefore($('#beforeAlarm').parent().find('#beforeAlarm').next());
+	
 	}
 	
 	// 읽음 처리
@@ -200,14 +196,15 @@
 		});
 		console.log(checkArr);			
 		$.ajax({
-			type:'get',
+			type:'post',
 			url:'alarmListRead.ajax',
 			data:{'alarmListRead':checkArr},
 			dataType:'json',
 			success:function(data){
 				console.log(data);
 				if(data.success){
-					location.reload();
+					alert(data.msg);
+					alarmList();
 				}
 			},
 			error:function(e){
@@ -215,6 +212,6 @@
 			}		
 		});		
 	}
-
 </script>
+
 </html>

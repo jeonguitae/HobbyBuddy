@@ -12,6 +12,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
 		<table>
 			<tr>
 				<th>분류</th>
