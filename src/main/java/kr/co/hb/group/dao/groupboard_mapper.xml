@@ -11,12 +11,12 @@
 	<select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * 
 		FROM gboardlist 
-		WHERE bhobby = #{bhobby} AND mhobby = #{mhobby} AND gender = #{gender} AND city = #{city} AND area = #{area} AND meeting_date = #{meeting_date}
+		WHERE big_hb = #{big_hb} AND small_hb = #{small_hb} AND gender = #{gender} AND city = #{city} AND area = #{area} AND meeting_date = #{meeting_date}
 	</select>
 	
 	<insert id="gwrite" parameterType="HashMap">
-		INSERT INTO gboardlist(id, subject, content, bhobby, mhobby, minage, maxage, gender, city, area, meeting_date, maxmem, mannertp)
-		VALUES(#{id}, #{subject}, #{content}, #{bhobby}, #{mhobby}, #{minage}, #{maxage}, #{gender}, #{city}, #{area}, #{meeting_date}, #{maxmem}, #{mannertp})
+		INSERT INTO gboardlist(id, subject, content, big_hb, small_hb, minage, maxage, gender, city, area, meeting_date, maxmem, mannertp)
+		VALUES(#{id}, #{subject}, #{content}, #{big_hb}, #{small_hb}, #{minage}, #{maxage}, #{gender}, #{city}, #{area}, #{meeting_date}, #{maxmem}, #{mannertp})
 	</insert>
 	
 	<select id="gdetail" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -33,8 +33,8 @@
 		UPDATE gboardlist SET 
 			subject = #{subject}
 			,content = #{content}
-			,bhobby = #{bhobby}
-			,mhobby = #{mhobby}
+			,big_hb = #{big_hb}
+			,small_hb = #{small_hb}
 			,minage = #{minage}
 			,maxage = #{maxage}
 			,gender = #{gender}

@@ -3,6 +3,8 @@ package kr.co.hb.admin.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,8 @@ import kr.co.hb.admin.dto.ReportDTO;
 @Service
 public class ReportService {
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired ReportDAO dao;
 	
 	public HashMap<String, Object> reportPageList(int page, int cnt) {
@@ -46,18 +50,12 @@ public class ReportService {
 	}
 
 	public String commentWrite(HashMap<String, String> params) {
-		  String page = "redirect:/reportCommentDetail.go";
+		
+		logger.info("서비스 도착");
+		
+		  String page = "redirect:/reportList.go";       
 	      
-	      ReportDTO dto = new ReportDTO();
-	      
-	      dto.setAdmin_id(params.get("id"));	
-	      dto.setProc_content(params.get("proc_content"));
-	      dto.setRept_state(params.get("rept_state"));
-	      
-	      
-	      dao.commentWrite(dto);
-	      
-	      int idx = dto.getRept_no();	      
+	      dao.commentWrite(params);	            
 	      
 	      return page;
 		

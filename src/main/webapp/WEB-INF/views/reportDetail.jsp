@@ -71,12 +71,51 @@
             <th>신고 일시</th>
             <td><fmt:formatDate value="${dto.rept_date}" pattern="yyyy/MM/dd" /></td>
          </tr>
+         <tr>
+            <th>처리 상태</th>
+            <td>${dto.rept_state}</td>
+         </tr>
+         <tr>
+            <th>처리 사유</th>
+            <td>${dto.proc_content}</td>
+         </tr>
           
       </table> 
       <hr>	    
-	  <jsp:include page="report_CommentBox.jsp"/>  
+	  <form action="report_CommentWrite.do" method="post">
+         <input type="hidden" name="rept_no" value="${dto.rept_no}">
+         <table>
+               <tr>
+                  <th>관리자 아이디</th>
+                  <td><input type="text" name="admin_id" value="${sessionScope.loginId}" readonly></td>
+               </tr>
+               <tr>
+                  <th>처리사유</th>
+                  <td><textarea name="proc_content"></textarea></td>
+               </tr>
+               <tr>
+                  <th>처리상태</th>
+                  <td>
+                     <select name="rept_state">
+                          <option value="처리중">처리중</option>
+                          <option value="처리완료">처리완료</option>
+                          <option value="반려">반려</option>
+                     </select>
+                    </td>
+               </tr>               
+         </table>            
+         <button>신고 처리 하기</button>
+         <input type="button" onclick="location.href='reportList.go'" value="취소">
+      </form>  
 </body>
 <script>
-
+    var form = document.querySelector('form');
+    form.addEventListener('submit', function(event) {
+        var proc_content = form.elements['proc_content'].value;
+        if (proc_content === '') {
+            alert('처리사유를 입력하세요.');
+            event.preventDefault();
+        }
+    });
 </script>
 </html>

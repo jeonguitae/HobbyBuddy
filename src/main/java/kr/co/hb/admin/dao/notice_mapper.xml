@@ -31,7 +31,7 @@
    </insert>
    
    <insert id="noticeFileWrite">
-      INSERT INTO hbphoto(notice_idx, oriFileName, newFileName)
+      INSERT INTO hbphoto2(notice_idx, oriFileName, newFileName)
          VALUES(#{param1},#{param2},#{param3})
    </insert>
    
@@ -43,7 +43,7 @@
     <select id="noticeDetail" resultType="kr.co.hb.admin.dto.NoticeDTO">
       select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content,n.notice_chk
          ,p.photo_idx, p.newFileName
-      FROM notice n LEFT JOIN hbphoto p ON n.notice_idx=p.notice_idx 
+      FROM notice n LEFT JOIN hbphoto2 p ON n.notice_idx=p.notice_idx 
       WHERE n.notice_idx = #{param1}   
    </select>
    
@@ -52,16 +52,16 @@
    </delete>
    
    <delete id="updatePDelete">
-      DELETE FROM hbphoto WHERE photo_idx = #{param1}
+      DELETE FROM hbphoto2 WHERE photo_idx = #{param1}
    </delete>
    
    <select id="noticeFindFile" resultType="String">
-      SELECT newFileName FROM hbphoto
+      SELECT newFileName FROM hbphoto2
          WHERE notice_idx = #{param1}
    </select>
    
    <select id="noticeFindFile2" resultType="String">
-      SELECT newFileName FROM hbphoto
+      SELECT newFileName FROM hbphoto2
          WHERE photo_idx = #{param1}
    </select>
    
@@ -103,7 +103,7 @@
    </update>
    
    <delete id="deletePhoto">
-   		DELETE from hbphoto where photo_idx = #{param1} AND notice_idx = #{param2};
+   		DELETE from hbphoto2 where photo_idx = #{param1} AND notice_idx = #{param2};
    </delete>
    
    

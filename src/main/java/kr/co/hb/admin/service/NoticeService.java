@@ -33,7 +33,7 @@ public class NoticeService {
 	    	    noticeFileSave(idx, photo);
 	    	}     
 	      
-	      String page = row > 0 ? "redirect:/noticeDetail.do?notice_idx=" + idx : "redirect:/noticeList.go";
+	      String page = row > 0 ? "redirect:/noticeDetail.go?notice_idx=" + idx : "redirect:/noticeList.go";
 	             
 	        return page;
 	   }

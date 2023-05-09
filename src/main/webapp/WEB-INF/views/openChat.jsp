@@ -10,7 +10,7 @@
      	position: relative;
      	border: 1px, solid, black;
      	left: 710px;
-     	top: 70px;
+     	top: 12%;
 	}
 	
 	table[class="chatting"]{
@@ -91,7 +91,7 @@ var gidx = "${sessionScope.gidx}";
 $(document).ready(function () {
     setInterval(function () {
     	clist();
-    }, 1000);
+    }, 500);
 });
 
 clist();
