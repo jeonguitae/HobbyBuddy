@@ -52,6 +52,10 @@ public class GroupBoardController {
 				
 		logger.info("검색 조건 : " + params);
 		
+		ArrayList<MemberDTO> big_hb = mservice.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
 		ArrayList<GroupBoardDTO> list = service.gsorting(params);
 		
 		model.addAttribute("list", list);
@@ -60,7 +64,11 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value="/gwrite.go")
-	public String gwriteform(Model model, @RequestParam HashMap<String, String> params) {		
+	public String gwriteform(Model model) {		
+		
+		ArrayList<MemberDTO> big_hb = mservice.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
 		
 		return "gBoardCreate";
 	}
@@ -90,6 +98,10 @@ public class GroupBoardController {
 
 	@RequestMapping(value="/gserch.do")
 	public String gserch(Model model, @RequestParam HashMap<String, String> params) {
+		
+		ArrayList<MemberDTO> big_hb = mservice.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
 		
 		ArrayList<GroupBoardDTO> list = service.gserch(params);
 		

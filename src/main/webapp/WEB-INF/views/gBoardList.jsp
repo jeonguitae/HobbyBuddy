@@ -49,12 +49,12 @@
          <table>
             <tr>
 	         <td colspan="2">
-	            <select id=big_hb>
+	            <select name=big_hb>
 	               <c:forEach items="${big_hb}" var="b">
 	                  <option value="${b.big_hb}">${b.big_hb}</option>      
 	               </c:forEach>
 	            </select>
-	            <select id="small_hb">
+	            <select name="small_hb">
 	           		 <option>x</option>
 	            </select>
 	           </td>
@@ -157,7 +157,7 @@
             <c:forEach items="${list}" var="bbs">
                <tr>
                   <td>${bbs.gidx}</td>
-                  <td>${bbs.mhobby}</td>
+                  <td>${bbs.small_hb}</td>
                   <td>${bbs.area}</td>
                   <td>${bbs.meeting_date}</td>
                   <td><a href="gdetail.do?id=${bbs.gidx}">${bbs.subject}</a></td>
@@ -215,7 +215,7 @@
          }
       });   
    }
-   
+
 
    function myHobbyListDraw(myHobbyList){
       console.log("myHobbyList : " + myHobbyList);
@@ -231,9 +231,9 @@
       $('#myHobbyList').empty();
       $('#myHobbyList').append(content);
    }
-   
-   $('#big_hb').on('change', function(e){
-       var big_hb = $('#big_hb').val();      
+
+   $('select[name=big_hb]').on('change', function(e){
+       var big_hb = $('select[name=big_hb]').val();      
        console.log("big_hb ? " + big_hb);      
        $.ajax({
           type: 'get'
@@ -253,17 +253,17 @@
              console.log(e);
           }
        });
- })
+   })
 
- function small_hbDraw(small_hb){
+   function small_hbDraw(small_hb){
     console.log("small_hb : " + small_hb);
     var content = '';
     small_hb.forEach(function(item,index){
        content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
     });
-    $('#small_hb').empty();
-    $('#small_hb').append(content);
- }
+    $('select[name="small_hb"]').empty();
+    $('select[name="small_hb"').append(content);
+   }
    
    
    $('select[name="city"]').on('change',function(){
