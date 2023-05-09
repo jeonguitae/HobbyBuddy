@@ -17,6 +17,9 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
+	<h3>작성한 글 목록</h3>
+	<input type="button" value="작성한 댓글 목록 보기" onclick="location.href='myReplyList.go'"/>
 	<table>
 		<colgroup>
 			<col width="10%"/>

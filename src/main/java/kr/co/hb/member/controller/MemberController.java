@@ -308,5 +308,23 @@ public class MemberController {
 		
 		return "myBoardList";
 	}
+	
+	@RequestMapping(value = "/myReplyList.go", method = RequestMethod.GET)
+	public String myReplyList(HttpSession session, Model model) {
+		logger.info("myBoardList call");
+		String id = (String) session.getAttribute("loginId");
+		logger.info("myBoardList call : " + id);
+		
+		ArrayList<MemberDTO> myReplyList = service.myReplyList(id);
+		logger.info("myReplyList"+myReplyList);
+
+		model.addAttribute("myReplyList", myReplyList);			
+		
+		
+		return "myReplyList";
+	}
+	
+	
+	
 
 }

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
 	table, tr, td{
