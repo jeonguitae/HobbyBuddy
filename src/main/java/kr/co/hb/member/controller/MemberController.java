@@ -40,11 +40,12 @@ public class MemberController {
 	@RequestMapping(value="/join.go")
 	public String join(Model model) {
 		logger.info("회원가입 페이지 이동");
-		ArrayList<MemberDTO> city = service.city();
-		logger.info("city : " + city);
-		model.addAttribute("city",city);		
+		//ArrayList<MemberDTO> city = service.city();
+		//logger.info("city : " + city);
+		//model.addAttribute("city",city);		
 		return "join";
 	}
+	/*
 	@RequestMapping(value="/city.ajax")
 	@ResponseBody
 	public HashMap<String, Object> city(Model model, @RequestParam String city) {
@@ -54,6 +55,7 @@ public class MemberController {
 		map.put("area", area);
 		return map;
 	}
+	*/
 	
 	@RequestMapping(value="/overlay.ajax")
 	@ResponseBody
@@ -171,10 +173,11 @@ public class MemberController {
 	
 	@RequestMapping(value="/mypage.go")
 	public String mypage(Model model, HttpSession session) {
-		ArrayList<MemberDTO> city = service.city();
+		/*
+		 * ArrayList<MemberDTO> city = service.city();
 		logger.info("city : " + city);
 		model.addAttribute("city",city);
-		
+		*/
 		String id = (String) session.getAttribute("loginId");
 		MemberDTO dto = service.myProPhotoList(id);
 		model.addAttribute("dto",dto);

@@ -14,15 +14,7 @@
 		insert into member (id,pw,name,email,phone,age,gender,city,area,intr,chkreq,chkresp,random)
 		values(#{id},#{pw},#{name},#{email},#{phone},#{age},#{gender},#{city},#{area},#{intr},#{chkreq},#{chkresp},#{random})
 	</insert>
-	
-	<select id="city" resultType="kr.co.hb.member.dto.MemberDTO">
-		SELECT city FROM city ORDER BY city
-	</select>
-	
-	<select id="area" resultType="kr.co.hb.member.dto.MemberDTO">
-		SELECT area FROM area where city=#{param1} ORDER BY city
-	</select>
-	
+
 	<select id="login" resultType="kr.co.hb.member.dto.MemberDTO">
 		SELECT id,admin FROM member
 			WHERE id=#{param1} and ban=false

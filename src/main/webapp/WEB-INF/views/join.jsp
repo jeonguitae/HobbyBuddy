@@ -285,7 +285,7 @@
 	      $('#msg').html('비밀번호가 일치 하지 않습니다.');
 	   }      
 	});
-	
+	/*
 	$('#city').on('change', function(e){
 		   var city = $('#city').val();      
 		   console.log("city ? " + city);      
@@ -317,7 +317,7 @@
 	$('#area').empty();
 	$('#area').append(content);
 }
-	
+*/	
 $('select[name="city"]').on('change',function(){
       var val = $(this).val();
       var content = '';

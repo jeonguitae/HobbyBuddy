@@ -56,7 +56,7 @@ public class MemberService {
 		logger.info("adminChk : " + adminChk);
 		return dao.login(id,pw);
 	}
-*/
+
 	public ArrayList<MemberDTO> city() {
 		return dao.city();
 	}
@@ -65,7 +65,7 @@ public class MemberService {
 		logger.info("Service city : " + city);
 		return dao.area(city);
 	}
-	
+*/	
 	public int pwChk2(String id, String pw) {
 		return dao.pwChk2(id,pw);
 	}

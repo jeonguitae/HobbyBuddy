@@ -13,9 +13,9 @@ public interface MemberDAO {
 
 	//int login(String id, String pw);
 
-	ArrayList<MemberDTO> city();
+	//ArrayList<MemberDTO> city();
 
-	ArrayList<MemberDTO> area(String city);
+	//ArrayList<MemberDTO> area(String city);
 
 	String adminChk(String id, String pw);
 

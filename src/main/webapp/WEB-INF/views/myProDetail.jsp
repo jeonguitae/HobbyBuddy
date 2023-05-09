@@ -297,7 +297,7 @@
 		      alert('오류 발생');
 		   }
 		}
-	
+	/*
 	$('#city').on('change', function(e){
 		   var city = $('#city').val();      
 		   console.log("city ? " + city);      
@@ -329,7 +329,7 @@
 		$('#area').empty();
 		$('#area').append(content);
 	}
-	
+	*/
 
 	$('#dropOut').on('click', function(e){   
 		const dropOutConfirm = confirm("탈퇴하시겠습니까?");
