@@ -1,0 +1,143 @@
+@charset "UTF-8";
+
+/* 전체 페이지에 대한 스타일 */
+body {
+  background-color: #f0fff0; /* 배경색 초록 */
+  color: #333333; /* 폰트색 검정 */
+  font-family: Arial, sans-serif; /* 글꼴 Arial */
+  text-align: center; /* 모든 요소들 중앙 정렬 */
+  margin-left:350;
+  margin-right:350;
+  margin-top:40; 
+}
+
+/* 제목에 대한 스타일 */
+h1, h2, h3 {
+  color: #22c55e; /* 제목색 초록 */
+}
+
+/* 링크에 대한 스타일 */
+a {
+  color: #22c55e; /* 링크색 초록 */
+}
+a:hover {
+  text-decoration: underline;
+}
+
+
+/* 버튼에 대한 스타일 */
+button {
+  background-color: #22c55e;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+button:hover {
+  background-color: #ffffff;
+  color: #22c55e;
+}
+
+
+/* 입력 폼에 대한 스타일 */
+input[type="text"], input[type="email"], input[type="password"] {
+  border-radius: 5px; /* 입력 폼 모서리 둥글게 */
+  padding: 10px; /* 입력 폼 안쪽 여백 */
+  border: 1px solid #cccccc; /* 입력 폼 보더 */
+  font-size: 16px; /* 입력 폼 글자 크기 */
+}
+
+input[type="button"] {
+  background-color: #22c55e;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+input[type="submit"] {
+  background-color: #22c55e;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+input[type="submit"]:hover {
+  background-color: #ffffff;
+  color: #22c55e;
+}
+
+
+/* 이미지에 대한 스타일 */
+img {
+  max-width: 100%; /* 이미지 최대 너비 */
+  height: auto; /* 이미지 높이 자동조정 */
+  float: left;
+}
+
+ p 태그에 대한 스타일
+p {
+font-size: 18px;
+line-height: 1.5;
+margin-bottom: 20px;
+}
+
+div {
+margin-bottom: 20px;
+}
+
+div:hover{
+  background-color: #ffffff;
+  color: #22c55e;
+}
+
+
+table {
+border-collapse: collapse; 
+width: 100%;
+}
+
+td, th {
+padding: 10px;
+border: 1px solid #cccccc;
+}
+
+input[type="submit"] {
+background-color: #22c55e;
+color: #ffffff;
+border: none;
+border-radius: 5px;
+padding: 10px 20px;
+cursor: pointer;
+}
+
+/* select 태그에 대한 스타일 */
+select {
+  background-color: #ffffff; /* 배경색 흰색 */
+  color: #333333; /* 폰트색 검정 */
+  border: 1px solid #cccccc; /* 테두리 */
+  border-radius: 5px; /* 모서리 둥글게 */
+  padding: 10px; /* 안쪽 여백 */
+  font-size: 16px; /* 글자 크기 */
+}
+
+/* option 태그에 대한 스타일 */
+option {
+  background-color: #ffffff; /* 배경색 흰색 */
+  color: #333333; /* 폰트색 검정 */
+}
+
+textarea {
+border-radius: 5px;
+padding: 10px;
+border: 1px solid #cccccc;
+font-size: 16px;
+}

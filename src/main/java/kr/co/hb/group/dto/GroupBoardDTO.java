@@ -8,8 +8,8 @@ public class GroupBoardDTO {
 	private String id;
 	private String subject;
 	private String content;
-	private String bhobby;
-	private String mhobby;
+	private String big_hb;
+	private String small_hb;
 	private int minage;
 	private int maxage;
 	private String gender;
@@ -58,17 +58,17 @@ public class GroupBoardDTO {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getBhobby() {
-		return bhobby;
+	public String getBig_hb() {
+		return big_hb;
 	}
-	public void setBhobby(String bhobby) {
-		this.bhobby = bhobby;
+	public void setBig_hb(String big_hb) {
+		this.big_hb = big_hb;
 	}
-	public String getMhobby() {
-		return mhobby;
+	public String getSmall_hb() {
+		return small_hb;
 	}
-	public void setMhobby(String mhobby) {
-		this.mhobby = mhobby;
+	public void setSmall_hb(String small_hb) {
+		this.small_hb = small_hb;
 	}
 	public int getMinage() {
 		return minage;

@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/css.css">
 <title>작성한 글/댓글 리스트</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
@@ -17,6 +18,9 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
+	<h3>작성한 글 목록</h3>
+	<input type="button" value="작성한 댓글 목록 보기" onclick="location.href='myReplyList.go'"/>
 	<table>
 		<colgroup>
 			<col width="10%"/>

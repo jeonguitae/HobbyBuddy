@@ -40,26 +40,19 @@
 				<th>*내용</th>
 				<td><textarea name="content"></textarea></td>
 			</tr>
+			
 			<tr>
-			<tr>
-				<th>분류</th>
-					<td>
-						<select name="bhobby">
-						    <option value="운동">운동</option>
-						    <option value="맛집">맛집</option>
-						    <option value="반려동물">반려동물</option>
-						    <option value="여가">여가</option>
-						</select>
-					
-						<select name="mhobby">
-							<option value="축구">축구</option>
-							<option value="헬스">헬스</option>
-							<option value="야구">야구</option>
-							<option value="골프">골프</option>
-							<option value="테니스">테니스</option>
-						</select>
-					</td>
-				</tr>
+	         <td colspan="2">
+	            <select name=big_hb>
+	               <c:forEach items="${big_hb}" var="b">
+	                  <option value="${b.big_hb}">${b.big_hb}</option>      
+	               </c:forEach>
+	            </select>
+	            <select name="small_hb">
+	           		 <option>x</option>
+	            </select>
+	           </td>
+      		</tr>
 				
 				<tr>
 					<th>나이</th>
@@ -170,7 +163,80 @@ if(msg != ""){
 	alert(msg);
 }
 
-$('select[name="bhobby"]').on('change',function(){
+myHobbyList();
+function myHobbyList(){
+   console.log("loginId : " + loginId);
+   $.ajax({
+      type:'get',
+      url:'myHobbyList.ajax',
+      data:{id:loginId},
+      dataType:'json',
+      success:function(data){
+         console.log("data, myHobbyList : " + data.myHobbyList);
+         console.log("data, login : " + data.login);
+         if(!true){
+            alert('로그인이 필요한 서비스 입니다.');
+            location.href='./';
+         }else{
+            myHobbyListDraw(data.myHobbyList);
+         }
+      },
+      error:function(e){
+         console.log(e);
+      }
+   });   
+}
+
+
+function myHobbyListDraw(myHobbyList){
+   console.log("myHobbyList : " + myHobbyList);
+   var content = '';
+   myHobbyList.forEach(function(item,index){
+      content += '<tr>';
+      content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
+      content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
+      content += '</tr>';
+      console.log(item.my_hobby_no);
+   });
+   
+   $('#myHobbyList').empty();
+   $('#myHobbyList').append(content);
+}
+
+$('select[name=big_hb]').on('change', function(e){
+    var big_hb = $('select[name=big_hb]').val();      
+    console.log("big_hb ? " + big_hb);      
+    $.ajax({
+       type: 'get'
+       ,url: 'big_hb.ajax'
+       ,data:{'big_hb':big_hb}
+       ,dataType:'json'
+       ,success:function(data){
+          console.log("big_hb data : " + data.small_hb);
+          if(data != ""){
+             console.log("big_hb 취미 호출");
+             small_hbDraw(data.small_hb);
+          } else {
+             alert('오류가 발생하였습니다.');
+          }
+       }
+       ,error:function(e){
+          console.log(e);
+       }
+    });
+})
+
+function small_hbDraw(small_hb){
+ console.log("small_hb : " + small_hb);
+ var content = '';
+ small_hb.forEach(function(item,index){
+    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+ });
+ $('select[name="small_hb"]').empty();
+ $('select[name="small_hb"]').append(content);
+}
+
+/* $('select[name="bhobby"]').on('change',function(){
 	var val = $(this).val();
 	var content = '';
 	
@@ -205,7 +271,7 @@ $('select[name="bhobby"]').on('change',function(){
 	
 	$('select[name="mhobby"]').html(content);
 	
-});
+}); */
 
 $('select[name="city"]').on('change',function(){
 	var val = $(this).val();

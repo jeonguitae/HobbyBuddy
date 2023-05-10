@@ -30,6 +30,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <h3 align="center">공지사항 등록</h3>
    <form action="noticeWrite.do" method="post" enctype="multipart/form-data">
       <table>      

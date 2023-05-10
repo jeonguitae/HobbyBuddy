@@ -33,7 +33,7 @@ public class NoticeService {
 	    	    noticeFileSave(idx, photo);
 	    	}     
 	      
-	      String page = row > 0 ? "redirect:/noticeDetail.do?notice_idx=" + idx : "redirect:/noticeList.go";
+	      String page = row > 0 ? "redirect:/noticeDetail.go?notice_idx=" + idx : "redirect:/noticeList.go";
 	             
 	        return page;
 	   }
@@ -74,6 +74,7 @@ public class NoticeService {
 	            Path path = Paths.get("C:/img/upload/" + newFileName);
 	            	            	    
 	            Files.write(path, bytes);
+	            logger.info("a" +file);
 	            
 	            dao.noticeFileWrite(idx,oriFileName,newFileName);
 	            

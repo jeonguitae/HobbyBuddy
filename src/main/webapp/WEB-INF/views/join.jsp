@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/css.css">
 <style>
    table, th, td{
       border: 1px solid black;
@@ -73,7 +74,7 @@
             <td>
             	<input type="radio" name="gender" value="남성"/>남성
             	&nbsp;&nbsp;&nbsp;&nbsp;
-            	<input type="radio" name="gender" value="여성"/>남성
+            	<input type="radio" name="gender" value="여성"/>여성
             </td>
          </tr>
          <tr>

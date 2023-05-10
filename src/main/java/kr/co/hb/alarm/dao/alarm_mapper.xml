@@ -12,4 +12,24 @@
 	<select id="alarmCount" resultType="int">
 		SELECT count(#{param1}) FROM alarm_list WHERE id_receive = #{param1}
 	</select>
+	
+	<select id="beforeAlarm" resultType="kr.co.hb.alarm.dto.AlarmDTO">
+		SELECT * FROM read_alarm_list WHERE id_receive = #{param1}
+	</select>
+	
+	
+	
+	<select id="alarmListRead_select" resultType="kr.co.hb.alarm.dto.AlarmDTO">
+		SELECT id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num
+			FROM alarm_list WHERE alarm_no = #{param1}
+	</select>	
+	
+	<insert id="alarmListRead_insert" parameterType="kr.co.hb.alarm.dto.AlarmDTO">
+		insert into read_alarm_list (id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
+			values (#{id_send},#{id_receive},#{alarm_title},#{alarm_content},#{alarm_class},#{alarm_num});
+	</insert>
+	
+	<delete id="alarmListRead">
+		DELETE FROM alarm_list WHERE alarm_no = #{param1}
+	</delete>
 </mapper>

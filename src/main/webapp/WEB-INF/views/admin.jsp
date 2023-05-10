@@ -34,6 +34,7 @@ table, th, td{
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
 	<div>
 		<table>
 	      <thead>
@@ -135,10 +136,10 @@ table, th, td{
    <table>
       <thead>
          <tr>
-            <td colspan="2">신고 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <td colspan="2">비밀글 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             
-            <button>리스트 보기</button></td>
+            <button onclick="location.href='secretList.go'">리스트 보기</button></td>
             
          </tr>
          <tr>

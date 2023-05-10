@@ -19,15 +19,11 @@
 	  FROM report WHERE rept_no = #{param1};  
    </select>
    
-   <update 
-      useGeneratedKeys="true"
-      keyColumn="rept_no"
-      keyProperty="rept_no"
-   
-   
-      id="commentWrite" parameterType="kr.co.hb.admin.dto.ReportDTO">
-      UPDATE report SET admin_id = #{admin_id}, proc_content = #{proc_content}, rept_state = #{rept_state}, proc_date = now() WHERE rept_no = #{rept_no};
+   <update id="commentWrite" parameterType="hashmap">
+		  
+ 	  UPDATE report SET admin_id = #{admin_id}, proc_content = #{proc_content}, rept_state = #{rept_state}, proc_date = now() WHERE rept_no = #{rept_no};
    </update>
+
    
    <select id="reportCommentDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
       SELECT rept_no, preporter, reptboard_class, rept_title, rept_content, rept_state, proc_content, rept_date 

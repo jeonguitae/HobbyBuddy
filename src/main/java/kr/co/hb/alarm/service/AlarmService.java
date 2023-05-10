@@ -1,6 +1,7 @@
 package kr.co.hb.alarm.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,5 +25,27 @@ public class AlarmService {
 	public int alarmCount(String id_receive) {
 		return dao.alarmCount(id_receive);
 	}
+
+	public ArrayList<AlarmDTO> beforeAlarm(String id) {
+		return dao.beforeAlarm(id);
+	}
+
+	public HashMap<String, Object> alarmListRead(ArrayList<String> alarmListRead) {
+		
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();	
+		int delSize = alarmListRead.size();
+		int successCnt = 0;
+		for (String id : alarmListRead) {
+			AlarmDTO dto = dao.alarmListRead_select(id);
+			logger.info("alarmListRead_select dto : " + dto);
+			dao.alarmListRead_insert(dto);
+			successCnt += dao.alarmListRead(id);
+		}		
+		map.put("msg", delSize+" 개의 알림 중 "+successCnt+" 개의 알림을 이전 알림 리스트로 이동 시켰습니다.");		
+		map.put("success", true);
+		return map;
+	}
+
 
 }

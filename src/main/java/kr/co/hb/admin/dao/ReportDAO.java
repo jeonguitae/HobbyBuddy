@@ -1,6 +1,7 @@
 package kr.co.hb.admin.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import kr.co.hb.admin.dto.ReportDTO;
 
@@ -12,7 +13,7 @@ public interface ReportDAO {
 
 	ReportDTO reportDetail(String rept_no);
 
-	void commentWrite(ReportDTO dto);
+	void commentWrite(HashMap<String, String> params);
 
 	ReportDTO reportCommentDetail(int rept_no);
 
