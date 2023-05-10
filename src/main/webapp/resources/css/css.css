@@ -10,6 +10,14 @@ body {
   margin-right:350;
   margin-top:40; 
 }
+b {
+  font-weight: 900;
+}
+
+
+input[type=checkbox] {
+  transform: scale(2); /* 크기를 2배로 키우기 */
+}
 
 /* 제목에 대한 스타일 */
 h1, h2, h3 {
@@ -104,6 +112,8 @@ table {
 border-collapse: collapse; 
 width: 100%;
 }
+
+
 
 td, th {
 padding: 10px;

@@ -8,7 +8,7 @@
 	
 	#profileIcon{
 		display:inline;
-		background-color: #22c55e;
+		background-color: #008000;
  		color: #ffffff;
 		border: none;
 	 	border-radius: 5px;
@@ -18,8 +18,8 @@
 	}
 	.panel{
 		display: none;
-		background-color: #22c55e;
- 		color: #ffffff;
+		background-color: #ffffff;
+ 		color: #22c55e;
 		border: none;
 	 	border-radius: 5px;
 		padding: 0.5rem 1rem;
@@ -28,8 +28,8 @@
 	}
 	.panel2{
 		display: none;
-		background-color: #22c55e;
- 		color: #ffffff;
+		background-color: #ffffff;
+ 		color: #22c55e;
 		border: none;
 	 	border-radius: 5px;
 		padding: 0.5rem 1rem;
@@ -38,8 +38,8 @@
 	}
 	.panel3{
 		display: none;
-		background-color: #22c55e;
- 		color: #ffffff;
+		background-color: #ffffff;
+ 		color: #22c55e;
 		border: none;
 	 	border-radius: 5px;
 		padding: 0.5rem 1rem;
@@ -49,13 +49,14 @@
 	
 	#alarmIcon{
 		display:inline;
-		background-color: #22c55e;
+		background-color: #0d7f5e;
  		color: #ffffff;
 		border: none;
 	 	border-radius: 5px;
 		padding: 0.5rem 1rem;
 		cursor: pointer;
 		font-size: 1.2rem;
+		
 	}
 	
 	.beforeAlarm{
@@ -109,22 +110,22 @@
 		<input type="button" value="익명 매칭" onclick="location.href='noNameList.go'"/>
 		<input type="button" value="자유 게시판" onclick="location.href='flist.go'"/>
 		<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
+		<input type="button" value="공지사항" onclick="location.href='nboard.go'"/>
 	</div>
 	
 	
 		<div id="alarmIcon">알림</div>
-		<div id="beforeAlarm" class="beforeAlarm">
-			<br/>
-			<input type="button" value="알림 읽음 처리" onclick="alarmListRead()"/>
-			<input type="button" value="이전 알림 보기" onclick="location.href='beforeAlarm.go'"/>	
-		</div>
-	
-	<br/><br/><br/>
+		<br/><br/>
+		<input type="button" value="알림 읽음 처리" class="beforeAlarm" onclick="alarmListRead()"/>
+		<input type="button" value="이전 알림 보기" class="beforeAlarm" onclick="location.href='beforeAlarm.go'"/>
+		<br/><br id="beforeAlarm"/>
+		<br/><br/><hr/><br/><br/>
 	
 </body>
 
 <script>
-
+	$.ajaxSetup({ cache: false });
+	
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
 	var alarmCount = "${sessionScope.alarmCount}";
@@ -153,14 +154,15 @@
 	function alarmList(){
 		console.log("loginId : " + loginId);
 		$.ajax({
-			type:'post',
-			url:'alarmList.ajax',
+			type:'get',
+			url:'alarmList.ajax',			
 			data:{},
 			dataType:'json',
 			success:function(data){
 				console.log("data : " + data.alarmList);
 				alarmListDraw(data.alarmList);				
 			},
+			cache: false,
 			error:function(e){
 				console.log(e);
 			}
@@ -174,10 +176,10 @@
 		    alarmList.forEach(function(item, index) {
 		    	console.log("alarmList : " + alarmList);
 		      content += '<div class="alarmList">';
-		      content += '<input type="checkbox" value="' + item.alarm_no + '"/>';
+		      content += '<input type="checkbox" value="' + item.alarm_no + '"/>&nbsp;&nbsp;&nbsp;&nbsp;';
 		      content += '<a href="alarmDetail.do?alarm_num=' + item.alarm_num + '&alarm_class=' + item.alarm_class + '&alarm_no=' + item.alarm_no + '">';
-		      content += item.alarm_title + " / " + item.alarm_content;
-		      content += '</a></div>';
+		      content += '<b>ID</b> : \" ' + item.id_send + ' \" &nbsp;&nbsp;&nbsp;<b>제목</b> : \" '+ item.alarm_title + ' \" &nbsp;&nbsp;&nbsp;<b>내용</b> : \ "' + item.alarm_content;
+		      content += ' /" </a></div>';
 		      console.log("alarmList : " + alarmList);
 		    });
 		  } else {
@@ -222,8 +224,7 @@
 			}		
 		});		
 	}
-	
-    
+
 
 </script>
 

@@ -110,7 +110,9 @@
 	</select>
 	
 	<select id="myReplyList" resultType="kr.co.hb.member.dto.MemberDTO">
-	SELECT * FROM fBoard WHERE id=#{param1} ORDER BY fbNo DESC
+		select c.fbNo, f.title,f.fbTime, f.id,c.coContent,c.coTime ,f.bhit  
+		from fboard f join comment c 
+		on f.fbNo = c.fbNo where c.id=#{param1} ORDER BY fbNo DESC
 	</select>
 
 </mapper>

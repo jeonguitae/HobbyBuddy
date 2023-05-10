@@ -10,7 +10,6 @@
 table, th, td{
       border: 1px solid black;
       border-collapse: collapse;
-      padding: 5px 10px;
    }
 
 </style>
@@ -55,6 +54,8 @@ table, th, td{
       		</th>         
 		</tr>		
 </table>
+
+
 
 </body>
 <script>
