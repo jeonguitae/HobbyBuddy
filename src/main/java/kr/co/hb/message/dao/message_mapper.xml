@@ -3,6 +3,13 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.message.dao.MessageDAO">
+<mapper namespace="kr.co.hb.message.dao.MessageDAO">
 
+	<select id="msgList" resultType="kr.co.hb.message.dto.MessageDTO">
+		SELECT * FROM msg WHERE id_receive=#{param1} ORDER BY msg_time DESC
+	</select>
+	
+	<insert id="msgReplyDo" parameterType="hashmap">
+		insert into msg (id_send,id_receive,msg_content) values (#{id_send},#{id_receive},#{msg_content})
+	</insert>
 </mapper>

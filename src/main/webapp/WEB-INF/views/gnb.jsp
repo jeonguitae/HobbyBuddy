@@ -8,7 +8,7 @@
 	
 	#profileIcon{
 		display:inline;
-		background-color: #008000;
+		background-color: #0074D9;
  		color: #ffffff;
 		border: none;
 	 	border-radius: 5px;
@@ -49,7 +49,7 @@
 	
 	#alarmIcon{
 		display:inline;
-		background-color: #0d7f5e;
+		background-color: #FFA500;
  		color: #ffffff;
 		border: none;
 	 	border-radius: 5px;
@@ -97,7 +97,7 @@
 		<input type="button" class="panel" value="마이페이지" onclick="location.href='pwChk.go'"/>
 		<input type="button" class="panel" value="작성한 글/댓글" onclick="location.href='myBoardList.go'"/>
 		<input type="button" class="panel" value="참여한 모임" onclick="location.href='#'"/>
-		<input type="button" class="panel" value="쪽지방" onclick="location.href='#'"/>
+		<input type="button" class="panel" value="쪽지방" onclick="location.href='msgList.go'"/>
 		<input type="button" class="panel" value="즐겨찾기" onclick="location.href='#'"/>
 		<input type="button" class="panel3" value="관리자" onclick="location.href='admin.go'"/>
 	</div>

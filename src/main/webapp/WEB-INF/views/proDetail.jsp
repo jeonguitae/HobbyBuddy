@@ -69,7 +69,7 @@
                <input type="submit" value="즐겨찾기"/>
             </th>
             <th>
-               <input type="submit" value="쪽지 보내기"/>
+               <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive='${member.id}"/>
             </th>
             <th>
       			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>

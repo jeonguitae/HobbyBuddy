@@ -49,11 +49,11 @@ public class AlarmController {
 		    if (alarmList != null) {
 		        for (AlarmDTO dto : alarmList) {
 		            String alarm_title = dto.getAlarm_title();
-		            String newalarm_title = alarm_title.substring(0, 5);
+		            String newalarm_title = alarm_title.substring(0, 7);
 		            dto.setAlarm_title(newalarm_title + "...");
 
 		            String alarm_content = dto.getAlarm_content();
-		            String newalarm_content = alarm_content.substring(0, 5);
+		            String newalarm_content = alarm_content.substring(0, 7);
 		            dto.setAlarm_content(newalarm_content + "...");
 		        }
 		    }
