@@ -17,9 +17,29 @@ public class BoardDTO {
 	private int board_num;
 	private String big_hb;
 	private String small_hb;
-	
+	private int coNo;
+	private Date coTime;
+	private String coContent;
 	
 
+	public int getCoNo() {
+		return coNo;
+	}
+	public void setCoNo(int coNo) {
+		this.coNo = coNo;
+	}
+	public Date getCoTime() {
+		return coTime;
+	}
+	public void setCoTime(Date coTime) {
+		this.coTime = coTime;
+	}
+	public String getCoContent() {
+		return coContent;
+	}
+	public void setCoContent(String coContent) {
+		this.coContent = coContent;
+	}
 	public String getBig_hb() {
 		return big_hb;
 	}

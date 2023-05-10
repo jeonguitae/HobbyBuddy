@@ -155,6 +155,17 @@ public class BoardService {
 			}
 		}
 	}
+
+	   public ArrayList<BoardDTO> colist(int fbNo) {
+		      // TODO Auto-generated method stub
+		      return dao.colist(fbNo);
+		   }
+
+		   public int cowrite(String id, int fbNo, String coContent) {
+		      // TODO Auto-generated method stub
+		      return dao.cowrite(id, fbNo, coContent);
+		   }
+
 }
 
 	
