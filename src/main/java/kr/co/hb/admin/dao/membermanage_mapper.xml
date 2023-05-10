@@ -9,4 +9,11 @@
 		SELECT * FROM member
 	</select>
 	
+	<select id="misearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT * FROM member WHERE id LIKE #{search}
+	</select>
+	
+	<select id="mnsearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT * FROM member WHERE name LIKE #{search}
+	</select>
 </mapper>

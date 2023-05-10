@@ -10,9 +10,22 @@ public class RandomDTO {
 	private int mannertp;
 	private boolean ban;
 	private String new_photo_name;
+	private String big_hb;
+	private String small_hb;
 	
 	
-
+	public String getBig_hb() {
+		return big_hb;
+	}
+	public void setBig_hb(String big_hb) {
+		this.big_hb = big_hb;
+	}
+	public String getSmall_hb() {
+		return small_hb;
+	}
+	public void setSmall_hb(String small_hb) {
+		this.small_hb = small_hb;
+	}
 	public String getNew_photo_name() {
 		return new_photo_name;
 	}

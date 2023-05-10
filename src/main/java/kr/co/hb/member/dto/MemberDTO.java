@@ -27,7 +27,21 @@ public class MemberDTO {
 	private Date fbTime;
 	private int bhit;
 	
+	private String coContent;
+	private Date coTime;
 	
+	public String getCoContent() {
+		return coContent;
+	}
+	public void setCoContent(String coContent) {
+		this.coContent = coContent;
+	}
+	public Date getCoTime() {
+		return coTime;
+	}
+	public void setCoTime(Date coTime) {
+		this.coTime = coTime;
+	}
 	public String getCity() {
 		return city;
 	}

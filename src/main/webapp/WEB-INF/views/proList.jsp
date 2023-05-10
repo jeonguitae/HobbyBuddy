@@ -12,33 +12,31 @@
 			border-collapse: collapse;
 			padding : 5px 10px;
 		}
+		
+		td[class="psearch"]{
+      margin-top: 5px;
+ 	  }
 	</style>
 
 </head>
 <body>
 	<div class="profile">
-	프로필 갯수 : 
-   <select id="pagePerNum">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="15">15</option>
-      <option value="20">20</option>
-   </select>
-	
 		<form action="profile.do" method="get">
 			<table>
-            <tr>
-	         <td colspan="2">
-	            <select id=big_hb>
-	               <c:forEach items="${big_hb}" var="b">
-	                  <option value="${b.big_hb}">${b.big_hb}</option>      
-	               </c:forEach>
-	            </select>
-	            <select id="small_hb">
-	           		 <option>x</option>
-	            </select>
-	           </td>
-      		</tr>
+				
+	            <tr>
+		            <th>취미</th>
+			         <td>
+			            <select id=big_hb name="big_hb">
+			               <c:forEach items="${big_hb}" var="b">
+			                  <option value="${b.big_hb}">${b.big_hb}</option>      
+			               </c:forEach>
+			            </select>
+			            <select id="small_hb" name="small_hb">
+			           		 <option>x</option>
+			            </select>
+			           </td>
+	      		</tr>
 				
 				<tr>
 					<th>성별</th>
@@ -109,27 +107,14 @@
 						</select>
 					</td>
 				</tr>
-				
-				<tr>
-					<th>프로필</th>
-					<td>
-						<input type="radio" name="profile" value="유"/>유
-						<input type="radio" name="profile" value="무"/>무
-						<input type="radio" name="profile" value="무관"/>무관
-					</td>
-				</tr>
-				
-								
+					
 				<tr>
 					<th colspan="2">
 						<input type="submit" value="검색"/>
 					</th>
 				</tr>			
-
 			</table>
-			
 				<h3>취미를 함께 할 사람을 찾아보세요!</h3>
-
 		</form>
 	</div>
 	
@@ -141,7 +126,7 @@
 				<th>NAME</th>
 				<th>나이</th>
 				<th>지역</th>
-				<th>취미</th>
+				<th>small 취미</th>
 				<th>성별</th>
 			</tr>
 		</thead>
@@ -150,100 +135,110 @@
 				<tr>
 					
 					<td>프로필 사진 자리</td>
-					
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>
 					<td>${member.area}</td>
-					<td>취미 자리</td>
+					<td>${member.small_hb}</td>
 					<td>${member.gender}</td>
 				</tr>			
 			</c:forEach>
+				<tr>
+	                  <td class="psearch" colspan="8">      
+	                     <form action="psearch.do">
+	                        <input type="text" name="search" value=""/>
+	                        <select name="ssorting">
+	                           <option value="id">아이디</option>
+	                           <option value="name">이름</option>
+	                        </select>
+	                        <input type="submit" value="검색"/>
+	                     </form>
+	                  </td>
+	               </tr>
 		</tbody>
-		
 	</table>
 	
 </body>
 <script>
-
-var msg = "${msg}";
-if(msg != ""){
-   alert(msg);
-}
-
-var loginId = "${sessionScope.loginId}";   
-myHobbyList();
-function myHobbyList(){
-   console.log("loginId : " + loginId);
-   $.ajax({
-      type:'get',
-      url:'myHobbyList.ajax',
-      data:{id:loginId},
-      dataType:'json',
-      success:function(data){
-         console.log("data, myHobbyList : " + data.myHobbyList);
-         console.log("data, login : " + data.login);
-         if(!true){
-            alert('로그인이 필요한 서비스 입니다.');
-            location.href='./';
-         }else{
-            myHobbyListDraw(data.myHobbyList);
-         }
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });   
-}
-
-
-function myHobbyListDraw(myHobbyList){
-   console.log("myHobbyList : " + myHobbyList);
-   var content = '';
-   myHobbyList.forEach(function(item,index){
-      content += '<tr>';
-      content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
-      content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
-      content += '</tr>';
-      console.log(item.my_hobby_no);
-   });
-   
-   $('#myHobbyList').empty();
-   $('#myHobbyList').append(content);
-}
-
-$('#big_hb').on('change', function(e){
-    var big_hb = $('#big_hb').val();      
-    console.log("big_hb ? " + big_hb);      
-    $.ajax({
-       type: 'get'
-       ,url: 'big_hb.ajax'
-       ,data:{'big_hb':big_hb}
-       ,dataType:'json'
-       ,success:function(data){
-          console.log("big_hb data : " + data.small_hb);
-          if(data != ""){
-             console.log("big_hb 취미 호출");
-             small_hbDraw(data.small_hb);
-          } else {
-             alert('오류가 발생하였습니다.');
-          }
-       }
-       ,error:function(e){
-          console.log(e);
-       }
-    });
-})
-
-function small_hbDraw(small_hb){
- console.log("small_hb : " + small_hb);
- var content = '';
- small_hb.forEach(function(item,index){
-    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
- });
- $('#small_hb').empty();
- $('#small_hb').append(content);
-}
+	
+	var msg = "${msg}";
+	if(msg != ""){
+	   alert(msg);
+	}
+	
+	var loginId = "${sessionScope.loginId}";   
+	myHobbyList();
+	function myHobbyList(){
+	   console.log("loginId : " + loginId);
+	   $.ajax({
+	      type:'get',
+	      url:'myHobbyList.ajax',
+	      data:{id:loginId},
+	      dataType:'json',
+	      success:function(data){
+	         console.log("data, myHobbyList : " + data.myHobbyList);
+	         console.log("data, login : " + data.login);
+	         if(!true){
+	            alert('로그인이 필요한 서비스 입니다.');
+	            location.href='./';
+	         }else{
+	            myHobbyListDraw(data.myHobbyList);
+	         }
+	      },
+	      error:function(e){
+	         console.log(e);
+	      }
+	   });   
+	}
+	
+	
+	function myHobbyListDraw(myHobbyList){
+	   console.log("myHobbyList : " + myHobbyList);
+	   var content = '';
+	   myHobbyList.forEach(function(item,index){
+	      content += '<tr>';
+	      content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
+	      content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
+	      content += '</tr>';
+	      console.log(item.my_hobby_no);
+	   });
+	   
+	   $('#myHobbyList').empty();
+	   $('#myHobbyList').append(content);
+	}
+	
+	$('#big_hb').on('change', function(e){
+	    var big_hb = $('#big_hb').val();      
+	    console.log("big_hb ? " + big_hb);      
+	    $.ajax({
+	       type: 'get'
+	       ,url: 'big_hb.ajax'
+	       ,data:{'big_hb':big_hb}
+	       ,dataType:'json'
+	       ,success:function(data){
+	          console.log("big_hb data : " + data.small_hb);
+	          if(data != ""){
+	             console.log("big_hb 취미 호출");
+	             small_hbDraw(data.small_hb);
+	          } else {
+	             alert('오류가 발생하였습니다.');
+	          }
+	       }
+	       ,error:function(e){
+	          console.log(e);
+	       }
+	    });
+	})
+	
+	function small_hbDraw(small_hb){
+	 console.log("small_hb : " + small_hb);
+	 var content = '';
+	 small_hb.forEach(function(item,index){
+	    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	 });
+	 $('#small_hb').empty();
+	 $('#small_hb').append(content);
+	}
 
 
 	

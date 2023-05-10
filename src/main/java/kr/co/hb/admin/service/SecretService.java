@@ -3,6 +3,8 @@ package kr.co.hb.admin.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import kr.co.hb.admin.dto.SecretDTO;
 public class SecretService {
 
 	@Autowired SecretDAO dao;
+	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public HashMap<String, Object> secretPageList(int page, int cnt) {
 		
@@ -42,9 +46,22 @@ public class SecretService {
 		return map;
 	}
 
-	public String secret_ChkUpdate(String notice_idx, String flag) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public String secret_ChkUpdate(String sboard_num, String secret_state) {
+		 
+		logger.info("서비스 등장");
+		logger.info("secret_state : " + secret_state);
+		
+		if (secret_state.equals("true")) {
+		    logger.info("참이니까 서비스에서 꺼야함 실행");
+		    dao.secret_ChkOff(sboard_num);
+		} else {
+		    logger.info("거짓이니까 서비스에서 참 실행");
+		    dao.secret_ChkOn(sboard_num);
+		}
 
+		   
+		   logger.info("secret_state : " + secret_state);
+		   return secret_state;
+		 }
+	
 }

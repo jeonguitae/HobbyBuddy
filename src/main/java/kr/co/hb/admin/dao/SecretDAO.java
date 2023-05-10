@@ -10,4 +10,8 @@ public interface SecretDAO {
 
 	ArrayList<SecretDTO> secretPageList(int cnt, int offset);
 
+	void secret_ChkOff(String sboard_num);
+
+	void secret_ChkOn(String sboard_num);
+
 }

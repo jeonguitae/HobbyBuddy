@@ -12,10 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
+import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.member.dto.MemberDTO;
 import kr.co.hb.member.service.MemberService;
 
@@ -27,21 +27,34 @@ public class RandomController {
 	@Autowired RandomService Service;
 	@Autowired MemberService service2;
 	
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping(value="/profile.go")
 	public String plist(Model model) {		
 		logger.info("start");
 
+		
 		ArrayList<MemberDTO> big_hb = service2.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
+		
+		ArrayList<RandomDTO> list = Service.plist();
+	    model.addAttribute("list", list);
+//	    RandomDTO dto = new RandomDTO();
+//	    String qq = dto.getSmall_hb();
+//	    logger.info("list"+qq);
+//	    logger.info("list",qq);
 		
 		return "proList";
 	}
 	
 	@RequestMapping(value="/profile.do")
-	public String profileList(Model model, @RequestParam HashMap<String, String> params) {	
+	public String profileList(Model model, @RequestParam HashMap<String, String> params) {
+		
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
 		
 		ArrayList<RandomDTO> list = Service.profileList(params);
 		logger.info("검색 조건 : " + params);
@@ -49,9 +62,28 @@ public class RandomController {
 		return "proList";
 	}
 	
+	@RequestMapping(value="/psearch.do")
+	public String psearch(Model model, @RequestParam HashMap<String, String> params) {
+		
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
+		ArrayList<RandomDTO> list = Service.psearch(params);
+		logger.info("검색 조건 : " + params);
+		model.addAttribute("list", list);
+		return "proList";
+	}
+	
 	@RequestMapping(value="/randomList.go")
 	public String rlist(Model model) {		
 		logger.info("start");
+		
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
+		
 		return "randomList";
 	}
 	
@@ -60,13 +92,24 @@ public class RandomController {
 		
 		ArrayList<RandomDTO> list = Service.randomList(params);
 		logger.info("검색 조건 : " + params);
+		
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
 		model.addAttribute("list",list);
 		return "randomList";
 	}
 	
 	@RequestMapping(value="/noNameList.go")
-	public String nlist(Model model) {		
+	public String nolist(Model model) {		
 		logger.info("start");
+		
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
+		
 		return "noNameList";
 	}
 	
@@ -75,6 +118,11 @@ public class RandomController {
 		
 		ArrayList<RandomDTO> list = Service.noNameList(params);
 		logger.info("검색 조건 : " + params);
+		
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
 		model.addAttribute("list",list);
 		return "noNameList";
 	}
@@ -111,6 +159,7 @@ public class RandomController {
 		return "proDetail";
 	}
 	
+
 	
 
 	
