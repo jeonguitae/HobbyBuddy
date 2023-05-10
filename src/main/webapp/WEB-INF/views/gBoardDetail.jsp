@@ -52,8 +52,8 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-					<button>수정하기</button>
-					<button onclick="location.href='greport.go'">신고하기</button>
+				  <button>수정하기</button>
+				  <button onclick="location.href='greport.go?' + '${board.gidx}'">신고하기</button>
 				</td>
 			</tr>
 			<tr>
