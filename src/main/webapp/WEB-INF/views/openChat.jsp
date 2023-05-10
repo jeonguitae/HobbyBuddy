@@ -77,6 +77,18 @@
 	  cursor: pointer;
 	}
 	
+	button.join {
+	  border: none;
+	  background-color: #0088ff;
+	  color: white;
+	  width: 60px;
+	  height: 60px;
+	  border-radius: 20px;
+	  font-size: 14px;
+	  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	  cursor: pointer;
+	}
+	
 	button.send:hover {
 	  background-color: #005eff;
 	}
@@ -107,14 +119,73 @@
 	  display: none; /* 숨김 처리 */
 	}
 	
-	.chatting {
+	table.sglist {
+	  border-collapse: collapse; /* 셀 경계선 제거 */
+	  width: 15%; /* 전체 너비 */
+	  margin-bottom: 20px; /* 하단 여백 */
+	}
+	
+	table.sglist thead {
+	  background-color: #f5f5f5; /* 배경색 */
+	  font-weight: bold; /* 글자 굵기 */
+	}
+	
+	table.sglist tbody {
+	  background-color: #fff; /* 배경색 */
+	}
+	
+	table.sglist th,
+	table.sglist td {
+	  border: 1px solid #ddd; /* 셀 경계선 스타일 */
+	  padding: 8px; /* 셀 내부 여백 */
+	}
+	
+	table.sglist th[hidden],
+	table.sglist td[hidden] {
+	  display: none; /* 숨김 처리 */
+	}
+	table.sglist td:nth-child(1) {
+	  font-size: 14px;
+	  font-weight: bold;
+	  width: 30%;
+	}
+	
+	table.sglist td:nth-child(2) {
+	  font-size: 14px;
+	  width: 20%;
+	}
+	
+	table.sglist td:nth-child(3) {
+	  font-size: 12px;
+	  color: #999;
+	  text-align: right;
+	  width: 20%;
+	}
+	table.sglist td:nth-child(4) {
+	  font-size: 14px;
+	  font-weight: bold;
+	  width: 10%;
+	}
+	
+	table.sglist td:nth-child(5) {
+	  font-size: 14px;
+	  width: 20%;
+	}
+	div.chatting, .chatting {
 	  position: relative;
+	  right: 0px;
 	}
 	
 	.memlist {
 	  position: absolute;
-	  top: 142px;
-	  right: 200px;
+	  top: 300px;
+	  right: 0px;
+	}
+	
+	.sglist {
+	  position: absolute;
+	  top: 350px;
+	  left: 0;
 	}
 	
 </style>
@@ -138,15 +209,31 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	
+	<table class="sglist">
+		<thead>
+			<tr>
+				<th hidden>방 번호</th>
+				<th colspan="6">소모임 리스트</th>
+			</tr>
 			
-	<div class="chatting" style="overflow:scroll; width:710px; height:400; scroll-behavior: smooth;" id="chatting">
+			<tr>
+				<th>제목</th>
+				<th>약속날짜</th>
+				<th>지역</th>
+				<th>인원 수</th>
+				<th>참가</th>
+				<th>참가인원</th>
+			</tr>
+		</thead>
+		
+		<tbody id="sglist">
+	
+		</tbody>
+	</table>
+			
+	<div class="chatting" style="overflow:scroll; width:600px; height:400px; scroll-behavior: smooth;" id="chatting">
 		<table class="chatting">
-			<colgroup>
-				<col width="30%"/>
-				<col width="50%"/>
-				<col width="20%"/>
-			</colgroup>
-				
 			<%-- <c:forEach items="${listmsg}" var="chat"> --%>
 				<tbody id="clist">
 					
@@ -161,13 +248,15 @@
 			<button class="send">전송</button>
 		</form>	
 		
-		<form action="sgwrite.go" method="get">
-			<button>소모임 생성하기</button>
-		</form>	
-			
+			<button onclick="location.href='sgwrite.go?gidx=${sessionScope.gidx}'">소모임 생성</button>		
 </body>
 <script>
-
+	
+	var msg = "${msg}";
+	if(msg != ""){
+	   alert(msg);
+	}
+	
 	function sendMsgOnEnter(event) {
 		  if (event.keyCode === 13) { // Enter key code is 13
 		    event.preventDefault(); // Prevent default enter key behavior (new line)
@@ -176,9 +265,13 @@
 	}
 	var gidx = "${sessionScope.gidx}";
 	
+	clist();
+	sglist();
+	
 	$(document).ready(function () {
 	    setInterval(function () {
 	        clist();
+	        sglist();
 	    }, 500);
 	});
 	
@@ -189,7 +282,7 @@
 	        data:{},
 	        dataType:'json',
 	        success:function(data){
-	            listDraw(data.clist);
+	            clistDraw(data.clist);
 	        },
 	        error:function(e){
 	            console.log(e);
@@ -197,7 +290,7 @@
 	    }); 
 	}
 	
-	function listDraw(clist){
+	function clistDraw(clist){
 	    var content = '';
 	    clist.forEach(function(item,index){
 	        content += '<tr>'
@@ -208,6 +301,37 @@
 	    });
 	    $('#clist').empty();
 	    $('#clist').append(content);
+	}
+	
+	function sglist(){
+	    $.ajax({
+	        type:'get',
+	        url:'sglist.ajax',
+	        data:{},
+	        dataType:'json',
+	        success:function(data){
+	            sglistDraw(data.sglist);
+	        },
+	        error:function(e){
+	            console.log(e);
+	        }
+	    }); 
+	}
+	
+	function sglistDraw(sglist){
+	    var content = '';
+	    sglist.forEach(function(item,index){
+	        content += '<tr>'
+	        content += '<td>' + item.sgsubject + '</td>'
+	        content += '<td>' + item.sgMeeting_date + '</td>'
+	        content += '<td>' + item.area + '</td>'
+	        content += '<td>' + item.maxmem + '</td>'
+	        content += '<td><button onclick="location.href=\'sgjoin.do?sidx=' + item.sidx + '\'">참가</button></td>';
+	        content += '<td><button onclick="location.href=\'sgjoinlist.go?sidx=' + item.sidx + '\'">참가인원</button></td>';
+	        content += '</tr>'
+	    });
+	    $('#sglist').empty();
+	    $('#sglist').append(content);
 	}
 	
 </script>

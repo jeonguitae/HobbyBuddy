@@ -5,33 +5,43 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<style>
+<style>	
+	table, th, td{
+      border : 1px solid black;
+      border-collapse: collapse;
+      padding : 5px 10px;
+   	}
+	
 </style>
+
+<script type="text/javascript">
+
+	window.onload = function() {
+		today = new Date();
+		console.log("today.toISOString() >>>" + today.toISOString());
+		today = today.toISOString().slice(0, 10);
+		console.log("today >>>> " + today);
+		bir = document.getElementById("date");
+		bir.value = today;
+	}
+	
+</script>
 </head>
 <body>
 <form action="sgwrite.do" method="post">
 		<table>
+			<tr hidden>
+				<th>글 번호</th>
+				<td><input type="text" name="gidx"/></td>
+			</tr>
 			<tr>
 				<th>*작성자</th>
 				<td><input type="text" name="id" readonly/></td>
 			</tr>
 			<tr>
 				<th>*제목</th>
-				<td><input type="text" name="subject"/></td>
+				<td><input type="text" name="sgsubject"/></td>
 			</tr>
-			
-			<tr>
-	         <td colspan="2">
-	            <select name=big_hb>
-	               <c:forEach items="${big_hb}" var="b">
-	                  <option value="${b.big_hb}">${b.big_hb}</option>      
-	               </c:forEach>
-	            </select>
-	            <select name="small_hb">
-	           		 <option>x</option>
-	            </select>
-	           </td>
-      		</tr>
 			
 			<tr>
 				<th>지역</th>
@@ -89,14 +99,14 @@
 			<tr>
 				<th>약속 날짜</th>
 				<td>
-					<input type="date" id="date" name="meeting_date">
+					<input type="date" id="date" name="sgMeeting_date"/>
 				</td>
 			</tr>
 			
 			<tr>
 				<th>최대 인원</th>
 				<td>
-					<input type="range" name="maxmem" min="2" max="100" step="1" value=""/>
+					<input type="number" name="maxmem"/>
 				</td>
 			</tr>
 			
@@ -109,77 +119,12 @@
 	</form>	
 </body>
 <script>
-	myHobbyList();
-	function myHobbyList(){
-	   console.log("loginId : " + loginId);
-	   $.ajax({
-	      type:'get',
-	      url:'myHobbyList.ajax',
-	      data:{id:loginId},
-	      dataType:'json',
-	      success:function(data){
-	         console.log("data, myHobbyList : " + data.myHobbyList);
-	         console.log("data, login : " + data.login);
-	         if(!true){
-	            alert('로그인이 필요한 서비스 입니다.');
-	            location.href='./';
-	         }else{
-	            myHobbyListDraw(data.myHobbyList);
-	         }
-	      },
-	      error:function(e){
-	         console.log(e);
-	      }
-	   });   
-	}
+	var gidx = "${sessionScope.gidx}";
+	console.log(gidx);
+	$('input[name=gidx]').val(gidx)
 	
-	
-	function myHobbyListDraw(myHobbyList){
-	   console.log("myHobbyList : " + myHobbyList);
-	   var content = '';
-	   myHobbyList.forEach(function(item,index){
-	      content += '<tr>';
-	      content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
-	      content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
-	      content += '</tr>';
-	      console.log(item.my_hobby_no);
-	   });
-	   
-	   $('#myHobbyList').empty();
-	   $('#myHobbyList').append(content);
-	}
-	
-	$('select[name=big_hb]').on('change', function(e){
-	    var big_hb = $('select[name=big_hb]').val();      
-	    console.log("big_hb ? " + big_hb);      
-	    $.ajax({
-	       type: 'get'
-	       ,url: 'big_hb.ajax'
-	       ,data:{'big_hb':big_hb}
-	       ,dataType:'json'
-	       ,success:function(data){
-	          console.log("big_hb data : " + data.small_hb);
-	          if(data != ""){
-	             console.log("big_hb 취미 호출");
-	             small_hbDraw(data.small_hb);
-	          } else {
-	             alert('오류가 발생하였습니다.');
-	          }
-	       }
-	       ,error:function(e){
-	          console.log(e);
-	       }
-	    });
-	})
-	
-	function small_hbDraw(small_hb){
-	 console.log("small_hb : " + small_hb);
-	 var content = '';
-	 small_hb.forEach(function(item,index){
-	    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
-	 });
-	 $('select[name="small_hb"]').empty();
-	 $('select[name="small_hb"]').append(content);
-	}
+	var loginId = "${sessionScope.loginId}";
+	$('input[name=id]').val(loginId)
+
 </script>
 </html>

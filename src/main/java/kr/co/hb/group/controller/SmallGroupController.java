@@ -1,6 +1,9 @@
 package kr.co.hb.group.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.hb.group.dto.OpenChatDTO;
+import kr.co.hb.group.dto.SmallGroupDTO;
 import kr.co.hb.group.service.SmallGroupService;
 import kr.co.hb.member.dto.MemberDTO;
 import kr.co.hb.member.service.MemberService;
@@ -29,6 +36,49 @@ public class SmallGroupController {
 		model.addAttribute("big_hb",big_hb);
 		
 		return "sGroupCreate";
+	}
+	
+	@RequestMapping(value="/sgwrite.do")
+	public String sgwrite(Model model, HttpSession session, @RequestParam HashMap<String, String> params) {
+		
+		int gidx = Integer.parseInt(params.get("gidx"));
+		logger.info("gidx : " + gidx);
+		
+		int row = service.sgwrite(params);
+		
+		return "redirect:/openchat.go";
+	}
+	
+	@RequestMapping(value = "/sglist.ajax")
+	@ResponseBody
+	public HashMap<String, Object> sglistCall(HttpSession session){
+
+		HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			int gidx = (int) session.getAttribute("gidx");
+			
+			ArrayList<SmallGroupDTO> sglist = service.sglist(gidx);
+			
+			map.put("sglist", sglist);
+		
+		return map;
+	}
+	
+	@RequestMapping(value="/sgjoin.do")
+	public String sgjoin(Model model, HttpSession session, @RequestParam int sidx) {
+		String msg = "참가 실패!";
+		
+		String id = (String) session.getAttribute("loginId");
+		
+		int row = service.sgjoin(sidx, id);
+		
+		if(row == 1) {
+			
+			msg = "참가성공!";
+		}
+		
+		model.addAttribute("msg", msg);
+		return "openChat";
 	}
 
 	
