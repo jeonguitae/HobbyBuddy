@@ -318,8 +318,7 @@ public class MemberController {
 		ArrayList<MemberDTO> myReplyList = service.myReplyList(id);
 		logger.info("myReplyList"+myReplyList);
 
-		model.addAttribute("myReplyList", myReplyList);			
-		
+		model.addAttribute("myReplyList", myReplyList);	
 		
 		return "myReplyList";
 	}

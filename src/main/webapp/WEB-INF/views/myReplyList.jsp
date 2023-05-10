@@ -11,8 +11,8 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-	<h3>작성한 글 목록</h3>
-	<input type="button" value="작성한 댓글 목록 보기" onclick="location.href='myReplyList.go'"/>
+	<h3>작성한 댓글의 게시판 목록</h3>
+	<input type="button" value="작성한 게시판 목록 보기" onclick="location.href='myBoardList.go'"/>
 	<table>
 		<colgroup>
 			<col width="10%"/>
@@ -25,19 +25,19 @@
 			<tr>
 				<th>게시판 번호</th>
 				<th>게시판 제목</th>
-				<th>작성자</th>
+				<th>작성한 댓글 내용</th>
 				<th>작성일</th>
 				<th>조회수</th>
 			</tr>
 		</thead>		
 		<tbody> 
-			<c:if test="${myBoardList.size() == 0}">
+			<c:if test="${myReplyList.size() == 0}">
 				<tr>
-					<th colspan="6">등록된 글이 없습니다.</th>
+					<th colspan="6">등록한 댓글이 없습니다.</th>
 				</tr>
 			</c:if>
 			
-				<c:forEach items="${myBoardList}" var="bbs">
+				<c:forEach items="${myReplyList}" var="bbs">
 					<tr>
 						<td>${bbs.fbNo}</td>
 						<td><a href="fdetail.do?fbNo=${bbs.fbNo}">${bbs.title}</a></td>
