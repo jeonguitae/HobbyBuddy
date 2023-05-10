@@ -26,7 +26,11 @@ public interface BoardDAO {
 
 	int fupdate(HashMap<String, String> params);
 
-	void filesave(String id, String board_class, String ori_photo_name, String new_photo_name, int board_num);
+	void filesave(String id, String board_class, String ori_photo_name, String new_photo_name, int fbNo);
+
+	int fphotodel(int fbNo, String board_class);
+
+
 
 	
 

@@ -18,7 +18,7 @@
 	
 	<insert id="filesave">
 	INSERT INTO hbPhoto(id, new_photo_name, ori_photo_name, board_class, board_num)
-			VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})	
+	VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})	
 	</insert>
 	
 	<update id="uphit">
@@ -37,11 +37,17 @@
 	</delete>
 	
 	<select id="findFile" resultType="String">
-	SELECT newFileName FROM hbPhoto( WHERE fbNo=#{param1}
+	SELECT new_photo_name FROM hbPhoto WHERE board_num=#{param1}
 	</select>
 	
 	
 	<update id="fupdate" parameterType="hashmap">
-	UPDATE fBoard SET title=#{title}, id=#{id}, bContent=#{bContent} WHERE fbNo = #{fbNo}
+	UPDATE fBoard SET title=#{title}, bContent=#{bContent} WHERE fbNo = #{fbNo}
 	</update>
+	
+	<delete id="fphotodel" >
+	DELETE FROM hbPhoto WHERE board_num=#{param1} AND board_class=#{param2}
+	
+	
+	</delete>
 </mapper>
