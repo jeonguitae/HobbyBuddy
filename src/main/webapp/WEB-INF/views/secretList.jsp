@@ -174,22 +174,27 @@ function listPrint(list) {
 	  $('button[id^="chkBtn"]').on('click', function() {
 		    var sboard_num = $(this).attr('id').replace('chkBtn', '');
 		    var secret_state = $(this).data('secret-state');
-		    var new_secret_state = !secret_state; // 현재 secret_state 값의 반대값
-			console.log(new_secret_state);
-		    if (confirm('해당 글 ' + (new_secret_state ? '비밀글 설정' : '비밀글 해제') + '하시겠습니까?')) {
-		    	
+		    var new_secret_state = secret_state; 
+		    if (secret_state) {
+		        if (confirm('해당 글 비밀글 해제하시겠습니까?')) {
+		            new_secret_state = false;
+		        }
+		    } else {
+		        if (confirm('해당 글 비밀글 설정하시겠습니까?')) {
+		            new_secret_state = true;
+		        }
+		    }
+		    if (new_secret_state !== secret_state) { 
 		        $.ajax({
 		            type: 'POST',
 		            url: 'secret_chk.ajax',
 		            cache: false,
-		            // new_secret : true
-		            data: { sboard_num: sboard_num, secret_state: secret_state },
+		            data: { sboard_num: sboard_num, secret_state: new_secret_state },
 		            success: function(response) {
 		                console.log(response);
-		                // 버튼의 텍스트와 data-secret-state 값을 바꿔준다.
 		                var newBtnText = new_secret_state ? '비밀글 해제' : '비밀글 설정';
 		                $('button#chkBtn'+sboard_num).text(newBtnText);
-		                $('button#chkBtn'+sboard_num).data('secret-state', secret_state);
+		                $('button#chkBtn'+sboard_num).data('secret-state', new_secret_state);
 		            },
 		            error: function(error) {
 		                console.error(error);
@@ -197,7 +202,6 @@ function listPrint(list) {
 		        });
 		    }
 		});
-
 };
 	
 
