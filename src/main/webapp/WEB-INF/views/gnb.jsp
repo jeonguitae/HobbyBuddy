@@ -3,93 +3,79 @@
 <!DOCTYPE html>
 <html>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/css.css">
 <style>
+	
 	#profileIcon{
-		text-align: center;
-		background-color: yellowgreen;
-		border: 1px solid green;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 150px;
-		height: 20px;
 		display:inline;
+		background-color: #22c55e;
+ 		color: #ffffff;
+		border: none;
+	 	border-radius: 5px;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+		font-size: 1.2rem;
 	}
 	.panel{
-		padding: 20px 10px;
 		display: none;
-		text-align: center;
-		background-color: yellowgreen;
-		border: 1px solid green;
-		padding: 5px;
-		margin: 2px;
+		background-color: #22c55e;
+ 		color: #ffffff;
+		border: none;
+	 	border-radius: 5px;
+		padding: 0.5rem 1rem;
 		cursor: pointer;
-		width: 150px;
-		height: 20px;
+		font-size: 1.2rem;
 	}
 	.panel2{
-		padding: 20px 10px;
 		display: none;
-		text-align: center;
-		background-color: yellowgreen;
-		border: 1px solid green;
-		padding: 5px;
-		margin: 2px;
+		background-color: #22c55e;
+ 		color: #ffffff;
+		border: none;
+	 	border-radius: 5px;
+		padding: 0.5rem 1rem;
 		cursor: pointer;
-		width: 150px;
-		height: 20px;
+		font-size: 1.2rem;
 	}
 	.panel3{
-		padding: 20px 10px;
 		display: none;
-		text-align: center;
-		background-color: yellowgreen;
-		border: 1px solid green;
-		padding: 5px;
-		margin: 2px;
+		background-color: #22c55e;
+ 		color: #ffffff;
+		border: none;
+	 	border-radius: 5px;
+		padding: 0.5rem 1rem;
 		cursor: pointer;
-		width: 150px;
-		height: 20px;
+		font-size: 1.2rem;
 	}
 	
 	#alarmIcon{
-		text-align: center;
-		background-color: green;
-		border: 1px solid black;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 100px;
-		height: 20px;
 		display:inline;
+		background-color: #22c55e;
+ 		color: #ffffff;
+		border: none;
+	 	border-radius: 5px;
+		padding: 0.5rem 1rem;
+		cursor: pointer;
+		font-size: 1.2rem;
 	}
 	
 	.beforeAlarm{
-		padding: 20px 10px;
-		display: none;
-		text-align: center;
-		background-color: gray;
-		border: 1px solid gray;
-		padding: 5px;
-		margin: 2px;
-		cursor: pointer;
-		width: 300px;
-		height: 20px;
-		
+		display: none;	
 	}
-
 	.alarmList{
-		padding: 20px 10px;
 		display: none;
-		text-align: center;
-		background-color: gray;
-		border: 1px solid gray;
-		padding: 5px;
-		margin: 2px;
+		background-color: #22c55e;
+ 		color: #ffffff;
+		border: none;
+	 	border-radius: 5px;
+		padding: 0.5rem 1rem;
 		cursor: pointer;
-		width: 565px;
-		height: 20px;		
+		font-size: 1.2rem;	
 	}
+	
+	.menu{
+		display:inline;
+	}
+	
 </style>
 <head>
 <meta charset="UTF-8">
@@ -99,34 +85,43 @@
 <body>
 	${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 <br/><br/>
 	
-	<input type="button" value="하비버디" onclick="location.href='./'"/><br/><br/><br/>
+	<a href="./"><img width="100" src="/photo/HBL.png"/></a>
+	<br/><br/><br/>
 	
-	<div id="profileIcon">프로필</div>
-	<div class="panel2" onclick="location.href='login.go'">로그인</div>
-	<div class="panel" onclick="location.href='logout.go'">로그아웃</div>
-	<div class="panel" onclick="location.href='pwChk.go'">마이페이지</div>
-	<div class="panel" onclick="location.href='myBoardList.go'">작성한 글/댓글</div>
-	<div class="panel">참여한 모임</div>
-	<div class="panel">쪽지방</div>
-	<div class="panel">즐겨찾기</div>
-	<div class="panel3" onclick="location.href='admin.go'">관리자</div>
-	
-	<div id="alarmIcon">알림</div>
-	<div id="beforeAlarm" class="beforeAlarm">
-		<input type="button" value="알림 읽음 처리" onclick="alarmListRead()"/>
-		<input type="button" value="이전 알림 보기" onclick="location.href='beforeAlarm.go'"/>	
+	<div class="menu">
+		<div id="profileIcon">프로필</div>
+		<div class="panel2" onclick="location.href='login.go'">로그인</div>
+		<div class="panel" onclick="location.href='logout.go'">로그아웃</div>
+		<div class="panel" onclick="location.href='pwChk.go'">마이페이지</div>
+		<div class="panel" onclick="location.href='myBoardList.go'">작성한 글/댓글</div>
+		<div class="panel">참여한 모임</div>
+		<div class="panel">쪽지방</div>
+		<div class="panel">즐겨찾기</div>
+		<div class="panel3" onclick="location.href='admin.go'">관리자</div>
 	</div>
+	
+	<div class="menu">
+		<div id="alarmIcon">알림</div>
+		<div id="beforeAlarm" class="beforeAlarm">
+			<input type="button" value="알림 읽음 처리" onclick="alarmListRead()"/>
+			<input type="button" value="이전 알림 보기" onclick="location.href='beforeAlarm.go'"/>	
+		</div>
+	</div>
+	<div class="menu">
+		<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
+		<input type="button" value="프로필" onclick="location.href='profile.go'"/>
+		<input type="button" value="랜덤 매칭" onclick="location.href='randomList.go'"/>
+		<input type="button" value="랜덤 매칭" onclick="location.href='noNameList.go'"/>
+		<input type="button" value="자유 게시판" onclick="location.href='flist.go'"/>
+		<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
+	</div>
+	<br/><br/><br/>
 
 	
-	<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
-	<input type="button" value="프로필" onclick="location.href='profile.go'"/>
-	<input type="button" value="랜덤 매칭" onclick="location.href='randomList.go'"/>
-	<input type="button" value="익명 매칭" onclick="location.href='noNameList.go'"/>
-	<input type="button" value="자유 게시판" onclick="location.href='flist.go'"/>
-	<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
 </body>
 
 <script>
+
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
 	var alarmCount = "${sessionScope.alarmCount}";
@@ -151,7 +146,7 @@
 		$('#alarmIcon').css('background-color', 'red');
 	}
 	
-	alarmList();	
+	alarmList();
 	function alarmList(){
 		console.log("loginId : " + loginId);
 		$.ajax({
@@ -161,8 +156,7 @@
 			dataType:'json',
 			success:function(data){
 				console.log("data : " + data.alarmList);
-				alarmListDraw(data.alarmList);
-				
+				alarmListDraw(data.alarmList);				
 			},
 			error:function(e){
 				console.log(e);
@@ -172,15 +166,17 @@
 	
 	function alarmListDraw(alarmList){
 		console.log("alarmList : " + alarmList);
-		var content = '';
-		alarmList.forEach(function(item,index){
-			content += '<div class="alarmList">';
-			content += '<input type="checkbox" value="'+item.alarm_no+'"/>';
-			content += '<a href="alarmDetail.do?alarm_num='+item.alarm_num+'&alarm_class='+item.alarm_class+'&alarm_no='+item.alarm_no+'">';
-			content += item.alarm_title + " / " + item.alarm_content;
-			content += '</a></div>';
-		});
-	    $(content).insertBefore($('#beforeAlarm').parent().find('#beforeAlarm').next());
+		if(alarmList && alarmList.length){
+			var content = '';
+			alarmList.forEach(function(item,index){
+				content += '<div class="alarmList">';
+				content += '<input type="checkbox" value="'+item.alarm_no+'"/>';
+				content += '<a href="alarmDetail.do?alarm_num='+item.alarm_num+'&alarm_class='+item.alarm_class+'&alarm_no='+item.alarm_no+'">';
+				content += item.alarm_title + " / " + item.alarm_content;
+				content += '</a></div>';
+			});
+		    $(content).insertBefore($('#beforeAlarm').parent().find('#beforeAlarm').next());				
+		}
 	
 	}
 	
@@ -212,6 +208,9 @@
 			}		
 		});		
 	}
+	
+    
+
 </script>
 
 </html>

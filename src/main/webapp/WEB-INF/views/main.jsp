@@ -5,12 +5,11 @@
 <meta charset="UTF-8">
 <title>메인</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<style>
-</style>
+<link rel="stylesheet" href="resources/css/css.css">
+<style></style>
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-	<br/><br/><div>하비버디 메인화면입니다</div><br/>
 	<input type="button" value="로그인" class="loginIdChk" onclick="location.href='login.go'"/>
 	<input type="button" value="회원가입" class="loginIdChk" onclick="location.href='join.go'"/>
 	<input type="button" value="로그아웃" class="loginIdChk2" onclick="location.href='logout.go'"/>
@@ -20,7 +19,6 @@
 	<input type="button" value="맛집" onclick="location.href='join.go'"/>	
 	<input type="button" value="여가" onclick="location.href='join.go'"/>	
 	<input type="button" value="기타" onclick="location.href='join.go'"/>
-	<input type="button" value="gnb" onclick="location.href='gnb.go'"/>
 	
 
 	

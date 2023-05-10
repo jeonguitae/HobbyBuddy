@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/css.css">
 <title>취미 관리</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>

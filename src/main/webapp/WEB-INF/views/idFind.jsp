@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/css.css">
 <title>아이디 찾기</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
