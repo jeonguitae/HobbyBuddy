@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/css.css">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
