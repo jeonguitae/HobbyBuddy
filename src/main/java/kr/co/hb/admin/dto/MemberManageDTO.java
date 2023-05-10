@@ -4,7 +4,17 @@ public class MemberManageDTO {
 	
 	private boolean admin;
 	private String id;
+	private String name;
 	private boolean ban;
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 	public boolean isAdmin() {
 		return admin;
 	}
@@ -24,7 +34,4 @@ public class MemberManageDTO {
 		this.ban = ban;
 	}
 	
-
-	
-
 }

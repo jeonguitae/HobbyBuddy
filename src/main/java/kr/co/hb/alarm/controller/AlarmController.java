@@ -40,12 +40,26 @@ public class AlarmController {
 		session.setAttribute("alarmCount", alarmCount);
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		if(session.getAttribute("loginId")!= null) {
-			login = true;
-			logger.info("session.getAttribute(\"loginId\") : " + session.getAttribute("loginId"));
-			ArrayList<AlarmDTO> alarmList = service.alarmList(loginId);
-			map.put("alarmList", alarmList);
-			logger.info("alarmList : "  + alarmList);
+		if(session.getAttribute("loginId") != null) {
+		    login = true;
+		    logger.info("session.getAttribute(\"loginId\") : " + session.getAttribute("loginId"));
+		    ArrayList<AlarmDTO> alarmList = service.alarmList(loginId);
+
+		    // AlarmDTO 객체와 관련된 작업은 alarmList가 null이 아닌 경우에만 수행
+		    if (alarmList != null) {
+		        for (AlarmDTO dto : alarmList) {
+		            String alarm_title = dto.getAlarm_title();
+		            String newalarm_title = alarm_title.substring(0, 5);
+		            dto.setAlarm_title(newalarm_title + "...");
+
+		            String alarm_content = dto.getAlarm_content();
+		            String newalarm_content = alarm_content.substring(0, 5);
+		            dto.setAlarm_content(newalarm_content + "...");
+		        }
+		    }
+
+		    map.put("alarmList", alarmList);
+		    logger.info("alarmList : " + alarmList);
 		}
 		map.put("login", login);
 		
