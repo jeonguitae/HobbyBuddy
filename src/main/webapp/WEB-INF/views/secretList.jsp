@@ -68,7 +68,7 @@
                <th>작성자</th>
                <th>처리한 관리자</th>
                <th>비밀글 여부</th>                        
-               <th>처리 일시</th>                       
+               <th>비밀 일시</th>                       
             </tr>            
          </thead>
          <tbody id="list">             
@@ -149,30 +149,61 @@ function listCall(page){
 }
 
 
-function listPrint(list){
-   var content='';
-   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
-   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
-   // 해결방법 2. js 에서 변환
-   list.forEach(function(item,idx){
+function listPrint(list) {
+	  var content = '';
+	  // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
+	  // 해결방법 1. DTO 에서 Date 를 String 으로 반환
+	  // 해결방법 2. js 에서 변환
+
+	  list.forEach(function(item, idx) {
+	    content += '<tr>';
+	    content += '<td>'+item.sboard_class+'</td>';
+	    content += '<td>'+item.sboard_num+'</td>';
+	    content += '<td><a href="reportDetail.go?rept_no='+item.sboard_num+'">'+item.sboard_title+'</a></td>';
+	    content += '<td>'+item.writer_id+'</td>';
+	    content += '<td>'+item.admin_id+'</td>';
+	    content += '<td><button id="chkBtn'+item.sboard_num+'" data-secret-state="'+item.secret_state+'">'+ (item.secret_state ? '비밀글 해제' : '비밀글 설정') + '</button></td>';
+	    var date = new Date(item.secret_time);
+	    // 기본은 en-US
+	    content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+	    content += '</tr>';
+	  });
+	  $('#list').empty();
+	  $('#list').append(content);  
 	  
-	   content += '<tr>';
-	   content += '<td>'+item.sboard_class+'</td>';
-	   content += '<td>'+item.sboard_num+'</td>';
-	   content += '<td><a href="reportDetail.go?rept_no='+item.sboard_num+'">'+item.sboard_title+'</a></td>';
-	   content += '<td>'+item.writer_id+'</td>';
-	   content += '<td>'+item.admin_id+'</td>';
-	   content += '<td><button id="chkBtn">'+ (item.secret_state ? '비밀글 해제' : '비밀글 설정') + '</button></td>';	   
-	   var date = new Date(item.secret_time);
-	   // 기본은 en-US
-	   content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-	   content += '</tr>';
-   });
-   $('#list').empty();
-   $('#list').append(content);
-   
-   
-}
+	  $('button[id^="chkBtn"]').on('click', function() {
+		    var sboard_num = $(this).attr('id').replace('chkBtn', '');
+		    var secret_state = $(this).data('secret-state');
+		    var new_secret_state = !secret_state; // 현재 secret_state 값의 반대값
+			console.log(new_secret_state);
+		    if (confirm('해당 글 ' + (new_secret_state ? '비밀글 설정' : '비밀글 해제') + '하시겠습니까?')) {
+		    	
+		        $.ajax({
+		            type: 'POST',
+		            url: 'secret_chk.ajax',
+		            cache: false,
+		            // new_secret : true
+		            data: { sboard_num: sboard_num, secret_state: secret_state },
+		            success: function(response) {
+		                console.log(response);
+		                // 버튼의 텍스트와 data-secret-state 값을 바꿔준다.
+		                var newBtnText = new_secret_state ? '비밀글 해제' : '비밀글 설정';
+		                $('button#chkBtn'+sboard_num).text(newBtnText);
+		                $('button#chkBtn'+sboard_num).data('secret-state', secret_state);
+		            },
+		            error: function(error) {
+		                console.error(error);
+		            }
+		        });
+		    }
+		});
+
+};
+	
+
+
+
+
 
 </script>
 </html>

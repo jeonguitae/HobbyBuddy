@@ -16,16 +16,20 @@
 
 </head>
 <body>
-	<form action="" method="post">
+	<form action="report.do" method="post">
 		<table>
 			<tr>
-				<th>신고 번호</th>
-				<td><input type="text" name="number"/></td>
-			</tr>
-			
-			<tr>
-				<th>신고자 아이디</th>
+				<th>신고 대상 아이디</th>
 				<td><input type="text" name="user_name"/></td>
+			</tr>					
+			<tr>
+				<%String gidx = request.getParameter("gidx");%>	
+			    <th>신고 방번호</th>
+			    <td><%= gidx %></td>
+			</tr>			
+			<tr>
+				<th>신고 일시</th>
+				<td></td>
 			</tr>
 			
 			<tr>
@@ -45,18 +49,15 @@
 			<tr>
 				<th>신고 제목</th>
 				<td><input type="text" name="subject"/></td>
-			</tr>
-			
-			<tr>
-				<th>신고 사유</th>
-				<td><input type="text" name="reason"/></td>
-			</tr>
-			
+			</tr>		
 			<tr>
 				<th>신고 내용</th>
 				<td><textarea name="content"></textarea></td>
 			</tr>
-			
+			<tr>
+				<th>사진<th>
+						
+			</tr>			
 			<tr>
 				<th colspan="2">
 					<input type="button" onclick="location.href='./'" value="신고등록"/>
@@ -66,5 +67,7 @@
 		</table>	
 	</form>
 </body>
-<script></script>
+<script>
+
+</script>
 </html>

@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/css.css">
 <style>
    table, th, td{
       border: 1px solid black;

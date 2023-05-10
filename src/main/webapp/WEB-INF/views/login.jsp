@@ -3,6 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="resources/css/css.css">
 <title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
@@ -58,8 +59,6 @@
 	      success : function(data){
 	         console.log(data);
 	         if (data.member != null) {
-	            alert('로그인에 성공했습니다.');
-	            
 	            location.href='./';
 	         }else{
 	            alert('아이디 또는 비밀번호를 확인해주세요.');

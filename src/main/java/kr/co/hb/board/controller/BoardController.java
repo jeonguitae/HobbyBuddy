@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
+
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.board.service.BoardService;
 
@@ -30,6 +32,7 @@ public class BoardController {
 		logger.info("listcall");
 		ArrayList<BoardDTO> list = service.list();
 		model.addAttribute("list", list);
+		
 		return "fBoardList";
 	}
 	@RequestMapping(value="/fwrite.go")
@@ -45,17 +48,21 @@ public class BoardController {
 		return service.fwrite(photo,params, null);
 	}
 	@RequestMapping(value="/fdetail.do")
-	public String fBoardDetail(Model model, @RequestParam int fbNo) {
-		String page = "redirect:/flist.go";
+	public String fBoardDetail(Model model, @RequestParam int fbNo, HttpSession session) {
+		String page = "";
 		logger.info("상세페이지로 넘어는 옴?");
 		//flag에 따라 조회수 해야 하니까
 		
 		BoardDTO dto=service.detail(fbNo,"detail");
 		
-		if (!dto.equals(null)) {
+		if (dto != null) {
 			model.addAttribute("dto",dto);
+			page = "redirect:/fdetail.do?fbNo="+fbNo;
 		}
-		page = "fBoardDetail";
+		if (session.getAttribute("loginId")==null) {
+			page = "fBoardList";
+		}
+		
 		return page;			
 	}
 	@RequestMapping(value="fdelete.do")
@@ -71,18 +78,27 @@ public class BoardController {
 		BoardDTO dto =service.detail(fbNo,"update");
 		if (dto!=null) {
 			model.addAttribute("dto",dto);
-			page = "fBoardUpdate";
+			
 		}
 		logger.info("업뎃가기 전"+dto);
-		return page;
+		return "fBoardUpdate";
 	}
-	/*
+
 	@RequestMapping(value="fupdate.do")
 	public String fupdate(MultipartFile photo ,@RequestParam HashMap<String, String> params) {
 		logger.info("업뎃 두 하기 전이양");
 		return service.fupdate(photo, params);
 	}
-	*/
+	@RequestMapping(value="fPhotodel.do")
+	public String fphotodel(@RequestParam int fbNo, @RequestParam String board_class) {
+		/*
+		 * BoardDTO dto = new BoardDTO(); int board_num = dto.getFbNo();
+		 */
+		service.fphotodel(fbNo, board_class);
+		logger.info("사진삭제할건데 row");
+		return "redirect:/fupdate.go?fbNo="+fbNo;
+	}
+	
 	
 }
 

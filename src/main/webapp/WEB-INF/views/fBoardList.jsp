@@ -74,20 +74,38 @@
 			</c:if>
 			
 			<c:forEach items="${list}" var="bbs">
-				<tr>
-					<td>${bbs.fbNo}</td>
-					<td><a href="fdetail.do?fbNo=${bbs.fbNo}">${bbs.title}</a></td>
-					<td>${bbs.id}</td>
-					<td>${bbs.fbTime}</td>
-					<td>${bbs.bhit}</td>
-				</tr>
+				<c:if test="${not empty sessionScope.loginId}">
+					<tr>
+						<td>${bbs.fbNo}</td>
+						<td><a href="fdetail.do?fbNo=${bbs.fbNo}" id="login">${bbs.title}</a></td>
+						<td>${bbs.id}</td>
+						<td>${bbs.fbTime}</td>
+						<td>${bbs.bhit}</td>
+					</tr>
+				</c:if> 
+				<c:if test="${empty sessionScope.loginId}">
+					<tr>
+						<td>${bbs.fbNo}</td>
+						<td><a href="javascript:showAlert();">${bbs.title}</a></td>
+						<td>${bbs.id}</td>
+						<td>${bbs.fbTime}</td>
+						<td>${bbs.bhit}</td>
+					</tr>
+				</c:if>
 			</c:forEach>
 		</tbody>
 	</table>
 	<input type="submit" value="필터링검색"/>
+	<c:if test="${not empty sessionScope.loginId}">
 	<button onclick="location.href='fwrite.go'">글쓰기</button>
+	</c:if>
 </body>
 <script>
+
+	function showAlert() {
+		alert("로그인이 필요한 페이지입니다.");
+	}
+
 	//선택이 안 됐다고 value가 null은 아닌가봐
 	var count = 0;
 	$('.fbutton').click(function(){

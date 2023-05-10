@@ -42,14 +42,25 @@
 				<td>${dto.bContent}</td>
 			</tr>
 			
+			
+			<c:if test="${dto.id eq sessionScope.loginId}">
 			<tr>
 				<th colspan="2">
+					<input type="hidden" name="board_class" value="${dto.board_class}">
 					<input type="button" onclick="location.href='./fupdate.go?fbNo=${dto.fbNo}'" value="수정"/>
 					<input type="button" onclick="location.href='./fdelete.do?fbNo=${dto.fbNo}'" value="삭제"/>
 				</th>
 			</tr>
+			</c:if>
+			
 		</table>	
 		<input type="button" onclick="location.href='./flist.go'" value="리스트"/>
+
 </body>
-<script></script>
+<script>
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
+</script>
 </html>

@@ -10,7 +10,7 @@ public class BoardDTO {
 	private Date fbTime;
 	private int bhit ;
 	private String bContent;
-	private int photoIdx;
+	private int photo_idx;
 	private String new_photo_name;
 	private String ori_photo_name;
 	private String board_class;
@@ -82,11 +82,12 @@ public class BoardDTO {
 	public void setbContent(String bContent) {
 		this.bContent = bContent;
 	}
-	public int getPhotoIdx() {
-		return photoIdx;
+	
+	public int getPhoto_idx() {
+		return photo_idx;
 	}
-	public void setPhotoIdx(int photoIdx) {
-		this.photoIdx = photoIdx;
+	public void setPhoto_idx(int photo_idx) {
+		this.photo_idx = photo_idx;
 	}
 	public String getNew_photo_name() {
 		return new_photo_name;

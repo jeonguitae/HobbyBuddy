@@ -2,6 +2,8 @@ package kr.co.hb.admin.controller;
 
 import java.util.HashMap;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +18,8 @@ public class SecretController {
 
 	@Autowired SecretService service;	
 	
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@RequestMapping(value = "/secretList.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> secretList(
@@ -28,9 +32,13 @@ public class SecretController {
 	
 	@RequestMapping(value = "/secret_chk.ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public String update_chk(@RequestParam("notice_idx") String notice_idx,
-	                         @RequestParam("flag") String flag) {
-	  return service.secret_ChkUpdate(notice_idx, flag);
+	public String update_chk(@RequestParam("sboard_num") String sboard_num,
+	                         @RequestParam("secret_state") String secret_state) {
+	    logger.info("컨트롤러 등장");
+	    logger.info("sboard_num : " + sboard_num);
+	    logger.info("secret_state : " + secret_state);
+	    return service.secret_ChkUpdate(sboard_num, secret_state);
 	}
+
 	
 }

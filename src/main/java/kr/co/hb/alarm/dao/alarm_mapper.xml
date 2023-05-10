@@ -15,8 +15,7 @@
 	
 	<select id="beforeAlarm" resultType="kr.co.hb.alarm.dto.AlarmDTO">
 		SELECT * FROM read_alarm_list WHERE id_receive = #{param1}
-	</select>
-	
+	</select>	
 	
 	
 	<select id="alarmListRead_select" resultType="kr.co.hb.alarm.dto.AlarmDTO">

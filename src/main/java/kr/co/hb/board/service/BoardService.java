@@ -62,7 +62,7 @@ public class BoardService {
 		return page;
 	}
 
-	private void filesave(String id, String board_class, MultipartFile photo, int board_num ) {
+	private void filesave(String id, String board_class, MultipartFile photo, int fbNo) {
 		logger.info("filesave 왔땅 dto");
 		//이름명
 		String ori_photo_name=photo.getOriginalFilename();
@@ -79,7 +79,7 @@ public class BoardService {
 			
 			//db에 저장-dao
 			logger.info("filesave dao 한당");
-			dao.filesave(id,board_class,ori_photo_name,new_photo_name,board_num);
+			dao.filesave(id,board_class,ori_photo_name,new_photo_name,fbNo);
 			logger.info("filesave dao 끝난당");
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -113,19 +113,49 @@ public class BoardService {
 			}
 		}
 	}
-	/*
+	
 	public String fupdate(MultipartFile photo, HashMap<String, String> params) {
 		int fbNo = Integer.parseInt(params.get("fbNo"));
 		int row = dao.fupdate(params);
+		logger.info("fbNo : " + fbNo);
+		
+		BoardDTO dto = new BoardDTO();
+		dto.setId(params.get("id"));
+		dto.setBoard_class("자유");
+		String board_class = "자유";
+		String id = dto.getId();
+		int board_num = dto.getFbNo();
+		logger.info("board_num : " + board_num);
+		
 		logger.info("update service서 처리 중"+row);
+		
+	
+		
 		//사진도 수정해야 하니까 
-		if (!photo.getOriginalFilename().equals("")) {
-			filesave(id,board_class,photo,board_num);
+		if (photo != null && !photo.getOriginalFilename().equals("")) {
+            filesave(id,board_class, photo, fbNo);
+        } 
+		return "redirect:/fdetail.do?fbNo="+fbNo;
+	}
+
+	public void fphotodel(int fbNo, String board_class) {
+
+		
+		board_class = "자유";
+		//idx가 있는 경우-사진
+		String new_photo_name = dao.findFile(fbNo);
+		//사진 없는 경우
+		int row = dao.fphotodel(fbNo, board_class);
+		logger.info("사진 삭제할거양"+row);
+		
+		if (new_photo_name != null && row>0 ) {
+			File file = new File("C:/img/upload"+new_photo_name);
+			if (file.exists()) {
+				file.delete();
+			}
 		}
-		String page = row>0? "redirect:/fdetail.do?fbNo="+fbNo:"redirect:/flist.go";
-		return page;
 	}
-	*/
+}
 
 	
 
@@ -138,5 +168,5 @@ public class BoardService {
 		
 		
 		
-	}
+
 
