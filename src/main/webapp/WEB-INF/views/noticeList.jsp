@@ -36,7 +36,6 @@
 </style>
 </head>
 <body>
-	 <%@ include file="gnb.jsp" %>
       <img src="../img/하비버디.png" width="100" height="100">
       <h2 align="center">공지사항 리스트</h2>
       게시물 갯수 : 

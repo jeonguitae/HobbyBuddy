@@ -6,8 +6,10 @@
 <mapper namespace="kr.co.hb.admin.dao.ReportDAO">
 	
 	<select id="reportPageList" resultType="kr.co.hb.admin.dto.ReportDTO">
-		SELECT *
-			FROM report ORDER BY rept_no DESC LIMIT #{param1} OFFSET #{param2}
+	    SELECT *
+	    FROM report
+	    ORDER BY CASE WHEN admin_id IS NULL THEN 1 ELSE 0 END, admin_id DESC, rept_no DESC
+	    LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="totalCount" resultType="int">

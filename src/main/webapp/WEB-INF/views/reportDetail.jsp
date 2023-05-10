@@ -105,7 +105,7 @@
                     </td>
                </tr>               
          </table>            
-         <button>신고 처리 하기</button>
+         <button id="confirmButton">신고 처리 하기</button>
          <input type="button" onclick="location.href='reportList.go'" value="취소">
       </form>  
 </body>
@@ -118,5 +118,16 @@
             event.preventDefault();
         }
     });
+    
+    $(document).ready(function() {
+    	  $('#confirmButton').on('click', function() {
+    	    if (confirm('신고를 처리하시겠습니까?')) {
+    	      // 정상적으로 접수된 경우 처리하는 코드
+    	      alert('신고가 정상적으로 접수되었습니다.');
+    	    }
+    	  });
+    	});
+
+
 </script>
 </html>

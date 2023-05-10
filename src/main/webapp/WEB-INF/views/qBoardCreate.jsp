@@ -39,9 +39,10 @@
             <td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
          </tr>               
          <tr>
-            <th>문의종류</th>
+            <th>문의 유형</th>
             <td>
-            	<select>
+            	<select name="qboard_class">
+            		<option value="question_default">선택</option>
             		<option value="question_id">계정문의</option>
             		<option value="question_board">게시판문의</option>
             		<option value="question_chat">채팅문의</option>
@@ -55,7 +56,7 @@
          </tr>
          <tr>
             <th>문의 내용</th>
-            <td><textarea name="notice_content"></textarea></td>
+            <td><textarea name="qboard_content"></textarea></td>
          </tr>
          <tr>
             <th>사진</th>
