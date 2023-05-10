@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import kr.co.hb.board.dao.RandomDAO;
 import kr.co.hb.board.dto.RandomDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 @Service
 public class RandomService {
@@ -49,6 +50,29 @@ public class RandomService {
 		return dao.proPhotoList(id, Board_class);
 	}
 
+	public ArrayList<RandomDTO> plist() {
+		return dao.plist();
+	}
+
+	public ArrayList<RandomDTO> psearch(HashMap<String, String> params) {
+		ArrayList<RandomDTO> list = null;
+		
+		if(params.get("ssorting").equals("id")) {
+			
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
+			list = dao.pisearch(params);
+		}
+		
+		if(params.get("ssorting").equals("name")) {
+			
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
+			list = dao.pnsearch(params);
+		}
+		
+		return list;
+	}
 
 
 

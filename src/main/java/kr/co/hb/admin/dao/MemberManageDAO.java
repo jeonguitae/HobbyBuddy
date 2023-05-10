@@ -9,4 +9,8 @@ public interface MemberManageDAO {
 
 	ArrayList<MemberManageDTO> memberList(HashMap<String, String> params);
 
+	ArrayList<MemberManageDTO> misearch(HashMap<String, String> params);
+
+	ArrayList<MemberManageDTO> mnsearch(HashMap<String, String> params);
+
 }

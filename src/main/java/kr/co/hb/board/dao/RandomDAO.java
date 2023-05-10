@@ -18,6 +18,13 @@ public interface RandomDAO {
 
 	RandomDTO proPhotoList(String id, String board_class);
 
+	ArrayList<RandomDTO> plist();
+
+	ArrayList<RandomDTO> pisearch(HashMap<String, String> params);
+
+	ArrayList<RandomDTO> pnsearch(HashMap<String, String> params);
+
+
 
 
 

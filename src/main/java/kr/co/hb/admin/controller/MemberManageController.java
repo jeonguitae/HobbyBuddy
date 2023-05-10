@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.hb.admin.dto.MemberManageDTO;
 import kr.co.hb.admin.service.MemberManageService;
+import kr.co.hb.board.dto.RandomDTO;
+import kr.co.hb.member.dto.MemberDTO;
 
 @Controller
 public class MemberManageController {
@@ -38,6 +40,13 @@ public class MemberManageController {
 		return "memberList";
 	}
 	
-	
+	@RequestMapping(value="/msearch.do")
+	public String msearch(Model model, @RequestParam HashMap<String, String> params) {
+		
+		ArrayList<MemberManageDTO> list = service.msearch(params);
+		logger.info("검색 조건 : " + params);
+		model.addAttribute("list", list);
+		return "memberList";
+	}
 
 }

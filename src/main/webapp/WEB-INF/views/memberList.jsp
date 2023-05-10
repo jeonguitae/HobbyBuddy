@@ -11,6 +11,10 @@
 		border-collapse: collapse;
 		padding : 5px 10px;
 	}
+	
+	td[class="msearch"]{
+      margin-top: 5px;
+ 	  }
 </style>
 
 </head>
@@ -55,6 +59,7 @@
 					<tr>
 						<th>구분</th>
 						<th>아이디</th>
+						<th>이름</th>
 						<th>경고횟수</th>
 						<th>정지여부</th>	
 					</tr>
@@ -65,10 +70,24 @@
 					<tr>
 						<td>${member.admin}</td>
 						<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
+						<td>${member.name}</td>
 						<td>경고횟수 자리</td>
 						<td>${member.ban}</td>
 					</tr>			
 				</c:forEach>
+				
+					<tr>
+	                  <td class="msearch" colspan="8">      
+	                     <form action="msearch.do">
+	                        <input type="text" name="search" value=""/>
+	                        <select name="ssorting">
+	                           <option value="id">아이디</option>
+	                           <option value="name">이름</option>
+	                        </select>
+	                        <input type="submit" value="검색"/>
+	                     </form>
+	                  </td>
+	               </tr>
 			</tbody>
 	</table>
 </body>

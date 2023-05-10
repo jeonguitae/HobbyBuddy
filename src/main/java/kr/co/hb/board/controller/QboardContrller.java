@@ -12,6 +12,11 @@ public class QboardContrller {
 				
 		return "qBoardCreate"; 
 	}
+	@RequestMapping(value="/qBoardWrite.do")
+	public String qBoardWriteDo(Model model) {		
+		
+		return "qBoardCreate"; 
+	}
 	
 	
 }

@@ -45,7 +45,7 @@ public class BoardController {
 	@RequestMapping(value="/fwrite.do")
 	public String fwrite(MultipartFile photo,@RequestParam HashMap<String, String> params){
 		logger.info("fwrite"+params);
-		return service.fwrite(photo,params, null);
+		return service.fwrite(photo,params,null);
 	}
 	@RequestMapping(value="/fdetail.do")
 	public String fBoardDetail(Model model, @RequestParam int fbNo, HttpSession session) {
@@ -57,12 +57,13 @@ public class BoardController {
 		
 		if (dto != null) {
 			model.addAttribute("dto",dto);
-			page = "redirect:/fdetail.do?fbNo="+fbNo;
+			model.addAttribute("fbNo",fbNo);
+			page = "fBoardDetail";
 		}
 		if (session.getAttribute("loginId")==null) {
 			page = "fBoardList";
 		}
-		
+		session.setAttribute("fbNo", fbNo);
 		return page;			
 	}
 	@RequestMapping(value="fdelete.do")
@@ -98,7 +99,20 @@ public class BoardController {
 		logger.info("사진삭제할건데 row");
 		return "redirect:/fupdate.go?fbNo="+fbNo;
 	}
-	
+	@RequestMapping(value="/cowrite.do")
+	   public String cowrite(@RequestParam HashMap<String, String> params, Model model, HttpSession session) {
+	      logger.info("params" +params);
+	      
+	      String id= params.get("id");
+	      String coContent = params.get("coContent");
+	      int fbNo = (int) session.getAttribute("fbNo");
+	      int row= service.cowrite(id, fbNo, coContent);
+	      
+	      ArrayList<BoardDTO> colist = service.colist(fbNo);
+	      model.addAttribute("coList", colist);
+	      logger.info("fbNo ? : " + fbNo);
+	      return "fBoardDetail";
+	   }
 	
 }
 

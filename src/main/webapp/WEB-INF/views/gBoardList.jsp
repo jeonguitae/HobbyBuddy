@@ -27,6 +27,77 @@
    td[class="gserch"]{
       margin-top: 5px;
    }
+   
+   table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 5px 10px;
+    font-size: 16px;
+  }
+
+  button[id="gcreate"] {
+    margin-bottom: 5px;
+  }
+   
+  #paging {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+   
+  td[class="gserch"] {
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  .sort {
+    margin: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-label {
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+  }
+
+  .form-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+    margin-right: 10px;
+  }
+
+  .form-input[type="radio"] {
+    margin-right: 5px;
+  }
+
+  .form-select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    width: 200px;
+    margin-right: 10px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+  }
 </style>
 
 <script type="text/javascript">
@@ -43,7 +114,7 @@
 </script>
 </head>
 <body>
-   
+   <jsp:include page="gnb.jsp"/>
    <div class="sort">
       <form action="gsorting.do" method="get">
          <table>
