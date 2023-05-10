@@ -5,15 +5,26 @@
 <mapper namespace="kr.co.hb.board.dao.RandomDAO">
 
 	<select id="plist" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member 
+		SELECT m.id ,m.name ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
 	</select>
 
 	<select id="profileList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} 
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		WHERE big_hb = #{big_hb} and small_hb = #{small_hb} and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} 
+	</select>
+	
+	<select id="pisearch" resultType="kr.co.hb.board.dto.RandomDTO">
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		WHERE m.id LIKE #{search}
+	</select>
+	
+	<select id="pnsearch" resultType="kr.co.hb.board.dto.RandomDTO">
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		WHERE m.name LIKE #{search}
 	</select>
 	
 	<select id="randomList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} 
+		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}
 	</select>
 	
 	<select id="noNameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
@@ -24,12 +35,10 @@
 		SELECT * FROM member WHERE id = #{param1}
 	</select>
 	
-		<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO">
+	<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO"> 
 		SELECT * FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</select>
 	
-
-
 
 	
 </mapper>

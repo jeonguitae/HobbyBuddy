@@ -26,6 +26,26 @@ public class MemberManageService {
 		return dao.memberList(params);
 
 	}
+	public ArrayList<MemberManageDTO> msearch(HashMap<String, String> params) {
+		
+		ArrayList<MemberManageDTO> list = null;
+		
+		if(params.get("ssorting").equals("id")) {
+			
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
+			list = dao.misearch(params);
+		}
+		
+		if(params.get("ssorting").equals("name")) {
+			
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
+			list = dao.mnsearch(params);
+		}
+		
+		return list;
+	}
 
 
 

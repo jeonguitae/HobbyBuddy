@@ -20,6 +20,11 @@ public interface RandomDAO {
 
 	ArrayList<RandomDTO> plist();
 
+	ArrayList<RandomDTO> pisearch(HashMap<String, String> params);
+
+	ArrayList<RandomDTO> pnsearch(HashMap<String, String> params);
+
+
 
 
 
