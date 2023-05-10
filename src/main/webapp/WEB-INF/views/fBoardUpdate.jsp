@@ -57,10 +57,7 @@
 				<th>제목</th>
 				<td><input type="text" name="title" value="${dto.title}"/></td>
 			</tr>
-			<tr>
-				<th>작성자</th>
-				<td><input type="text" name="id" value="${dto.id}"/></td>
-			</tr>
+			
 			<tr>
 				<th>내용</th>
 				<td><textarea name="bContent">${dto.bContent}</textarea></td>
@@ -72,8 +69,13 @@
 						<input type="file" name="photo"/>
 					</c:if>
 					<c:if test="${dto.new_photo_name ne null }">
-						<img src="/photo/${dto.newfilename}"/>
-					</c:if>					
+						<img width="500" src="/photo/${dto.new_photo_name}"/>
+						<input type="hidden" name="id" value="${sessionScope.loginId}"> 
+						<!-- 사진 삭제 시 사진의 idx를 갖고 와야 하니까 : hidden-->
+				  		<input type="hidden" name="photo_idx" value="${dto.photo_idx}">
+				  		${dto.board_class}
+				  	<a href="fPhotodel.do?fbNo=${dto.fbNo}&board_class=${dto.board_class}">사진 삭제</a>	
+					</c:if>			
 				</td>
 			</tr>
 			<tr>
