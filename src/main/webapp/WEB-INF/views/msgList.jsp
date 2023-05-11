@@ -14,14 +14,7 @@
 	<h3>쪽지함</h3>
 	<input type="button" value="보낸 쪽지함으로 이동" onclick="location.href='msgList2.go'"/><br/><br/>
 	<table>
-		<colgroup>
-			<col width="10%"/>
-			<col width="10%"/>
-			<col width="45%"/>
-			<col width="15%"/>
-			<col width="10%"/>
-			<col width="10%"/>
-		</colgroup>
+
 		<thead>
 			<tr>
 				<th>쪽지 번호</th>
