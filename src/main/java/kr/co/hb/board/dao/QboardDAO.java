@@ -19,12 +19,14 @@ public interface QboardDAO {
 
 	int qboardUpdate(HashMap<String, String> params);
 
-	String qboardFindFile(String qboard_no);
+	String qboardFindFile(String board_num);
 
-	int qboardDelete(String qboard_no);	
+	int qboardDelete(String board_num);	
 
-	void deletePhoto(String photoIdx, String qboard_no);
+	void qDeletePhoto(String photoIdx, String board_num);
 
-	String noticeFindFile2(String photoIdx);
+	String qboardFindFile2(String photoIdx);
+
+	int replyWrite(HashMap<String, String> params);
 
 }

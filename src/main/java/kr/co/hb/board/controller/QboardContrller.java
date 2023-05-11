@@ -25,7 +25,7 @@ public class QboardContrller {
 
 	@RequestMapping(value = "/qboardList.ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public HashMap<String, Object> noticeList(
+	public HashMap<String, Object> qboardList(
 			@RequestParam String page,
 			@RequestParam String cnt			
 			){
@@ -57,7 +57,7 @@ public class QboardContrller {
 	}
 	
 	@RequestMapping(value = "/qboardDetail.go")
-	   public String noticeDetail(Model model, @RequestParam String qboard_no) {
+	   public String qboardDetail(Model model, @RequestParam String qboard_no) {
 	      
 	      String page = "redirect:/qboardList.go";
 	      
@@ -71,13 +71,13 @@ public class QboardContrller {
 	      return page;
 	   }
 	 @RequestMapping(value = "/qboardUpdate.do", method = RequestMethod.POST)
-	   public String noticeUpdate(MultipartFile photo,@RequestParam HashMap<String, String> params) {
+	   public String qboardUpdate(MultipartFile photo,@RequestParam HashMap<String, String> params) {
 	      
 	      return service.qboardUpdate(photo,params);
 	   }
 	 
 	 @RequestMapping(value = "/qboardUpdate.go")
-	   public String updateForm(Model model, @RequestParam String qboard_no) {
+	   public String QupdateForm(Model model, @RequestParam String qboard_no) {
 	      
 		 logger.info("업데이트 컨트롤러 등장");
 		 
@@ -95,7 +95,7 @@ public class QboardContrller {
 	   }	   
 	   
 	   @RequestMapping(value = "/qboardDelete.go")
-	   public String noticeDelete(Model model,@RequestParam HashMap<String, String> params) {
+	   public String qboardDelete(Model model,@RequestParam HashMap<String, String> params) {
 	      		   
 		   service.qboardDelete(params.get("qboard_no"));
 	      return "redirect:/qboardList.go";
@@ -110,5 +110,13 @@ public class QboardContrller {
 				   
 	       return "redirect:/qboardUpdate.go?qboard_no=" + qboard_no;
 	       
+	}
+	@RequestMapping(value = "/qBoard_replyWrite.do")  
+	public String qBoard_replyWrite(@RequestParam HashMap<String, String> params) {
+	      
+		logger.info("여긴오나?");
+		
+	      return service.qBoard_replyWrite(params);
 	   }
+	   
 }

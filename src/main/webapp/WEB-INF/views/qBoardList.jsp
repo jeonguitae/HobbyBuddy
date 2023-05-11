@@ -65,12 +65,14 @@
                <th>작성자</th>
                <th id="sortDate">작성일<i class="fas fa-sort"></i></th>                                     
                <th id="sortChk">공개여부<i class="fas fa-sort"></i></th>
+               <th>답변 여부</th>
+               <th>비밀글 여부</th>               
             </tr>            
          </thead>
          <tbody id="list">             
          </tbody>
             <tr>
-               <td colspan="6" id="paging">   
+               <td colspan="8" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
                   <div class="container">                           
                      <nav aria-label="Page navigation" style="text-align:center">
@@ -143,20 +145,33 @@ function listPrint(list){
    // 해결방법 2. js 에서 변환
    list.forEach(function(item,idx){
 	  
-      content += '<tr>';
-      content += '<td>'+item.qboard_no+'</td>';
-      content += '<td>'+item.qboard_class+'</a></td>';
-      content += '<td><a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</td>';
-      content += '<td>'+item.id+'</td>';
-      var date = new Date(item.qboard_time);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
-      content += '</tr>';
+	   content += '<tr>';
+	   content += '<td>'+item.qboard_no+'</td>';
+	   content += '<td>'+item.qboard_class+'</a></td>';
+	   content += '<td>';
+	   
+	   // 작성자 아이디와 세션 아이디가 일치하거나, 글이 공개된 경우 링크 제공
+	   if (item.qboard_openchk === true || item.id === '${sessionScope.loginId}' || ${sessionScope.adminChk} === true) {
+		  content += '<a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</a>';
+		} else {
+		  content += '<span onclick="alert(\'비공개글 입니다.\')" style="cursor: not-allowed;">'+item.qboard_title+'</span>';
+		}
+
+	   
+	   content += '</td>';
+	   content += '<td>'+item.id+'</td>';
+	   var date = new Date(item.qboard_time);
+	   // 기본은 en-US
+	   content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+	   content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
+	   content += '<td>'+(item.qboard_state ? '답변 완료' : '답변 대기중')+'</td>';
+	   content += '<td>'+(item.secret_state ? '비밀글 설정' : '비밀글 해제')+'</td>';
+	   
+	   content += '</tr>';
+
    });
    $('#list').empty();
-   $('#list').append(content);
-   
+   $('#list').append(content);   
    
 }
 
