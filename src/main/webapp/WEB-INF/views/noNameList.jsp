@@ -28,18 +28,6 @@
 						<input type="radio" name="gender" value="성별 무관"/>성별 무관
 					</td>
 				</tr>
-<!-- 				<tr>
-					<div style="display: none;">display: none; 테스트</div>
-
-					<div style="visibility: hidden;">visibility: hidden; 테스트</div>
-				</tr> -->
-				<tr>
-					<th>나이</th>
-					<td>
-						<input type="text" name="minage" value="0"/> &nbsp; ~ &nbsp;
-						<input type="text" name="maxage" value="100"/>
-					</td>
-				</tr>
 				
 				<tr>
 					<th>지역</th>

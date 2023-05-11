@@ -82,7 +82,7 @@
             <th>
                <input type="button" value="경고"/> 
             </th>
-            <th>
+            <th> 
                <input type="button" value="정지"/> 
             </th>
       	</tr>
