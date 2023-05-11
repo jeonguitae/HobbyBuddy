@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/css.css">
 <style>
 	table, th, td{
 		border : 1px solid black;
@@ -15,7 +16,6 @@
 
 </head>
 <body>
-asssssssssss
 	<div class="profile">
 		<form action="noNameList.do" method="get">
 			<table>
@@ -26,14 +26,6 @@ asssssssssss
 						<input type="radio" name="gender" value="남성"/>남성
 						<input type="radio" name="gender" value="여성"/>여성
 						<input type="radio" name="gender" value="성별 무관"/>성별 무관
-					</td>
-				</tr>
-				
-				<tr>
-					<th>나이</th>
-					<td>
-						<input type="text" name="minage" value="0"/> &nbsp; ~ &nbsp;
-						<input type="text" name="maxage" value="100"/>
 					</td>
 				</tr>
 				
@@ -90,47 +82,49 @@ asssssssssss
 					</td>
 				</tr>
 				
-				 <tr>
-		            <th>취미1</th>
-			         <td>
-			            <select id=big_hb1>
-			               <c:forEach items="${big_hb}" var="b">
-			                  <option value="${b.big_hb}">${b.big_hb}</option>      
-			               </c:forEach>
-			            </select>
-			            <select id="small_hb1">
-			           		 <option>x</option>
-			            </select>
-			           </td>
-	      		</tr>
-				
-				 <tr>
-		            <th>취미2</th>
-			         <td>
-			            <select id=big_hb2>
-			               <c:forEach items="${big_hb}" var="b">
-			                  <option value="${b.big_hb}">${b.big_hb}</option>      
-			               </c:forEach>
-			            </select>
-			            <select id="small_hb2">
-			           		 <option>x</option>
-			            </select>
-			           </td>
-	      		</tr>
-				
-				 <tr>
-		            <th>취미3</th>
-			         <td>
-			            <select id=big_hb3>
-			               <c:forEach items="${big_hb}" var="b">
-			                  <option value="${b.big_hb}">${b.big_hb}</option>      
-			               </c:forEach>
-			            </select>
-			            <select id="small_hb3">
-			           		 <option>x</option>
-			            </select>
-			           </td>
-	      		</tr>
+					 <tr>
+			            <th>취미1</th>
+				         <td>
+				            <select name=big_hb1>
+				               <c:forEach items="${big_hb}" var="b">
+				                  <option value="${b.big_hb}">${b.big_hb}</option>      
+				               </c:forEach>
+				            </select>
+				            <select name="small_hb1">
+				           		 <option>x</option>
+				            </select>
+				           </td>
+		      		</tr>
+					
+					 <tr>
+			            <th>취미2</th>
+				         <td>
+				            <select name=big_hb2>
+				               <c:forEach items="${big_hb}" var="b">
+				                  <option value="${b.big_hb}">${b.big_hb}</option>      
+				               </c:forEach>
+				            </select>
+				            <select name="small_hb2">
+				           		 <option>x</option>
+				            </select>
+				           </td>
+		      		</tr>
+					
+					 <tr>
+			            <th>취미3</th>
+				         <td>
+				            <select name=big_hb3>
+				               <c:forEach items="${big_hb}" var="b">
+				                  <option value="${b.big_hb}">${b.big_hb}</option>      
+				               </c:forEach>
+				            </select>
+				            <select name="small_hb3">
+				           		 <option>x</option>
+				            </select>
+				           </td>
+		      		</tr>
+					
+        	
 								
 				<tr>
 					<th colspan="2">
@@ -148,6 +142,7 @@ asssssssssss
 	<table>
 		<thead>
 			<tr>
+				<th>ID</th>
 				<th>나이</th>
 				<th>지역</th>
 				<th>취미</th>
@@ -157,9 +152,10 @@ asssssssssss
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
-					<td><a href="detail.do?id=${member.age}">${member.age}</a></td>
+					<td><a href="nodetail.do?id=${member.id}">익명</a></td>
+					<td>${member.age}</td>
 					<td>${member.area}</td>
-					<td>취미 자리</td>
+					<td>${member.small_hb}</td>
 					<td>${member.gender}</td>
 				</tr>			
 			</c:forEach>
@@ -169,136 +165,136 @@ asssssssssss
 	
 </body>
 <script>
+		
+	var msg = "${msg}";
+	if(msg != ""){
+	   alert(msg);
+	}
 	
-var msg = "${msg}";
-if(msg != ""){
-   alert(msg);
-}
+	var loginId = "${sessionScope.loginId}";   
+	myHobbyList();
+	function myHobbyList(){
+	   
+	   $.ajax({
+	      type:'get',
+	      url:'myHobbyList.ajax',
+	      data:{id:loginId},
+	      dataType:'json',
+	      success:function(data){
+	         console.log("data, myHobbyList : " + data.myHobbyList);
+	         console.log("data, login : " + data.login);
+	         if(!true){
+	            alert('로그인이 필요한 서비스 입니다.');
+	            location.href='./';
+	         }else{
+	         }
+	      },
+	      error:function(e){
+	         console.log(e);
+	      }
+	   });   
+	}
+	
+	
+	
+	$('select[name=big_hb1]').on('change', function(e){
+	       var big_hb = $('select[name=big_hb1]').val();      
+	       console.log("big_hb ? " + big_hb);      
+	       $.ajax({
+	          type: 'get'
+	          ,url: 'big_hb.ajax'
+	          ,data:{'big_hb':big_hb}
+	          ,dataType:'json'
+	          ,success:function(data){
+	             console.log("big_hb data : " + data.small_hb);
+	             if(data != ""){
+	                console.log("big_hb 취미 호출");
+	                small_hbDraw1(data.small_hb);
+	             } else {
+	                alert('오류가 발생하였습니다.');
+	             }
+	          }
+	          ,error:function(e){
+	             console.log(e);
+	          }
+	       });
+	   })
 
-var loginId = "${sessionScope.loginId}";   
-myHobbyList();
-function myHobbyList(){
-   console.log("loginId : " + loginId);
-   $.ajax({
-      type:'get',
-      url:'myHobbyList.ajax',
-      data:{id:loginId},
-      dataType:'json',
-      success:function(data){
-         console.log("data, myHobbyList : " + data.myHobbyList);
-         console.log("data, login : " + data.login);
-         if(!true){
-            alert('로그인이 필요한 서비스 입니다.');
-            location.href='./';
-         }else{
-         }
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });   
-}
+	   function small_hbDraw1(small_hb){
+	    console.log("small_hb : " + small_hb);
+	    var content = '';
+	    small_hb.forEach(function(item,index){
+	       content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	    });
+	    $('select[name="small_hb1"]').empty();
+	    $('select[name="small_hb1"]').append(content);
+	   }
+	
+	$('select[name=big_hb2]').on('change', function(e){
+	       var big_hb = $('select[name=big_hb2]').val();      
+	       console.log("big_hb ? " + big_hb);      
+	       $.ajax({
+	          type: 'get'
+	          ,url: 'big_hb.ajax'
+	          ,data:{'big_hb':big_hb}
+	          ,dataType:'json'
+	          ,success:function(data){
+	             console.log("big_hb data : " + data.small_hb);
+	             if(data != ""){
+	                console.log("big_hb 취미 호출");
+	                small_hbDraw2(data.small_hb);
+	             } else {
+	                alert('오류가 발생하였습니다.');
+	             }
+	          }
+	          ,error:function(e){
+	             console.log(e);
+	          }
+	       });
+	   })
 
+	   function small_hbDraw2(small_hb){
+	    console.log("small_hb : " + small_hb);
+	    var content = '';
+	    small_hb.forEach(function(item,index){
+	       content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	    });
+	    $('select[name="small_hb2"]').empty();
+	    $('select[name="small_hb2"]').append(content);
+	   }
+	
+	$('select[name=big_hb3]').on('change', function(e){
+	       var big_hb = $('select[name=big_hb3]').val();      
+	       console.log("big_hb ? " + big_hb);      
+	       $.ajax({
+	          type: 'get'
+	          ,url: 'big_hb.ajax'
+	          ,data:{'big_hb':big_hb}
+	          ,dataType:'json'
+	          ,success:function(data){
+	             console.log("big_hb data : " + data.small_hb);
+	             if(data != ""){
+	                console.log("big_hb 취미 호출");
+	                small_hbDraw3(data.small_hb);
+	             } else {
+	                alert('오류가 발생하였습니다.');
+	             }
+	          }
+	          ,error:function(e){
+	             console.log(e);
+	          }
+	       });
+	   })
 
-
-$('#big_hb1').on('change', function(e){
-    var big_hb = $('#big_hb1').val();      
-    console.log("big_hb ? " + big_hb);      
-    $.ajax({
-       type: 'get'
-       ,url: 'big_hb.ajax'
-       ,data:{'big_hb':big_hb}
-       ,dataType:'json'
-       ,success:function(data){
-          console.log("big_hb data : " + data.small_hb);
-          if(data != ""){
-             console.log("big_hb 취미 호출");
-             small_hbDraw1(data.small_hb);
-          } else {
-             alert('오류가 발생하였습니다.');
-          }
-       }
-       ,error:function(e){
-          console.log(e);
-       }
-    });
-})
-
-function small_hbDraw1(small_hb){
- console.log("small_hb : " + small_hb);
- var content = '';
- small_hb.forEach(function(item,index){
-    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
- });
- $('#small_hb1').empty();
- $('#small_hb1').append(content);
-}
-
-$('#big_hb2').on('change', function(e){
-    var big_hb = $('#big_hb2').val();      
-    console.log("big_hb ? " + big_hb);      
-    $.ajax({
-       type: 'get'
-       ,url: 'big_hb.ajax'
-       ,data:{'big_hb':big_hb}
-       ,dataType:'json'
-       ,success:function(data){
-          console.log("big_hb data : " + data.small_hb);
-          if(data != ""){
-             console.log("big_hb 취미 호출");
-             small_hbDraw2(data.small_hb);
-          } else {
-             alert('오류가 발생하였습니다.');
-          }
-       }
-       ,error:function(e){
-          console.log(e);
-       }
-    });
-})
-
-function small_hbDraw2(small_hb){
- console.log("small_hb : " + small_hb);
- var content = '';
- small_hb.forEach(function(item,index){
-    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
- });
- $('#small_hb2').empty();
- $('#small_hb2').append(content);
-}
-
-$('#big_hb3').on('change', function(e){
-    var big_hb = $('#big_hb3').val();      
-    console.log("big_hb ? " + big_hb);      
-    $.ajax({
-       type: 'get'
-       ,url: 'big_hb.ajax'
-       ,data:{'big_hb':big_hb}
-       ,dataType:'json'
-       ,success:function(data){
-          console.log("big_hb data : " + data.small_hb);
-          if(data != ""){
-             console.log("big_hb 취미 호출");
-             small_hbDraw3(data.small_hb);
-          } else {
-             alert('오류가 발생하였습니다.');
-          }
-       }
-       ,error:function(e){
-          console.log(e);
-       }
-    });
-})
-
-function small_hbDraw3(small_hb){
- console.log("small_hb : " + small_hb);
- var content = '';
- small_hb.forEach(function(item,index){
-    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
- });
- $('#small_hb3').empty();
- $('#small_hb3').append(content);
-}
+	   function small_hbDraw3(small_hb){
+	    console.log("small_hb : " + small_hb);
+	    var content = '';
+	    small_hb.forEach(function(item,index){
+	       content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+	    });
+	    $('select[name="small_hb3"]').empty();
+	    $('select[name="small_hb3"]').append(content);
+	   }
 
 	
 	$('select[name="city"]').on('change',function(){
