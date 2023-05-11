@@ -8,7 +8,7 @@
 	
 	#profileIcon{
 		display:inline;
-		background-color: #008000;
+		background-color: #0074D9;
  		color: #ffffff;
 		border: none;
 	 	border-radius: 5px;
@@ -49,7 +49,7 @@
 	
 	#alarmIcon{
 		display:inline;
-		background-color: #0d7f5e;
+		background-color: #FFA500;
  		color: #ffffff;
 		border: none;
 	 	border-radius: 5px;
@@ -71,6 +71,7 @@
 		padding: 0.5rem 1rem;
 		cursor: pointer;
 		font-size: 1.2rem;	
+		position: static;
 	}
 	
 	.menu{
@@ -97,7 +98,7 @@
 		<input type="button" class="panel" value="마이페이지" onclick="location.href='pwChk.go'"/>
 		<input type="button" class="panel" value="작성한 글/댓글" onclick="location.href='myBoardList.go'"/>
 		<input type="button" class="panel" value="참여한 모임" onclick="location.href='#'"/>
-		<input type="button" class="panel" value="쪽지방" onclick="location.href='#'"/>
+		<input type="button" class="panel" value="쪽지방" onclick="location.href='msgList.go'"/>
 		<input type="button" class="panel" value="즐겨찾기" onclick="location.href='#'"/>
 		<input type="button" class="panel3" value="관리자" onclick="location.href='admin.go'"/>
 	</div>
@@ -124,7 +125,6 @@
 </body>
 
 <script>
-	$.ajaxSetup({ cache: false });
 	
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
@@ -178,7 +178,8 @@
 		      content += '<div class="alarmList">';
 		      content += '<input type="checkbox" value="' + item.alarm_no + '"/>&nbsp;&nbsp;&nbsp;&nbsp;';
 		      content += '<a href="alarmDetail.do?alarm_num=' + item.alarm_num + '&alarm_class=' + item.alarm_class + '&alarm_no=' + item.alarm_no + '">';
-		      content += '<b>ID</b> : \" ' + item.id_send + ' \" &nbsp;&nbsp;&nbsp;<b>제목</b> : \" '+ item.alarm_title + ' \" &nbsp;&nbsp;&nbsp;<b>내용</b> : \ "' + item.alarm_content;
+		      content += '('+ item.alarm_class+')&nbsp;&nbsp;<b>ID</b> : \" ' + item.id_send + ' \" &nbsp;&nbsp;&nbsp;<b>제목</b> : \" '
+		      			+ item.alarm_title + ' \" &nbsp;&nbsp;&nbsp;<b>내용</b> : \ "' + item.alarm_content;
 		      content += ' /" </a></div>';
 		      console.log("alarmList : " + alarmList);
 		    });

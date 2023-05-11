@@ -6,7 +6,7 @@
 <title>자유게시판 리스트</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-	table, th, td{
+	/* table, th, td{
 		border : 1px solid black;
 		border-collapse: collapse;
 		padding : 5px 10px;
@@ -18,6 +18,61 @@
 		border-collapse: collapse;
 		padding : 5px 10px;
 		width : 1000px;
+	} */
+	body {
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+	
+	table, th, td{
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+		width: 800px;
+		margin: 5px;
+	}
+	
+	table.first, table.second {
+		margin: 20px auto;
+	}
+	
+	table.second {
+		width: 1000px;
+	}
+	
+	table.second th {
+		background-color: #f0f0f0;
+		color: #222;
+	}
+	
+	table.second tbody tr:nth-child(odd) {
+		background-color: #f9f9f9;
+	}
+	
+	table.second tbody tr:hover {
+		background-color: #e9e9e9;
+		cursor: pointer;
+	}
+	
+	table.second a {
+		color: #222;
+		text-decoration: none;
+	}
+	
+	table.second input[type="submit"], table.first button, table.first input[type="submit"] {
+		padding: 10px 20px;
+		background-color: #333;
+		color: #fff;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+	}
+	
+	table.first button {
+		margin-left: 10px;
+	}
+	
+	table.first input[type="radio"], table.first input[type="checkbox"] {
+		margin-right: 10px;
 	}
 </style>
 </head>

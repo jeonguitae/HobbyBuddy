@@ -3,6 +3,22 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.hb.board.dao.BoardDAO">
+<mapper namespace="kr.co.hb.board.dao.QboardDAO">
+	
+	<insert 
+      useGeneratedKeys="true"
+      keyColumn="qboard_no"
+      keyProperty="qboard_no"
+   
+   
+      id="qboard_write" parameterType="kr.co.hb.board.dto.QboardDTO">
+      INSERT INTO notice(id, qboard_class, qboard_title, qboard_content,qboard_openchk)
+         VALUES(#{id},#{qboard_class},#{qboard_title},#{qboard_content},#{qboard_openchk})
+   </insert>
+   
+   <insert id="qboardFileSave">
+      INSERT INTO hbphoto(board_num, board_class, ori_photo_name, new_photo_name)
+         VALUES(#{param1},#{param2},#{param3},#{param4})
+   </insert>
 	
 </mapper>

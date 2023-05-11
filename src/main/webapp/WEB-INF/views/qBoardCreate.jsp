@@ -31,7 +31,7 @@
 </head>
 <body>
    <h3 align="center">문의 등록</h3>
-   <form action="qBoardWrite.do" method="post" enctype="multipart/form-data">
+   <!-- <form action="qBoardWrite.do" method="post" enctype="multipart/form-data"> -->
       <table>      
       
          <tr>
@@ -39,9 +39,10 @@
             <td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
          </tr>               
          <tr>
-            <th>문의종류</th>
+            <th>문의 유형</th>
             <td>
-            	<select>
+            	<select name="qboard_class" id="qboard_class">
+            		<option value="question_default">선택</option>
             		<option value="question_id">계정문의</option>
             		<option value="question_board">게시판문의</option>
             		<option value="question_chat">채팅문의</option>
@@ -51,16 +52,16 @@
          </tr>
          <tr>
             <th>문의 제목</th>
-            <td><input type="text" name="qBoard_title"></td>
+            <td><input type="text" name="qboard_title" id="qboard_title"></td>
          </tr>
          <tr>
             <th>문의 내용</th>
-            <td><textarea name="notice_content"></textarea></td>
+            <td><textarea name="qboard_content" id="qboard_content"></textarea></td>
          </tr>
          <tr>
             <th>사진</th>
             <td>
-               <input type="file" name="photo" multiple="multiple">               
+               <input type="file" name="photo" id="photo" multiple="multiple">               
             </td>
          </tr>   
          <tr>
@@ -68,25 +69,102 @@
 	         	공개여부
          	</th>
          	<th>
-         		<input type="radio" name="open_Chk">공개&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	         	<input type="radio" name="open_Chk">비공개
+         		<input type="radio" name="qboard_openchk" value="true">공개&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	         	<input type="radio" name="qboard_openchk" value="false">비공개
          	</th>         	
          </tr>      
          <tr>            
             <th colspan="2">               
                <!-- 이러면 submit 효과가 사라짐 -->
                <!-- <button type="button"></button> -->
-               <button>등록</button>
+               <button onclick="qboard_write()">등록</button>
                <input type="button" onclick="location.href='qboard.go'" value="취소">
             </th>
          </tr>
       </table>
-   </form>
+   <!-- </form> -->
 </body>
 <script>
-var msg = "${msg}";
+function qboard_write(){
+	console.log("공지사항 등록");
+	var $id = $('#id');
+	var $qboard_class = $('#qboard_class');
+	var $qboard_title = $('#qboard_title');
+	var $qboard_content = $('#qboard_content');
+	var $qboard_openchk = $('input[name="qboard_openchk"]:checked');
+	
+	if ($id.val()=="") {
+		alert('세션이 만료되었습니다, 다시 로그인 해주세요.');
+		$id.focus();
+	}else if ($qboard_class.val() == "question_default") {
+		alert('문의 종류를 선택하세요.');
+		$qboard_class.focus();
+	}else if ($qboard_title.val() == "") {
+		alert('문의 제목을 입력하세요.');
+		$qboard_title.focus();
+	}else if ($qboard_title.val().length > 20) {
+		alert('문의 제목은 20자 이내로 작성해주세요.');
+		$qBoard_title.focus();
+	}else if ($qboard_content.val() == "") {
+		alert('문의 내용을 입력하세요.')
+		$qboard_content.focus();
+	}else if ($qboard_content.val().length > 1000) {
+		alert('문의 내용은 1000자를 초과할 수 없습니다.');
+		$qboard_content.focus();
+	}else if($qboard_openchk.val()== null) {
+		alert('공개 여부를 선택하세요.');
+	}else{
+   	 
+		var formData = new FormData();
+
+	    // 파일 선택
+	    var files = $("#photo").get(0).files;
+
+	    // FormData 객체에 파일 추가
+	    for (var i = 0; i < files.length; i++) {
+	        formData.append("photo", files[i]);
+	    }
+
+	    // 폼 데이터에 나머지 값 추가
+	    formData.append("id", $id.val());
+	    formData.append("qboard_class", $qboard_class.val());
+	    formData.append("qboard_title", $qboard_title.val());
+	    formData.append("qboard_content", $qboard_content.val());
+	    formData.append("qboard_openchk", $qboard_openchk.val());
+   	 
+	    $.ajax({
+	        type: "POST",
+	        enctype: "multipart/form-data",
+	        url: "qboard_write.ajax",
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        cache: false
+            ,dataType:'json'
+            ,success:function(data){
+               console.log(data);
+               
+               if (data.success == 1) {
+   				alert('문의사항 등록이 완료 되었습니다.');
+   				location.href = 'redirect:/qboard.go';
+   			}else{
+   				alert('문의사항 등록에 실패 했습니다.\r\n 다시 시도해 주세요!');
+   			}
+            }
+            ,error:function(e){
+               console.log(e);
+               alert('문의사항 등록에 실패 했습니다.\r\n 다시 시도해 주세요!');
+            }
+        });      
+    }    	
+}
+
+
+
+
+/* var msg = "${msg}";
 if (msg != "") {
 	alert(msg);
-}
+} */
 </script>
 </html>

@@ -30,6 +30,12 @@ public interface BoardDAO {
 
 	int fphotodel(int fbNo, String board_class);
 
+	ArrayList<BoardDTO> colist(int fbNo);
+
+	int cowrite(String id, int fbNo, String coContent);
+
+	
+
 
 
 	

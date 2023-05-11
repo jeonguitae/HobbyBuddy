@@ -47,7 +47,15 @@
 	
 	<delete id="fphotodel" >
 	DELETE FROM hbPhoto WHERE board_num=#{param1} AND board_class=#{param2}
-	
-	
 	</delete>
+	
+	<insert id="cowrite" >
+	INSERT INTO comment(fbNo, id, coContent)
+	VALUES(#{param2}, #{param1}, #{param3}) 
+	</insert>
+	
+	<select id="colist" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT * FROM comment WHERE fbNo = #{fbNo}
+	</select>
+	
 </mapper>

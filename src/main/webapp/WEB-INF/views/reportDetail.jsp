@@ -105,18 +105,31 @@
                     </td>
                </tr>               
          </table>            
-         <button>신고 처리 하기</button>
-         <input type="button" onclick="location.href='reportList.go'" value="취소">
+         <button id="confirmButton">신고 처리 하기</button>
+         <input type="button" onclick="location.href='reportList.go'" value="취소">                 
       </form>  
 </body>
 <script>
-    var form = document.querySelector('form');
-    form.addEventListener('submit', function(event) {
-        var proc_content = form.elements['proc_content'].value;
-        if (proc_content === '') {
-            alert('처리사유를 입력하세요.');
-            event.preventDefault();
-        }
-    });
+    
+    
+$(document).ready(function() {
+	  $('#confirmButton').on('click', function() {
+	    if (confirm('신고를 처리하시겠습니까?')) {
+	      var form = document.querySelector('form');
+	      var proc_content = form.elements['proc_content'].value;
+	      if (proc_content === '') {
+	        alert('처리사유를 입력하세요.');
+	        return;
+	      }else{
+	    	  form.submit();
+	    	  alert('처리가 완료 되었습니다.');
+	      }
+	      
+	    }
+	  });
+});
+
+
+
 </script>
 </html>

@@ -3,6 +3,38 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.message.dao.MessageDAO">
+<mapper namespace="kr.co.hb.message.dao.MessageDAO">
 
+	<select id="msgList" resultType="kr.co.hb.message.dto.MessageDTO">
+		SELECT * FROM msg WHERE id_receive=#{param1} ORDER BY msg_time DESC
+	</select>
+	
+	<insert useGeneratedKeys="true" keyColumn="msgNo" keyProperty="msgNo" id="msgReplyDo" parameterType="kr.co.hb.message.dto.MessageDTO">
+		insert into msg (id_send,id_receive,msg_content) values (#{id_send},#{id_receive},#{msg_content})
+	</insert>
+	
+	<insert id="msgAlarm">
+		insert into alarm_list (id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
+		 values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+	</insert>
+	
+	<insert useGeneratedKeys="true" keyColumn="msgNo" keyProperty="msgNo" id="msgChatDo" parameterType="kr.co.hb.message.dto.MessageDTO">
+		insert into msg (id_send,id_receive,msg_content) values (#{id_send},#{id_receive},#{msg_content})
+	</insert>
+	
+	<delete id="msgDel">
+		delete from msg where msgNo = #{param1}
+	</delete>
+	
+	<select id="msgList2" resultType="kr.co.hb.message.dto.MessageDTO">
+		SELECT * FROM msg WHERE id_send=#{param1} ORDER BY msg_time DESC
+	</select>
+	
+	<insert id="reportMsgDo" parameterType="hashmap">
+		insert into report (reporter,preporter,reptboard_class,reptboard_num,rept_title,rept_content)
+		 values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
+	</insert>
+	
+	
+	
 </mapper>

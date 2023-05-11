@@ -66,6 +66,26 @@
             <th>자기소개</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
       	</tr>
+      	<tr>
+      		<th>
+               <input type="submit" value="즐겨찾기"/>
+            </th>
+            <th>
+               <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
+            </th>
+            <th>
+      			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
+      		</th>
+      		<th>
+      			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
+      		</th>
+            <th>
+               <input type="button" value="경고"/> 
+            </th>
+            <th>
+               <input type="button" value="정지"/> 
+            </th>
+      	</tr>
       </table>
       
       <br/>
