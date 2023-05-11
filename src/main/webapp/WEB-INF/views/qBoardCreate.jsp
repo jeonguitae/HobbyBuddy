@@ -52,7 +52,7 @@
          </tr>
          <tr>
             <th>문의 제목</th>
-            <td><input type="text" name="qBoard_title" id="qBoard_title"></td>
+            <td><input type="text" name="qboard_title" id="qboard_title"></td>
          </tr>
          <tr>
             <th>문의 내용</th>
@@ -61,7 +61,7 @@
          <tr>
             <th>사진</th>
             <td>
-               <input type="file" name="photo" multiple="multiple">               
+               <input type="file" name="photo" id="photo" multiple="multiple">               
             </td>
          </tr>   
          <tr>
@@ -69,8 +69,8 @@
 	         	공개여부
          	</th>
          	<th>
-         		<input type="radio" name="open_Chk">공개&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-	         	<input type="radio" name="open_Chk">비공개
+         		<input type="radio" name="qboard_openchk" value="true">공개&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	         	<input type="radio" name="qboard_openchk" value="false">비공개
          	</th>         	
          </tr>      
          <tr>            
@@ -89,19 +89,19 @@ function qboard_write(){
 	console.log("공지사항 등록");
 	var $id = $('#id');
 	var $qboard_class = $('#qboard_class');
-	var $qBoard_title = $('#qBoard_title');
+	var $qboard_title = $('#qboard_title');
 	var $qboard_content = $('#qboard_content');
-	var $open_chk = $('input[name="open_Chk"]:checked');
+	var $qboard_openchk = $('input[name="qboard_openchk"]:checked');
 	
-	if ($id.val()="") {
+	if ($id.val()=="") {
 		alert('세션이 만료되었습니다, 다시 로그인 해주세요.');
 		$id.focus();
 	}else if ($qboard_class.val() == "question_default") {
 		alert('문의 종류를 선택하세요.');
 		$qboard_class.focus();
-	}else if ($qBoard_title.val() == "") {
+	}else if ($qboard_title.val() == "") {
 		alert('문의 제목을 입력하세요.');
-		$qBoard_title.focus();
+		$qboard_title.focus();
 	}else if ($qboard_title.val().length > 20) {
 		alert('문의 제목은 20자 이내로 작성해주세요.');
 		$qBoard_title.focus();
@@ -111,42 +111,52 @@ function qboard_write(){
 	}else if ($qboard_content.val().length > 1000) {
 		alert('문의 내용은 1000자를 초과할 수 없습니다.');
 		$qboard_content.focus();
-	}else if($open_chk.val()== null) {
+	}else if($qboard_openchk.val()== null) {
 		alert('공개 여부를 선택하세요.');
 	}else{
    	 
-   	 var param = {};
-   	 param.id = $id.val();
-   	 param.pw = $pw.val();
-   	 param.name = $name.val();
-   	 param.age = $age.val();
-   	 param.gender = $gender.val();
-   	 param.email = $email.val();
+		var formData = new FormData();
+
+	    // 파일 선택
+	    var files = $("#photo").get(0).files;
+
+	    // FormData 객체에 파일 추가
+	    for (var i = 0; i < files.length; i++) {
+	        formData.append("photo", files[i]);
+	    }
+
+	    // 폼 데이터에 나머지 값 추가
+	    formData.append("id", $id.val());
+	    formData.append("qboard_class", $qboard_class.val());
+	    formData.append("qboard_title", $qboard_title.val());
+	    formData.append("qboard_content", $qboard_content.val());
+	    formData.append("qboard_openchk", $qboard_openchk.val());
    	 
-   	 console.log(param);
-   	 
-   	 $.ajax({
-            type: 'post'
-            ,url: 'join.ajax'
-            ,data:param
+	    $.ajax({
+	        type: "POST",
+	        enctype: "multipart/form-data",
+	        url: "qboard_write.ajax",
+	        data: formData,
+	        processData: false,
+	        contentType: false,
+	        cache: false
             ,dataType:'json'
             ,success:function(data){
                console.log(data);
                
                if (data.success == 1) {
-   				alert('회원가입이 완료 되었습니다.');
-   				location.href = './';
+   				alert('문의사항 등록이 완료 되었습니다.');
+   				location.href = 'redirect:/qboard.go';
    			}else{
-   				alert('회원가입에 실패 했습니다.\r\n 다시 시도해 주세요!');
+   				alert('문의사항 등록에 실패 했습니다.\r\n 다시 시도해 주세요!');
    			}
             }
             ,error:function(e){
                console.log(e);
-               alert('회원가입에 실패 했습니다.\r\n 다시 시도해 주세요!');
+               alert('문의사항 등록에 실패 했습니다.\r\n 다시 시도해 주세요!');
             }
         });      
-    }    
-	
+    }    	
 }
 
 
