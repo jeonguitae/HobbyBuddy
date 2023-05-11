@@ -79,9 +79,13 @@ public class RandomController {
 	public String rlist(Model model) {		
 		logger.info("start");
 		
+		
 		ArrayList<MemberDTO> big_hb = service2.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
+		
+		ArrayList<RandomDTO> list = Service.plist();
+	    model.addAttribute("list", list);
 		
 		
 		return "randomList";
@@ -100,19 +104,23 @@ public class RandomController {
 		model.addAttribute("list",list);
 		return "randomList";
 	}
-	
+	/*
 	@RequestMapping(value="/noNameList.go")
-	public String nolist(Model model) {		
+	public String nlist(Model model) {		
 		logger.info("start");
+		
 		
 		ArrayList<MemberDTO> big_hb = service2.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
 		
+		ArrayList<RandomDTO> list = Service.nlist();
+	    model.addAttribute("list", list);
+		
 		
 		return "noNameList";
 	}
-	
+	*/
 	@RequestMapping(value="/noNameList.do")
 	public String nonameList(Model model, @RequestParam HashMap<String, String> params) {	
 		
@@ -147,6 +155,11 @@ public class RandomController {
 			
 		String page = "redirect:/list.do";
 		
+		logger.info("취미 등록 페이지 이동");
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
 		RandomDTO dto= Service.detail(id);
 		RandomDTO photo = Service.proPhotoList(id);
 		logger.info("dto"+dto);
@@ -157,6 +170,20 @@ public class RandomController {
 			model.addAttribute("photo",photo);
 		}
 		return "proDetail";
+	}
+	
+	@RequestMapping(value = "/nodetail.do", method = RequestMethod.GET)
+	public String nodetail(@RequestParam String id,Model model) {
+			
+		String page = "redirect:/list.do";
+		
+		RandomDTO dto= Service.detail(id);
+		logger.info("dto"+dto);
+		if(dto != null) {
+			page = "noNameDetail";
+			model.addAttribute("member",dto);
+		}
+		return "noNameDetail";
 	}
 	
 

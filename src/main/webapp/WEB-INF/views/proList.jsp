@@ -5,6 +5,7 @@
    <meta charset="UTF-8">
    <title>Insert title here</title>
       <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+      <link rel="stylesheet" href="resources/css/css.css">
 
    <style>
 		table, th, td{
@@ -41,7 +42,7 @@
 				<tr>
 					<th>성별</th>
 					<td>
-						<input type="radio" name="gender" value="남성"/>남성
+						<input type="radio" name="gender" value="남성" checked="checked"/>남성
 						<input type="radio" name="gender" value="여성"/>여성
 						<input type="radio" name="gender" value="성별 무관"/>성별 무관
 					</td>
@@ -126,7 +127,7 @@
 				<th>NAME</th>
 				<th>나이</th>
 				<th>지역</th>
-				<th>small 취미</th>
+				<th>취미</th>
 				<th>성별</th>
 			</tr>
 		</thead>

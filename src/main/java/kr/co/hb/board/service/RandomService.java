@@ -74,6 +74,11 @@ public class RandomService {
 		return list;
 	}
 
+	public ArrayList<RandomDTO> nlist() {
+		return dao.nlist();
+	}
+
+
 
 
 }

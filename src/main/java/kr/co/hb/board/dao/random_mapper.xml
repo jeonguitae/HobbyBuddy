@@ -7,6 +7,10 @@
 	<select id="plist" resultType="kr.co.hb.board.dto.RandomDTO">
 		SELECT m.id ,m.name ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
 	</select>
+	
+	<select id="nlist" resultType="kr.co.hb.board.dto.RandomDTO">
+		SELECT m.id ,m.name ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+	</select>
 
 	<select id="profileList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
@@ -24,15 +28,19 @@
 	</select>
 	
 	<select id="randomList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		WHERE big_hb = #{big_hb1} and small_hb = #{small_hb1} or big_hb = #{big_hb2} and small_hb = #{small_hb2} or big_hb = #{big_hb3} and small_hb = #{small_hb3} 
+		and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}
 	</select>
 	
 	<select id="noNameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member WHERE gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}  
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		WHERE big_hb = #{big_hb1} and small_hb = #{small_hb1} or big_hb = #{big_hb2} and small_hb = #{small_hb2} or big_hb = #{big_hb3} and small_hb = #{small_hb3} 
+		and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}
 	</select>
 	
 	<select id="detail" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT * FROM member WHERE id = #{param1}
+		select id ,name ,age , area ,gender from member where id = #{param1}
 	</select>
 	
 	<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO"> 
