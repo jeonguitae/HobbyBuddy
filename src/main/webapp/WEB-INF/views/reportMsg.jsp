@@ -36,7 +36,7 @@
 			</tr>
 			<tr>
 				<th>신고 내용</th>
-				<td><input type="text" name="rept_content" value=""></td>
+				<td><input type="text" name="rept_content" value="${msg_content}"></td>
 			</tr>
 			<tr>
 				<th>신고 하기</th>

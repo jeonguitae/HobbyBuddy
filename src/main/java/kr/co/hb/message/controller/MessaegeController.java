@@ -95,9 +95,10 @@ public class MessaegeController {
 	}
 
 	@RequestMapping(value = "/reportMsg.go", method = RequestMethod.GET)
-	public String msgReport(HttpSession session, Model model, @RequestParam int msgNo, @RequestParam String id_send) {
+	public String msgReport(HttpSession session, Model model, @RequestParam int msgNo, @RequestParam String id_send, @RequestParam String msg_content) {
 		model.addAttribute("msgNo", msgNo);
 		model.addAttribute("id_send", id_send);
+		model.addAttribute("msg_content",msg_content);
 		return "reportMsg";
 	}
 	

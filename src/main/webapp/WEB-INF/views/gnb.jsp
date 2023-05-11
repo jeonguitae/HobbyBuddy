@@ -108,7 +108,7 @@
 		<input type="button" value="취미 모임" onclick="location.href='glist.go'"/>
 		<input type="button" value="프로필" onclick="location.href='profile.go'"/>
 		<input type="button" value="랜덤 매칭" onclick="location.href='randomList.go'"/>
-		<input type="button" value="익명 매칭" onclick="location.href='noNameList.go'"/>
+		<input type="button" value="익명 매칭" onclick="location.href='noNameList.do'"/>
 		<input type="button" value="자유 게시판" onclick="location.href='flist.go'"/>
 		<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>
 		<input type="button" value="공지사항" onclick="location.href='nboard.go'"/>

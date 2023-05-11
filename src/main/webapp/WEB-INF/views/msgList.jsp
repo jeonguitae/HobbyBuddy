@@ -48,7 +48,7 @@
 						<td>${bbs.msg_time}</td>
 						<td><a href="msgReply.go?id_send=${bbs.id_send}">답장 하기</a></td>
 						<td><a href="msgDel.do?msgNo=${bbs.msgNo}">삭제 하기</a></td>
-						<td><a href="reportMsg.go?msgNo=${bbs.msgNo}&id_send=${bbs.id_send}">신고 하기</a></td>
+						<td><a href="reportMsg.go?msgNo=${bbs.msgNo}&id_send=${bbs.id_send}&msg_content=${msg_content}">신고 하기</a></td>
 					</tr>
 				</c:forEach>			
 		</tbody>
