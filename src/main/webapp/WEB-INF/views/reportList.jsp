@@ -153,33 +153,26 @@ function listCall(page){
 
 
 function listPrint(list){
-   var content='';
-   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
-   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
-   // 해결방법 2. js 에서 변환
-   list.forEach(function(item,idx){
-	  
-      content += '<tr>';
-      content += '<td>'+item.rept_no+'</td>';
-      content += '<td>'+item.reptboard_class+'</td>';
-      content += '<td>'+item.reporter+'</td>';
-      content += '<td><a href="reportDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
-      var date = new Date(item.rept_date);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.rept_state+'</td>';
-      var date = new Date(item.proc_date);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.admin_id+'</td>';
-      
-      content += '</tr>';
-   });
-   $('#list').empty();
-   $('#list').append(content);
-   
-   
-}
+	   var content='';
+	   list.forEach(function(item,idx){
+	      content += '<tr>';
+	      content += '<td>'+item.rept_no+'</td>';
+	      content += '<td>'+item.reptboard_class+'</td>';
+	      content += '<td>'+item.reporter+'</td>';
+	      content += '<td><a href="reportDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
+	      var date = new Date(item.rept_date);
+	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+	      content += '<td>'+item.rept_state+'</td>';
+	      date = new Date(item.proc_date);
+	      var procDate = date.getTime() === 0 ? '' : date.toLocaleDateString('ko-KR'); // 조건문 추가
+	      content += '<td>'+ procDate +'</td>';
+	      content += '<td>'+(item.admin_id ? item.admin_id : '')+'</td>'; // 조건문 추가
+	      content += '</tr>';
+	   });
+	   $('#list').empty();
+	   $('#list').append(content);
+	}
+
 
 </script>
 </html>

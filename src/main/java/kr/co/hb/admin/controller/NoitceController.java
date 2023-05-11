@@ -80,9 +80,12 @@ public class NoitceController {
 			model.addAttribute("msg","제목을 입력하세요.");
 		   }else if (params.get("notice_content").equals("")) {
 			   model.addAttribute("msg","내용을 입력하세요.");
+		   }else if(params.get("id").equals("")){
+			   model.addAttribute("msg","세션이 만료되었습니다. 다시 로그인해주세요.");
 		   }else {
+			   model.addAttribute("msg","정상적으로 작성 되었습니다.");
 			   service.noticeWrite(photo, params);
-			page = "redirect:/noticeList.go";
+			page = "noticeList";
 		}
 		   
 	      return page;
