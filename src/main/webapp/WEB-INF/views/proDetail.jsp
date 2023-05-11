@@ -20,7 +20,6 @@
 <body>
    <form action="myp.do" method="post">
       <table>
-      
       	<tr>
       		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;<img width="500" src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
       		</th>

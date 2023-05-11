@@ -45,7 +45,7 @@
       	</tr>
       	<tr>
             <th>취미</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.small_hb}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td id="myHobbyList"></td>
       	</tr>
       	<tr>
             <th>매너온도</th>
@@ -88,5 +88,42 @@
 </body>
 
 <script>
+var member_id = "${member.id}";
+HobbyList();
+function HobbyList(){
+	console.log("member_id : " + member_id);
+	$.ajax({
+		type:'get',
+		url:'myHobbyList.ajax',
+		data:{id:member_id},
+		dataType:'json',
+		success:function(data){
+			console.log("data, myHobbyList : " + data.myHobbyList);
+			console.log("data, login : " + data.login);
+			if(!data.login){
+				alert('로그인이 필요한 서비스 입니다.');
+				location.href='./';
+			}else{
+				myHobbyListDraw(data.myHobbyList);
+			}
+		},
+		error:function(e){
+			console.log(e);
+		}
+	});	
+}
+
+
+function myHobbyListDraw(myHobbyList){
+	console.log("myHobbyList : " + myHobbyList);
+	var content = '';
+	myHobbyList.forEach(function(item,index){
+		content+= item.big_hb + " / " + item.small_hb + "<br/>" ;
+		console.log(item.my_hobby_no);
+	});
+	
+	$('#myHobbyList').empty();
+	$('#myHobbyList').append(content);
+}
 </script>
 </html>

@@ -40,7 +40,11 @@
 	</select>
 	
 	<select id="detail" resultType="kr.co.hb.board.dto.RandomDTO">
-		select id ,name ,age , area ,gender from member where id = #{param1}
+		select * from member where id = #{param1}
+	</select>
+	
+	<select id="nodetail" resultType="kr.co.hb.board.dto.RandomDTO">
+		select * from member where id = #{param1}
 	</select>
 	
 	<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO"> 
