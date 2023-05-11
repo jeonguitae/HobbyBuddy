@@ -19,6 +19,8 @@ import kr.co.hb.alarm.dto.AlarmDTO;
 import kr.co.hb.alarm.service.AlarmService;
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.board.service.BoardService;
+import kr.co.hb.message.dto.MessageDTO;
+import kr.co.hb.message.service.MessageService;
 
 
 
@@ -28,6 +30,7 @@ public class AlarmController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	@Autowired AlarmService service;
 	@Autowired BoardService bservice;
+	@Autowired MessageService mservice;
 
 	@RequestMapping(value = "/alarmList.ajax")
 	@ResponseBody
@@ -48,13 +51,17 @@ public class AlarmController {
 		    // AlarmDTO 객체와 관련된 작업은 alarmList가 null이 아닌 경우에만 수행
 		    if (alarmList != null) {
 		        for (AlarmDTO dto : alarmList) {
-		            String alarm_title = dto.getAlarm_title();
-		            String newalarm_title = alarm_title.substring(0, 7);
-		            dto.setAlarm_title(newalarm_title + "...");
-
+		        	String alarm_title = dto.getAlarm_title();
+		            if(alarm_title.length()>8) {
+		            	String newalarm_title = alarm_title.substring(0, 7);
+		            	dto.setAlarm_title(newalarm_title + "...");
+		            }
+		            
 		            String alarm_content = dto.getAlarm_content();
-		            String newalarm_content = alarm_content.substring(0, 7);
-		            dto.setAlarm_content(newalarm_content + "...");
+		            if(alarm_content.length()>8) {
+			            String newalarm_content = alarm_content.substring(0, 7);
+			            dto.setAlarm_content(newalarm_content + "...");
+		            }
 		        }
 		    }
 
@@ -84,7 +91,8 @@ public class AlarmController {
 	}
 	
 	@RequestMapping(value="/alarmDetail.do")
-	public String alarmDetail(Model model, @RequestParam int alarm_num, @RequestParam String alarm_class, @RequestParam ArrayList<String> alarm_no) {
+	public String alarmDetail(Model model, @RequestParam int alarm_num, 
+			@RequestParam String alarm_class, @RequestParam ArrayList<String> alarm_no, HttpSession session) {
 		logger.info("alarmDetail" + alarm_num + " / " + alarm_class);
 		String page = "main";
 		if(alarm_class.equals("자유")) {
@@ -92,6 +100,16 @@ public class AlarmController {
 			model.addAttribute("dto",dto);
 			service.alarmListRead(alarm_no);
 			page = "fBoardDetail";
+		}
+		
+		if(alarm_class.equals("쪽지")) {
+			service.alarmListRead(alarm_no);
+			
+			String id = (String) session.getAttribute("loginId");
+			logger.info("msgList call : " + id);		
+			ArrayList<MessageDTO> msgList = mservice.msgList(id);
+			model.addAttribute("msgList", msgList);
+			page = "msgList";
 		}
 		
 		return page;

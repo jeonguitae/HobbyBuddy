@@ -71,6 +71,7 @@
 		padding: 0.5rem 1rem;
 		cursor: pointer;
 		font-size: 1.2rem;	
+		position: static;
 	}
 	
 	.menu{
@@ -124,7 +125,6 @@
 </body>
 
 <script>
-	$.ajaxSetup({ cache: false });
 	
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";
@@ -178,7 +178,8 @@
 		      content += '<div class="alarmList">';
 		      content += '<input type="checkbox" value="' + item.alarm_no + '"/>&nbsp;&nbsp;&nbsp;&nbsp;';
 		      content += '<a href="alarmDetail.do?alarm_num=' + item.alarm_num + '&alarm_class=' + item.alarm_class + '&alarm_no=' + item.alarm_no + '">';
-		      content += '<b>ID</b> : \" ' + item.id_send + ' \" &nbsp;&nbsp;&nbsp;<b>제목</b> : \" '+ item.alarm_title + ' \" &nbsp;&nbsp;&nbsp;<b>내용</b> : \ "' + item.alarm_content;
+		      content += '('+ item.alarm_class+')&nbsp;&nbsp;<b>ID</b> : \" ' + item.id_send + ' \" &nbsp;&nbsp;&nbsp;<b>제목</b> : \" '
+		      			+ item.alarm_title + ' \" &nbsp;&nbsp;&nbsp;<b>내용</b> : \ "' + item.alarm_content;
 		      content += ' /" </a></div>';
 		      console.log("alarmList : " + alarmList);
 		    });

@@ -9,6 +9,17 @@ public interface MessageDAO {
 
 	ArrayList<MessageDTO> msgList(String id);
 
-	void msgReplyDo(HashMap<String, String> params);
+	int msgReplyDo(MessageDTO dto);
+
+	int msgChatDo(MessageDTO dto);
+
+	void msgDel(String msgNo);
+
+	ArrayList<MessageDTO> msgList2(String id);
+
+	void msgAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
+			int alarm_num);
+
+	int reportMsgDo(HashMap<String, String> params);
 
 }
