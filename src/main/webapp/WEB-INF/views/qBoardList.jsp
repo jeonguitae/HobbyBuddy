@@ -99,7 +99,7 @@ $('#pagePerNum').change(function() {
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'noticeList.ajax',
+      url:'qboardList.ajax',
       data:{
           'page':page,
             'cnt':$('#pagePerNum').val()          
@@ -107,7 +107,7 @@ function listCall(page){
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.noticePageList);
+         listPrint(data.qboardPageList);
 
          
          // 총 페이지 수
@@ -144,14 +144,14 @@ function listPrint(list){
    list.forEach(function(item,idx){
 	  
       content += '<tr>';
-      content += '<td>'+item.notice_idx+'</td>';
-      content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';
-      content += '<td><a href="noticeDetail.do?notice_idx='+item.notice_idx+'">'+item.notice_title+'</a></td>';
-      var date = new Date(item.notice_date);
+      content += '<td>'+item.qboard_no+'</td>';
+      content += '<td>'+item.qboard_class+'</a></td>';
+      content += '<td><a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</td>';
+      content += '<td>'+item.id+'</td>';
+      var date = new Date(item.qboard_time);
       // 기본은 en-US
       content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.notice_bHit+'</td>';
-      content += '<td>'+ (item.notice_chk ? '공개' : '비공개') +'</td>';
+      content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
       content += '</tr>';
    });
    $('#list').empty();

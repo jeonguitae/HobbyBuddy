@@ -12,13 +12,61 @@
    
    
       id="qboard_write" parameterType="kr.co.hb.board.dto.QboardDTO">
-      INSERT INTO notice(id, qboard_class, qboard_title, qboard_content,qboard_openchk)
+      INSERT INTO qboard(id, qboard_class, qboard_title, qboard_content,qboard_openchk)
          VALUES(#{id},#{qboard_class},#{qboard_title},#{qboard_content},#{qboard_openchk})
    </insert>
    
    <insert id="qboardFileSave">
-      INSERT INTO hbphoto(board_num, board_class, ori_photo_name, new_photo_name)
-         VALUES(#{param1},#{param2},#{param3},#{param4})
+      INSERT INTO hbphoto(id, board_num, board_class, ori_photo_name, new_photo_name)
+         VALUES(#{param1},#{param2},#{param3},#{param4}, #{param5})
    </insert>
+   
+   <select id="qboardPageList" resultType="kr.co.hb.board.dto.QboardDTO">
+		SELECT *
+			FROM qboard ORDER BY qboard_no DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+	
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(qboard_no) FROM qboard 
+	</select>
+	
+	<select id="qboardDetail" resultType="kr.co.hb.board.dto.QboardDTO">
+      SELECT q.qboard_no, q.qboard_class, q.qboard_time, q.id, q.qboard_title, q.qboard_content,q.qboard_openchk,
+		h.photoIdx, h.new_photo_name FROM qboard q
+	LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num WHERE q.qboard_no = #{param1}   
+   </select>
+   
+   
+   <delete id="qboardDelete">
+      DELETE FROM qboard WHERE qboard_no = #{param1}
+   </delete>
+   
+   <delete id="updatePDelete">
+      DELETE FROM hbphoto WHERE photoIdx = #{param1}
+   </delete>
+   
+   <select id="qboardFindFile" resultType="String">
+      SELECT new_photo_name FROM hbphoto
+         WHERE qboard_no = #{param1}
+   </select>
+   
+   <select id="qboardFindFile2" resultType="String">
+      SELECT new_photo_name FROM hbphoto
+         WHERE photoIdx = #{param1}
+   </select>
+   
+   <update id="qboardUpdate" parameterType="HashMap">
+         UPDATE qboard 
+         SET qboard_class = #{qboard_class}
+         , qboard_time = now()
+         , qboard_title = #{qboard_title}
+         , qboard_content = #{qboard_content}
+         , qboard_openchk = #{qboard_openchk}
+         WHERE qboard_no = #{qboard_no}
+   </update>
+   
+    <delete id="deletePhoto">
+   		DELETE from hbphoto where photoIdx = #{param1} AND qboard_no = #{param2};
+   </delete>
 	
 </mapper>

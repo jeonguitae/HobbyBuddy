@@ -36,17 +36,17 @@
       
          <tr>
             <th>작성자 아이디</th>
-            <td><input type="text" name="id" value="${sessionScope.loginId}" readonly></td>
+            <td><input type="text" name="id" id="id" value="${sessionScope.loginId}" readonly></td>
          </tr>               
          <tr>
             <th>문의 유형</th>
             <td>
             	<select name="qboard_class" id="qboard_class">
             		<option value="question_default">선택</option>
-            		<option value="question_id">계정문의</option>
-            		<option value="question_board">게시판문의</option>
-            		<option value="question_chat">채팅문의</option>
-            		<option value="question_other">기타문의</option>
+            		<option value="계정 문의">계정문의</option>
+            		<option value="게시판 문의">게시판문의</option>
+            		<option value="채팅 문의">채팅문의</option>
+            		<option value="기타 문의">기타문의</option>
             	</select>
             </td>
          </tr>
@@ -146,7 +146,7 @@ function qboard_write(){
                
                if (data.success == 1) {
    				alert('문의사항 등록이 완료 되었습니다.');
-   				location.href = 'redirect:/qboard.go';
+   				location.href = 'qboardList.go';   				
    			}else{
    				alert('문의사항 등록에 실패 했습니다.\r\n 다시 시도해 주세요!');
    			}
