@@ -66,6 +66,8 @@
 		<p>댓글 쓰기</p>
 		<br>
 		<form class="comment" method="post" action="cowrite.do?fbNo=${dto.fbNo}">
+			<input type="hidden" name="id_receive" value="${dto.id}">
+			<input type="hidden" name="alarm_title" value="${dto.title}">
 			<input type="hidden" name="id" value="${sessionScope.loginId}">
 			<input type="text" name="coContent" value=""/>
 			<button>작성</button>	
