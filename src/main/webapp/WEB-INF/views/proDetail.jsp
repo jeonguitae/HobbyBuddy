@@ -12,22 +12,33 @@
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
+
    }
+   
+   .m{
+  background-color: navy;
+  color: #ffffff;
+   }
+   
    
 </style>
 
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <form action="myp.do" method="post">
       <table>
+      <colgroup>
+		<col width="50%"/>
+		<col width="20%"/>
+		<col width="30%"/>
+
+	</colgroup>
       	<tr>
-      		<th rowspan="8">&nbsp;&nbsp;&nbsp;&nbsp;<img width="500" src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+      		<th rowspan="9">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
       		</th>
       		<th>아이디</th>
       		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-      		<th rowspan="2">
-               <input type="submit" value="즐겨찾기"/>
-            </th>
       	</tr>
       	<tr>
       		<th>이름</th>
@@ -36,9 +47,6 @@
       	<tr>
             <th>나이</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.age}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <th rowspan="2">
-            	<input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
-            </th>
       	</tr>
       	<tr>
             <th>성별</th>
@@ -47,9 +55,6 @@
       	<tr>
             <th>지역</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.area}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <th rowspan="2">
-      			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
-      		</th>
       	</tr>
       	<tr>
             <th>취미</th>
@@ -58,33 +63,26 @@
       	<tr>
             <th>매너온도</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.mannertp}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <th rowspan="2">
-      			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
-      		</th>
       	</tr>
       	<tr>
             <th>자기소개</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
       	</tr>
       	<tr>
-      		<th>
+            <th>매너온도</th>
+            <td>
+               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${mimber.id}&mpm=plus'"/>
+               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${mimber.id}&mpm=minus'"/>
+               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${mimber.id}&mpm=del'"/>
+            </td>
+      	</tr>
+      	<tr>
+      		<th colspan="3">
                <input type="submit" value="즐겨찾기"/>
-            </th>
-            <th>
                <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
-            </th>
-            <th>
       			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
-      		</th>
-      		<th>
       			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
       		</th>
-            <th>
-               <input type="button" value="경고"/> 
-            </th>
-            <th> 
-               <input type="button" value="정지"/> 
-            </th>
       	</tr>
       </table>
       
@@ -153,5 +151,6 @@ function myHobbyListDraw(myHobbyList){
 	$('#myHobbyList').empty();
 	$('#myHobbyList').append(content);
 }
+
 </script>
 </html>
