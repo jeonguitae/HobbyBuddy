@@ -24,7 +24,7 @@ public class NoitceController {
 	
 	@Autowired NoticeService service;
 	
-	@RequestMapping(value = "/noticeList.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = {"/noticeList.ajax", "/nboard.go"}, method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> noticeList(
 			@RequestParam String page,
