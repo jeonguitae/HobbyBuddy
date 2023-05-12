@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.board.dao.BoardDAO;
 import kr.co.hb.board.dto.BoardDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 @Service
 public class BoardService {
 
@@ -33,7 +34,8 @@ public class BoardService {
 	public String fwrite(MultipartFile photo, HashMap<String, String> params,HttpSession session) {
 		
 		logger.info("서비스까지 왔땅");
-		
+		//insert하면서 auto되는 애 key 뽑아올 때 dto로 함
+		//name이 title인 애의 value를 갖고 와라 
 		BoardDTO dto = new BoardDTO();
 		dto.setTitle(params.get("title"));
 		dto.setId(params.get("id"));
@@ -90,7 +92,7 @@ public class BoardService {
 
 	public BoardDTO detail(int fbNo, String flag) {
 		if (flag.equals("detail")) {
-			dao.uphit();
+			dao.uphit(fbNo);
 		}
 		return dao.detail(fbNo);
 	}
@@ -156,17 +158,62 @@ public class BoardService {
 		}
 	}
 
-	   public ArrayList<BoardDTO> colist(int fbNo) {
-		      // TODO Auto-generated method stub
-		      return dao.colist(fbNo);
-		   }
+	public ArrayList<BoardDTO> coList(int fbNo) {
+		return dao.coList(fbNo);
+	}
 
-		   public int cowrite(String id, int fbNo, String coContent) {
-		      // TODO Auto-generated method stub
-		      return dao.cowrite(id, fbNo, coContent);
-		   }
+	public int cowrite(HashMap<String, String> params) {
+		return dao.cowrite(params);
+	}
 
-}
+	public int codelete(int coNo) {
+		return dao.codelete(coNo);
+	}
+
+
+	public ArrayList<BoardDTO> fsorting(HashMap<String, String> params) {
+		return dao.fsorting(params);
+	}
+
+	public ArrayList<BoardDTO> fsearch(HashMap<String, String> params) {
+		
+		ArrayList<BoardDTO> list = null;
+		
+		if(params.get("fsearch").equals("title")) {
+			String wildcard = "%" + params.get("fsearch") + "%";
+			params.replace("fsearch", wildcard);
+			list = dao.tsearch(params);
+		}
+		
+		if(params.get("fsearch").equals("id")) {
+			
+			String wildcard = "%" + params.get("fsearch") + "%";
+			params.replace("fsearch", wildcard);
+			list = dao.isearch(params);
+		}
+		
+		if(params.get("fsearch").equals("bContent")) {
+			
+			String wildcard = "%" + params.get("fsearch") + "%";
+			params.replace("fsearch", wildcard);
+			list = dao.csearch(params);
+		}
+		
+		return list;
+	}
+
+	public int bmarkdo(String memid, String myid) {
+		return dao.bmarkdo(memid, myid);
+	}
+	
+	
+	
+	}
+
+
+
+	 
+
 
 	
 
