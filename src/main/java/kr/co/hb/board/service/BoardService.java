@@ -205,6 +205,11 @@ public class BoardService {
 	public int bmarkdo(String memid, String myid) {
 		return dao.bmarkdo(memid, myid);
 	}
+
+	public void coAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
+			String alarm_num) {
+		dao.coAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);		
+	}
 	
 	
 	

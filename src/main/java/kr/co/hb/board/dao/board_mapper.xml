@@ -87,4 +87,10 @@
 	INSERT INTO bmark (myid, memid)
 	VALUES(#{param2},#{param1})
 	</insert>
+	
+	<insert id="coAlarm">
+      insert into alarm_list (id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
+       values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+   </insert>
+	
 </mapper>

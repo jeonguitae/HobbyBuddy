@@ -49,6 +49,9 @@ public interface BoardDAO {
 
 	int bmarkdo(String memid, String myid);
 
+	void coAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
+			String alarm_num);
+
 	
 	
 

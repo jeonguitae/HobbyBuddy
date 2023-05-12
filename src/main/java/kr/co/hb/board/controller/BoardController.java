@@ -148,6 +148,15 @@ public class BoardController {
 		int row=service.cowrite(params);
 		int fbNo=Integer.parseInt(params.get("fbNo"));
 		logger.info("댓글쓰기"+row);
+		
+		String id_send = params.get("id");
+		String id_receive = params.get("id_receive");
+		String alarm_title = params.get("alarm_title");
+		String alarm_content = params.get("coContent");
+		String alarm_class = "자유";
+		String alarm_num = params.get("alarm_num");
+		
+		service.coAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);
 		return "redirect:/fdetail.do?fbNo="+fbNo;
 	}
 	@RequestMapping(value="/codelete.go")
