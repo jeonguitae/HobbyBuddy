@@ -30,15 +30,22 @@ public class SecretController {
 		return service.secretPageList(Integer.parseInt(page), Integer.parseInt(cnt));
 	}	
 	
-	@RequestMapping(value = "/secret_chk.ajax", method = RequestMethod.POST)
-	@ResponseBody
-	public String update_chk(@RequestParam("sboard_num") String sboard_num,
-	                         @RequestParam("secret_state") String secret_state) {
-	    logger.info("컨트롤러 등장");
-	    logger.info("sboard_num : " + sboard_num);
-	    logger.info("secret_state : " + secret_state);
-	    return service.secret_ChkUpdate(sboard_num, secret_state);
-	}
+	/*
+	 * @RequestMapping(value = "/secret_chk.ajax", method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public String update_chk(@RequestParam("sboard_num") String
+	 * sboard_num,
+	 * 
+	 * @RequestParam("secret_state") String secret_state) { logger.info("컨트롤러 등장");
+	 * logger.info("sboard_num : " + sboard_num); logger.info("secret_state : " +
+	 * secret_state); return service.secret_ChkUpdate(sboard_num, secret_state); }
+	 */
 
-	
+	@RequestMapping(value = "/secretSet.do")
+	public String secretSet(@RequestParam int sboard_num) {
+		
+		
+		
+		return service.secretSet(sboard_num);
+	}
 }

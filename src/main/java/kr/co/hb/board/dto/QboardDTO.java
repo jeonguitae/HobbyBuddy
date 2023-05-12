@@ -3,6 +3,7 @@ package kr.co.hb.board.dto;
 import java.util.Date;
 
 public class QboardDTO {
+	
 	private int qboard_no;
 	private String id;
 	private String qboard_title;
@@ -15,11 +16,14 @@ public class QboardDTO {
 	private String admin_id;
 	private String answer_content;
 	private Date answer_date;
-	private int photo_idx;
+	private int photoIdx;
 	private String new_photo_name;
 	private String ori_photo_name;
 	private String board_class;
 	private int board_num;
+	private String qboard_reply;
+	private String secret_state;
+	private Date reply_time;
 	
 	
 	public int getQboard_no() {
@@ -94,12 +98,6 @@ public class QboardDTO {
 	public void setAnswer_date(Date answer_date) {
 		this.answer_date = answer_date;
 	}
-	public int getPhoto_idx() {
-		return photo_idx;
-	}
-	public void setPhoto_idx(int photo_idx) {
-		this.photo_idx = photo_idx;
-	}
 	public String getNew_photo_name() {
 		return new_photo_name;
 	}
@@ -124,7 +122,30 @@ public class QboardDTO {
 	public void setBoard_num(int board_num) {
 		this.board_num = board_num;
 	}
-	
+	public int getPhotoIdx() {
+		return photoIdx;
+	}
+	public void setPhotoIdx(int photoIdx) {
+		this.photoIdx = photoIdx;
+	}
+	public String getQboard_reply() {
+		return qboard_reply;
+	}
+	public void setQboard_reply(String qboard_reply) {
+		this.qboard_reply = qboard_reply;
+	}
+	public String getSecret_state() {
+		return secret_state;
+	}
+	public void setSecret_state(String secret_state) {
+		this.secret_state = secret_state;
+	}
+	public Date getReply_time() {
+		return reply_time;
+	}
+	public void setReply_time(Date reply_time) {
+		this.reply_time = reply_time;
+	}
 	
 	
 }

@@ -63,5 +63,14 @@ public class SecretService {
 		   logger.info("secret_state : " + secret_state);
 		   return secret_state;
 		 }
+
+	public String secretSet(int sboard_num) {
+		
+		String page = "redirect:/secretList.go";		
+		
+		dao.secretSet(sboard_num);
+		
+		return page;
+	}
 	
 }

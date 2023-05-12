@@ -2,13 +2,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>\
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
 <style>
 	table, th, td{
       border: 1px solid black;
@@ -83,27 +87,80 @@
 		<tr>
 			<td colspan="2">				
 				<input type="button" onclick="location.href='qboardList.go'" value="리스트로 돌아가기" id="listBack">
-				<input type="button" onclick="location.href='./qboardUpdate.go?qboard_no=${dto.qboard_no}'" value="수정">	
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제">               	
+				<input type="button" onclick="location.href='./qboardUpdate.go?qboard_no=${dto.qboard_no}'" value="수정" id="updateBtn">	
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제" id="deleteBtn">
+               <form action="secretSet.do">
+               	<button value="${dto.secret_state ? "비밀글 설정" : "비밀글 해제"}"></button>
+               </form>
+                              	
 			</td>    
 		</tr>
-      </table>   
-      <table>	      
+      </table>
+      <form action="qBoard_replyWrite.do" method="post">  
+      <input type="hidden" name="qboard_no" value="${dto.qboard_no}">   	
+      <input type="hidden" name="qboard_state" value="${dto.qboard_state}">   	
+
+		<table>	      
 		    <tr>
-		      <th>문의 답변</th>
-		      <td id="after"><input type="text" value="작성된 답변이 없습니다." readonly="readonly"></td>         
-		    </tr>
-		    <tr>
-		      <th>답변 일시</th>
-		      <td><%-- ${dto.answer_date} --%></td>         
-		    </tr>		  
-	</table>	 
+		      <th>문의 답변</th>		      
+		      <td id="after">		      	
+		      	<textarea disabled="disabled" name="qboard_reply" style="width: 400px; height: 200px; resize: none;">${dto.qboard_reply}</textarea></td>         
+			</tr>
+			<tr id="reply_time2">
+			  <th>답변 일시</th>
+			  <td><input type="text" name="reply_time" value="${dto.reply_time}" class="reply-time"></td>
+			</tr>
+			<tr id="admin_reply" style="display:none">
+				<th colspan="2"><button>답변 등록</button></th>
+			</tr>		  
+		</table>      
+      </form>
 </body>
 <script>
-		var adminChk = "${sessionscope.adminChk}";
-		if (adminChk == '1' || adminChk == 'true') {
-		    $('#after').removeAttr('readonly').val('작성된 답변이.');
+var sessionID = '${sessionScope.loginId}';
+var authorID = '${dto.id}';
+var adminChk = '${sessionScope.adminChk}';
+
+if (adminChk === true || adminChk === '1' || adminChk === "true") {
+  document.querySelector('#after textarea').disabled = false;
+  document.querySelector('#admin_reply').style.display = 'table-row';
+} else {
+  document.querySelector('#admin_reply').style.display = 'none';
+}
+
+// 수정 버튼 보이기/숨기기
+var updateBtn = document.querySelector('#updateBtn');
+if (sessionID === authorID || adminChk === "true") {
+  updateBtn.style.display = 'inline-block';
+} else {
+  updateBtn.style.display = 'none';
+}
+
+// 삭제 버튼 보이기/숨기기
+var deleteBtn = document.querySelector('#deleteBtn');
+if (sessionID === authorID || adminChk === "true") {
+  deleteBtn.style.display = 'inline-block';
+} else {
+  deleteBtn.style.display = 'none';
+}
+
+$(document).ready(function() {
+	  // reply-time 클래스를 가진 input 요소를 선택합니다.
+	  var replyTime = $(".reply-time");
+
+	  // 해당 값이 "1999-09-09 00:00:00.000"인 경우에는 해당 요소를 숨깁니다.
+	  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
+		  replyTime.closest("tr").hide();
+		} else {
+		  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD");
+		  if (date !== "Invalid date") {
+		    replyTime.val(date);
+		  }
 		}
+
+	});
+
+
 
 
 

@@ -67,7 +67,7 @@ public class QboardService {
 	String id = dto.getId();
 	
 	
-	if (!photo.getOriginalFilename().equals("")) {
+	if (photo != null && !photo.getOriginalFilename().equals("")) {
         qboardFileSave(id,board_num, photo);
      }
 	
@@ -149,7 +149,7 @@ public class QboardService {
 	}
 
 	public String qboardUpdate(MultipartFile photo, HashMap<String, String> params) {
-		int row = dao.qboardUpdate(params);
+			int row = dao.qboardUpdate(params);
 	      int board_num = Integer.parseInt(params.get("qboard_no"));	
 	      
 	      String id = params.get("id");
@@ -161,6 +161,22 @@ public class QboardService {
 	      
 	      String page = row > 0 ? "redirect:/qboardDetail.go?qboard_no=" + board_num : "redirect:/qboardList.go";
 	             
+	        return page;
+	}
+	
+	public String qBoard_replyWrite(HashMap<String, String> params) {
+					
+			int board_num = Integer.parseInt(params.get("qboard_no"));
+			
+			logger.info("board_num : " + board_num);
+		
+			int row = dao.replyWrite(params);
+			
+			logger.info("row : " + row);
+		  
+	      
+		    String page = row > 0 ? "redirect:/qboardList.go" : "redirect:/qboardDetail.go?qboard_no=" + board_num;
+            
 	        return page;
 	}
 
@@ -181,9 +197,9 @@ public class QboardService {
 		
 	}
 
-	public void deletePhoto(String photoIdx, String qboard_no) {
+	public void deletePhoto(String photoIdx, String board_num) {
 		logger.info(photoIdx);
-		String new_photo_name = dao.noticeFindFile2(photoIdx);
+		String new_photo_name = dao.qboardFindFile2(photoIdx);
 		
 	    if (new_photo_name != null) {
 	        	
@@ -191,12 +207,14 @@ public class QboardService {
 	        if (files.exists()) {
 	        	logger.info("2");
 	            files.delete();
-	            dao.deletePhoto(photoIdx,qboard_no); // photo_idx 파라미터 사용
+	            dao.qDeletePhoto(photoIdx,board_num); // photo_idx 파라미터 사용
 	        }
 	        
 	    }
 		
 	}
+
+	
 
 	
 

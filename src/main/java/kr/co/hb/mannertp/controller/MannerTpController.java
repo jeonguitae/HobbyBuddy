@@ -1,7 +1,5 @@
 package kr.co.hb.mannertp.controller;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -12,11 +10,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+
 import kr.co.hb.board.controller.RandomController;
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.mannertp.dto.MannerTpDTO;
+
 import kr.co.hb.mannertp.service.MannerTpService;
-import kr.co.hb.message.dto.MessageDTO;
 
 @Controller
 public class MannerTpController {
@@ -35,7 +34,9 @@ public class MannerTpController {
 				
 		MannerTpDTO dto = service.mannerChk(id_receive,id_send,tp_cal);
 		
+
 		String msg = "이미 매너온도를 평가한 적이 있는 회원입니다. 매너온도 삭제 후 이용해주세요 !";
+
 		
 		if(dto!=null) {
 			String id_r = dto.getId_receive();
