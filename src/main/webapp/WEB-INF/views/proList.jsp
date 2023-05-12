@@ -125,6 +125,7 @@
 				<th>프로필 사진</th>
 				<th>아이디</th>
 				<th>NAME</th>
+				<th>매너온도</th>
 				<th>나이</th>
 				<th>지역</th>
 				<th>취미</th>
@@ -138,6 +139,7 @@
 					<td>프로필 사진 자리</td>
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
+					<td>${member.mannertp}</td>
 					<td>${member.age}</td>
 					<td>${member.area}</td>
 					<td>${member.small_hb}</td>
