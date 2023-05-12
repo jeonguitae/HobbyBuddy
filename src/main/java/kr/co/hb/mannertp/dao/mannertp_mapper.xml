@@ -3,6 +3,39 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 
-<mapper namespace="kr.co.mannertp.dao.MannerTpDAO">
+<mapper namespace="kr.co.hb.mannertp.dao.MannerTpDAO">
+	
+	<select id="mannerChk" resultType="kr.co.hb.mannertp.dto.MannerTpDTO">
+		SELECT * FROM manner_tp WHERE id_receive=#{param1} AND id_send=#{param2}	
+	</select>
+	
+	<delete id="mannertpDel">
+		DELETE FROM manner_tp WHERE id_receive=#{param1} AND id_send=#{param2}
+	</delete>
+	
+	<update id="mannertpM">
+		update member set mannertp=mannertp-1 where id=#{param1}
+	</update>
+	
+	<update id="mannertpP">
+		update member set mannertp=mannertp+1 where id=#{param1}
+	</update>
+	
+	<update id="mannertpUp">
+		update member set mannertp=mannertp+1 where id=#{param1}
+	</update>	
+	
+	<insert id="mannertpUp2">
+		insert into manner_tp (id_send,id_receive,tp_cal) values (#{param2},#{param1},#{param3});
+	</insert>
+	
+	<update id="mannertpDown">
+		update member set mannertp=mannertp-1 where id=#{param1}
+	</update>	
+	
+	<insert id="mannertpDown2">
+		insert into manner_tp (id_send,id_receive,tp_cal) values (#{param2},#{param1},#{param3});
+	</insert>
+
 
 </mapper>

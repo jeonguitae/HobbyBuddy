@@ -5,7 +5,7 @@
 <mapper namespace="kr.co.hb.board.dao.RandomDAO">
 
 	<select id="plist" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		SELECT m.id ,m.name, m.mannertp ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
 	</select>
 	
 	<select id="nlist" resultType="kr.co.hb.board.dto.RandomDTO">
