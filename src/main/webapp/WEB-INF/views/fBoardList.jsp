@@ -77,33 +77,26 @@
 </style>
 </head>
 <body>
+<jsp:include page="gnb.jsp"/>
+	<div class="fsort">
+      <form action="fsorting.do" method="get">
 	<table class="first">
-	<colgroup>
-		<col width="15%"/>
-		<col width="85%"/>
-	</colgroup>
-		<thead>
 			<tr>
-				<th>대분류</th>
-					<td class="bhobby">
-						<input type="radio" name="bhobby" value="운동">운동
-						<input type="radio" name="bhobby" value="맛집">맛집
-						<input type="radio" name="bhobby" value="반려동물">반려동물
-						<input type="radio" name="bhobby" value="기타여가">기타 여가
-					</td>
-			</tr>
-			<tr>
-				<th>중분류</th>
-					<td class="mhobby">
-					</td>
-			</tr>
-			
-		</thead>
-		<tbody>
-			
-		</tbody>
+	         <td colspan="2">
+	            <select name="big_hb">
+	               <c:forEach items="${big_hb}" var="b">
+	                  <option value="${b.big_hb}">${b.big_hb}</option>      
+	               </c:forEach>
+	            </select>
+	            <select name="small_hb">
+	           		 <option>x</option>
+	            </select>
+	           </td>
+      		</tr>
 	</table>
 		<button class="fbutton">검색</button>
+	 </form>
+   </div>
 	<table class="second">
 		<colgroup>
 			<col width="10%"/>
@@ -127,7 +120,9 @@
 					<th colspan="6">등록된 글이 없습니다.</th>
 				</tr>
 			</c:if>
-			
+			<c:if test="${list.size() == 0}">
+               <tr><th colspan="5">조건에 해당하는 게시물이 없습니다.</th></tr>
+            </c:if>
 			<c:forEach items="${list}" var="bbs">
 				<c:if test="${not empty sessionScope.loginId}">
 					<tr>
@@ -150,26 +145,112 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	<input type="submit" value="필터링검색"/>
+	<table>
+		<tr>
+            <td class="fsearch">      
+                <form action="fsearch.do">
+                   <input type="text" name="search" value=""/>
+                      <select name="fsearch">
+                         <option value="title">제목</option>
+                         <option value="id">작성자</option>
+                         <option value="bContent">내용</option>
+                      </select>
+                   <input type="submit" value="검색"/>
+                     </form>
+                  </td>
+               </tr>
+	</table>
 	<c:if test="${not empty sessionScope.loginId}">
 	<button onclick="location.href='fwrite.go'">글쓰기</button>
 	</c:if>
 </body>
 <script>
-
 	function showAlert() {
 		alert("로그인이 필요한 페이지입니다.");
 	}
-
+/* 
 	//선택이 안 됐다고 value가 null은 아닌가봐
 	var count = 0;
 	$('.fbutton').click(function(){
 		if(count == 0){
 			alert('대분류는 필수 선택 항목입니다.');
 		}
-	})
+	}) */
 	
-	$('input[name="bhobby"]').click(function(){
+	var loginId = "${sessionScope.loginId}";   
+   myHobbyList();
+   function myHobbyList(){
+      console.log("loginId : " + loginId);
+      $.ajax({
+         type:'get',
+         url:'myHobbyList.ajax',
+         data:{id:loginId},
+         dataType:'json',
+         success:function(data){
+            console.log("data, myHobbyList : " + data.myHobbyList);
+            console.log("data, login : " + data.login);
+            if(!true){
+               alert('로그인이 필요한 서비스 입니다.');
+               location.href='./';
+            }else{
+               myHobbyListDraw(data.myHobbyList);
+            }
+         },
+         error:function(e){
+            console.log(e);
+         }
+      });   
+   }
+
+
+   function myHobbyListDraw(myHobbyList){
+      console.log("myHobbyList : " + myHobbyList);
+      var content = '';
+      myHobbyList.forEach(function(item,index){
+         content += '<tr>';
+         content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
+         content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
+         content += '</tr>';
+         console.log(item.my_hobby_no);
+      });
+      
+      $('#myHobbyList').empty();
+      $('#myHobbyList').append(content);
+   }
+
+   $('select[name="big_hb"]').on('change', function(e){
+       var big_hb = $('select[name="big_hb"]').val();      
+       console.log("big_hb ? " + big_hb);      
+       $.ajax({
+          type: 'get'
+          ,url: 'big_hb.ajax'
+          ,data:{'big_hb':big_hb}
+          ,dataType:'json'
+          ,success:function(data){
+             console.log("big_hb data : " + data.small_hb);
+             if(data != ""){
+                console.log("big_hb 취미 호출");
+                small_hbDraw(data.small_hb);
+             } else {
+                alert('오류가 발생하였습니다.');
+             }
+          }
+          ,error:function(e){
+             console.log(e);
+          }
+       });
+   })
+
+   function small_hbDraw(small_hb){
+    console.log("small_hb : " + small_hb);
+    var content = '';
+    small_hb.forEach(function(item,index){
+       content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+    });
+    $('select[name="small_hb"]').empty();
+    $('select[name="small_hb"]').append(content);
+   }
+	/* $('input[name="bhobby"]').click(function(){
 		count = 1;
 	var content='';
 	var val = $(this).val();
@@ -206,6 +287,6 @@
       }
 
 	$('.mhobby').html(content);
-	});
+	}); */
 </script>
 </html>
