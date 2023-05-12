@@ -34,10 +34,17 @@
 	</select>
 	
 	<select id="noNameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-<!-- 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
-		WHERE big_hb = #{big_hb1} and small_hb = #{small_hb1} or big_hb = #{big_hb2} and small_hb = #{small_hb2} or big_hb = #{big_hb3} and small_hb = #{small_hb3} 
-		and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} -->
-		SELECT * FROM member ORDER BY RAND() LIMIT 5
+		SELECT m.id, m.name, m.age, m.city, m.area, h.big_hb, h.small_hb, m.gender
+		FROM member m
+		INNER JOIN my_hobby_list h ON m.id = h.id
+		WHERE (big_hb = #{big_hb1} AND small_hb = #{small_hb1})
+		    OR (big_hb = #{big_hb2} AND small_hb = #{small_hb2})
+		    OR (big_hb = #{big_hb3} AND small_hb = #{small_hb3})
+		    AND gender = #{gender}
+		    AND city = #{city}
+		    AND area = #{area}
+		ORDER BY RAND()
+		LIMIT 5;
 	</select>
 	
 	<select id="detail" resultType="kr.co.hb.board.dto.RandomDTO">

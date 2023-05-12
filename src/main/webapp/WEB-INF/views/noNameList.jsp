@@ -23,7 +23,7 @@
 				<tr>
 					<th>성별</th>
 					<td>
-						<input type="radio" name="gender" value="남성"/>남성
+						<input type="radio" name="gender" value="남성" checked="checked"/>남성
 						<input type="radio" name="gender" value="여성"/>여성
 						<input type="radio" name="gender" value="성별 무관"/>성별 무관
 					</td>
@@ -152,7 +152,7 @@
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
-					<td><a href="nodetail.do?id=${member.id}">익명</a></td>
+					<td><a href="nodetail.do?id=${member.id}">익명의 회원</a></td>
 					<td>${member.age}</td>
 					<td>${member.area}</td>
 					<td>${member.small_hb}</td>
@@ -161,8 +161,6 @@
 			</c:forEach>
 		</tbody>
 	</table>
-	
-	
 </body>
 <script>
 		
