@@ -223,6 +223,7 @@
 				if(data.success){
 					alert(data.msg);
 					alarmList();
+					location.reload();
 				}
 			},
 			error:function(e){
