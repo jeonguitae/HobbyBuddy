@@ -9,7 +9,23 @@
 </style>
 </head>
 <body>
-
+<jsp:include page="gnb.jsp"/>
+	<table class="sgjlist">
+		
+		<thead>
+			<tr>
+				<th>참가중인 유저</th>
+			</tr>
+		</thead>		
+		
+		<tbody>
+			<c:forEach items="${sgjlist}" var="bbs">
+				<tr>
+					<th class="id">${bbs.id}</th>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 <script></script>
 </html>
