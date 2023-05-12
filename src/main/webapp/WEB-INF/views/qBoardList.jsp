@@ -36,7 +36,6 @@
 </style>
 </head>
 <body>      
-      <img src="../img/하비버디.png" width="100" height="100">
       <h2 align="center">고객센터</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
@@ -165,7 +164,7 @@ function listPrint(list){
 	   content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
 	   content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
 	   content += '<td>'+(item.qboard_state ? '답변 완료' : '답변 대기중')+'</td>';
-	   content += '<td>'+(item.secret_state ? '비밀글 설정' : '비밀글 해제')+'</td>';
+	   content += '<td><button>'+(item.secret_state ? '비밀글 설정' : '비밀글 해제')+'</button></td>';
 	   
 	   content += '</tr>';
 
@@ -174,6 +173,7 @@ function listPrint(list){
    $('#list').append(content);   
    
 }
+
 
 var dateSortOrder = -1; 
 var chkSortOrder = -1; 

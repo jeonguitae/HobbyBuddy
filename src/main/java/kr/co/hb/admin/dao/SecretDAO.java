@@ -14,4 +14,6 @@ public interface SecretDAO {
 
 	void secret_ChkOn(String sboard_num);
 
+	void secretSet(int sboard_num);
+
 }

@@ -23,7 +23,7 @@
    
    <select id="qboardPageList" resultType="kr.co.hb.board.dto.QboardDTO">
 		SELECT *
-			FROM qboard ORDER BY qboard_no DESC LIMIT #{param1} OFFSET #{param2}
+			FROM qboard WHERE secret_state = 0 ORDER BY qboard_no DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="totalCount" resultType="int">

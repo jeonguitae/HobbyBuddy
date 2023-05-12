@@ -88,7 +88,11 @@
 			<td colspan="2">				
 				<input type="button" onclick="location.href='qboardList.go'" value="리스트로 돌아가기" id="listBack">
 				<input type="button" onclick="location.href='./qboardUpdate.go?qboard_no=${dto.qboard_no}'" value="수정" id="updateBtn">	
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제" id="deleteBtn">               	
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제" id="deleteBtn">
+               <form action="secretSet.do">
+               	<button value="${dto.secret_state ? "비밀글 설정" : "비밀글 해제"}"></button>
+               </form>
+                              	
 			</td>    
 		</tr>
       </table>
@@ -100,7 +104,7 @@
 		    <tr>
 		      <th>문의 답변</th>		      
 		      <td id="after">		      	
-		      	<textarea disabled="disabled" name="qboard_reply">${dto.qboard_reply}</textarea></td>         
+		      	<textarea disabled="disabled" name="qboard_reply" style="width: 400px; height: 200px; resize: none;">${dto.qboard_reply}</textarea></td>         
 			</tr>
 			<tr id="reply_time2">
 			  <th>답변 일시</th>
