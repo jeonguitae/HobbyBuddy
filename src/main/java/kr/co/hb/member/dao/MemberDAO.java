@@ -61,6 +61,8 @@ public interface MemberDAO {
 
 	ArrayList<MemberDTO> myReplyList(String id);
 
+	void myhobbyDefault(String id);
+
 	
 
 	

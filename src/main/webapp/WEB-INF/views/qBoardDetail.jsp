@@ -3,6 +3,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -38,6 +39,9 @@
    #listBack{
    	background: aqua;
    }
+   #after_qboard{
+   	display: none;
+   }
 </style>
 </head>
 <body>
@@ -46,84 +50,62 @@
       <table>
          
          <tr>
-            <th>작성일</th>
-            <td>${dto.notice_idx}</td>
-         </tr>
-         <tr>
-            <th>작성종류</th>
-            <td>${dto.notice_bHit}</td>
+            <th>문의 종류</th>
+            <td>${dto.qboard_class}</td>
          </tr>
          <tr>
             <th>작성자</th>
             <td>${dto.id}</td>
          </tr>
          <tr>
-			  <th>문의제목</th>
-			  <td><fmt:formatDate value="${dto.notice_date}" pattern="yyyy/MM/dd" /></td>  
+			  <th>작성 날짜</th>
+			  <td><fmt:formatDate value="${dto.qboard_time}" pattern="yyyy/MM/dd" /></td>  
 		 </tr>
 		 <tr>
-            <th>문의내용</th>
-            <td >${dto.notice_title}</td>
+            <th>문의 제목</th>
+            <td>${dto.qboard_title}</td>
+         </tr>
+		 <tr>
+            <th>문의 내용</th>
+            <td >${dto.qboard_content}</td>
          </tr>
          <tr>
-            <th>공개여부</th>
-            <td>${dto.notice_content}</td>
+            <th>공개 여부</th>
+            <td>${dto.qboard_openchk ? '공개' : '비공개'}</td>
          </tr>
          
-         <c:if test="${dto.newFileName ne null }">
-            <tr>
-               <th>사진</th>
-               <td> <img src="/photo/${dto.newFileName}" width="100"/></td>         
-            </tr>
-         </c:if>            
-         <tr>
-            <th colspan="2">
-            	<button id="chkBtn">${dto.notice_chk ? '비공개 설정' : '공개 설정'}</button>          	
-               <input type="button" onclick="location.href='noticeList.go'" value="리스트로 돌아가기" id="listBack">
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="rightt">
-               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="rightt">              
-               
-            </th>
-         </tr>
-      </table>      
+         <c:if test="${not empty dto.new_photo_name}">
+		    <tr>
+		        <th>사진</th>
+		        <td><img src="/photo/${dto.new_photo_name}" width="100"/></td>
+		    </tr>
+		</c:if>
+		<tr>
+			<td colspan="2">				
+				<input type="button" onclick="location.href='qboardList.go'" value="리스트로 돌아가기" id="listBack">
+				<input type="button" onclick="location.href='./qboardUpdate.go?qboard_no=${dto.qboard_no}'" value="수정">	
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제">               	
+			</td>    
+		</tr>
+      </table>   
+      <table>	      
+		    <tr>
+		      <th>문의 답변</th>
+		      <td id="after"><input type="text" value="작성된 답변이 없습니다." readonly="readonly"></td>         
+		    </tr>
+		    <tr>
+		      <th>답변 일시</th>
+		      <td><%-- ${dto.answer_date} --%></td>         
+		    </tr>		  
+	</table>	 
 </body>
 <script>
-$(document).ready(function() {
-  var btnText = $("#chkBtn").text();
-  $("#chkBtn").on("click", function() {
-    var notice_idx = ${dto.notice_idx};
-    var flag = $("#chkBtn").text() == '공개 설정' ? 'true' : 'false';
+		var adminChk = "${sessionscope.adminChk}";
+		if (adminChk == '1' || adminChk == 'true') {
+		    $('#after').removeAttr('readonly').val('작성된 답변이.');
+		}
 
-    if (confirm('해당 글을 ' + (flag == 'true' ? '공개' : '비공개') + '하시겠습니까?')) {
-      $.ajax({
-        type: 'POST',
-        url: 'update_chk.ajax',
-        data: { notice_idx: notice_idx, flag: flag },
-        success: function(response) {
-          console.log(response);
-          var newBtnText = flag == 'true' ? '비공개 설정' : '공개 설정';
-          $("#chkBtn").text(newBtnText);
-        },
-        error: function(error) {
-          console.error(error);
-        }
-      });
-    } else {
-      $("#chkBtn").text(btnText);
-    }
-});
-/* // 페이지 로드될 때 버튼 텍스트 초기화
-  if ($("#chkBtn").text() == 'false') {
-    $("#chkBtn").text('공개 설정');
-  } else {
-    $("#chkBtn").text('비공개 설정');
-  }
-  if ($("#chkText").text() == 'false') {
-	    $("#chkText").text('비공개 설정');
-	  } else {
-	    $("#chkText").text('공개 설정');
-  } */
-  
-});
+
+
 </script>
 </html>

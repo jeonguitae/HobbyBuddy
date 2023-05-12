@@ -125,6 +125,8 @@
 </body>
 
 <script>
+
+
 	
 	var loginId = "${sessionScope.loginId}";
 	var adminChk = "${sessionScope.adminChk}";

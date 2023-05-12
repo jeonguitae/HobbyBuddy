@@ -59,6 +59,7 @@
 	      success : function(data){
 	         console.log(data);
 	         if (data.member != null) {
+	        	 alarmList();
 	            location.href='./';
 	         }else{
 	            alert('아이디 또는 비밀번호를 확인해주세요.');
@@ -72,5 +73,50 @@
 	   });
 	   
 	}
+	alarmList();
+	function alarmList(){
+		console.log("loginId : " + loginId);
+		$.ajax({
+			type:'get',
+			url:'alarmList.ajax',			
+			data:{},
+			dataType:'json',
+			success:function(data){
+				console.log("data : " + data.alarmList);
+				alarmListDraw(data.alarmList);				
+			},
+			cache: false,
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}	
+	
+	function alarmListDraw(alarmList) {
+		console.log("alarmList : " + alarmList);
+		  var content = '';
+		  if (alarmList && alarmList.length) {
+		    alarmList.forEach(function(item, index) {
+		    	console.log("alarmList : " + alarmList);
+		      content += '<div class="alarmList">';
+		      content += '<input type="checkbox" value="' + item.alarm_no + '"/>&nbsp;&nbsp;&nbsp;&nbsp;';
+		      content += '<a href="alarmDetail.do?alarm_num=' + item.alarm_num + '&alarm_class=' + item.alarm_class + '&alarm_no=' + item.alarm_no + '">';
+		      content += '('+ item.alarm_class+')&nbsp;&nbsp;<b>ID</b> : \" ' + item.id_send + ' \" &nbsp;&nbsp;&nbsp;<b>제목</b> : \" '
+		      			+ item.alarm_title + ' \" &nbsp;&nbsp;&nbsp;<b>내용</b> : \ "' + item.alarm_content;
+		      content += ' /" </a></div>';
+		      console.log("alarmList : " + alarmList);
+		    });
+		  } else {
+			console.log("alarmList : " + alarmList);
+		    content = '<div class="alarmList">새로운 알림이 없습니다.</div>';
+		  }
+		  
+		  // 이전 알림 리스트 요소 삭제
+		  $('.alarmList').empty();
+		  
+		  // 새로운 알림 리스트 요소 생성 및 삽입
+		  $(content).insertBefore($('#beforeAlarm').parent().find('#beforeAlarm').next());
+		  
+		}
 </script>
 </html>

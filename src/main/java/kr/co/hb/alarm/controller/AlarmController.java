@@ -95,6 +95,7 @@ public class AlarmController {
 			@RequestParam String alarm_class, @RequestParam ArrayList<String> alarm_no, HttpSession session) {
 		logger.info("alarmDetail" + alarm_num + " / " + alarm_class);
 		String page = "main";
+		
 		if(alarm_class.equals("자유")) {
 			BoardDTO dto = bservice.detail(alarm_num, "detail");
 			model.addAttribute("dto",dto);
@@ -111,6 +112,8 @@ public class AlarmController {
 			model.addAttribute("msgList", msgList);
 			page = "msgList";
 		}
+		
+		alarmList(session);
 		
 		return page;
 	}

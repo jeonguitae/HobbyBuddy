@@ -47,6 +47,7 @@ public class MemberService {
 		
 		map.put("success", dao.join(params));
 		logger.info("service.join map : " + map);
+		dao.myhobbyDefault(params.get("id"));
 		return map;
 	}
 /*

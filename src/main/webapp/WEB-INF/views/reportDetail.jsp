@@ -47,10 +47,13 @@
    <h3 align="center">신고 상세</h3>
    
       <table>
-         
          <tr>
             <th>신고 번호</th>
             <td><a href="fBoardDetail.go?reptboard_num='+item.notice_idx+'"></a>${dto.rept_no}</td>
+         </tr>
+         <tr>
+            <th>신고 번호</th>
+            <td>${dto.rept_no}</td>
          </tr>
          <tr>
             <th>피신고자 아이디</th>
