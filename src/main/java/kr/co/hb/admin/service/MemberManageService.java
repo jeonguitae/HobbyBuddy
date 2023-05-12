@@ -17,35 +17,21 @@ import kr.co.hb.admin.dao.MemberManageDAO;
 public class MemberManageService {
 
 	@Autowired MemberManageDAO dao;
-	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	public ArrayList<MemberManageDTO> memberList(HashMap<String, String> params) {
+
+	public ArrayList<RandomDTO> alist() {
+		return dao.alist();
+	}
 	
+	public ArrayList<MemberManageDTO> memberList(HashMap<String, String> params) {
+		
 		logger.info("검색 조건 : " + params);
 		
 		return dao.memberList(params);
+	}
 
-	}
-	public ArrayList<MemberManageDTO> msearch(HashMap<String, String> params) {
-		
-		ArrayList<MemberManageDTO> list = null;
-		
-		if(params.get("ssorting").equals("id")) {
-			
-			String wildcard = "%" + params.get("search") + "%";
-			params.replace("search", wildcard);
-			list = dao.misearch(params);
-		}
-		
-		if(params.get("ssorting").equals("name")) {
-			
-			String wildcard = "%" + params.get("search") + "%";
-			params.replace("search", wildcard);
-			list = dao.mnsearch(params);
-		}
-		
-		return list;
-	}
+
+	
 
 
 

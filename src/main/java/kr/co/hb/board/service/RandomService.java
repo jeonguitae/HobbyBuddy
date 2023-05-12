@@ -17,6 +17,7 @@ public class RandomService {
 
 	@Autowired RandomDAO dao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	public ArrayList<RandomDTO> profileList(HashMap<String, String> params) {
 	
 		logger.info("검색 조건 : " + params);
@@ -77,8 +78,6 @@ public class RandomService {
 	public ArrayList<RandomDTO> nlist() {
 		return dao.nlist();
 	}
-
-
 
 
 }

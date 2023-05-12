@@ -23,7 +23,7 @@
 				<tr>
 					<th>성별</th>
 					<td>
-						<input type="radio" name="gender" value="남성"/>남성
+						<input type="radio" name="gender" value="남성" checked="checked"/>남성
 						<input type="radio" name="gender" value="여성"/>여성
 						<input type="radio" name="gender" value="성별 무관"/>성별 무관
 					</td>

@@ -28,6 +28,10 @@ public class MemberManageController {
 	@RequestMapping(value="/memberList.go")
 	public String mlist(Model model) {		
 		logger.info("start");
+		
+		ArrayList<RandomDTO> list = service.alist();
+	    model.addAttribute("list", list);
+	    
 		return "memberList";
 	}
 	
@@ -35,18 +39,11 @@ public class MemberManageController {
 	public String memberList(Model model, @RequestParam HashMap<String, String> params) {	
 		
 		ArrayList<MemberManageDTO> list = service.memberList(params);
-		logger.info("검색 조건 : " + params);
+		logger.info("파람: " + params);
 		model.addAttribute("list",list);
 		return "memberList";
 	}
+
 	
-	@RequestMapping(value="/msearch.do")
-	public String msearch(Model model, @RequestParam HashMap<String, String> params) {
-		
-		ArrayList<MemberManageDTO> list = service.msearch(params);
-		logger.info("검색 조건 : " + params);
-		model.addAttribute("list", list);
-		return "memberList";
-	}
 
 }

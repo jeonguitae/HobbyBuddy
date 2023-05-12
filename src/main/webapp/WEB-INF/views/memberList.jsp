@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<link rel="stylesheet" href="resources/css/css.css">
 <style>
 	table, th, td{
 		border : 1px solid black;
@@ -26,26 +27,26 @@
 				<tr>
 					<th>구분</th>
 					<td>
-						<input type="checkbox" name="admin" value="관리자">관리자
-						<input type="checkbox" name="admin" value="회원">회원
+						<input type="checkbox" name="admin" value="true"/>     관리자
+						<input type="checkbox" name="member" value="false"/>     회원
 					</td>
 				</tr>
-				<tr>
+<!-- 				<tr>
 					<th>경고횟수</th>
 					<td>
-						<input type="checkbox" name="number" value="0">0회
-						<input type="checkbox" name="number" value="1">1회
-						<input type="checkbox" name="number" value="2">2회
-						<input type="checkbox" name="number" value="3">3회
+						<input type="checkbox" name="number0" value="0"/>     0 회
+						<input type="checkbox" name="number1" value="1"/>     1 회
+						<input type="checkbox" name="number2" value="2"/>     2 회
+						<input type="checkbox" name="number3" value="3"/>     3 회
 					</td>
-				</tr>
-				<tr>
+				</tr> -->
+<!-- 				<tr>
 					<th>정지여부</th>
 					<td>
-						<input type="checkbox" name="stop" value="정상 회원">정상 회원
-						<input type="checkbox" name="stop" value="정지 회원">정지 회원
+						<input type="checkbox" name="normal" value="false"/>     정상 회원
+						<input type="checkbox" name="stop" value="true"/>     정지 회원
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<th colspan="2">
 						<input type="submit" value="검색"/>
