@@ -55,7 +55,7 @@
 	
 	textarea[name="msg"] {
 	  border: none;
-	  width: calc(60% - 70px);
+	  width: calc(100% - 450px);
 	  height: 40px;
 	  resize: none;
 	  padding: 10px;
@@ -171,27 +171,39 @@
 	  font-size: 14px;
 	  width: 20%;
 	}
-	div.chatting, .chatting {
-	  position: relative;
-	  right: 0px;
-	}
 	
-	.memlist {
-	  position: absolute;
+	table[class="memlist"] {
 	  top: 300px;
 	  right: 0px;
+	  width: 50%;
 	}
 	
-	.sglist {
-	  position: absolute;
+	table[class="sglist"] {
 	  top: 350px;
 	  left: 0;
+	  width: 50%;
 	}
 	
 </style>
 </head>
 <jsp:include page="gnb.jsp"/>
-<body>
+<body>	
+	<div class="chatting" style="overflow:scroll; width:80%; height:400px; scroll-behavior: smooth;" id="chatting">
+		<table class="chatting">
+			<%-- <c:forEach items="${listmsg}" var="chat"> --%>
+				<tbody id="clist">
+					
+				</tbody>
+			<%-- </c:forEach> --%>
+		</table>
+	</div>
+	
+	<form action="sendmsg.do" method="post">
+		<input type="text" name="id" value="${sessionScope.loginId}" hidden/>
+		<textarea name="msg" onkeydown="sendMsgOnEnter(event)"></textarea>
+		<button class="send">전송</button>
+	</form>	
+		
 	<table class="memlist">
 		<thead>
 			<tr>
@@ -200,7 +212,7 @@
 			</tr>
 		</thead>
 		
-		<tbody>
+		<tbody id="memlist">
 			<c:forEach items="${list}" var="bbs">
 				<tr>
 					<td class="gidx" hidden>${bbs.gidx}</td>
@@ -219,7 +231,6 @@
 			
 			<tr>
 				<th>제목</th>
-				<th>약속날짜</th>
 				<th>지역</th>
 				<th>인원 수</th>
 				<th>참가</th>
@@ -231,22 +242,6 @@
 	
 		</tbody>
 	</table>
-			
-	<div class="chatting" style="overflow:scroll; width:600px; height:400px; scroll-behavior: smooth;" id="chatting">
-		<table class="chatting">
-			<%-- <c:forEach items="${listmsg}" var="chat"> --%>
-				<tbody id="clist">
-					
-				</tbody>
-			<%-- </c:forEach> --%>
-		</table>
-	</div>
-	
-		<form action="sendmsg.do" method="post">
-			<input type="text" name="id" value="${sessionScope.loginId}" hidden/>
-			<textarea name="msg" onkeydown="sendMsgOnEnter(event)"></textarea>
-			<button class="send">전송</button>
-		</form>	
 		
 			<button onclick="location.href='sgwrite.go?gidx=${sessionScope.gidx}'">소모임 생성</button>		
 </body>
@@ -299,6 +294,10 @@
 	        content += '<td>' + item.chattime + '</td>'
 	        content += '</tr>'
 	    });
+
+	    var clist = document.getElementById("clist");
+	    clist.scrollTop = clist.scrollHeight;
+	    
 	    $('#clist').empty();
 	    $('#clist').append(content);
 	}
@@ -323,7 +322,6 @@
 	    sglist.forEach(function(item,index){
 	        content += '<tr>'
 	        content += '<td>' + item.sgsubject + '</td>'
-	        content += '<td>' + item.sgMeeting_date + '</td>'
 	        content += '<td>' + item.area + '</td>'
 	        content += '<td>' + item.maxmem + '</td>'
 	        content += '<td><button onclick="location.href=\'sgjoin.do?sidx=' + item.sidx + '\'">참가</button></td>';
@@ -333,6 +331,5 @@
 	    $('#sglist').empty();
 	    $('#sglist').append(content);
 	}
-	
 </script>
 </html>

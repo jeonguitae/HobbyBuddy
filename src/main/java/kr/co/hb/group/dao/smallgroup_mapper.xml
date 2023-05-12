@@ -17,4 +17,20 @@
 	<insert id="sgjoin">
 		INSERT INTO sgmem(sidx, id) VALUES(#{param1}, #{param2})
 	</insert>
+	
+	<select id="memchk" resultType="int">
+		SELECT COUNT(id) FROM sgmem WHERE id = #{param1} AND sidx = #{param2}
+	</select>
+	
+	<select id="maxmemchk" resultType="int">
+		SELECT COUNT(id) FROM sgmem WHERE sidx = #{param1}
+	</select>
+	
+	<select id="maxmem" resultType="int">
+		SELECT maxmem FROM sgroup WHERE sidx = #{param1}
+	</select>
+	
+	<select id="sgjlist" resultType="kr.co.hb.group.dto.SmallGroupDTO">
+		SELECT * FROM sgmem WHERE sidx = #{param1}
+	</select>
 </mapper>

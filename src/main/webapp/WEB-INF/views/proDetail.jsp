@@ -71,14 +71,14 @@
       	<tr>
             <th>매너온도</th>
             <td>
-               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${mimber.id}&mpm=plus'"/>
-               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${mimber.id}&mpm=minus'"/>
-               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${mimber.id}&mpm=del'"/>
+               <input type="button" value="매너온도 + 1" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=plus'"/>
+               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=minus'"/>
+               <input type="button" value="매너온도 삭제" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=del'"/>
             </td>
       	</tr>
       	<tr>
       		<th colspan="3">
-               <input type="submit" value="즐겨찾기"/>
+      		   <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>  
                <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
       			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
       			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
@@ -114,6 +114,12 @@
 </body>
 
 <script>
+var msg = "${msg}";
+if(msg!=""){
+	alert(msg);
+}
+
+
 var member_id = "${member.id}";
 HobbyList();
 function HobbyList(){

@@ -26,6 +26,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="gnb.jsp"/>
 	<form action="gwrite.do" method="post">
 		<table>
 			<tr>
@@ -42,7 +43,8 @@
 			</tr>
 			
 			<tr>
-	         <td colspan="2">
+			 <th>취미</th>
+	         <td>
 	            <select name=big_hb>
 	               <c:forEach items="${big_hb}" var="b">
 	                  <option value="${b.big_hb}">${b.big_hb}</option>      
@@ -134,14 +136,14 @@
 				<tr>
 					<th>최대 인원</th>
 					<td>
-						<input type="range" name="maxmem" min="2" max="100" step="1" value=""/>
+						<input type="number" name="maxmem" value=""/>
 					</td>
 				</tr>
 				
 				<tr>
-					<th>메너온도</th>
+					<th>매너온도</th>
 					<td>
-						<input type="range" name="mannertp" min="0" max="100" step="1" value=""/>
+						<input type="number" name="mannertp" value="36"/>
 					</td>
 				</tr>
 				

@@ -38,8 +38,6 @@
 </style>
 </head>
 <body>     
-	 <jsp:include page="gnb.jsp"/> 
-      <img src="../img/하비버디.png" width="100" height="100">
       <h2 align="center">비밀글 처리 관리</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
@@ -162,52 +160,59 @@ function listPrint(list) {
 	    content += '<td><a href="reportDetail.go?rept_no='+item.sboard_num+'">'+item.sboard_title+'</a></td>';
 	    content += '<td>'+item.writer_id+'</td>';
 	    content += '<td>'+item.admin_id+'</td>';
-	    content += '<td><button id="chkBtn'+item.sboard_num+'" data-secret-state="'+item.secret_state+'">'+ (item.secret_state ? '비밀글 해제' : '비밀글 설정') + '</button></td>';
+	    content += '<td><button onclick="location.href=\'./secretSet.do?sboard_num=' + item.sboard_num + '\'">비밀 해제</button></td>';
 	    var date = new Date(item.secret_time);
 	    // 기본은 en-US
 	    content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
 	    content += '</tr>';
 	  });
+
 	  $('#list').empty();
-	  $('#list').append(content);  
+	  $('#list').append(content);
+
 	  
-	  $('button[id^="chkBtn"]').on('click', function() {
-		    var sboard_num = $(this).attr('id').replace('chkBtn', '');
-		    var secret_state = $(this).data('secret-state');
-		    var new_secret_state = secret_state; 
-		    if (secret_state) {
-		        if (confirm('해당 글 비밀글 해제하시겠습니까?')) {
-		            new_secret_state = false;
-		        }
-		    } else {
-		        if (confirm('해당 글 비밀글 설정하시겠습니까?')) {
-		            new_secret_state = true;
-		        }
-		    }
-		    if (new_secret_state !== secret_state) { 
-		        $.ajax({
-		            type: 'POST',
-		            url: 'secret_chk.ajax',
-		            cache: false,
-		            data: { sboard_num: sboard_num, secret_state: new_secret_state },
-		            success: function(response) {
-		                console.log(response);
-		                var newBtnText = new_secret_state ? '비밀글 해제' : '비밀글 설정';
-		                $('button#chkBtn'+sboard_num).text(newBtnText);
-		                $('button#chkBtn'+sboard_num).data('secret-state', new_secret_state);
-		            },
-		            error: function(error) {
-		                console.error(error);
-		            }
-		        });
-		    }
-		});
-};
+	};
 	
+	
+	/* $('.chkBtn').off('click').on('click', function() {
+    var $btn = $(this);
+    var sboard_num = $btn.data('sboard-num');
+    var secret_state = $btn.data('secret-state');
+    var new_secret_state = secret_state;
+    var newBtnText = '';
 
+    if (secret_state) {
+      if (confirm('해당 글 비밀글 해제하시겠습니까?')) {
+        new_secret_state = false;
+        newBtnText = '비밀글 설정';
+      }
+    } else {
+      if (confirm('해당 글 비밀글 설정하시겠습니까?')) {
+        new_secret_state = true;
+        newBtnText = '비밀글 해제';
+      }
+    }
 
-
-
+    if (new_secret_state !== secret_state) {
+      $.ajax({
+        type: 'POST',
+        url: 'secret_chk.ajax',
+        cache: false,
+        data: { sboard_num: sboard_num, secret_state: new_secret_state },
+        success: function(response) {
+          console.log(response);
+          $btn.text(newBtnText);
+          $btn.data('secret-state', new_secret_state);
+        },
+        error: function(error) {
+          console.error(error);
+        }
+      });
+    } else {
+      $btn.text(newBtnText);
+      $btn.data('secret-state', new_secret_state);
+    }
+  }); */
 
 </script>
 </html>

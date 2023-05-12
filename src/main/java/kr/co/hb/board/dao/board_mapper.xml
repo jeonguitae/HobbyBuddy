@@ -9,6 +9,26 @@
 	FROM fBoard ORDER BY fbNo DESC
 	</select>
 	
+	<select id="fsorting" resultType="kr.co.hb.board.dto.BoardDTO">
+	SELECT *FROM fBoard WHERE big_hb = #{big_hb} AND small_hb = #{small_hb}	
+	</select>
+	
+	
+	<select id="tsearch" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT * FROM fBoard
+		WHERE title LIKE #{search}
+	</select>
+	
+	<select id="isearch" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT * FROM fBoard
+		WHERE id LIKE #{search}
+	</select>
+	
+	<select id="csearch" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT * FROM fBoard
+		WHERE bContent LIKE #{search}
+	</select>
+	
 	<insert useGeneratedKeys="true" keyColumn="fbNo"
 	keyProperty="fbNo" id="fwrite" 
 	parameterType="kr.co.hb.board.dto.BoardDTO"> 
@@ -49,13 +69,22 @@
 	DELETE FROM hbPhoto WHERE board_num=#{param1} AND board_class=#{param2}
 	</delete>
 	
-	<insert id="cowrite" >
-	INSERT INTO comment(fbNo, id, coContent)
-	VALUES(#{param2}, #{param1}, #{param3}) 
-	</insert>
-	
-	<select id="colist" resultType="kr.co.hb.board.dto.BoardDTO">
-		SELECT * FROM comment WHERE fbNo = #{fbNo}
+
+	<select id="coList" resultType="kr.co.hb.board.dto.BoardDTO">
+	SELECT fbNo, id, coContent, coTime, coNo FROM comment where fbNo =#{param1} 
 	</select>
 	
+	<insert id="cowrite" parameterType="hashmap">
+	INSERT INTO comment(fbNo, id, coContent) 
+	VALUES (#{fbNo}, #{id},#{coContent}) 
+	</insert>
+	
+	<delete id="codelete">
+	DELETE FROM comment WHERE coNo = #{coNo}
+	</delete>
+	
+	<insert id="bmarkdo">
+	INSERT INTO bmark (myid, memid)
+	VALUES(#{param2},#{param1})
+	</insert>
 </mapper>

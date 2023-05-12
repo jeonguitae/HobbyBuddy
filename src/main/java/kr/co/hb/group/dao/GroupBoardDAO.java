@@ -11,9 +11,9 @@ public interface GroupBoardDAO {
 	
 	ArrayList<GroupBoardDTO> gsorting(HashMap<String, String> params);
 
-	int gwrite(HashMap<String, String> params);
+	int gwrite(GroupBoardDTO dto);
 
-	GroupBoardDTO gdetail(int id);
+	GroupBoardDTO gdetail(int gidx);
 
 	ArrayList<GroupBoardDTO> gwserch(HashMap<String, String> params);
 
@@ -24,6 +24,18 @@ public interface GroupBoardDAO {
 	ArrayList<GroupBoardDTO> gboardpagelist(int cnt, int offset);
 
 	int totalCount();
+
+	void uphit(int gidx);
+
+	int gupdate(HashMap<String, String> params);
+
+	void filesave(String id, String board_class, String ori_photo_name, String new_photo_name, int gidx);
+
+	void gdelete(int gidx);
+
+	int hostchk(String loginId);
+
+	int host(String loginId, int gidx);
 
 
 }

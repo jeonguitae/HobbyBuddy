@@ -10,6 +10,8 @@ public class MemberDTO {
 	private String big_hb;
 	private String small_hb;
 	private int my_hobby_no;
+	private int mannertp;
+	private int age;
 	
 	private String id;
 	
@@ -143,6 +145,18 @@ public class MemberDTO {
 	}
 	public void setBhit(int bhit) {
 		this.bhit = bhit;
+	}
+	public int getMannertp() {
+		return mannertp;
+	}
+	public void setMannertp(int mannertp) {
+		this.mannertp = mannertp;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	
 }
