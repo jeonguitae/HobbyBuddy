@@ -28,6 +28,7 @@
 </script>
 </head>
 <body>
+<jsp:include page="gnb.jsp"/>
 <form action="sgwrite.do" method="post">
 		<table>
 			<tr hidden>

@@ -66,19 +66,41 @@ public class SmallGroupController {
 	
 	@RequestMapping(value="/sgjoin.do")
 	public String sgjoin(Model model, HttpSession session, @RequestParam int sidx) {
-		String msg = "참가 실패!";
+		String msg = "참가 실패";
 		
 		String id = (String) session.getAttribute("loginId");
 		
-		int row = service.sgjoin(sidx, id);
-		
-		if(row == 1) {
+		int chk1 = service.memchk(id, sidx);
+		int chk2 = service.maxmemchk(sidx);
+		int maxmem = service.maxmem(sidx);
+
+		if(chk1 == 0 && chk2 < maxmem) {
 			
-			msg = "참가성공!";
+			int row = service.sgjoin(sidx, id);
+			
+			if(row == 1) {
+				
+				msg = "참가완료!";
+			}
 		}
 		
-		model.addAttribute("msg", msg);
-		return "openChat";
+		else if(chk2 == maxmem) {
+			
+				msg = "정원이 초과되었습니다!";
+		}
+		
+		session.setAttribute("msg", msg);
+		return "redirect:/openchat.go";
+	}
+	
+	@RequestMapping(value="/sgjoinlist.go")
+	public String sgjoinlist(Model model, @RequestParam int sidx) {
+		
+		ArrayList<SmallGroupDTO> sgjlist = service.sgjlist(sidx);
+		
+		model.addAttribute("sgjlist", sgjlist);
+		
+		return "sGroupList";
 	}
 
 	

@@ -14,41 +14,23 @@
 		WHERE big_hb = #{big_hb} AND small_hb = #{small_hb} AND gender = #{gender} AND city = #{city} AND area = #{area} AND meeting_date = #{meeting_date}
 	</select>
 	
-	<insert id="gwrite" parameterType="HashMap">
+	<select id="gdetail" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT g.gidx, g.id, g.subject, g.minage, g.maxage, g.city, g.area, g.meeting_date, g.content, g.mannertp, g.maxmem, g.big_hb, g.small_hb
+		,h.photoIdx, h.new_photo_name FROM gboardlist g
+		LEFT JOIN hbPhoto h ON g.gidx = h.board_num WHERE g.gidx = #{gidx}
+	</select>
+	
+	<insert 
+		useGeneratedKeys="true" keyColumn="gidx"
+		keyProperty="gidx"
+		id="gwrite" parameterType="kr.co.hb.group.dto.GroupBoardDTO">
 		INSERT INTO gboardlist(id, subject, content, big_hb, small_hb, minage, maxage, gender, city, area, meeting_date, maxmem, mannertp)
 		VALUES(#{id}, #{subject}, #{content}, #{big_hb}, #{small_hb}, #{minage}, #{maxage}, #{gender}, #{city}, #{area}, #{meeting_date}, #{maxmem}, #{mannertp})
 	</insert>
 	
-	<select id="gdetail" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist
-		WHERE gidx = #{id}
-	</select>
-	
-	<select id="gupdate" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist
-		WHERE gidx = #{id}
-	</select>
-	
-	<update id="gupdatedo" parameterType="hashmap">
-		UPDATE gboardlist SET 
-			subject = #{subject}
-			,content = #{content}
-			,big_hb = #{big_hb}
-			,small_hb = #{small_hb}
-			,minage = #{minage}
-			,maxage = #{maxage}
-			,gender = #{gender}
-			,city = #{city}
-			,area = #{area}
-			,meeting_date = #{meeting_date}
-			,maxmem = #{maxmem}
-			,mannertp = #{mannertp}
-		WHERE gidx = #{id}
-	</update>
-	
 	<select id="gsserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * FROM gboardlist
-		WHERE subject LIKE #{serch}
+		WHERE subject LIKE #{serch} 
 	</select>
 	
 	<select id="gwserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -69,5 +51,33 @@
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(gidx) FROM gboardlist 
 	</select>
+	
+	<update id="uphit">
+		UPDATE gboardlist SET bHit = bHit + 1
+		WHERE gidx = #{id}
+	</update>
+	
+	<update id="gupdate" parameterType="hashmap">
+		UPDATE gboardlist 
+		SET subject=#{subject}, content=#{content}, big_hb=#{big_hb}, small_hb=#{small_hb}, minage=#{minage}, maxage=#{maxage}, gender=#{gender}, city=#{city}, area=#{area}, meeting_date=#{meeting_date}, maxmem=#{maxmem}, mannertp=#{mannertp} 
+		WHERE gidx = #{gidx}
+	</update>
+	
+	<insert id="filesave">
+		INSERT INTO hbPhoto(id, new_photo_name, ori_photo_name, board_class, board_num)
+		VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})	
+	</insert>
+	
+	<delete id="gdelete">
+		DELETE FROM hbphoto WHERE board_num=#{gidx}
+	</delete>
+	
+	<select id="hostchk" resultType="int">
+		SELECT COUNT(id) FROM gboardlist WHERE id = #{loginId}
+	</select>
+	
+	<insert id="host">
+		INSERT INTO openlist(id, gidx) VALUES(#{loginId}, #{gidx})
+	</insert>
 	
 </mapper>

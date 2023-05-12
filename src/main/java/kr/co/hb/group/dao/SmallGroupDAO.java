@@ -13,4 +13,12 @@ public interface SmallGroupDAO {
 
 	int sgjoin(int sidx, String id);
 
+	ArrayList<SmallGroupDTO> sgjlist(int sidx);
+
+	int memchk(String id, int sidx);
+
+	int maxmemchk(int sidx);
+
+	int maxmem(int sidx);
+
 }

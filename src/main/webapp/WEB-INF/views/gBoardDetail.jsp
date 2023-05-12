@@ -42,6 +42,12 @@
 				<th>지역</th>
 				<td>${board.city} ${board.area}</td>
 			</tr>
+			<c:if test="${board.new_photo_name ne null}">
+				<tr>
+					<th>사진</th>
+					<td><img width="500" src="/photo/${board.new_photo_name}"/></td>
+				</tr>
+			</c:if>
 			<tr>
 				<th>약속날짜</th>
 				<td>${board.meeting_date}</td>
@@ -52,8 +58,9 @@
 			</tr>
 			<tr>
 				<td colspan="2">
-				  <button>수정하기</button>
-				  <button onclick="location.href='greport.go?' + '${board.gidx}'">신고하기</button>
+				  <button onclick="location.href='gupdate.go?gidx=${board.gidx}&id=${board.id}'">수정하기</button>
+
+				  <button onclick="location.href='greport.go?gidx=${board.gidx}'">신고하기</button>
 				</td>
 			</tr>
 			<tr>
@@ -63,12 +70,17 @@
 			</tr>
 			<tr>
 				<th colspan="2">
-					<a href="./">리스트로 돌아가기</a>
+					<input type="button" onclick="location.href='./glist.go'" value="리스트"/>
 				</th>
 			</tr>
 		</table>
 </body>
 <script>
+	var msg = "${msg}";
+	if(msg != ""){
+	   alert(msg);
+	}
+
 	session.setAttribute("gidx", params.get("gidx"));
 	$('a[class="openchat"]').click(function(){
 		var loginId = "${sessionScope.loginId}";

@@ -119,8 +119,9 @@
       <form action="gsorting.do" method="get">
          <table>
             <tr>
-	         <td colspan="2">
-	            <select name=big_hb>
+             <th>취미</th>
+	         <td>
+	            <select name="big_hb">
 	               <c:forEach items="${big_hb}" var="b">
 	                  <option value="${b.big_hb}">${b.big_hb}</option>      
 	               </c:forEach>
@@ -231,7 +232,7 @@
                   <td>${bbs.small_hb}</td>
                   <td>${bbs.area}</td>
                   <td>${bbs.meeting_date}</td>
-                  <td><a href="gdetail.do?id=${bbs.gidx}">${bbs.subject}</a></td>
+                  <td><a href="gdetail.do?gidx=${bbs.gidx}">${bbs.subject}</a></td>
                   <td>${bbs.id}</td>
                   <td>${bbs.reg_date}</td>
                   <td>${bbs.bHit}</td>
@@ -257,11 +258,16 @@
 </body>
 <script>
 
-   var msg = "${msg}";
-   if(msg != ""){
-      alert(msg);
-   }
-   
+	var msg = "${msg}";
+	if(msg != ""){
+		alert(msg);
+	}
+	
+	var msg2 = "${msg2}";
+	if(msg2 != ""){
+		alert(msg2);
+	}
+	
    var loginId = "${sessionScope.loginId}";   
    myHobbyList();
    function myHobbyList(){
@@ -288,23 +294,8 @@
    }
 
 
-   function myHobbyListDraw(myHobbyList){
-      console.log("myHobbyList : " + myHobbyList);
-      var content = '';
-      myHobbyList.forEach(function(item,index){
-         content += '<tr>';
-         content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
-         content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
-         content += '</tr>';
-         console.log(item.my_hobby_no);
-      });
-      
-      $('#myHobbyList').empty();
-      $('#myHobbyList').append(content);
-   }
-
-   $('select[name=big_hb]').on('change', function(e){
-       var big_hb = $('select[name=big_hb]').val();      
+   $('select[name="big_hb"]').on('change', function(e){
+       var big_hb = $('select[name="big_hb"]').val();      
        console.log("big_hb ? " + big_hb);      
        $.ajax({
           type: 'get'
@@ -333,7 +324,7 @@
        content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
     });
     $('select[name="small_hb"]').empty();
-    $('select[name="small_hb"').append(content);
+    $('select[name="small_hb"]').append(content);
    }
    
    

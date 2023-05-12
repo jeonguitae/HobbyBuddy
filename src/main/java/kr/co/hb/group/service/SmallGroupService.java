@@ -31,4 +31,24 @@ public class SmallGroupService {
 		
 		return dao.sgjoin(sidx, id);
 	}
+
+	public ArrayList<SmallGroupDTO> sgjlist(int sidx) {
+		
+		return dao.sgjlist(sidx);
+	}
+
+	public int memchk(String id, int sidx) {
+		
+		return dao.memchk(id, sidx);
+	}
+
+	public int maxmemchk(int sidx) {
+		
+		return dao.maxmemchk(sidx);
+	}
+
+	public int maxmem(int sidx) {
+		
+		return dao.maxmem(sidx);
+	}
 }

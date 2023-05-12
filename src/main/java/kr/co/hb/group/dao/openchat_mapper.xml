@@ -23,4 +23,13 @@
 	<select id="clist" resultType="kr.co.hb.group.dto.OpenChatDTO">
 		SELECT id, chatting, chattime FROM chat WHERE gidx = #{param1}
 	</select>
+	
+	<select id="memconchk" resultType="HashMap">
+		SELECT mannertp, age FROM member WHERE id = #{loginId}
+	</select>
+	
+	<select id="openconchk" resultType="HashMap">
+		SELECT mannertp, minage, maxage FROM gboardlist WHERE gidx = #{gidx}
+	</select>
+
 </mapper>
