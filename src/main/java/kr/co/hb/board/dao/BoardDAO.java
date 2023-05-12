@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.board.dto.BoardDTO;
+import kr.co.hb.group.dto.GroupBoardDTO;
 
 public interface BoardDAO {
 
@@ -15,7 +16,7 @@ public interface BoardDAO {
 
 	void filesave(int fbNo, MultipartFile photo);
 
-	void uphit();
+	void uphit(int fbNo);
 
 	BoardDTO detail(int fbNo);
 
@@ -30,10 +31,25 @@ public interface BoardDAO {
 
 	int fphotodel(int fbNo, String board_class);
 
-	ArrayList<BoardDTO> colist(int fbNo);
+	ArrayList<BoardDTO> coList(int fbNo);
 
-	int cowrite(String id, int fbNo, String coContent);
+	int cowrite(HashMap<String, String> params);
 
+	int codelete(int coNo);
+
+	ArrayList<BoardDTO> fsorting(HashMap<String, String> params);
+	
+	ArrayList<BoardDTO> tsearch(HashMap<String, String> params);
+
+	ArrayList<BoardDTO> isearch(HashMap<String, String> params);
+
+	ArrayList<BoardDTO> csearch(HashMap<String, String> params);
+
+	int bmarkdo(String id);
+
+	int bmarkdo(String memid, String myid);
+
+	
 	
 
 

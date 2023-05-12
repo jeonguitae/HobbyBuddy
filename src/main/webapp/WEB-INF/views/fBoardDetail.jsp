@@ -77,14 +77,14 @@
 				<table id="comment">
 					<c:forEach items="${coList}" var="coList">
 						<tr>
-							<th class="coNo" hidden>${coList.coNo}</th>
+							<%-- <th class="coNo" hidden>${coList.coNo}</th> --%>
 							<th>${coList.id}</th>
 							<td>${coList.coContent}</td>
 							<td>${coList.coTime}</td>
 							<td>
 							<c:if test="${coList.id eq loginId}">
-								<button onclick="location.href='coupdate.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">수정</button>
-								<button onclick="location.href='codelete.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">삭제</button>
+								<button onclick="location.href='./coupdate.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">수정</button>
+								<button onclick="location.href='./codelete.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">삭제</button>
 							</c:if>
 							<c:if test="${coList.id ne loginId}">
 								<button onclick="location.href='#'">신고</button>
