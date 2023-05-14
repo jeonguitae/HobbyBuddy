@@ -3,6 +3,8 @@ package kr.co.hb.admin.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +38,38 @@ public class NoitceController {
 	
 	@RequestMapping(value = "/update_chk.ajax", method = RequestMethod.POST)
 	@ResponseBody
-	public String update_chk(@RequestParam("notice_idx") String notice_idx,
-	                         @RequestParam("flag") String flag) {
-	  return service.notice_ChkUpdate(notice_idx, flag);
+	public String update_chk(@RequestParam("notice_idx") String notice_idx, HttpSession session, @RequestParam String notice_chk,
+			@RequestParam("flag") String flag,@RequestParam("notice_title") String notice_title,@RequestParam("notice_content") String notice_content) {
+	    logger.info("notice_chk : " + notice_chk);
+
+		if(notice_chk.equals("true")) {
+			ArrayList<NoticeDTO> dto = service.pro_select();
+			
+			logger.info("pro_select : " + dto);
+			if(dto != null) {
+				logger.info("pro_select : " + dto);	
+				logger.info("pro_select : " + dto.size());	
+				
+				for (NoticeDTO noticeDTO : dto) {
+					String id_send = (String) session.getAttribute("loginId");
+					String id_receive = noticeDTO.getId();
+					String alarm_title = notice_title;
+					String alarm_content = notice_content;
+					String alarm_class = "공지";
+					String alarm_num = notice_idx;
+					
+					logger.info("전 : " + id_send+id_receive+alarm_title+alarm_content+alarm_class+alarm_num);
+					
+					service.noticeAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);
+					
+					logger.info("후 : " + id_send+id_receive+alarm_title+alarm_content+alarm_class+alarm_num);
+					
+				}
+			}
+		}
+		
+		
+		return service.notice_ChkUpdate(notice_idx, flag);
 	}
 	
 	
@@ -98,7 +129,7 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/noticeDetail.go")
-	   public String noticeDetail(Model model, @RequestParam String notice_idx) {
+	   public String noticeDetail(Model model, @RequestParam int notice_idx) {
 	      
 	      String page = "redirect:/noticeList.go";
 	      
@@ -113,7 +144,7 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/noticeUpdate.go")
-	   public String updateForm(Model model, @RequestParam String notice_idx) {
+	   public String updateForm(Model model, @RequestParam int notice_idx) {
 	      
 	      String page = "redirect:/noticeList.go";
 	      

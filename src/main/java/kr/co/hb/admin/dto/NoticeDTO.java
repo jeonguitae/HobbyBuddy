@@ -15,9 +15,54 @@ public class NoticeDTO {
 	   private String board_num;
 	   private int notice_bHit;
 	   private boolean notice_chk;
+	   
+	   private String id_send;
+	   private String id_receive;
+	   private String alarm_title;
+	   private String alarm_content;
+	   private String alarm_class;
+	   private int alarm_num;
+	   
+	   
 	
 	   
-	   public int getNotice_idx() {
+	   public String getId_send() {
+		return id_send;
+	}
+	public void setId_send(String id_send) {
+		this.id_send = id_send;
+	}
+	public String getId_receive() {
+		return id_receive;
+	}
+	public void setId_receive(String id_receive) {
+		this.id_receive = id_receive;
+	}
+	public String getAlarm_title() {
+		return alarm_title;
+	}
+	public void setAlarm_title(String alarm_title) {
+		this.alarm_title = alarm_title;
+	}
+	public String getAlarm_content() {
+		return alarm_content;
+	}
+	public void setAlarm_content(String alarm_content) {
+		this.alarm_content = alarm_content;
+	}
+	public String getAlarm_class() {
+		return alarm_class;
+	}
+	public void setAlarm_class(String alarm_class) {
+		this.alarm_class = alarm_class;
+	}
+	public int getAlarm_num() {
+		return alarm_num;
+	}
+	public void setAlarm_num(int alarm_num) {
+		this.alarm_num = alarm_num;
+	}
+	public int getNotice_idx() {
 	      return notice_idx;
 	   }
 	   public void setNotice_idx(int notice_idx) {

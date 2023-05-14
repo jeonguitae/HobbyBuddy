@@ -108,7 +108,7 @@ public class NoticeService {
 		   return flag;
 		 }
 
-	   public NoticeDTO noticeDetail(String notice_idx, String flag) {
+	   public NoticeDTO noticeDetail(int notice_idx, String flag) {
 	      
 	      if(flag.equals("noticeDetail")) {
 	            // 조회수 증가
@@ -205,6 +205,16 @@ public class NoticeService {
 	        }
 	        
 	    }
+	}
+
+	public ArrayList<NoticeDTO> pro_select() {
+		return dao.pro_select();
+	}
+
+	public void noticeAlarm(String id_send, String id_receive, String alarm_title, String alarm_content,
+			String alarm_class, String alarm_num) {
+		dao.noticeAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);
+		
 	}
 	
 

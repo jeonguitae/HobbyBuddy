@@ -106,6 +106,14 @@
    		DELETE from hbphoto where photoIdx = #{param1} AND board_num = #{param2};
    </delete>
    
+   <select id="pro_select" resultType="kr.co.hb.admin.dto.NoticeDTO">
+   	select id from member
+   </select>
+   
+   <insert id="noticeAlarm">
+      insert into alarm_list (id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
+       values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+   </insert>
    
 
    

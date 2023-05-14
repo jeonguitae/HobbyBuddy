@@ -11,9 +11,9 @@ public interface NoticeDAO {
 
 	   void noticeFileWrite(String id, int board_num, String board_class, String ori_photo_name, String new_photo_name);
 
-	   NoticeDTO noticeDetail(String notice_idx);
+	   NoticeDTO noticeDetail(int notice_idx);
 
-	   void noticeUpHit(String notice_idx);
+	   void noticeUpHit(int notice_idx);
 
 	   ArrayList<NoticeDTO> noticeList();
 
@@ -42,6 +42,11 @@ public interface NoticeDAO {
 	void deletePhoto(String photoIdx, String notice_idx);
 
 	String noticeFindFile2(String photoIdx);
+
+	ArrayList<NoticeDTO> pro_select();
+
+	void noticeAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
+			String alarm_num);
 
 
 

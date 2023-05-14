@@ -69,7 +69,7 @@
             <th>제목</th>
             <td >${dto.notice_title}</td>
          </tr>
-         <tr>
+         <tr> 
             <th>내용</th>
             <td>${dto.notice_content}</td>
          </tr>
@@ -107,14 +107,23 @@ if (adminChk === true || adminChk === '1' || adminChk === "true") {
 $(document).ready(function() {
 	  var btnText = $("#chkBtn").text();
 	  $("#chkBtn").on("click", function() {
-	    var notice_idx = ${dto.notice_idx};
+	    var notice_idx = '${dto.notice_idx}';
+	    var notice_title = '${dto.notice_title}';
+	    var notice_content = '${dto.notice_content}';
+	    var notice_chk2 = '${dto.notice_chk}';
 	    var flag = $("#chkBtn").text() == '공개 설정' ? 'true' : 'false';
 
 	    if (confirm('해당 글을 ' + (flag == 'true' ? '공개' : '비공개') + '하시겠습니까?')) {
 	      $.ajax({
 	        type: 'POST',
 	        url: 'update_chk.ajax',
-	        data: { notice_idx: notice_idx, flag: flag },
+	        data: {
+	        	'notice_idx': notice_idx,
+	        	'notice_title': notice_title,
+	        	'notice_content': notice_content,
+	        	'notice_chk' : notice_chk2,
+	        	'flag': flag 
+	        },
 	        success: function(response) {
 	          console.log(response);
 	          var newBtnText = flag == 'true' ? '비공개 설정' : '공개 설정';
