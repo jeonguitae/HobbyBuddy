@@ -50,7 +50,14 @@
 </head>
 <body>
    <h3 align="center">문의 내역 상세</h3>
-   
+   		<form class="secretSet" method="post" action="qboardSecretSet.do?qboard_no=${dto.qboard_no}">
+			<input type="hidden" name="writer_id" value="${dto.id}">
+			<input type="hidden" name="sboard_title" value="${dto.qboard_title}">
+			<input type="hidden" name="sboard_num" value="${dto.qboard_no}">
+			<input type="hidden" name="admin_id" value="${sessionScope.loginId}">			
+			<button id="secretSet_btn">비밀글 설정</button>
+		</form>
+   		
       <table>
          
          <tr>
@@ -131,6 +138,19 @@ if (sessionID === authorID || adminChk === "true") {
 } else {
   updateBtn.style.display = 'none';
 }
+
+var secretSet_btn = document.querySelector('#secretSet_btn');
+if (secretSet_btn.value === 'true') {
+  secretSet_btn.innerText = '비밀글 해제';
+} else if (secretSet_btn.value === 'false') {
+  secretSet_btn.innerText = '비밀글 설정';
+}
+
+if (adminChk === true || adminChk === '1' || adminChk === "true") {
+	secretSet_btn.style.display = 'inline-block';
+	} else {
+		secretSet_btn.style.display = 'none';
+	}
 
 // 삭제 버튼 보이기/숨기기
 var deleteBtn = document.querySelector('#deleteBtn');

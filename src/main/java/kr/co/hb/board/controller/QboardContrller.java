@@ -49,7 +49,7 @@ public class QboardContrller {
 	@RequestMapping(value = "/qboard_write.ajax",method = RequestMethod.POST)
 	// ajasx형태로 주고 받기 위해 작성
 	@ResponseBody
-	public HashMap<String, Object> join(MultipartFile photo ,@RequestParam HashMap<String, String> params){
+	public HashMap<String, Object> qboard_write(MultipartFile photo ,@RequestParam HashMap<String, String> params){
 		logger.info("정보들 컨트롤러에 도착 : {}", params);
 		
 		logger.info("parmas true + " + params.get("qboard_openchk"));
@@ -117,6 +117,21 @@ public class QboardContrller {
 		logger.info("여긴오나?");
 		
 	      return service.qBoard_replyWrite(params);
+	   }	
+	
+	@RequestMapping(value = "/qboardSecretSet.do")
+	   public String qboardSecretSet(Model model,@RequestParam HashMap<String, String> params) {
+	      		   
+		logger.info("컨트롤러");
+		
+		  String writer_id = params.get("writer_id");
+		  String admin_id = params.get("admin_id");
+		  String sboard_class = "고객센터";
+		  String sboard_title = params.get("sboard_title");
+		  String sboard_num = params.get("sboard_num");
+		
+		   service.qboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+	      return "redirect:/qboardList.go";
 	   }
 	   
 }

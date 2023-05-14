@@ -22,8 +22,16 @@
    </insert>
    
    <select id="qboardPageList" resultType="kr.co.hb.board.dto.QboardDTO">
-		SELECT *
-			FROM qboard WHERE secret_state = 0 ORDER BY qboard_no DESC LIMIT #{param1} OFFSET #{param2}
+	  SELECT *
+	  FROM qboard q
+	  WHERE qboard_no NOT IN (
+	    SELECT q.qboard_no
+	    FROM qboard q
+	    INNER JOIN secret s ON q.qboard_no = s.sboard_num
+	    WHERE s.secret_state = 1 
+	  )
+	  ORDER BY qboard_no DESC
+	  LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="totalCount" resultType="int">
@@ -73,5 +81,12 @@
    <update id="replyWrite" parameterType="HashMap">
    		update qboard set qboard_state = true, qboard_reply = #{qboard_reply}, reply_time=now() where qboard_no = #{qboard_no}
    </update>
+   
+   <insert id="qboardSecretSet">
+    insert into secret (writer_id, admin_id, sboard_class, sboard_title, sboard_num)
+     values (#{param1},#{param2},#{param3},#{param4},#{param5})
+     </insert>
+   
+  
 	
 </mapper>

@@ -9,8 +9,10 @@ public class NoticeDTO {
 	   private String notice_title;
 	   private String notice_content;   
 	   private Date notice_date;
-	   private int photo_idx;
-	   private String newFileName;
+	   private int photoIdx;
+	   private String new_photo_name;
+	   private String board_class;
+	   private String board_num;
 	   private int notice_bHit;
 	   private boolean notice_chk;
 	
@@ -45,18 +47,7 @@ public class NoticeDTO {
 	   public void setNotice_date(Date notice_date) {
 	      this.notice_date = notice_date;
 	   }
-	   public int getPhoto_idx() {
-	      return photo_idx;
-	   }
-	   public void setPhoto_idx(int photo_idx) {
-	      this.photo_idx = photo_idx;
-	   }
-	   public String getNewFileName() {
-	      return newFileName;
-	   }
-	   public void setNewFileName(String newFileName) {
-	      this.newFileName = newFileName;
-	   }
+	   
 	   public int getNotice_bHit() {
 	      return notice_bHit;
 	   }
@@ -69,6 +60,30 @@ public class NoticeDTO {
 	   public void setNotice_chk(boolean notice_chk) {
 	      this.notice_chk = notice_chk;
 	   }
+	public int getPhotoIdx() {
+		return photoIdx;
+	}
+	public void setPhotoIdx(int photoIdx) {
+		this.photoIdx = photoIdx;
+	}
+	public String getNew_photo_name() {
+		return new_photo_name;
+	}
+	public void setNew_photo_name(String new_photo_name) {
+		this.new_photo_name = new_photo_name;
+	}
+	public String getBoard_class() {
+		return board_class;
+	}
+	public void setBoard_class(String board_class) {
+		this.board_class = board_class;
+	}
+	public String getBoard_num() {
+		return board_num;
+	}
+	public void setBoard_num(String board_num) {
+		this.board_num = board_num;
+	}
 
 	
 }

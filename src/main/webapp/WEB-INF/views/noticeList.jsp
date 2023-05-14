@@ -55,7 +55,7 @@
          <button id="search_btn">검색</button>
        </div> 
                  
-      <button onclick="location.href='noticeWrite.go'" >공지사항 작성</button>         
+      <button onclick="location.href='noticeWrite.go'" id="write_btn">공지사항 작성</button>         
       <table>
          <thead>
             <tr>
@@ -83,6 +83,20 @@
       
    </body>
 <script>
+
+$(document).ready(function() {
+	var adminChk = '${sessionScope.adminChk}';
+	if (adminChk == 1 || adminChk == '1' || adminChk == "true") {
+
+	}else{
+	   $('#sortChk').closest('th').hide();
+	   $('#list td:nth-child(5), #list th:nth-child(5)').hide();
+	   document.querySelector('#write_btn').style.display = 'none';
+	}
+
+});
+
+
 
 var showPage = 1;
 
@@ -145,29 +159,33 @@ function listCall(page){
 }
 
 
-function listPrint(list){
-   var content='';
-   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
-   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
-   // 해결방법 2. js 에서 변환
-   list.forEach(function(item,idx){
-     
-      content += '<tr>';
-      content += '<td>'+item.notice_idx+'</td>';
-      content += '<td><a href="noticeDetail.go?notice_idx='+item.notice_idx+'">'+item.id+'</a></td>';
-      content += '<td><a href="noticeDetail.go?notice_idx='+item.notice_idx+'">'+item.notice_title+'</a></td>';
-      var date = new Date(item.notice_date);
-      // 기본은 en-US
-      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-      content += '<td>'+item.notice_bHit+'</td>';
-      content += '<td>'+ (item.notice_chk ? '공개' : '비공개') +'</td>';
-      content += '</tr>';
-   });
-   $('#list').empty();
-   $('#list').append(content);
-   
-   
-}
+function listPrint(list) {
+	   var content = '';
+	   list.forEach(function(item, idx) {
+	      content += '<tr>';
+	      content += '<td>' + item.notice_idx + '</td>';
+	      content += '<td><a href="noticeDetail.go?notice_idx=' + item.notice_idx + '">' + item.id + '</a></td>';
+	      content += '<td><a href="noticeDetail.go?notice_idx=' + item.notice_idx + '">' + item.notice_title + '</a></td>';
+	      var date = new Date(item.notice_date);
+	      content += '<td>' + date.toLocaleDateString('ko-KR') + '</td>';
+	      content += '<td>' + item.notice_bHit + '</td>';
+	      content += '<td id="secret">' + (item.notice_chk ? '공개' : '비공개') + '</td>';
+	      content += '</tr>';
+	   });
+	   $('#list').empty();
+	   $('#list').append(content);
+	   
+	   
+	   var adminChk = '${sessionScope.adminChk}';
+	   if (adminChk === 1 || adminChk === '1' || adminChk === "true") {
+	      
+	   }else{
+		   $('#list td#secret, #list th#secret').hide();
+	   }
+	   
+	}
+
+
 
 var dateSortOrder = -1; 
 var chkSortOrder = -1; 

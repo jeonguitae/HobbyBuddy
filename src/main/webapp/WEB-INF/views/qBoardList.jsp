@@ -65,7 +65,7 @@
                <th id="sortDate">작성일<i class="fas fa-sort"></i></th>                                     
                <th id="sortChk">공개여부<i class="fas fa-sort"></i></th>
                <th>답변 여부</th>
-               <th>비밀글 여부</th>               
+               <!-- <th id="secret_col">비밀글 여부</th>   -->             
             </tr>            
          </thead>
          <tbody id="list">             
@@ -84,6 +84,16 @@
       
 	</body>
 <script>
+
+$(document).ready(function() {
+	   var adminChk = '${sessionScope.adminChk}';
+	   if (adminChk === true || adminChk === '1' || adminChk === "true") {
+	      
+	   } else {
+	      $('#secret_col').closest('th').hide();
+	      $('#list td:nth-child(8), #list th:nth-child(8)').hide();
+	   }
+	});
 
 var showPage = 1;
 
@@ -138,41 +148,53 @@ function listCall(page){
 
 
 function listPrint(list){
-   var content='';
-   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
-   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
-   // 해결방법 2. js 에서 변환
-   list.forEach(function(item,idx){
-	  
-	   content += '<tr>';
-	   content += '<td>'+item.qboard_no+'</td>';
-	   content += '<td>'+item.qboard_class+'</a></td>';
-	   content += '<td>';
-	   
-	   // 작성자 아이디와 세션 아이디가 일치하거나, 글이 공개된 경우 링크 제공
-	   if (item.qboard_openchk === true || item.id === '${sessionScope.loginId}' || ${sessionScope.adminChk} === true) {
-		  content += '<a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</a>';
-		} else {
-		  content += '<span onclick="alert(\'비공개글 입니다.\')" style="cursor: not-allowed;">'+item.qboard_title+'</span>';
-		}
+	   var content='';
+	   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
+	   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
+	   // 해결방법 2. js 에서 변환
+	   list.forEach(function(item,idx){
+	      
+	      content += '<tr>';
+	      content += '<td>'+item.qboard_no+'</td>';
+	      content += '<td>'+item.qboard_class+'</a></td>';
+	      content += '<td>';
+	      
+	      // 작성자 아이디와 세션 아이디가 일치하거나, 글이 공개된 경우 링크 제공
+	      if (item.qboard_openchk === true || item.id === '${sessionScope.loginId}' || ${sessionScope.adminChk} === true) {
+	         content += '<a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</a>';
+	      } else {
+	         content += '<span onclick="alert(\'비공개글 입니다.\')" style="cursor: not-allowed;">'+item.qboard_title+'</span>';
+	      }
 
+	      
+	      content += '</td>';
+	      content += '<td>'+item.id+'</td>';
+	      var date = new Date(item.qboard_time);
+	      // 기본은 en-US
+	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+	      content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
+	      content += '<td>'+(item.qboard_state ? '답변 완료' : '답변 대기중')+'</td>';
+	      
+	     /*  if(item.secret_state) {
+	         content += '<td id="secret"><button>비밀글 설정</button></td>';
+	      } else {
+	         content += '<td id="secret" style="display: none;"><button>비밀글 해제</button></td>';
+	      } */
+	      
+	      content += '</tr>';
+	      
+	   });
+	   $('#list').empty();
+	   $('#list').append(content);   
 	   
-	   content += '</td>';
-	   content += '<td>'+item.id+'</td>';
-	   var date = new Date(item.qboard_time);
-	   // 기본은 en-US
-	   content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-	   content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
-	   content += '<td>'+(item.qboard_state ? '답변 완료' : '답변 대기중')+'</td>';
-	   content += '<td><button>'+(item.secret_state ? '비밀글 설정' : '비밀글 해제')+'</button></td>';
-	   
-	   content += '</tr>';
+	   /* var adminChk = '${sessionScope.adminChk}';
+	   if (adminChk === true || adminChk === '1' || adminChk === "true") {
 
-   });
-   $('#list').empty();
-   $('#list').append(content);   
-   
-}
+	   } else {
+	      $('#list tr').find('td:nth-child(8), th:nth-child(8)').hide();
+	   } */
+	}
+
 
 
 var dateSortOrder = -1; 

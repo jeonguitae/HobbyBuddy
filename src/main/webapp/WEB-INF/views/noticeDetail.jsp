@@ -32,7 +32,10 @@
    #chkBtn{
    	 float: left;
    }
-   #rightt{
+   #delete_btn{
+   	float: right;
+   }
+   #update_btn{
    	float: right;
    }
    #listBack{
@@ -71,24 +74,36 @@
             <td>${dto.notice_content}</td>
          </tr>
          
-         <c:if test="${dto.newFileName ne null }">
+         <c:if test="${dto.new_photo_name ne null }">
             <tr>
                <th>사진</th>
-               <td> <img src="/photo/${dto.newFileName}" width="100"/></td>         
+               <td> <img src="/photo/${dto.new_photo_name}" width="100"/></td>         
             </tr>
          </c:if>            
          <tr>
             <th colspan="2">
             	<button id="chkBtn">${dto.notice_chk ? '비공개 설정' : '공개 설정'}</button>          	
                <input type="button" onclick="location.href='noticeList.go'" value="리스트로 돌아가기" id="listBack">
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="rightt">
-               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="rightt">              
-               
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="delete_btn">
+               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="update_btn">              
+              
             </th>
          </tr>
       </table>      
 </body>
 <script>
+
+var adminChk = '${sessionScope.adminChk}';
+
+if (adminChk === true || adminChk === '1' || adminChk === "true") {
+ 
+} else {
+	document.querySelector('#update_btn').style.display = 'none';
+	document.querySelector('#chkBtn').style.display = 'none';
+	document.querySelector('#delete_btn').style.display = 'none';
+}
+
+
 $(document).ready(function() {
 	  var btnText = $("#chkBtn").text();
 	  $("#chkBtn").on("click", function() {

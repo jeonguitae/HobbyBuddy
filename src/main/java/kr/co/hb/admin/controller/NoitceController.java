@@ -24,7 +24,7 @@ public class NoitceController {
 	
 	@Autowired NoticeService service;
 	
-	@RequestMapping(value = {"/noticeList.ajax", "/nboard.go"}, method = RequestMethod.POST)
+	@RequestMapping(value = {"/noticeList.ajax"}, method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> noticeList(
 			@RequestParam String page,
@@ -42,7 +42,7 @@ public class NoitceController {
 	}
 	
 	
-	@RequestMapping(value = "/noticeList.go")
+	@RequestMapping(value = {"/noticeList.go","/nboard.go"})
 	public String noticePage() {
 		return "noticeList";
 	}
@@ -135,11 +135,11 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/deletePhoto.do")
-       public String deletePhoto(@RequestParam String photo_idx, @RequestParam String notice_idx) {
-		   logger.info("photo_idx={}, notice_idx={}", photo_idx, notice_idx);
+       public String deletePhoto(@RequestParam String photoIdx, @RequestParam String notice_idx) {
+		   logger.info("photo_idx={}, notice_idx={}", photoIdx, notice_idx);
 
 		     
-		   service.deletePhoto(photo_idx, notice_idx);
+		   service.deletePhoto(photoIdx, notice_idx);
 				   
 	       return "redirect:/noticeUpdate.go?notice_idx=" + notice_idx;
 	       
