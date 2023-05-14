@@ -10,6 +10,8 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+
 
 <style>
    table, th, td{
@@ -36,6 +38,7 @@
 </style>
 </head>
 <body>      
+	<jsp:include page="gnb.jsp"/>
       <h2 align="center">고객센터</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
@@ -59,7 +62,7 @@
          <thead>
             <tr>
                <th>번호</th>
-               <th>문의종류</th>
+               <th id="sortClass">문의종류<i class="fas fa-sort"></i></th>
                <th>제목</th>
                <th>작성자</th>
                <th id="sortDate">작성일<i class="fas fa-sort"></i></th>                                     
@@ -194,61 +197,60 @@ function listPrint(list){
 	      $('#list tr').find('td:nth-child(8), th:nth-child(8)').hide();
 	   } */
 	}
-
-
-
-var dateSortOrder = -1; 
-var chkSortOrder = -1; 
+var dateSortOrder = -1;
+var chkSortOrder = -1;
 
 $('#sortDate').click(function() {
-   dateSortOrder *= -1; 
-   $.ajax({
-      type:'post',
-      url:'noticeList.ajax',
-      data:{
-         'page':showPage,
-         'cnt':$('#pagePerNum').val(),
-         'sort':'date'
-      },
-      dataType:'json',
-      success:function(data){
-         list = data.noticePageList;
-         list.sort(function(a, b) {
-            var dateA = new Date(a.notice_date);
-            var dateB = new Date(b.notice_date);
-            return dateSortOrder * (dateB - dateA); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
-         });
-         listPrint(list);
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });
+  dateSortOrder *= -1;
+  $.ajax({
+    type: 'post',
+    url: 'qboardList.ajax',
+    data: {
+      'page': showPage,
+      'cnt': $('#pagePerNum').val(),
+      'sort': 'date'
+    },
+    dataType: 'json',
+    success: function(data) {
+      list = data.qboardPageList;
+      list.sort(function(a, b) {
+        var dateA = new Date(a.qboard_time);
+        var dateB = new Date(b.qboard_time);
+        return dateSortOrder * (dateB - dateA); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
+      });
+      listPrint(list);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
 });
 
 $('#sortChk').click(function() {
-   chkSortOrder *= -1; // 클릭할 때마다 정렬 방식을 변경
-   $.ajax({
-      type:'post',
-      url:'noticeList.ajax',
-      data:{
-         'page':showPage,
-         'cnt':$('#pagePerNum').val(),
-         'sort':'chk'
-      },
-      dataType:'json',
-      success:function(data){
-         list = data.noticePageList;
-         list.sort(function(a, b) {
-            return chkSortOrder * (b.notice_chk - a.notice_chk); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
-         });
-         listPrint(list);
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });
+  chkSortOrder *= -1; // 클릭할 때마다 정렬 방식을 변경
+  $.ajax({
+    type: 'post',
+    url: 'qboardList.ajax',
+    data: {
+      'page': showPage,
+      'cnt': $('#pagePerNum').val(),
+      'sort': 'chk'
+    },
+    dataType: 'json',
+    success: function(data) {
+      list = data.qboardPageList;
+      list.sort(function(a, b) {
+        return chkSortOrder * (b.qboard_openchk - a.qboard_openchk); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
+      });
+      listPrint(list);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
 });
+
+
 
 </script>
 </html>

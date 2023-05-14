@@ -38,6 +38,7 @@
 </style>
 </head>
 <body>     
+	<jsp:include page="gnb.jsp"/>
       <h2 align="center">비밀글 처리 관리</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
@@ -165,18 +166,22 @@ function listPrint(list) {
 	    content += '<td><a href="reportDetail.go?rept_no='+item.sboard_num+'">'+item.sboard_title+'</a></td>';
 	    content += '<td>'+item.writer_id+'</td>';
 	    content += '<td>'+item.admin_id+'</td>';
-	    content += '<td><button onclick="location.href=\'./secretSet.do?sboard_num=' + item.sboard_num + '\'">비밀 해제</button></td>';
+	    content += '<td><button id="secretSet_Btn" onclick="confirmSecretRelease(' + item.sboard_num + ')">비밀 해제</button></td>';
 	    var date = new Date(item.secret_time);
-	    // 기본은 en-US
 	    content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
 	    content += '</tr>';
 	  });
 
 	  $('#list').empty();
 	  $('#list').append(content);
+	}
 
-	  
-	};
+	function confirmSecretRelease(sboard_num) {
+	  if (confirm('비밀 글을 해제하시겠습니까?')) {
+	    // Perform additional logic if needed
+	    location.href = './secretSet.do?sboard_num=' + sboard_num;
+	  }
+	}
 	
 	
 	/* $('.chkBtn').off('click').on('click', function() {

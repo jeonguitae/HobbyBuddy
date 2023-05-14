@@ -49,6 +49,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <h3 align="center">문의 내역</h3>
    		<form class="secretSet" method="post" action="qboardSecretSet.do?qboard_no=${dto.qboard_no}">
 			<input type="hidden" name="writer_id" value="${dto.id}">
@@ -125,71 +126,66 @@
 <script>
 
 
-document.getElementById("after").addEventListener("click", function() {
-document.getElementsByName("qboard_reply")[0].value = "";
 
 
-var sessionID = '${sessionScope.loginId}';
-var authorID = '${dto.id}';
-var adminChk = '${sessionScope.adminChk}';
-
-if (adminChk === true || adminChk === '1' || adminChk === "true") {
-  document.querySelector('#after textarea').disabled = false;
-  document.querySelector('#admin_reply').style.display = 'table-row';
-  
-} else {
-  document.querySelector('#admin_reply').style.display = 'none';
-  document.querySelector('#reply_time2').style.display = 'none';
-}
-
-// 수정 버튼 보이기/숨기기
-var updateBtn = document.querySelector('#updateBtn');
-if (sessionID === authorID || adminChk === "true") {
-  updateBtn.style.display = 'inline-block';
-} else {
-  updateBtn.style.display = 'none';
-}
-
-var secretSet_btn = document.querySelector('#secretSet_btn');
-if (secretSet_btn.value === 'true') {
-  secretSet_btn.innerText = '비밀글 해제';
-} else if (secretSet_btn.value === 'false') {
-  secretSet_btn.innerText = '비밀글 설정';
-}
-
-if (adminChk === true || adminChk === '1' || adminChk === "true") {
-	secretSet_btn.style.display = 'inline-block';
+	var sessionID = '${sessionScope.loginId}';
+	var authorID = '${dto.id}';
+	var adminChk = '${sessionScope.adminChk}';
+	
+	if (adminChk === true || adminChk === '1' || adminChk === "true") {
+	  document.querySelector('#after textarea').disabled = false;
+	  document.querySelector('#admin_reply').style.display = 'table-row';
+	  
 	} else {
-		secretSet_btn.style.display = 'none';
+	  document.querySelector('#admin_reply').style.display = 'none';
+	  document.querySelector('#reply_time2').style.display = 'none';
 	}
 
-// 삭제 버튼 보이기/숨기기
-var deleteBtn = document.querySelector('#deleteBtn');
-if (sessionID === authorID || adminChk === "true") {
-  deleteBtn.style.display = 'inline-block';
-} else {
-  deleteBtn.style.display = 'none';
-}
-
-$(document).ready(function() {
-	  // reply-time 클래스를 가진 input 요소를 선택합니다.
-	  var replyTime = $(".reply-time");
-
-	  // 해당 값이 "1999-09-09 00:00:00.000"인 경우에는 해당 요소를 숨깁니다.
-	  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
-		  replyTime.closest("tr").hide();
+	// 수정 버튼 보이기/숨기기
+	var updateBtn = document.querySelector('#updateBtn');
+	if (sessionID === authorID || adminChk === "true") {
+	  updateBtn.style.display = 'inline-block';
+	} else {
+	  updateBtn.style.display = 'none';
+	}
+	
+	var secretSet_btn = document.querySelector('#secretSet_btn');
+	if (secretSet_btn.value === 'true') {
+	  secretSet_btn.innerText = '비밀글 해제';
+	} else if (secretSet_btn.value === 'false') {
+	  secretSet_btn.innerText = '비밀글 설정';
+	}
+	
+	if (adminChk === true || adminChk === '1' || adminChk === "true") {
+		secretSet_btn.style.display = 'inline-block';
 		} else {
-		  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD");
-		  if (date !== "Invalid date") {
-		    replyTime.val(date);
-		  }
+			secretSet_btn.style.display = 'none';
 		}
 
-	});
-
-
-
-
+	// 삭제 버튼 보이기/숨기기
+	var deleteBtn = document.querySelector('#deleteBtn');
+	if (sessionID === authorID || adminChk === "true") {
+	  deleteBtn.style.display = 'inline-block';
+	} else {
+	  deleteBtn.style.display = 'none';
+	}
+	
+	$(document).ready(function() {
+		  // reply-time 클래스를 가진 input 요소를 선택합니다.
+		  var replyTime = $(".reply-time");
+	
+		  // 해당 값이 "1999-09-09 00:00:00.000"인 경우에는 해당 요소를 숨깁니다.
+		  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
+			  replyTime.closest("tr").hide();
+			} else {
+			  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD");
+			  if (date !== "Invalid date") {
+			    replyTime.val(date);
+			  }
+			}
+	
+		});
+	
 
 </script>
 </html>

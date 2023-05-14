@@ -71,7 +71,6 @@
          UPDATE qboard 
          SET qboard_class = #{qboard_class}
          , qboard_time = now()
-         , id = #{id}
          , qboard_title = #{qboard_title}
          , qboard_content = #{qboard_content}
          , qboard_openchk = #{qboard_openchk}

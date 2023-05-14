@@ -49,7 +49,6 @@ public interface NoticeDAO {
 			String alarm_num);
 
 
-
 	
 	
 	

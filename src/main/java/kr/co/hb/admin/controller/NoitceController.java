@@ -73,8 +73,9 @@ public class NoitceController {
 	}
 	
 	
-	@RequestMapping(value = {"/noticeList.go","/nboard.go"})
-	public String noticePage() {
+	
+	@RequestMapping(value = {"/nboard.go","/noticeList.go"})
+	public String noticePage2() {
 		return "noticeList";
 	}
 	

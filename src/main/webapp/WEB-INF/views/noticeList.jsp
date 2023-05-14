@@ -10,6 +10,7 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 <style>
    table, th, td{
@@ -36,7 +37,7 @@
 </style>
 </head>
 <body>
-      <img src="../img/하비버디.png" width="100" height="100">
+		<jsp:include page="gnb.jsp"/>
       <h2 align="center">공지사항 리스트</h2>
       게시물 갯수 : 
          <select id="pagePerNum">

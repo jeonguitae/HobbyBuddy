@@ -76,7 +76,7 @@
 		SELECT *
 			FROM notice ORDER BY notice_idx DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
-	
+		
 	<select id="totalCount" resultType="int">
 		SELECT COUNT(notice_idx) FROM notice 
 	</select>

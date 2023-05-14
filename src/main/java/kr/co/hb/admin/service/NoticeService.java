@@ -216,7 +216,6 @@ public class NoticeService {
 		dao.noticeAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);
 		
 	}
-	
 
 
 

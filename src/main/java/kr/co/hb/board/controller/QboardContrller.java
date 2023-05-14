@@ -2,6 +2,8 @@ package kr.co.hb.board.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import kr.co.hb.board.dto.QboardDTO;
 import kr.co.hb.board.service.QboardService;
@@ -71,8 +75,15 @@ public class QboardContrller {
 	      return page;
 	   }
 	 @RequestMapping(value = "/qboardUpdate.do", method = RequestMethod.POST)
-	   public String qboardUpdate(MultipartFile photo,@RequestParam HashMap<String, String> params) {
+	   public String qboardUpdate(HttpSession session,Model model ,MultipartFile photo,@RequestParam HashMap<String, String> params) {
 	      
+		 if (params.get("qboard_title") != null) {
+			model.addAttribute("msg","문의 제목을 입력하세요.");
+		}else if (params.get("qboard_content") != null) {
+			model.addAttribute("msg","문의 내용을 입력하세요.");
+		}
+		 
+		 
 	      return service.qboardUpdate(photo,params);
 	   }
 	 

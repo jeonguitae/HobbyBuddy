@@ -183,6 +183,39 @@
          </tr>         
       </thead>
    </table>   
+   
+   <table class="liner">
+      <thead>
+         <tr>
+            <td colspan="2">공지사항 관리 
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	          	 &nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	        <button onclick="location.href='noticeList.go'">리스트 보기</button></td>
+            
+         </tr>
+         <tr>
+            <td align="left">하비버디 관리자...
+            
+            
+            2022-04-23</td>
+            
+         </tr>         
+         <tr>
+            <td align="left">자냐??</td>
+            
+         </tr>         
+         <tr>
+            <td align="left">신고 제목</td>
+            
+         </tr>         
+         <tr>
+            <td align="left">신고 제목</td>
+            
+         </tr>         
+      </thead>
+   </table>   
 </body>
 <script>
 var msg = "${msg}";
