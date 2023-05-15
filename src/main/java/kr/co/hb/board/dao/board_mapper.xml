@@ -1,96 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC	"-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
 
 <mapper namespace="kr.co.hb.board.dao.BoardDAO">
 	<select id="list" resultType="kr.co.hb.board.dto.BoardDTO">
-	SELECT fbNo, title, id, fbTime, bhit 
-	FROM fBoard ORDER BY fbNo DESC
+		SELECT fbNo, title, id, fbTime,
+		bhit
+		FROM fBoard ORDER BY fbNo DESC
 	</select>
-	
+
 	<select id="fsorting" resultType="kr.co.hb.board.dto.BoardDTO">
-	SELECT *FROM fBoard WHERE big_hb = #{big_hb} AND small_hb = #{small_hb}	
+		SELECT *FROM fBoard WHERE
+		big_hb = #{big_hb} AND small_hb = #{small_hb}
 	</select>
-	
-	
+
+
 	<select id="tsearch" resultType="kr.co.hb.board.dto.BoardDTO">
 		SELECT * FROM fBoard
-		WHERE title LIKE #{search}
+		WHERE title
+		LIKE #{search}
 	</select>
-	
+
 	<select id="isearch" resultType="kr.co.hb.board.dto.BoardDTO">
 		SELECT * FROM fBoard
-		WHERE id LIKE #{search}
+		WHERE id
+		LIKE #{search}
 	</select>
-	
+
 	<select id="csearch" resultType="kr.co.hb.board.dto.BoardDTO">
 		SELECT * FROM fBoard
-		WHERE bContent LIKE #{search}
+		WHERE
+		bContent LIKE #{search}
 	</select>
-	
+
 	<insert useGeneratedKeys="true" keyColumn="fbNo"
-	keyProperty="fbNo" id="fwrite" 
-	parameterType="kr.co.hb.board.dto.BoardDTO"> 
-	INSERT INTO fBoard (title, id, bContent,big_hb,small_hb)
-	VALUES (#{title},#{id},#{bContent},#{big_hb},#{small_hb})
+		keyProperty="fbNo" id="fwrite"
+		parameterType="kr.co.hb.board.dto.BoardDTO">
+		INSERT INTO fBoard (title, id, bContent,big_hb,small_hb)
+		VALUES (#{title},#{id},#{bContent},#{big_hb},#{small_hb})
 	</insert>
-	
+
 	<insert id="filesave">
-	INSERT INTO hbPhoto(id, new_photo_name, ori_photo_name, board_class, board_num)
-	VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})	
+		INSERT INTO hbPhoto(id, new_photo_name,
+		ori_photo_name, board_class,
+		board_num)
+		VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})
 	</insert>
-	
+
 	<update id="uphit">
-	UPDATE fBoard SET bhit = bhit+1
-	WHERE fbNo = #{fbNo}
+		UPDATE fBoard SET bhit = bhit+1
+		WHERE fbNo = #{fbNo}
 	</update>
-	
+
 	<select id="detail" resultType="kr.co.hb.board.dto.BoardDTO">
-	SELECT f.fbNo, f.id, f.title, f.fbTime, f.bContent, f.bhit, f.big_hb, small_hb,
-	h.photoIdx, h.new_photo_name FROM fBoard f
-	LEFT JOIN hbPhoto h ON f.fbNo = h.board_num WHERE f.fbNo = #{fbNo}
+		SELECT f.fbNo, f.id, f.title,
+		f.fbTime, f.bContent, f.bhit, f.big_hb,
+		small_hb,
+		h.photoIdx,
+		h.new_photo_name FROM fBoard f
+		LEFT JOIN hbPhoto h ON f.fbNo =
+		h.board_num WHERE f.fbNo = #{fbNo}
 	</select>
-	
+
 	<delete id="fdelete">
-	DELETE FROM fBoard WHERE fbNo=#{param1}
+		DELETE FROM fBoard WHERE fbNo=#{param1}
 	</delete>
-	
+
 	<select id="findFile" resultType="String">
-	SELECT new_photo_name FROM hbPhoto WHERE board_num=#{param1}
+		SELECT new_photo_name FROM
+		hbPhoto WHERE board_num=#{param1}
 	</select>
-	
-	
+
+
 	<update id="fupdate" parameterType="hashmap">
-	UPDATE fBoard SET title=#{title}, bContent=#{bContent} WHERE fbNo = #{fbNo}
+		UPDATE fBoard SET
+		title=#{title}, bContent=#{bContent} WHERE fbNo = #{fbNo}
 	</update>
-	
-	<delete id="fphotodel" >
-	DELETE FROM hbPhoto WHERE board_num=#{param1} AND board_class=#{param2}
+
+	<delete id="fphotodel">
+		DELETE FROM hbPhoto WHERE board_num=#{param1} AND
+		board_class=#{param2}
 	</delete>
-	
+
 
 	<select id="coList" resultType="kr.co.hb.board.dto.BoardDTO">
-	SELECT fbNo, id, coContent, coTime, coNo FROM comment where fbNo =#{param1} 
+		SELECT fbNo, id, coContent,
+		coTime, coNo FROM comment where fbNo =#{param1}
 	</select>
-	
+
 	<insert id="cowrite" parameterType="hashmap">
-	INSERT INTO comment(fbNo, id, coContent) 
-	VALUES (#{fbNo}, #{id},#{coContent}) 
+		INSERT INTO comment(fbNo, id,
+		coContent)
+		VALUES (#{fbNo}, #{id},#{coContent})
 	</insert>
-	
+
 	<delete id="codelete">
-	DELETE FROM comment WHERE coNo = #{coNo}
+		DELETE FROM comment WHERE coNo = #{coNo}
 	</delete>
-	
+
 	<insert id="bmarkdo">
-	INSERT INTO bmark (myid, memid)
-	VALUES(#{param2},#{param1})
+		INSERT INTO bmark (myid, memid)
+		VALUES(#{param2},#{param1})
 	</insert>
-	
+
 	<insert id="coAlarm">
-      insert into alarm_list (id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
-       values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
-   </insert>
-	
+		insert into alarm_list
+		(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
+		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
+	</insert>
+
 </mapper>

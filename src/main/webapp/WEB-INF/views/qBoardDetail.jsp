@@ -4,8 +4,6 @@
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>\
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -98,30 +96,7 @@
                <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제" id="deleteBtn">
 			</td>    
 		</tr>
-      </table>
-      <form action="qBoard_replyWrite.do" method="post">  
-      <input type="hidden" name="qboard_no" value="${dto.qboard_no}">   	
-      <input type="hidden" name="qboard_state" value="${dto.qboard_state}">   	
-
-		<table>	      
-		    <tr>
-		      <th>문의 답변</th>		      
-		      <td id="after">		      	
-		      	<textarea disabled="disabled" name="qboard_reply" style="width: 400px; height: 200px; resize: none;">${dto.reply_content}</textarea></td>         
-			</tr>
-			<tr id="reply_time2">
-			  <th>답변 일시</th>
-			  <td><input type="text" name="reply_time" value="${dto.reply_time}" class="reply-time"></td>
-			</tr>
-			<tr id="admin_reply" style="display:none">
-				<th colspan="2">
-				<input type="button" onclick="location.href='qBoard_replyWrite.go'" value="답변 등록" id="listBack">
-				<input type="button" onclick="location.href='./qreplyUpdate.go?qboard_no=${dto.qboard_no}'" value="답변 수정">	
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qreplyDelete.go?qboard_no=${dto.qboard_no}';}" value="답변 삭제" >
-				</th>
-			</tr>		  
-		</table>      
-      </form>
+      </table>     
 </body>
 <script>
 

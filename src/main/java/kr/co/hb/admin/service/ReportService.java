@@ -164,4 +164,8 @@ public class ReportService {
 		
 	}
 
+	public int reportComentdo(HashMap<String, String> params) {
+		return dao.reportComentdo(params);
+	}
+
 }

@@ -49,12 +49,14 @@ public class GroupBoardController {
 		
 		String msg = (String) session.getAttribute("msg");
 		String msg2 = (String) session.getAttribute("msg2");
+		String msg3 = (String) session.getAttribute("msg3");
 		
 		model.addAttribute("msg", msg);
 		model.addAttribute("msg2", msg2);
 		
 		session.removeAttribute("msg");
 		session.removeAttribute("msg2");
+
 		return "gBoardList";
 	}
 	
@@ -166,13 +168,21 @@ public class GroupBoardController {
 	
 	@RequestMapping(value="/gupdate.go")
 	public String gupdateForm(Model model, @RequestParam int gidx, @RequestParam String id, HttpSession session, HttpServletRequest req) {
-		String page = "redirect:/glist.go";
+		String page = "";
+		
 		String loginId = (String) session.getAttribute("loginId");
 			
 			logger.info("id : " + id);
 			if(loginId.equals(id)) {
 				
 				page = "gBoardUpdate";
+			}
+			
+			if(!loginId.equals(id)) {
+				
+				String msg = "모임 생성자만 수정 가능합니다";
+				session.setAttribute("msg", msg);
+				page = "redirect:/glist.go";
 			}
 		
 		//그 fbNo갖고 있는 애를 update로 보내야하니까
@@ -236,11 +246,61 @@ public class GroupBoardController {
 			service.delsgmem(gidx);
 			
 			service.gdelete(gidx);
+			
 			msg = "삭제완료";
 			
 		}
 		
+		session.setAttribute("msg", msg);
+		
 		return "redirect:/glist.go";
 	}
+	
+	@RequestMapping(value="/sportglist.go")
+	public String sportglist(Model model) {
+		
+		ArrayList<GroupBoardDTO> list = service.sportglist();
+		
+		model.addAttribute("list", list);
+		return "gBoardList";
+	}
+	
+	@RequestMapping(value="/petglist.go")
+	public String petglist(Model model) {
+		
+		ArrayList<GroupBoardDTO> list = service.petglist();
+		
+		model.addAttribute("list", list);
+		return "gBoardList";
+	}
+	
+	@RequestMapping(value="/foodglist.go")
+	public String foodglist(Model model) {
+		
+		ArrayList<GroupBoardDTO> list = service.foodglist();
+		
+		model.addAttribute("list", list);
+		return "gBoardList";
+	}
+	
+	@RequestMapping(value="/leisureglist.go")
+	public String leisureglist(Model model) {
+		
+		ArrayList<GroupBoardDTO> list = service.leisureglist();
+		
+		model.addAttribute("list", list);
+		return "gBoardList";
+	}
+	
+	@RequestMapping(value="/etcglist.go")
+	public String etcglist(Model model) {
+		
+		ArrayList<GroupBoardDTO> list = service.etcglist();
+		
+		model.addAttribute("list", list);
+		return "gBoardList";
+	}
+	
+	
 
 }

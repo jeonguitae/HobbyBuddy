@@ -167,11 +167,19 @@ public class BoardController {
 		return "redirect:/fdetail.do?fbNo="+fbNo;
 	}
 
+	@RequestMapping(value="/bmarklist.go")
+	public String bmarkgo(HttpSession session) {
+		logger.info("즐겨찾기로 이동 얍");
+		String id = (String) session.getAttribute("loginId");
+		return "bmarkList";
+	}
+	
 	@RequestMapping(value="/bmark.do")
-	public String bmarkdo(@RequestParam String memid,@RequestParam String myid) {
+	public String bmarkdo(@RequestParam String memid,@RequestParam String myid, Model model) {
 		int row=service.bmarkdo(memid, myid);
-		logger.info("북마크함?"+row);
-		return "proDetail";
+		logger.info("북마크함?"+ memid);
+		
+		return "bmarkList";
 	}
 }
 	 

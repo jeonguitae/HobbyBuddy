@@ -78,6 +78,13 @@
 	  FROM report WHERE rept_no = #{param1};  
    </select>
    
+   	<insert id="reportComentdo" parameterType="hashmap">
+		insert into report (reporter,preporter,reptboard_class,reptboard_num,rept_title,rept_content)
+		 values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
+	</insert>
+	
+	
+   
 	
 	
 </mapper>

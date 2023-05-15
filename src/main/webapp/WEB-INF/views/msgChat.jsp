@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h3>쪽지 쓰기</h3>
-	<form action="msgChat.do" method="get">
+	<form action="msgChat.do" method="get" onsubmit="closePopup()">
 		<table>
 			<tr>
 				<th>받는 사람</th>
@@ -33,5 +33,11 @@
 	</form>
 </body>
 <script>
+function closePopup() {
+	  window.opener = self;
+	  window.close();
+	  alert("쪽지를 보냈습니다.");
+	  return true;
+	}
 </script>
 </html>
