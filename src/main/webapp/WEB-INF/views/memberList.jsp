@@ -34,17 +34,17 @@
  				<tr>
 					<th>경고횟수</th>
 					<td>
-						<input type="checkbox" name="number0" value="0"/>     0 회
-						<input type="checkbox" name="number1" value="1"/>     1 회
-						<input type="checkbox" name="number2" value="2"/>     2 회
-						<input type="checkbox" name="number3" value="3"/>     3 회
+						<input type="checkbox" name="warning" value="0"/>     0 회
+						<input type="checkbox" name="warning" value="1"/>     1 회
+						<input type="checkbox" name="warning" value="2"/>     2 회
+						<input type="checkbox" name="warning" value="3"/>     3 회
 					</td>
 				</tr> 
  				<tr>
 					<th>정지여부</th>
 					<td>
-						<input type="checkbox" name="normal" value="false"/>     정상 회원
-						<input type="checkbox" name="stop" value="true"/>     정지 회원
+						<input type="checkbox" name="ban" value="false"/>     정상 회원
+						<input type="checkbox" name="ban" value="true"/>     정지 회원
 					</td>
 				</tr>
 				<tr>

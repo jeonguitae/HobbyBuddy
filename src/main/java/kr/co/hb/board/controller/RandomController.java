@@ -4,6 +4,8 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,8 +122,10 @@ public class RandomController {
 	}
 	
 	@RequestMapping(value="/report.go")
-	public String reList(Model model) {		
+	public String reList(Model model, @RequestParam String id) {		
 		logger.info("start");
+		
+		model.addAttribute("id",id);
 		return "reportCreate";
 	}
 	
@@ -131,11 +135,11 @@ public class RandomController {
 		ArrayList<RandomDTO> list = Service.profileList(params);
 		logger.info("검색 조건 : " + params);
 		model.addAttribute("list",list);
-		return "reportList";
+		return "redirect:/";
 	}
 	
 	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
-	public String detail(@RequestParam String id,Model model) {
+	public String detail(@RequestParam String id,Model model ) {
 			
 		String page = "redirect:/list.do";
 		
@@ -153,6 +157,7 @@ public class RandomController {
 			model.addAttribute("member",dto);
 			model.addAttribute("photo",photo);
 		}
+		
 		return "proDetail";
 	}
 	
@@ -170,8 +175,5 @@ public class RandomController {
 		return "noNameDetail";
 	}
 	
-
-	
-
 	
 }

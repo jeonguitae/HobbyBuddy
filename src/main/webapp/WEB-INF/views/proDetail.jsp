@@ -14,25 +14,13 @@
       padding: 5px 10px;
 
    }
-/*    
-   .m{
-  background-color: navy;
-  color: #ffffff;
-   }
-    */
    
 </style>
 
 </head>
 <body>
-   <%-- <jsp:include page="gnb.jsp"/> --%>
      <form action="myp.do" method="post">
       <table>
-<%--       <colgroup>
-         <col width="50%"/>
-         <col width="20%"/>
-         <col width="30%"/>
-      </colgroup> --%>
       
          <tr>
             <th rowspan="9">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -80,7 +68,7 @@
             <th colspan="3">
                <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>  
                <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
-               <input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
+               <input type="button" value="프로필 신고" onclick="location.href='report.go?id=${member.id}'"/>
 <!--                <input type="button" value="뒤로가기" onclick="redirect:/profile.go"/> -->
             </th>
          </tr>
@@ -96,8 +84,8 @@
          </tr>
          <tr>
             <th>경고 당한 횟수</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="button" value="경고"/> </td>
+            <td>&nbsp;&nbsp;${wcount.wcount}&nbsp;&nbsp;</td>
+            <td><input type="button" onclick="increaseWarningCount()" value="경고"/> </td>
          </tr>
          <tr>
             <th>랜덤매칭 동의 여부</th>
@@ -116,7 +104,6 @@
 <script>
 
    var adminChk = "${sessionScope.adminChk}";
-
    
    if (adminChk === 'true') {
         document.getElementById('admin').style.display = 'block';
