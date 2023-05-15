@@ -140,4 +140,11 @@ public class QboardContrller {
 	      return "redirect:/qboardList.go";
 	   }
 	   
+    @RequestMapping(value = "/qBoard_replyWrite.do")  
+    public String qBoard_replyWrite(@RequestParam HashMap<String, String> params) {
+          
+        logger.info("여긴오나?");
+        
+          return service.qBoard_replyWrite(params);
+       }
 }
