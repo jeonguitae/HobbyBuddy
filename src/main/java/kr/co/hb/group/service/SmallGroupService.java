@@ -27,9 +27,9 @@ public class SmallGroupService {
 		return dao.sglist(gidx);
 	}
 
-	public int sgjoin(int sidx, String id) {
+	public int sgjoin(int sidx, int gidx, String id) {
 		
-		return dao.sgjoin(sidx, id);
+		return dao.sgjoin(sidx, gidx, id);
 	}
 
 	public ArrayList<SmallGroupDTO> sgjlist(int sidx) {

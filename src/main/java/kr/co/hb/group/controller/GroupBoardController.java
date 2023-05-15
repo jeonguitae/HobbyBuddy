@@ -204,9 +204,43 @@ public class GroupBoardController {
 	
 	@RequestMapping(value="gPhotodel.do")
 	public String gdelete(@RequestParam int gidx, @RequestParam String id) {
-		service.gdelete(gidx);
+		service.gpdelete(gidx);
 		
 		return "redirect:/gupdate.go?gidx="+gidx+"&id="+id;
+	}
+	
+	@RequestMapping(value="myGroupList.go")
+	public String myGroupList(Model model, HttpSession session) {
+		
+		String loginId = (String) session.getAttribute("loginId");
+		
+		ArrayList<GroupBoardDTO> list = service.myGroupList(loginId);
+		
+		model.addAttribute("list", list);
+		
+		return "myGroupList";
+	}
+	
+	@RequestMapping(value="gdelete.do")
+	public String gdelete(@RequestParam HashMap<String, String> params, HttpSession session) {
+		String msg = "모임 생성자만 삭제 가능합니다";
+		
+		String id = params.get("id");
+		int gidx = Integer.parseInt(params.get("gidx"));
+		
+		if(id.equals(session.getAttribute("loginId"))) {
+			
+			service.delopenlist(gidx);
+			service.delchat(gidx);
+			service.delsgroup(gidx);
+			service.delsgmem(gidx);
+			
+			service.gdelete(gidx);
+			msg = "삭제완료";
+			
+		}
+		
+		return "redirect:/glist.go";
 	}
 
 }
