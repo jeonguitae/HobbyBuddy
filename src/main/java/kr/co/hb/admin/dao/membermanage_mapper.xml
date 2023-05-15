@@ -11,16 +11,15 @@
 
 	<select id="memberList" parameterType="hashmap" resultType="kr.co.hb.admin.dto.MemberManageDTO">
 		<!-- SELECT * FROM member WHERE admin = #{admin} and ban=#{ban} -->
-		<!-- SELECT admin FROM member WHERE admin = #{param1} -->
-		SELECT *
-			FROM member
-			WHERE (admin = true AND member = false)
-		   OR (admin = false AND member = true)
-		   OR (admin = true AND member = true)
-
-  
-  			
-  
+		SELECT * FROM member
+	</select>
+	
+	<select id="adminList" parameterType="hashmap" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT * FROM member WHERE admin = 1
+	</select>
+	
+	<select id="mList" parameterType="hashmap" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT * FROM member WHERE admin = 0
 	</select>
 	
 	<select id="misearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">

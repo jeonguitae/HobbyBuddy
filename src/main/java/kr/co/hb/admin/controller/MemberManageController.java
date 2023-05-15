@@ -41,9 +41,23 @@ public class MemberManageController {
 	
 	@RequestMapping(value="/memberList.do")
 	public String memberList(Model model, @RequestParam HashMap<String, String> params) {	
+		ArrayList<MemberManageDTO> list = null;
+		if (params.size() == 2) {
+		    list = service.memberList();
+		    logger.info("파람: " + params);
+		    logger.info("파람 사이즈: " + params.size());
+		}
+		else if (params.size() == 1) {
+		    if (params.containsKey("admin")) {
+		        list = service.adminList();
+		        logger.info("파람 사이즈: " + params.size());
+		    }
+		    else{
+		        list = service.mList();
+		        logger.info("파람 사이즈: " + params.size());
+		    }
+		}
 		
-		ArrayList<MemberManageDTO> list = service.memberList(params);
-		logger.info("파람: " + params);
 		model.addAttribute("list",list);
 		return "memberList";
 	}

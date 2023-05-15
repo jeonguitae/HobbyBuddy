@@ -8,7 +8,7 @@ import kr.co.hb.board.dto.RandomDTO;
 
 public interface MemberManageDAO {
 
-	ArrayList<MemberManageDTO> memberList(HashMap<String, String> params);
+	ArrayList<MemberManageDTO> memberList();
 
 	ArrayList<RandomDTO> alist();
 
@@ -19,6 +19,10 @@ public interface MemberManageDAO {
 	MemberManageDTO mdetail(String id);
 
 	MemberManageDTO proPhotoList(String id, String board_class);
+
+	ArrayList<MemberManageDTO> adminList();
+
+	ArrayList<MemberManageDTO> mList();
 
 
 }
