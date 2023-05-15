@@ -190,7 +190,7 @@
             <tr>
                <td colspan="8" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
-                  <div class="container">                           
+                  <div class="container" style="justify-content: center; display: flex;">                           
                      <nav aria-label="Page navigation" style="text-align:center">
                         <ul class="pagination" id="pagination"></ul>
                      </nav>               

@@ -154,10 +154,10 @@
       <h2 align="center">비밀글 처리 관리</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
-            <option value="100">100</option>
-            <option value="150">150</option>
-            <option value="200">200</option>
-            <option value="250">250</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
          </select>
       <form action="search.do">
       
@@ -187,7 +187,7 @@
             <tr>
                <td colspan="7" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
-                  <div class="container">                           
+                  <div class="container" style="justify-content: center; display: flex;">                          
                      <nav aria-label="Page navigation" style="text-align:center">
                         <ul class="pagination" id="pagination"></ul>
                      </nav>               
