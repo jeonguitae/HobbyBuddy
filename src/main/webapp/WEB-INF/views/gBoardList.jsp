@@ -237,7 +237,6 @@
                   <td>${bbs.reg_date}</td>
                   <td>${bbs.bHit}</td>
                </tr>
-               
             </c:forEach>
                
                <tr>

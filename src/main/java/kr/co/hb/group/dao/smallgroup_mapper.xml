@@ -15,7 +15,7 @@
 	</select>
 	
 	<insert id="sgjoin">
-		INSERT INTO sgmem(sidx, id) VALUES(#{param1}, #{param2})
+		INSERT INTO sgmem(sidx, gidx, id) VALUES(#{param1}, #{param2}, #{param3})
 	</insert>
 	
 	<select id="memchk" resultType="int">
