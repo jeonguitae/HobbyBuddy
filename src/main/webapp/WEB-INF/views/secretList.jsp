@@ -163,7 +163,7 @@ function listPrint(list) {
 	    content += '<tr>';
 	    content += '<td>'+item.sboard_class+'</td>';
 	    content += '<td>'+item.sboard_num+'</td>';
-	    content += '<td><a href="reportDetail.go?rept_no='+item.sboard_num+'">'+item.sboard_title+'</a></td>';
+	    content += '<td>'+item.sboard_title+'</td>';
 	    content += '<td>'+item.writer_id+'</td>';
 	    content += '<td>'+item.admin_id+'</td>';
 	    content += '<td><button id="secretSet_Btn" onclick="confirmSecretRelease(' + item.sboard_num + ')">비밀 해제</button></td>';
