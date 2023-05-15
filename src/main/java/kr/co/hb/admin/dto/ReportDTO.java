@@ -17,6 +17,8 @@ public class ReportDTO {
 	   private String newFileName;
 	   private String proc_content;
 	   private Date proc_date;
+	   private int fbNo;
+	   private int gidx;
 	   
     public int getRept_no() {
 		return rept_no;
@@ -95,5 +97,17 @@ public class ReportDTO {
 	}
 	public void setRept_state(String rept_state) {
 		this.rept_state = rept_state;
+	}
+	public int getFbNo() {
+		return fbNo;
+	}
+	public void setFbNo(int fbNo) {
+		this.fbNo = fbNo;
+	}
+	public int getGidx() {
+		return gidx;
+	}
+	public void setGidx(int gidx) {
+		this.gidx = gidx;
 	}
 }

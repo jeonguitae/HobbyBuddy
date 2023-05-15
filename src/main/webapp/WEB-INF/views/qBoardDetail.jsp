@@ -49,8 +49,15 @@
 </style>
 </head>
 <body>
-   <h3 align="center">문의 내역 상세</h3>
-   
+	<jsp:include page="gnb.jsp"/>
+   <h3 align="center">문의 내역</h3>
+   		<form class="secretSet" method="post" action="qboardSecretSet.do?qboard_no=${dto.qboard_no}">
+			<input type="hidden" name="writer_id" value="${dto.id}">
+			<input type="hidden" name="sboard_title" value="${dto.qboard_title}">
+			<input type="hidden" name="sboard_num" value="${dto.qboard_no}">
+			<input type="hidden" name="admin_id" value="${sessionScope.loginId}">			
+			<button id="secretSet_btn">비밀글 설정</button>
+		</form>   		
       <table>
          
          <tr>
@@ -100,65 +107,85 @@
 		    <tr>
 		      <th>문의 답변</th>		      
 		      <td id="after">		      	
-		      	<textarea disabled="disabled" name="qboard_reply" style="width: 400px; height: 200px; resize: none;">${dto.qboard_reply}</textarea></td>         
+		      	<textarea disabled="disabled" name="qboard_reply" style="width: 400px; height: 200px; resize: none;">${dto.reply_content}</textarea></td>         
 			</tr>
 			<tr id="reply_time2">
 			  <th>답변 일시</th>
 			  <td><input type="text" name="reply_time" value="${dto.reply_time}" class="reply-time"></td>
 			</tr>
 			<tr id="admin_reply" style="display:none">
-				<th colspan="2"><button>답변 등록</button></th>
+				<th colspan="2">
+				<input type="button" onclick="location.href='qBoard_replyWrite.go'" value="답변 등록" id="listBack">
+				<input type="button" onclick="location.href='./qreplyUpdate.go?qboard_no=${dto.qboard_no}'" value="답변 수정">	
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qreplyDelete.go?qboard_no=${dto.qboard_no}';}" value="답변 삭제" >
+				</th>
 			</tr>		  
 		</table>      
       </form>
 </body>
 <script>
-var sessionID = '${sessionScope.loginId}';
-var authorID = '${dto.id}';
-var adminChk = '${sessionScope.adminChk}';
 
-if (adminChk === true || adminChk === '1' || adminChk === "true") {
-  document.querySelector('#after textarea').disabled = false;
-  document.querySelector('#admin_reply').style.display = 'table-row';
-} else {
-  document.querySelector('#admin_reply').style.display = 'none';
-}
 
-// 수정 버튼 보이기/숨기기
-var updateBtn = document.querySelector('#updateBtn');
-if (sessionID === authorID || adminChk === "true") {
-  updateBtn.style.display = 'inline-block';
-} else {
-  updateBtn.style.display = 'none';
-}
 
-// 삭제 버튼 보이기/숨기기
-var deleteBtn = document.querySelector('#deleteBtn');
-if (sessionID === authorID || adminChk === "true") {
-  deleteBtn.style.display = 'inline-block';
-} else {
-  deleteBtn.style.display = 'none';
-}
 
-$(document).ready(function() {
-	  // reply-time 클래스를 가진 input 요소를 선택합니다.
-	  var replyTime = $(".reply-time");
+	var sessionID = '${sessionScope.loginId}';
+	var authorID = '${dto.id}';
+	var adminChk = '${sessionScope.adminChk}';
+	
+	if (adminChk === true || adminChk === '1' || adminChk === "true") {
+	  document.querySelector('#after textarea').disabled = false;
+	  document.querySelector('#admin_reply').style.display = 'table-row';
+	  
+	} else {
+	  document.querySelector('#admin_reply').style.display = 'none';
+	  document.querySelector('#reply_time2').style.display = 'none';
+	}
 
-	  // 해당 값이 "1999-09-09 00:00:00.000"인 경우에는 해당 요소를 숨깁니다.
-	  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
-		  replyTime.closest("tr").hide();
+	// 수정 버튼 보이기/숨기기
+	var updateBtn = document.querySelector('#updateBtn');
+	if (sessionID === authorID || adminChk === "true") {
+	  updateBtn.style.display = 'inline-block';
+	} else {
+	  updateBtn.style.display = 'none';
+	}
+	
+	var secretSet_btn = document.querySelector('#secretSet_btn');
+	if (secretSet_btn.value === 'true') {
+	  secretSet_btn.innerText = '비밀글 해제';
+	} else if (secretSet_btn.value === 'false') {
+	  secretSet_btn.innerText = '비밀글 설정';
+	}
+	
+	if (adminChk === true || adminChk === '1' || adminChk === "true") {
+		secretSet_btn.style.display = 'inline-block';
 		} else {
-		  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD");
-		  if (date !== "Invalid date") {
-		    replyTime.val(date);
-		  }
+			secretSet_btn.style.display = 'none';
 		}
 
-	});
-
-
-
-
+	// 삭제 버튼 보이기/숨기기
+	var deleteBtn = document.querySelector('#deleteBtn');
+	if (sessionID === authorID || adminChk === "true") {
+	  deleteBtn.style.display = 'inline-block';
+	} else {
+	  deleteBtn.style.display = 'none';
+	}
+	
+	$(document).ready(function() {
+		  // reply-time 클래스를 가진 input 요소를 선택합니다.
+		  var replyTime = $(".reply-time");
+	
+		  // 해당 값이 "1999-09-09 00:00:00.000"인 경우에는 해당 요소를 숨깁니다.
+		  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
+			  replyTime.closest("tr").hide();
+			} else {
+			  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD");
+			  if (date !== "Invalid date") {
+			    replyTime.val(date);
+			  }
+			}
+	
+		});
+	
 
 </script>
 </html>

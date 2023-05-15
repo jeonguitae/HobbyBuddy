@@ -53,14 +53,14 @@
             <th>사진</th>
             <td>
                
-               <c:if test="${dto.newFileName eq null}">
+               <c:if test="${dto.new_photo_name eq null}">
                   <input type="file" name="photo" multiple="multiple">
                </c:if>
-               <c:if test="${dto.newFileName ne null}">
-				  <img src="/photo/${dto.newFileName}" width="100"/>
-				  ${dto.newFileName}
-				  <input type="hidden" name="photo_idx" value="${dto.photo_idx}">
-				  <a href="deletePhoto.do?photo_idx=${dto.photo_idx}&notice_idx=${dto.notice_idx}">사진 삭제</a>				  		  
+               <c:if test="${dto.new_photo_name ne null}">
+				  <img src="/photo/${dto.new_photo_name}" width="100"/>
+				  ${dto.new_photo_name}
+				  <input type="hidden" name="photoIdx" value="${dto.photoIdx}">
+				  <a href="deletePhoto.do?photoIdx=${dto.photoIdx}&notice_idx=${dto.notice_idx}">사진 삭제</a>				  		  
 				</c:if>      
             </td>
          </tr>         

@@ -32,7 +32,10 @@
    #chkBtn{
    	 float: left;
    }
-   #rightt{
+   #delete_btn{
+   	float: right;
+   }
+   #update_btn{
    	float: right;
    }
    #listBack{
@@ -66,40 +69,61 @@
             <th>제목</th>
             <td >${dto.notice_title}</td>
          </tr>
-         <tr>
+         <tr> 
             <th>내용</th>
             <td>${dto.notice_content}</td>
          </tr>
          
-         <c:if test="${dto.newFileName ne null }">
+         <c:if test="${dto.new_photo_name ne null }">
             <tr>
                <th>사진</th>
-               <td> <img src="/photo/${dto.newFileName}" width="100"/></td>         
+               <td> <img src="/photo/${dto.new_photo_name}" width="100"/></td>         
             </tr>
          </c:if>            
          <tr>
             <th colspan="2">
             	<button id="chkBtn">${dto.notice_chk ? '비공개 설정' : '공개 설정'}</button>          	
                <input type="button" onclick="location.href='noticeList.go'" value="리스트로 돌아가기" id="listBack">
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="rightt">
-               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="rightt">              
-               
+               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./noticeDelete.go?notice_idx=${dto.notice_idx}';}" value="삭제" id="delete_btn">
+               <input type="button" onclick="location.href='./noticeUpdate.go?notice_idx=${dto.notice_idx}'" value="수정" id="update_btn">              
+              
             </th>
          </tr>
       </table>      
 </body>
 <script>
+
+var adminChk = '${sessionScope.adminChk}';
+
+if (adminChk === true || adminChk === '1' || adminChk === "true") {
+ 
+} else {
+	document.querySelector('#update_btn').style.display = 'none';
+	document.querySelector('#chkBtn').style.display = 'none';
+	document.querySelector('#delete_btn').style.display = 'none';
+}
+
+
 $(document).ready(function() {
 	  var btnText = $("#chkBtn").text();
 	  $("#chkBtn").on("click", function() {
-	    var notice_idx = ${dto.notice_idx};
+	    var notice_idx = '${dto.notice_idx}';
+	    var notice_title = '${dto.notice_title}';
+	    var notice_content = '${dto.notice_content}';
+	    var notice_chk2 = '${dto.notice_chk}';
 	    var flag = $("#chkBtn").text() == '공개 설정' ? 'true' : 'false';
 
 	    if (confirm('해당 글을 ' + (flag == 'true' ? '공개' : '비공개') + '하시겠습니까?')) {
 	      $.ajax({
 	        type: 'POST',
 	        url: 'update_chk.ajax',
-	        data: { notice_idx: notice_idx, flag: flag },
+	        data: {
+	        	'notice_idx': notice_idx,
+	        	'notice_title': notice_title,
+	        	'notice_content': notice_content,
+	        	'notice_chk' : notice_chk2,
+	        	'flag': flag 
+	        },
 	        success: function(response) {
 	          console.log(response);
 	          var newBtnText = flag == 'true' ? '비공개 설정' : '공개 설정';

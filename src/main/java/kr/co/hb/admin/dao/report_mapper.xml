@@ -5,10 +5,29 @@
 
 <mapper namespace="kr.co.hb.admin.dao.ReportDAO">
 	
-	<select id="reportPageList" resultType="kr.co.hb.admin.dto.ReportDTO">
+	<select id="report_msg_profileList" resultType="kr.co.hb.admin.dto.ReportDTO">
 	
-	    SELECT *
-		FROM report
+	    SELECT r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date
+		FROM report r
+		WHERE reptboard_class = '쪽지' OR reptboard_class = '프로필' 
+		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
+		LIMIT #{param1} OFFSET #{param2}
+
+	</select>
+	
+	<select id="report_fboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
+	
+	    select r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date, f.fbNo from report r, fboard f 
+	    WHERE r.reptboard_num = f.fbNo AND reptboard_class = '자유게시판'		 
+		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
+		LIMIT #{param1} OFFSET #{param2}
+
+	</select>
+	
+	<select id="report_gboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
+	
+	    select r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date, g.gidx from report r, gboardlist g 
+	    WHERE r.reptboard_num = g.gidx AND reptboard_class = '모임'	 
 		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
 		LIMIT #{param1} OFFSET #{param2}
 
@@ -18,20 +37,47 @@
 		SELECT COUNT(rept_no) FROM report 
 	</select>
 	
-	<select id="reportDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
-      SELECT rept_no, preporter, reptboard_class, rept_title, rept_content, rept_state, proc_content, rept_date 
+	<select id="report_msg_profileDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT rept_no, preporter, reptboard_class, rept_title, rept_content, rept_state, proc_content, rept_date, admin_id 
 	  FROM report WHERE rept_no = #{param1};  
    </select>
    
-   <update id="commentWrite" parameterType="hashmap">
+	<select id="report_fboardDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date, f.fbNo
+		FROM report r
+		JOIN fboard f ON r.reptboard_num = f.fbNo
+		WHERE r.rept_no = #{param1};
+ 
+   </select>
+   
+	<select id="report_gboardDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date, g.gidx
+		FROM report r
+		JOIN gboardlist g ON r.reptboard_num = g.gidx
+		WHERE r.rept_no = #{param1};
+ 
+   </select>
+   
+   <update id="pcommentWrite" parameterType="hashmap">
 		  
  	  UPDATE report SET admin_id = #{admin_id}, proc_content = #{proc_content}, rept_state = #{rept_state}, proc_date = now() WHERE rept_no = #{rept_no};
    </update>
-
    
+   <update id="fcommentWrite" parameterType="hashmap">
+		  
+ 	  UPDATE report SET admin_id = #{admin_id}, proc_content = #{proc_content}, rept_state = #{rept_state}, proc_date = now() WHERE rept_no = #{rept_no};
+   </update>
+   
+   <update id="gcommentWrite" parameterType="hashmap">
+		  
+ 	  UPDATE report SET admin_id = #{admin_id}, proc_content = #{proc_content}, rept_state = #{rept_state}, proc_date = now() WHERE rept_no = #{rept_no};
+   </update>
+      
    <select id="reportCommentDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
       SELECT rept_no, preporter, reptboard_class, rept_title, rept_content, rept_state, proc_content, rept_date 
 	  FROM report WHERE rept_no = #{param1};  
    </select>
+   
+	
 	
 </mapper>

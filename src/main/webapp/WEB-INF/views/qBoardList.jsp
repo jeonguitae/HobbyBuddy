@@ -10,6 +10,8 @@
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>    
 <script src="resources/js/jquery.twbsPagination.js" type="text/javascript"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>
+
 
 <style>
    table, th, td{
@@ -36,6 +38,7 @@
 </style>
 </head>
 <body>      
+	<jsp:include page="gnb.jsp"/>
       <h2 align="center">고객센터</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
@@ -59,13 +62,13 @@
          <thead>
             <tr>
                <th>번호</th>
-               <th>문의종류</th>
+               <th id="sortClass">문의종류<i class="fas fa-sort"></i></th>
                <th>제목</th>
                <th>작성자</th>
                <th id="sortDate">작성일<i class="fas fa-sort"></i></th>                                     
                <th id="sortChk">공개여부<i class="fas fa-sort"></i></th>
                <th>답변 여부</th>
-               <th>비밀글 여부</th>               
+               <!-- <th id="secret_col">비밀글 여부</th>   -->             
             </tr>            
          </thead>
          <tbody id="list">             
@@ -84,6 +87,16 @@
       
 	</body>
 <script>
+
+$(document).ready(function() {
+	   var adminChk = '${sessionScope.adminChk}';
+	   if (adminChk === true || adminChk === '1' || adminChk === "true") {
+	      
+	   } else {
+	      $('#secret_col').closest('th').hide();
+	      $('#list td:nth-child(8), #list th:nth-child(8)').hide();
+	   }
+	});
 
 var showPage = 1;
 
@@ -138,95 +151,106 @@ function listCall(page){
 
 
 function listPrint(list){
-   var content='';
-   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
-   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
-   // 해결방법 2. js 에서 변환
-   list.forEach(function(item,idx){
-	  
-	   content += '<tr>';
-	   content += '<td>'+item.qboard_no+'</td>';
-	   content += '<td>'+item.qboard_class+'</a></td>';
-	   content += '<td>';
+	   var content='';
+	   // java.sql.Date 는 js 에서 읽지 못해 밀리세컨드로 반환한다.
+	   // 해결방법 1. DTO 에서 Date 를 String 으로 반환
+	   // 해결방법 2. js 에서 변환
+	   list.forEach(function(item,idx){
+	      
+	      content += '<tr>';
+	      content += '<td>'+item.qboard_no+'</td>';
+	      content += '<td>'+item.qboard_class+'</a></td>';
+	      content += '<td>';
+	      
+	      // 작성자 아이디와 세션 아이디가 일치하거나, 글이 공개된 경우 링크 제공
+	      if (item.qboard_openchk === true || item.id === '${sessionScope.loginId}' || ${sessionScope.adminChk} === true) {
+	         content += '<a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</a>';
+	      } else {
+	         content += '<span onclick="alert(\'비공개글 입니다.\')" style="cursor: not-allowed;">'+item.qboard_title+'</span>';
+	      }
+
+	      
+	      content += '</td>';
+	      content += '<td>'+item.id+'</td>';
+	      var date = new Date(item.qboard_time);
+	      // 기본은 en-US
+	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
+	      content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
+	      content += '<td>'+(item.qboard_state ? '답변 완료' : '답변 대기중')+'</td>';
+	      
+	     /*  if(item.secret_state) {
+	         content += '<td id="secret"><button>비밀글 설정</button></td>';
+	      } else {
+	         content += '<td id="secret" style="display: none;"><button>비밀글 해제</button></td>';
+	      } */
+	      
+	      content += '</tr>';
+	      
+	   });
+	   $('#list').empty();
+	   $('#list').append(content);   
 	   
-	   // 작성자 아이디와 세션 아이디가 일치하거나, 글이 공개된 경우 링크 제공
-	   if (item.qboard_openchk === true || item.id === '${sessionScope.loginId}' || ${sessionScope.adminChk} === true) {
-		  content += '<a href="qboardDetail.go?qboard_no='+item.qboard_no+'">'+item.qboard_title+'</a>';
-		} else {
-		  content += '<span onclick="alert(\'비공개글 입니다.\')" style="cursor: not-allowed;">'+item.qboard_title+'</span>';
-		}
+	   /* var adminChk = '${sessionScope.adminChk}';
+	   if (adminChk === true || adminChk === '1' || adminChk === "true") {
 
-	   
-	   content += '</td>';
-	   content += '<td>'+item.id+'</td>';
-	   var date = new Date(item.qboard_time);
-	   // 기본은 en-US
-	   content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
-	   content += '<td>'+(item.qboard_openchk ? '공개' : '비공개')+'</td>';
-	   content += '<td>'+(item.qboard_state ? '답변 완료' : '답변 대기중')+'</td>';
-	   content += '<td><button>'+(item.secret_state ? '비밀글 설정' : '비밀글 해제')+'</button></td>';
-	   
-	   content += '</tr>';
-
-   });
-   $('#list').empty();
-   $('#list').append(content);   
-   
-}
-
-
-var dateSortOrder = -1; 
-var chkSortOrder = -1; 
+	   } else {
+	      $('#list tr').find('td:nth-child(8), th:nth-child(8)').hide();
+	   } */
+	}
+var dateSortOrder = -1;
+var chkSortOrder = -1;
 
 $('#sortDate').click(function() {
-   dateSortOrder *= -1; 
-   $.ajax({
-      type:'post',
-      url:'noticeList.ajax',
-      data:{
-         'page':showPage,
-         'cnt':$('#pagePerNum').val(),
-         'sort':'date'
-      },
-      dataType:'json',
-      success:function(data){
-         list = data.noticePageList;
-         list.sort(function(a, b) {
-            var dateA = new Date(a.notice_date);
-            var dateB = new Date(b.notice_date);
-            return dateSortOrder * (dateB - dateA); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
-         });
-         listPrint(list);
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });
+  dateSortOrder *= -1;
+  $.ajax({
+    type: 'post',
+    url: 'qboardList.ajax',
+    data: {
+      'page': showPage,
+      'cnt': $('#pagePerNum').val(),
+      'sort': 'date'
+    },
+    dataType: 'json',
+    success: function(data) {
+      list = data.qboardPageList;
+      list.sort(function(a, b) {
+        var dateA = new Date(a.qboard_time);
+        var dateB = new Date(b.qboard_time);
+        return dateSortOrder * (dateB - dateA); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
+      });
+      listPrint(list);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
 });
 
 $('#sortChk').click(function() {
-   chkSortOrder *= -1; // 클릭할 때마다 정렬 방식을 변경
-   $.ajax({
-      type:'post',
-      url:'noticeList.ajax',
-      data:{
-         'page':showPage,
-         'cnt':$('#pagePerNum').val(),
-         'sort':'chk'
-      },
-      dataType:'json',
-      success:function(data){
-         list = data.noticePageList;
-         list.sort(function(a, b) {
-            return chkSortOrder * (b.notice_chk - a.notice_chk); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
-         });
-         listPrint(list);
-      },
-      error:function(e){
-         console.log(e);
-      }
-   });
+  chkSortOrder *= -1; // 클릭할 때마다 정렬 방식을 변경
+  $.ajax({
+    type: 'post',
+    url: 'qboardList.ajax',
+    data: {
+      'page': showPage,
+      'cnt': $('#pagePerNum').val(),
+      'sort': 'chk'
+    },
+    dataType: 'json',
+    success: function(data) {
+      list = data.qboardPageList;
+      list.sort(function(a, b) {
+        return chkSortOrder * (b.qboard_openchk - a.qboard_openchk); // 클릭 횟수에 따라 오름차순 또는 내림차순 정렬
+      });
+      listPrint(list);
+    },
+    error: function(e) {
+      console.log(e);
+    }
+  });
 });
+
+
 
 </script>
 </html>

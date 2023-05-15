@@ -98,7 +98,7 @@ public class BoardController {
 			page = "fBoardDetail";
 		}
 		if (session.getAttribute("loginId")==null) {
-			page = "fBoardList";
+			page = "fBoardList";			
 		}
 		session.setAttribute("fbNo", fbNo);
 		

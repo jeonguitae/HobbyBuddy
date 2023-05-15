@@ -44,12 +44,12 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">신고 상세</h3>
+   <h3 align="center">쪽지/프로필 신고 상세</h3>
    
       <table>
          <tr>
             <th>신고 번호</th>
-            <td><a href="fBoardDetail.go?reptboard_num='+item.notice_idx+'"></a>${dto.rept_no}</td>
+            <td>${dto.rept_no}</td>
          </tr>
          <tr>
             <th>신고 번호</th>
@@ -76,6 +76,10 @@
             <td><fmt:formatDate value="${dto.rept_date}" pattern="yyyy/MM/dd" /></td>
          </tr>
          <tr>
+            <th>이전 처리자</th>
+            <td>${dto.admin_id}</td>
+         </tr>
+         <tr>
             <th>처리 상태</th>
             <td>${dto.rept_state}</td>
          </tr>
@@ -86,7 +90,7 @@
           
       </table> 
       <hr>	    
-	  <form action="report_CommentWrite.do" method="post">
+	  <form action="report_pCommentWrite.do" method="post">
          <input type="hidden" name="rept_no" value="${dto.rept_no}">
          <table>
                <tr>
@@ -101,7 +105,7 @@
                   <th>처리상태</th>
                   <td>
                      <select name="rept_state">
-                          <option value="처리중">처리중</option>
+                          <option value="선택">선택</option>
                           <option value="처리완료">처리완료</option>
                           <option value="반려">반려</option>
                      </select>
@@ -109,7 +113,7 @@
                </tr>               
          </table>            
          <button id="confirmButton">신고 처리 하기</button>
-         <input type="button" onclick="location.href='reportList.go'" value="취소">                 
+         <input type="button" onclick="location.href='report_msg_profileList.go'" value="취소" id="cancel">                 
       </form>  
 </body>
 <script>
@@ -117,22 +121,29 @@
     
 $(document).ready(function() {
 	  $('#confirmButton').on('click', function() {
-	    if (confirm('신고를 처리하시겠습니까?')) {
-	      var form = document.querySelector('form');
-	      var proc_content = form.elements['proc_content'].value;
-	      if (proc_content === '') {
-	        alert('처리사유를 입력하세요.');
-	        return;
-	      }else{
-	    	  form.submit();
-	    	  alert('처리가 완료 되었습니다.');
-	      }
-	      
-	    }
+		    if (confirm('신고를 처리하시겠습니까?')) {
+		      var form = document.querySelector('form');
+		      var proc_content = form.elements['proc_content'].value;
+		      var admin_id = form.elements['admin_id'].value;
+		      var rept_state = form.elements['rept_state'].value;
+		      if (admin_id === '') {
+		    	  alert('세션이 종료되었습니다. 다시 로그인 해주세요.');
+			      return;
+			  }else if (proc_content === '') {
+			      alert('처리사유를 입력하세요.');
+			      return;
+			  }else if (rept_state === '선택') {
+				  alert('처리상태를 선택하세요.');
+			      return;
+		      }else{				  
+				  form.submit();
+			      alert('처리가 완료 되었습니다.');  
+			  }	      
+		    }else{
+		    	
+		    }
 	  });
 });
-
-
 
 </script>
 </html>

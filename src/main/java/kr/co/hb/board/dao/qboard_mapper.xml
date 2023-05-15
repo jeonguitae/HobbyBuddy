@@ -22,8 +22,16 @@
    </insert>
    
    <select id="qboardPageList" resultType="kr.co.hb.board.dto.QboardDTO">
-		SELECT *
-			FROM qboard WHERE secret_state = 0 ORDER BY qboard_no DESC LIMIT #{param1} OFFSET #{param2}
+	  SELECT *
+	  FROM qboard q
+	  WHERE qboard_no NOT IN (
+	    SELECT q.qboard_no
+	    FROM qboard q
+	    INNER JOIN secret s ON q.qboard_no = s.sboard_num
+	    WHERE s.secret_state = 1 
+	  )
+	  ORDER BY qboard_no DESC
+	  LIMIT #{param1} OFFSET #{param2}
 	</select>
 	
 	<select id="totalCount" resultType="int">
@@ -31,11 +39,15 @@
 	</select>
 	
 	<select id="qboardDetail" resultType="kr.co.hb.board.dto.QboardDTO">
-      SELECT q.qboard_no, q.qboard_class, q.qboard_time, q.id, q.qboard_title, q.qboard_content, q.qboard_openchk, q.qboard_reply, q.reply_time,
-		h.photoIdx, h.new_photo_name FROM qboard q
-	LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num WHERE q.qboard_no = #{param1}   
-   </select>
-   
+      SELECT q.qboard_no, q.qboard_class, q.qboard_time, q.id, q.qboard_title, q.qboard_content, q.qboard_openchk,
+	    h.photoIdx, h.new_photo_name, r.admin_id, COALESCE(r.reply_content, '답변이 등록 되지 않았습니다.') AS reply_content, COALESCE(r.reply_time, '1999-09-09') AS reply_time
+	FROM qboard q
+	LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num
+	LEFT JOIN qboard_reply r ON q.qboard_no = r.qboard_no
+	WHERE q.qboard_no = #{param1};
+
+
+   </select>   
    
    <delete id="qboardDelete">
       DELETE FROM qboard WHERE qboard_no = #{param1}
@@ -59,7 +71,6 @@
          UPDATE qboard 
          SET qboard_class = #{qboard_class}
          , qboard_time = now()
-         , id = #{id}
          , qboard_title = #{qboard_title}
          , qboard_content = #{qboard_content}
          , qboard_openchk = #{qboard_openchk}
@@ -73,5 +84,12 @@
    <update id="replyWrite" parameterType="HashMap">
    		update qboard set qboard_state = true, qboard_reply = #{qboard_reply}, reply_time=now() where qboard_no = #{qboard_no}
    </update>
+   
+   <insert id="qboardSecretSet">
+    insert into secret (writer_id, admin_id, sboard_class, sboard_title, sboard_num)
+     values (#{param1},#{param2},#{param3},#{param4},#{param5})
+     </insert>
+   
+  
 	
 </mapper>

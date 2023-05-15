@@ -40,14 +40,14 @@
 </style>
 </head>
 <body>      
-      <img src="../img/하비버디.png" width="100" height="100">
-      <h2 align="center">신고 관리 리스트</h2>
+      <jsp:include page="gnb.jsp"/>
+      <h2 align="center">모임 신고 관리 리스트</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+            <option value="150">150</option>
+            <option value="200">200</option>
          </select>
       <form action="search.do">
       
@@ -114,7 +114,7 @@ listCall(showPage);
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'reportList.ajax',
+      url:'report_gboardList.ajax',
       data:{
           'page':page,
             'cnt':$('#pagePerNum').val()          
@@ -122,7 +122,7 @@ function listCall(page){
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.reportPageList);
+         listPrint(data.report_gboardList);
 
          
          // 총 페이지 수
@@ -158,7 +158,7 @@ function listPrint(list){
 	      content += '<td>'+item.rept_no+'</td>';
 	      content += '<td>'+item.reptboard_class+'</td>';
 	      content += '<td>'+item.reporter+'</td>';
-	      content += '<td><a href="reportDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
+	      content += '<td><a href="report_gboardDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
 	      var date = new Date(item.rept_date);
 	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
 	      content += '<td>'+item.rept_state+'</td>';

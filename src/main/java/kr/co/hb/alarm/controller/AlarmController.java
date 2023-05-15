@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.co.hb.admin.dto.NoticeDTO;
+import kr.co.hb.admin.service.NoticeService;
 import kr.co.hb.alarm.dto.AlarmDTO;
 import kr.co.hb.alarm.service.AlarmService;
 import kr.co.hb.board.dto.BoardDTO;
@@ -31,6 +33,7 @@ public class AlarmController {
 	@Autowired AlarmService service;
 	@Autowired BoardService bservice;
 	@Autowired MessageService mservice;
+	@Autowired NoticeService nservice;
 
 	@RequestMapping(value = "/alarmList.ajax")
 	@ResponseBody
@@ -99,6 +102,11 @@ public class AlarmController {
 		if(alarm_class.equals("자유")) {
 			BoardDTO dto = bservice.detail(alarm_num, "detail");
 			model.addAttribute("dto",dto);
+			
+			ArrayList<BoardDTO> coList = new ArrayList<BoardDTO>();
+			coList=bservice.coList(alarm_num);
+			model.addAttribute("coList",coList);
+			
 			service.alarmListRead(alarm_no);
 			page = "fBoardDetail";
 		}
@@ -111,6 +119,13 @@ public class AlarmController {
 			ArrayList<MessageDTO> msgList = mservice.msgList(id);
 			model.addAttribute("msgList", msgList);
 			page = "msgList";
+		}
+		
+		if(alarm_class.equals("공지")) {
+			NoticeDTO dto = nservice.noticeDetail(alarm_num, "noticeDetail");
+			model.addAttribute("dto",dto);
+			service.alarmListRead(alarm_no);
+			page = "noticeDetail";
 		}
 		
 		alarmList(session);

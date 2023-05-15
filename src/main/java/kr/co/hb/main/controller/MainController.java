@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.main.dto.MainDTO;
 import kr.co.hb.main.service.MainService;
+import kr.co.hb.member.dto.MemberDTO;
 
 @Controller
 public class MainController {
@@ -43,6 +44,11 @@ public class MainController {
 	
 	@RequestMapping(value = "/admin.go", method = RequestMethod.GET)
 	public String admin(HttpSession session) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		if(session.getAttribute("loginId")!= null) {
+			map.put("msg", "관리자 로그인이 필요한 서비스 입니다.");
+		}
 		return "admin";
 	}
 	@RequestMapping(value = "/RandomList.go", method = RequestMethod.GET)
@@ -71,6 +77,10 @@ public class MainController {
 	}
 	@RequestMapping(value = "/secretList.go", method = RequestMethod.GET)
 	public String secret(HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+	    if(session.getAttribute("loginId")!= null) {
+	         map.put("msg", "관리자 로그인이 필요한 서비스 입니다.");
+	    }
 		return "secretList";
 	}
 	

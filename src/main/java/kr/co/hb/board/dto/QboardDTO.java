@@ -24,6 +24,7 @@ public class QboardDTO {
 	private String qboard_reply;
 	private String secret_state;
 	private Date reply_time;
+	private String reply_content;
 	
 	
 	public int getQboard_no() {
@@ -145,6 +146,12 @@ public class QboardDTO {
 	}
 	public void setReply_time(Date reply_time) {
 		this.reply_time = reply_time;
+	}
+	public String getReply_content() {
+		return reply_content;
+	}
+	public void setReply_content(String reply_content) {
+		this.reply_content = reply_content;
 	}
 	
 	
