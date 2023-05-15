@@ -10,7 +10,8 @@
 </style>
 </head>
 <body>
-<jsp:include page="gnb.jsp"/>	
+<jsp:include page="gnb.jsp"/>
+<button onclick="location.href='report_fboardList.go'" class="buttons"> 자유 게시판 신고 관리 가기</button>
 <button onclick="location.href='report_gboardList.go'" class="buttons"> 모임방 신고 관리 가기</button>           
 <button onclick="location.href='secretList.go'" class="buttons">비밀글 리스트 보기</button>
 <button onclick="location.href='report_msg_profileList.go'" class="buttons">쪽지, 프로필 신고 관리 가기</button>
