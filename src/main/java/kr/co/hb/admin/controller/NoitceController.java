@@ -30,10 +30,13 @@ public class NoitceController {
 	@ResponseBody
 	public HashMap<String, Object> noticeList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String cnt,
+			@RequestParam String search
 			){
 		
-		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt));
+		logger.info("컨트롤러 등장");
+		
+		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt),search);
 	}	
 	
 	@RequestMapping(value = "/update_chk.ajax", method = RequestMethod.POST)

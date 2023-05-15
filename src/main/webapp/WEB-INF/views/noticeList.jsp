@@ -157,8 +157,8 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
             <option value="40">40</option>
          </select>
          <br/>
-		   <input type ="text" id="freeboardSearchInput" placeholder="제목 또는 닉네임을 입력">
-		   <button id ="freeboardSearchButton">검색</button>
+		   <input type ="text" id="noticeboardSearchInput" placeholder="제목을 입력">
+		   <button id ="noticeboardSearchButton">검색</button>
 		
 		 <br/>
        <!-- <div>
@@ -314,7 +314,7 @@ $(document).ready(function() {
 });
 
 
-
+var searchText = 'default';
 var showPage = 1;
 
 listCall(showPage);
@@ -325,6 +325,12 @@ listCall(showPage);
    // 그래서 pagePerNum이 변경되면 부수고 다시 만들어야 한다.
    $('#pagination').twbsPagination('destroy');
 }); 
+ 
+ $('#noticeboardSearchButton').click(function(){
+	   searchText = $('#noticeboardSearchInput').val();
+	   listCall(showPage);
+	   $('#pagination').twbsPagination('destroy');
+	});
 
  
 
@@ -342,12 +348,13 @@ function listCall(page){
       url:'noticeList.ajax',
       data:{
           'page':page,
-            'cnt':$('#pagePerNum').val()          
+            'cnt':$('#pagePerNum').val() 
+            'search':searchText
       },
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.noticePageList);
+         listPrint(data.nolist);
 
          
          // 총 페이지 수

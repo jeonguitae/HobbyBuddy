@@ -72,7 +72,7 @@
          WHERE notice_idx = #{notice_idx}
    </update>  
    
-   <select id="noticePageList" resultType="kr.co.hb.admin.dto.NoticeDTO">
+   <select id="nolist" resultType="kr.co.hb.admin.dto.NoticeDTO">
 		SELECT *
 			FROM notice ORDER BY notice_idx DESC LIMIT #{param1} OFFSET #{param2}
 	</select>
@@ -113,12 +113,16 @@
    <insert id="noticeAlarm">
       insert into alarm_list (id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
        values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
-   </insert>
-   
-
-   
-   
-   
-	
-   
+   </insert>   
+      
+   <select id="nolistSearch" resultType="kr.co.hb.admin.dto.NoticeDTO">
+      SELECT
+         *
+      FROM notice where notice_title LIKE CONCAT('%' #{search} '%')
+   </select>         
+      
+   <select id="ntotalCountSearch" resultType="int">
+      SELECT COUNT(notice_idx) FROM notice
+         WHERE notice_title LIKE CONCAT('%' #{param1} '%')
+   </select>
 </mapper>
