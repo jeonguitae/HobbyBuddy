@@ -110,7 +110,10 @@
 		        <textarea disabled="disabled" name="content" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}</textarea>
 		      </td>
 		    </tr>
-		    
+		    <tr>
+		  		<th>관리자 아이디</th>
+		  		<td>${dto.admin_id}</td>		  		
+		  	</tr>
 		    <tr id="reply_time2">
 		      <th>답변 일시</th>
 		      <td>
@@ -119,12 +122,7 @@
 		    </tr>
 		  </table>
 		  
-		  <table>
-		  	<tr>
-		  		<th>관리자 아이디</th>
-		  		<td>${dto.admin_id}</td>
-		  		
-		  	</tr>
+		  <table>		  	
 		    <tr id="admin_reply2">
 		      <th>문의 답변</th>
 		      <td id="after">
@@ -143,6 +141,7 @@
 <script>
 
 const replyBtn = document.getElementById('reply_btn');
+const myForm = document.querySelector('form[action="qBoard_replyWrite.do"]');
 
 replyBtn.addEventListener('click', function(event) {
   event.preventDefault(); // 기본 동작인 form submit을 막음
@@ -151,8 +150,7 @@ replyBtn.addEventListener('click', function(event) {
 
   if (result) {
     console.log("답변이 등록되었습니다.");
-
-    // 추가 동작을 수행하도록 코드를 작성해주세요.
+    myForm.submit(); // 폼을 제출함
   } else {
     console.log("답변 등록이 취소되었습니다.");
     return; // 취소 버튼을 눌렀을 때 함수를 종료하여 아무 동작도 수행하지 않음
