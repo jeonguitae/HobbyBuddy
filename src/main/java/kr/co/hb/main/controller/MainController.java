@@ -43,12 +43,13 @@ public class MainController {
 	}
 	
 	@RequestMapping(value = "/admin.go", method = RequestMethod.GET)
-	public String admin(HttpSession session) {
+	public String admin(HttpSession session, Model model) {
 		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		if(session.getAttribute("loginId")!= null) {
 			map.put("msg", "관리자 로그인이 필요한 서비스 입니다.");
 		}
+
 		return "admin";
 	}
 	@RequestMapping(value = "/RandomList.go", method = RequestMethod.GET)
