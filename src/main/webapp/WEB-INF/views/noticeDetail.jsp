@@ -93,6 +93,12 @@
 </body>
 <script>
 
+var msg = "${msg}";
+if (msg !== "") {
+    alert(msg);
+}
+
+
 var adminChk = '${sessionScope.adminChk}';
 
 if (adminChk === true || adminChk === '1' || adminChk === "true") {
@@ -149,6 +155,7 @@ $(document).ready(function() {
 	  } else {
 	    $("#chkText").text('공개 설정');
   } */
+  
   
 
 </script>

@@ -30,6 +30,7 @@
 </style>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
    <h3 align="center">문의 등록</h3>
    <!-- <form action="qBoardWrite.do" method="post" enctype="multipart/form-data"> -->
       <table>      

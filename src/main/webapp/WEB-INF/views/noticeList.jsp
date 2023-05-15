@@ -29,6 +29,7 @@
    }
    #paging{
             text-align: center;
+            justify-content: center;
    }
    #profileIcon{
 		display:inline;
@@ -150,12 +151,17 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
       <h2 align="center">공지사항 리스트</h2>
       게시물 갯수 : 
          <select id="pagePerNum">
-            <option value="50">50</option>
-            <option value="100">100</option>
-            <option value="150">150</option>
-            <option value="200">200</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
          </select>
-       <div>
+         <br/>
+		   <input type ="text" id="freeboardSearchInput" placeholder="제목 또는 닉네임을 입력">
+		   <button id ="freeboardSearchButton">검색</button>
+		
+		 <br/>
+       <!-- <div>
           <select id="search_Class">
             <option value="default">선택</option>
             <option value="notice_title">제목</option>
@@ -163,7 +169,7 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
          </select>      
          <input type="text" id="search_text">
          <button id="search_btn">검색</button>
-       </div> 
+       </div>  -->
                  
       <button onclick="location.href='noticeWrite.go'" id="write_btn">공지사항 작성</button>         
       <table>
@@ -180,15 +186,15 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
          <tbody id="list">             
          </tbody>
             <tr>
-               <td colspan="6" id="paging">   
-                  <!--    플러그인 사용   (twbsPagination)   -->
-                  <div class="container">                           
-                     <nav aria-label="Page navigation" style="text-align:center">
-                        <ul class="pagination" id="pagination"></ul>
-                     </nav>               
-                  </div>
-               </td>
-            </tr>                     
+			    <th colspan="6" id="paging" style="text-align: center;">
+			        <!-- 플러그인 사용 (twbsPagination) -->
+			        <div class="container" style="justify-content: center; display: flex;">
+			            <nav aria-label="Page navigation">
+			                <ul class="pagination" id="pagination"></ul>
+			            </nav>
+			        </div>
+			    </th>
+			</tr>                   
       </table>
       
    </body>
