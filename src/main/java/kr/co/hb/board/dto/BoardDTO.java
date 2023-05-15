@@ -20,8 +20,24 @@ public class BoardDTO {
 	private int coNo;
 	private Date coTime;
 	private String coContent;
+	private String myid;
+	private String memid;
 	
 
+	
+	
+	public String getMyid() {
+		return myid;
+	}
+	public void setMyid(String myid) {
+		this.myid = myid;
+	}
+	public String getMemid() {
+		return memid;
+	}
+	public void setMemid(String memid) {
+		this.memid = memid;
+	}
 	public int getCoNo() {
 		return coNo;
 	}
