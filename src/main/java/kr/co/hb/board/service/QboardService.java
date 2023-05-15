@@ -207,6 +207,22 @@ public class QboardService {
 		dao.secretUpdate(sboard_class,sboard_num);
 		
 	}
+	
+    public String qBoard_replyWrite(HashMap<String, String> params) {
+        
+        int board_num = Integer.parseInt(params.get("qboard_no"));
+        
+        logger.info("board_num : " + board_num);
+    
+        int row = dao.qBoard_replyWrite(params);
+        
+        logger.info("row : " + row);
+      
+      
+        String page = row > 0 ? "redirect:/qboardList.go" : "redirect:/qboardDetail.go?qboard_no=" + board_num;
+        
+        return page;
+}
 
 
 	
