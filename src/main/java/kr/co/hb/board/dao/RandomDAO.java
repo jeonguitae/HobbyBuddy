@@ -24,7 +24,6 @@ public interface RandomDAO {
 
 	ArrayList<RandomDTO> pnsearch(HashMap<String, String> params);
 
-	ArrayList<RandomDTO> nlist();
 
 
 

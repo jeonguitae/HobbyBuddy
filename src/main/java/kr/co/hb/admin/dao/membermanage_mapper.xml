@@ -11,7 +11,34 @@
 
 	<select id="memberList" parameterType="hashmap" resultType="kr.co.hb.admin.dto.MemberManageDTO">
 		<!-- SELECT * FROM member WHERE admin = #{admin} and ban=#{ban} -->
-		SELECT * FROM member WHERE admin = #{param1}
+		<!-- SELECT admin FROM member WHERE admin = #{param1} -->
+		SELECT *
+			FROM member
+			WHERE (admin = true AND member = false)
+		   OR (admin = false AND member = true)
+		   OR (admin = true AND member = true)
+
+  
+  			
+  
+	</select>
+	
+	<select id="misearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
+		WHERE m.id LIKE #{search}
+	</select>
+	
+	<select id="mnsearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
+		WHERE m.name LIKE #{search}
+	</select>
+	
+	<select id="mdetail" resultType="kr.co.hb.admin.dto.MemberManageDTO">
+		SELECT * FROM member where id = #{param1}
+	</select>
+	
+	<select id="proPhotoList" resultType="kr.co.hb.admin.dto.MemberManageDTO"> 
+		SELECT * FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</select>
 	
 	

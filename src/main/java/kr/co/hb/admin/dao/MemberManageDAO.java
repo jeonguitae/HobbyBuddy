@@ -12,4 +12,13 @@ public interface MemberManageDAO {
 
 	ArrayList<RandomDTO> alist();
 
+	ArrayList<RandomDTO> misearch(HashMap<String, String> params);
+
+	ArrayList<RandomDTO> mnsearch(HashMap<String, String> params);
+
+	MemberManageDTO mdetail(String id);
+
+	MemberManageDTO proPhotoList(String id, String board_class);
+
+
 }

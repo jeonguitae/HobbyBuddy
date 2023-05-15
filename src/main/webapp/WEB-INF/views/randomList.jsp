@@ -140,14 +140,16 @@
 	
 				</table>
 				
-					<h3>취미를 함께 할 사람을 찾아보세요!</h3>
+					<h3>
+						조건을 설정 후 버튼을 클릭하여 취미를 함께 할 상대를 찾아보세요 <br/>
+							해당하는 회원을 랜덤으로 추천해드릴게요!
+					</h3>
 			</form>
 		</div>
 		
 		<table>
 			<thead>
 				<tr>
-					<th>프로필 사진</th>
 					<th>ID</th>
 					<th>NAME</th>
 					<th>나이</th>
@@ -159,8 +161,9 @@
 			<tbody>
 				<c:forEach items="${list}" var="member">
 					<tr>
-						<td>프로필 사진 자리</td>
-						<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
+						<td>
+							<a href="javascript:void(0);" onclick="openPopup('${member.id}');">${member.id}</a>
+						</td>
 						<td>${member.name}</td>
 						<td>${member.age}</td>
 						<td>${member.area}</td>
@@ -172,6 +175,11 @@
 		</table>
 	</body>
 <script>
+	
+	function openPopup(memberId) {
+	    var url = 'detail.do?id=' + memberId;
+	    window.open(url, '_blank', 'width=1000,height=700');
+	  }
 
 	var msg = "${msg}";
 	if(msg != ""){

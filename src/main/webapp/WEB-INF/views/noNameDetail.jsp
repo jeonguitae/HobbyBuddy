@@ -50,9 +50,9 @@
       	<tr>
             <th>매너온도</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.mannertp}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <th rowspan="2">
+<!--             <th rowspan="2">
       			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
-      		</th>
+      		</th> -->
       	</tr>
       	<tr>
             <th>자기소개</th>
@@ -61,7 +61,7 @@
       </table>
       
       <br/>
-      
+      <div id="admin">
       <table>
       	<tr>
       		<th>정지 상태</th>
@@ -75,7 +75,7 @@
       	</tr>
       	<tr>
       		<th>랜덤매칭 동의 여부</th>
-      		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      		<td>&nbsp;&nbsp;${member.random}&nbsp;&nbsp;</td>
       	</tr>
       	<tr>
       		<th>현재 방 생성 갯수</th>
@@ -83,47 +83,57 @@
       	</tr>
       	
       </table>
-
+	</div>
    </form>
 </body>
 
 <script>
-var member_id = "${member.id}";
-HobbyList();
-function HobbyList(){
-	console.log("member_id : " + member_id);
-	$.ajax({
-		type:'get',
-		url:'myHobbyList.ajax',
-		data:{id:member_id},
-		dataType:'json',
-		success:function(data){
-			console.log("data, myHobbyList : " + data.myHobbyList);
-			console.log("data, login : " + data.login);
-			if(!data.login){
-				alert('로그인이 필요한 서비스 입니다.');
-				location.href='./';
-			}else{
-				myHobbyListDraw(data.myHobbyList);
-			}
-		},
-		error:function(e){
-			console.log(e);
-		}
-	});	
-}
 
-
-function myHobbyListDraw(myHobbyList){
-	console.log("myHobbyList : " + myHobbyList);
-	var content = '';
-	myHobbyList.forEach(function(item,index){
-		content+= item.big_hb + " / " + item.small_hb + "<br/>" ;
-		console.log(item.my_hobby_no);
-	});
+	var adminChk = "${sessionScope.adminChk}";
 	
-	$('#myHobbyList').empty();
-	$('#myHobbyList').append(content);
-}
+	
+	if (adminChk === 'true') {
+	    document.getElementById('admin').style.display = 'block';
+	} else {
+	    document.getElementById('admin').style.display = 'none';
+	}
+	
+	var member_id = "${member.id}";
+	HobbyList();
+	function HobbyList(){
+		console.log("member_id : " + member_id);
+		$.ajax({
+			type:'get',
+			url:'myHobbyList.ajax',
+			data:{id:member_id},
+			dataType:'json',
+			success:function(data){
+				console.log("data, myHobbyList : " + data.myHobbyList);
+				console.log("data, login : " + data.login);
+				if(!data.login){
+					alert('로그인이 필요한 서비스 입니다.');
+					location.href='./';
+				}else{
+					myHobbyListDraw(data.myHobbyList);
+				}
+			},
+			error:function(e){
+				console.log(e);
+			}
+		});	
+	}
+	
+	
+	function myHobbyListDraw(myHobbyList){
+		console.log("myHobbyList : " + myHobbyList);
+		var content = '';
+		myHobbyList.forEach(function(item,index){
+			content+= item.big_hb + " / " + item.small_hb + "<br/>" ;
+			console.log(item.my_hobby_no);
+		});
+		
+		$('#myHobbyList').empty();
+		$('#myHobbyList').append(content);
+	}
 </script>
 </html>

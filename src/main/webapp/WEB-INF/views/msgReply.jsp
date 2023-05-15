@@ -10,7 +10,6 @@
 </style>
 </head>
 <body>
-	<jsp:include page="gnb.jsp"/>
 	<h3>쪽지 답장하기</h3>
 	<form action="msgReply.do" method="get">
 		<table>

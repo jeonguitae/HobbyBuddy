@@ -30,6 +30,38 @@ public class MemberManageService {
 		return dao.memberList(params);
 	}
 
+	public ArrayList<RandomDTO> msearch(HashMap<String, String> params) {
+		
+		ArrayList<RandomDTO> list = null;
+		
+		if(params.get("ssorting").equals("id")) {
+			
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
+			list = dao.misearch(params);
+		}
+		
+		if(params.get("ssorting").equals("name")) {
+			
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
+			list = dao.mnsearch(params);
+		}
+		
+		return list;
+	}
+
+	public MemberManageDTO mdetail(String id) {
+		return dao.mdetail(id);
+	}
+
+	public MemberManageDTO proPhotoList(String id) {
+		String Board_class = "프로필";
+		
+		logger.info("검색 조건 : " + id + " / " + Board_class);
+		return dao.proPhotoList(id, Board_class);
+	}
+
 
 	
 
