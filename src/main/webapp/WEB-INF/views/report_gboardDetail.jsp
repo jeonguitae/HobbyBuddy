@@ -99,14 +99,13 @@
                </tr>
                <tr>
                   <th>처리상태</th>
-                  <td>
+                   <td>
                      <select name="rept_state">
                           <option value="선택">선택</option>
                           <option value="처리완료">처리완료</option>
                           <option value="반려">반려</option>
                      </select>
-                    </td>
-                    <td>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
                      <select name="warning">
                     	 <option value="0">경고 X</option>
                           <option value="1">경고</option>                          
