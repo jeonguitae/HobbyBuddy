@@ -16,7 +16,7 @@
 		<table>
 			<tr>
 				<th>신고 아이디</th>
-				<td><input type="text" name="reporter" value="${id_send}" readonly/></td>
+				<td><input type="text" name="reporter" value="${reporter}" readonly/></td>
 			</tr>
 			<tr>
 				<th>내 아이디</th>
@@ -28,11 +28,11 @@
 			</tr>
 			<tr>
 				<th>게시판 번호</th>
-				<td><input type="text" name="reptboard_num" value="${fbNo}" readonly></td>
+				<td><input type="text" name="reptboard_num" value="${reptboard_num}" readonly></td>
 			</tr>			
 			<tr>
 				<th>신고 내용</th>
-				<td><input type="text" name="rept_content" value="${msg_content} / 댓글 번호 : ${coNo}" readonly></td>
+				<td><input type="text" name="rept_content" value="${rept_content} / 댓글 번호 : ${coNo}" readonly></td>
 			</tr>
 			<tr>
 				<th>신고 사유</th>
