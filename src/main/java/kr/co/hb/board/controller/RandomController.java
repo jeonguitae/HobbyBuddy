@@ -84,8 +84,8 @@ public class RandomController {
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
 		
-		ArrayList<RandomDTO> list = Service.plist();
-	    model.addAttribute("list", list);
+//		ArrayList<RandomDTO> list = Service.plist();
+//	    model.addAttribute("list", list);
 		
 		
 		return "randomList";
@@ -104,23 +104,7 @@ public class RandomController {
 		model.addAttribute("list",list);
 		return "randomList";
 	}
-	/*
-	@RequestMapping(value="/noNameList.go")
-	public String nlist(Model model) {		
-		logger.info("start");
-		
-		
-		ArrayList<MemberDTO> big_hb = service2.big_hb();
-		logger.info("big_hb : " + big_hb);
-		model.addAttribute("big_hb",big_hb);
-		
-		ArrayList<RandomDTO> list = Service.nlist();
-	    model.addAttribute("list", list);
-		
-		
-		return "noNameList";
-	}
-	*/
+
 	@RequestMapping(value="/noNameList.do")
 	public String nonameList(Model model, @RequestParam HashMap<String, String> params) {	
 		

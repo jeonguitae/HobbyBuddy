@@ -12,8 +12,16 @@ public class RandomDTO {
 	private String new_photo_name;
 	private String big_hb;
 	private String small_hb;
+	private boolean random;
 	
 	
+	
+	public boolean isRandom() {
+		return random;
+	}
+	public void setRandom(boolean random) {
+		this.random = random;
+	}
 	public String getBig_hb() {
 		return big_hb;
 	}

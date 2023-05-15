@@ -122,7 +122,6 @@
 	<table>
 		<thead>
 			<tr>
-				<th>프로필 사진</th>
 				<th>아이디</th>
 				<th>NAME</th>
 				<th>매너온도</th>
@@ -136,8 +135,9 @@
 			<c:forEach items="${list}" var="member">
 				<tr>
 					
-					<td>프로필 사진 자리</td>
-					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
+					<td><%-- <a href="detail.do?id=${member.id}">${member.id}</a> --%>
+						<a href="javascript:void(0);" onclick="openPopup('${member.id}');">${member.id}</a>
+					</td>
 					<td>${member.name}</td>
 					<td>${member.mannertp}</td>
 					<td>${member.age}</td>
@@ -163,6 +163,11 @@
 	
 </body>
 <script>
+
+	function openPopup(memberId) {
+	    var url = 'detail.do?id=' + memberId;
+	    window.open(url, '_blank', 'width=1000,height=700');
+	  }
 	
 	var msg = "${msg}";
 	if(msg != ""){

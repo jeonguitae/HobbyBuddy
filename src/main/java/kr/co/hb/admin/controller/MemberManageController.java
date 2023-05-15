@@ -10,18 +10,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.hb.admin.dto.MemberManageDTO;
 import kr.co.hb.admin.service.MemberManageService;
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.member.dto.MemberDTO;
+import kr.co.hb.member.service.MemberService;
+import sun.tools.serialver.resources.serialver;
 
 @Controller
 public class MemberManageController {
 
 	
 	@Autowired MemberManageService service;
+	@Autowired MemberService service2;
 	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
@@ -44,6 +48,35 @@ public class MemberManageController {
 		return "memberList";
 	}
 
+	@RequestMapping(value="/msearch.do")
+	public String msearch(Model model, @RequestParam HashMap<String, String> params) {
+		
+		ArrayList<RandomDTO> list = service.msearch(params);
+		logger.info("검색 조건 : " + params);
+		model.addAttribute("list", list);
+		return "memberList";
+	}
 	
+	@RequestMapping(value = "/mdetail.do", method = RequestMethod.GET)
+	public String mdetail(@RequestParam String id,Model model) {
+			
+		String page = "redirect:/list.do";
+		
+		logger.info("취미 등록 페이지 이동");
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+		logger.info("big_hb : " + big_hb);
+		model.addAttribute("big_hb",big_hb);
+		
+		MemberManageDTO dto= service.mdetail(id);
+		MemberManageDTO photo = service.proPhotoList(id);
+		logger.info("dto"+dto);
+		logger.info("photo"+photo);
+		if(dto != null) {
+			page = "proDetail";
+			model.addAttribute("member",dto);
+			model.addAttribute("photo",photo);
+		}
+		return "memberDetail";
+	}
 
 }

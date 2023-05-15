@@ -28,7 +28,7 @@
 					<th>구분</th>
 					<td>
 						<input type="checkbox" name="admin" value="true"/>     관리자
-						<input type="checkbox" name="member" value="false"/>     회원
+						<input type="checkbox" name="admin" value="false"/>     회원
 					</td>
 				</tr>
 <!-- 				<tr>
@@ -70,7 +70,9 @@
 				<c:forEach items="${list}" var="member">
 					<tr>
 						<td>${member.admin}</td>
-						<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
+						<td>
+							<a href="javascript:void(0);" onclick="openPopup('${member.id}');">${member.id}</a>
+						</td>
 						<td>${member.name}</td>
 						<td>경고횟수 자리</td>
 						<td>${member.ban}</td>
@@ -93,6 +95,10 @@
 	</table>
 </body>
 <script>
-
+	
+	function openPopup(memberId) {
+	    var url = 'mdetail.do?id=' + memberId;
+	    window.open(url, '_blank', 'width=`1000,height=700');
+	  }
 </script>
 </html>

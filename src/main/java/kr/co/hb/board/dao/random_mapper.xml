@@ -5,54 +5,57 @@
 <mapper namespace="kr.co.hb.board.dao.RandomDAO">
 
 	<select id="plist" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name, m.mannertp ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
-	</select>
-	
-	<select id="nlist" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name ,m.age, m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		SELECT m.id ,m.name, m.mannertp ,m.age, m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id group by m.id
 	</select>
 
 	<select id="profileList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
-		WHERE big_hb = #{big_hb} and small_hb = #{small_hb} and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} 
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
+		WHERE big_hb = #{big_hb} AND small_hb = #{small_hb} AND city=#{city} AND area=#{area} AND age between #{minage} AND #{maxage} 
+		AND((gender = #{gender} AND gender != '성별 무관')
+		    OR (gender IN ('남성', '여성') AND #{gender} = '성별 무관'))
 	</select>
 	
 	<select id="pisearch" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
 		WHERE m.id LIKE #{search}
 	</select>
 	
 	<select id="pnsearch" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
 		WHERE m.name LIKE #{search}
 	</select>
 	
 	<select id="randomList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
+<!-- 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb ,h.small_hb ,m.gender from member m inner join my_hobby_list h on m.id = h.id
 		WHERE big_hb = #{big_hb1} and small_hb = #{small_hb1} or big_hb = #{big_hb2} and small_hb = #{small_hb2} or big_hb = #{big_hb3} and small_hb = #{small_hb3} 
-		and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage}
+		and gender= #{gender} and city=#{city} and area=#{area} and age between #{minage} and #{maxage} -->
+		SELECT m.id, m.name, m.age, m.area, h.big_hb, h.small_hb, m.gender FROM member m INNER JOIN my_hobby_list h ON m.id = h.id
+		WHERE ((big_hb = #{big_hb1} AND small_hb = #{small_hb1})
+		        OR (big_hb = #{big_hb2} AND small_hb = #{small_hb2})
+		        OR (big_hb = #{big_hb3} AND small_hb = #{small_hb3}))
+		    	AND city = #{city} AND area = #{area} 
+		    	AND((gender = #{gender} AND gender != '성별 무관')
+		    	OR (gender IN ('남성', '여성') AND #{gender} = '성별 무관'))
+		    	ORDER BY RAND() LIMIT 5
 	</select>
 	
 	<select id="noNameList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id, m.name, m.age, m.city, m.area, h.big_hb, h.small_hb, m.gender
-		FROM member m
-		INNER JOIN my_hobby_list h ON m.id = h.id
-		WHERE (big_hb = #{big_hb1} AND small_hb = #{small_hb1})
-		    OR (big_hb = #{big_hb2} AND small_hb = #{small_hb2})
-		    OR (big_hb = #{big_hb3} AND small_hb = #{small_hb3})
-		    AND gender = #{gender}
-		    AND city = #{city}
-		    AND area = #{area}
-		ORDER BY RAND()
-		LIMIT 5;
+		SELECT m.id, m.name, m.age, m.area, h.big_hb, h.small_hb, m.gender FROM member m INNER JOIN my_hobby_list h ON m.id = h.id
+		WHERE ((big_hb = #{big_hb1} AND small_hb = #{small_hb1})
+		        OR (big_hb = #{big_hb2} AND small_hb = #{small_hb2})
+		        OR (big_hb = #{big_hb3} AND small_hb = #{small_hb3}))
+		    	AND city = #{city} AND area = #{area} 
+		    	AND((gender = #{gender} AND gender != '성별 무관')
+		    	OR (gender IN ('남성', '여성') AND #{gender} = '성별 무관'))
+		    	ORDER BY RAND() LIMIT 5
 	</select>
 	
 	<select id="detail" resultType="kr.co.hb.board.dto.RandomDTO">
-		select * from member where id = #{param1}
+		SELECT * FROM member where id = #{param1}
 	</select>
 	
 	<select id="nodetail" resultType="kr.co.hb.board.dto.RandomDTO">
-		select * from member where id = #{param1}
+		SELECT * FROM member where id = #{param1}
 	</select>
 	
 	<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO"> 

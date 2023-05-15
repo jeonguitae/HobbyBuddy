@@ -10,7 +10,6 @@
 </style>
 </head>
 <body>
-	<jsp:include page="gnb.jsp"/>
 	<h3>쪽지 쓰기</h3>
 	<form action="msgChat.do" method="get">
 		<table>

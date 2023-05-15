@@ -19,4 +19,5 @@ public interface MainDAO {
 	void pwFind4(String id, String encodedPassword);
 
 
+
 }

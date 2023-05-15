@@ -123,8 +123,7 @@
 				            </select>
 				           </td>
 		      		</tr>
-					
-        	
+
 								
 				<tr>
 					<th colspan="2">
@@ -134,7 +133,10 @@
 
 			</table>
 			
-				<h3>취미를 함께 할 사람을 찾아보세요!</h3>
+				<h3>
+					조건을 설정 후 버튼을 클릭하여 취미를 함께 할 익명의 상대를 찾아보세요<br/>
+					해당하는 회원을 랜덤으로 추천해드릴게요!
+				</h3>
 
 		</form>
 	</div>
@@ -152,7 +154,9 @@
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
-					<td><a href="nodetail.do?id=${member.id}">익명의 회원</a></td>
+					<td>
+						<a href="javascript:void(0);" onclick="openPopup('${member.id}');">익명의 회원</a>
+					</td>
 					<td>${member.age}</td>
 					<td>${member.area}</td>
 					<td>${member.small_hb}</td>
@@ -163,6 +167,12 @@
 	</table>
 </body>
 <script>
+	
+	function openPopup(memberId) {
+	    var url = 'nodetail.do?id=' + memberId;
+	    window.open(url, '_blank', 'width=1000,height=700');
+	  }
+		
 		
 	var msg = "${msg}";
 	if(msg != ""){
