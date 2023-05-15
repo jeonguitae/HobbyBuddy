@@ -32,5 +32,7 @@ public interface QboardDAO {
 	void qboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
 			String sboard_num);
 
+	void secretUpdate(String sboard_class, String sboard_num);
+
 	
 }

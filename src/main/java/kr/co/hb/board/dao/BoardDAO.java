@@ -45,8 +45,6 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> csearch(HashMap<String, String> params);
 
-	int bmarkdo(String id);
-
 	int bmarkdo(String memid, String myid);
 
 	void coAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
