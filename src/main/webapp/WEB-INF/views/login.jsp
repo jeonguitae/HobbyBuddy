@@ -26,11 +26,11 @@
    <table>
       <tr>
          <th>ID</th>
-         <td><input type="text" id="id"></td>
+         <td><input type="text" id="id" placeholder="아이디를 입력해주세요 !"></td>
       </tr>
       <tr>
          <th>PW</th>
-         <td><input type="password" id="pw"></td>
+         <td><input type="password" id="pw" placeholder="비밀번호를 입력해주세요 !"></td>
       </tr>
       <tr>
          <th colspan="2">

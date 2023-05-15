@@ -38,36 +38,36 @@
 		<tr>
 			<th>아이디</th>
             <td>
-               <input type="text" id="id"/>
+               <input type="text" id="id" placeholder="아이디를 입력해주세요 !"/>
                 <button id="overlay">중복체크</button>
             </td>
 		</tr>
 		<tr>
 			<th>비밀번호</th>
-            <td><input type="password" id="pw"/></td>
+            <td><input type="password" id="pw" placeholder="비밀번호를 입력해주세요 !"/></td>
 		</tr>
          <tr>
             <th>비밀번호 확인</th>
             <td>
-            	<input type="password" id="confirm"/>
+            	<input type="password" id="confirm" placeholder="비밀번호 확인 !"/>
             	<span id="msg"></span>
             </td> 
          </tr>
          <tr>
             <th>이름</th>
-            <td><input type="text" id="name"/></td>
+            <td><input type="text" id="name" placeholder="이름을 입력해주세요 !"/></td>
          </tr>
          <tr>
             <th>이메일</th>
-            <td><input type="email" id="email"/></td>
+            <td><input type="email" id="email" placeholder="이메일을 입력해주세요 !"/></td>
          </tr>
          <tr>
-            <th>전화번호(숫자만 입력)</th>
-            <td><input type="number" id="phone"/></td>
+            <th>전화번호</th>
+            <td><input type="number" id="phone" placeholder=" - 를 제외하고 번호를 입력해주세요 !"/></td>
          </tr>
          <tr>
             <th>나이</th>
-            <td><input type="number" id="age"/></td>
+            <td><input type="number" id="age" placeholder="나이를 입력해주세요 !"/></td>
          </tr>
          <tr>
             <th>성별</th>
@@ -131,7 +131,7 @@
             </tr>
          <tr>
             <th>자기 소개</th>
-            <td><textarea id="intr"></textarea></td>
+            <td><textarea id="intr" placeholder="자기소개를 입력해주세요 !"></textarea></td>
          </tr>
          <tr>
             <th>본인확인 질문</th>
@@ -146,7 +146,7 @@
          </tr>   
          <tr>
             <th>본인확인 답변</th> 
-            <td><input type="text" id="chkresp"/></td>
+            <td><input type="text" id="chkresp" placeholder="본인확인 답변을 입력해주세요 !"/></td>
          </tr>
 		<tr>
 			<th>랜덤매칭 동의여부</th>

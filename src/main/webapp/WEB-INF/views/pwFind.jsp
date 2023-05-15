@@ -18,6 +18,12 @@
    table{
       width: 500px;
    }
+   input[type="text"]{
+      width: 100%;
+   }
+   input[type="number"]{
+      width: 100%;
+   }
 </style>
 </head>
 <body>
@@ -27,11 +33,11 @@
 	   <table>
 	      <tr>
 	         <th>아이디</th>
-	         <td><input type="text" name="id"></td>
+	         <td><input type="text" name="id" placeholder="아이디를 입력해주세요 !"></td>
 	      </tr>
 	      <tr>
 	         <th>번호</th>
-	         <td><input type="number" name="phone"></td>
+	         <td><input type="number" name="phone" placeholder="- 를 제외한 번호를 입력해주세요 !"></td>
 	      </tr>
 	      <tr>
 	         <th colspan="2">
