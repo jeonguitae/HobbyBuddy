@@ -69,6 +69,7 @@ public class SmallGroupController {
 		String msg = "참가 실패";
 		
 		String id = (String) session.getAttribute("loginId");
+		int gidx = (int) session.getAttribute("gidx");
 		
 		int chk1 = service.memchk(id, sidx);
 		int chk2 = service.maxmemchk(sidx);
@@ -76,7 +77,7 @@ public class SmallGroupController {
 
 		if(chk1 == 0 && chk2 < maxmem) {
 			
-			int row = service.sgjoin(sidx, id);
+			int row = service.sgjoin(sidx, gidx, id);
 			
 			if(row == 1) {
 				

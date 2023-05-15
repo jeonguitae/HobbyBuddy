@@ -68,7 +68,7 @@
 		VALUES(#{param1},#{param4},#{param3},#{param2},#{param5})	
 	</insert>
 	
-	<delete id="gdelete">
+	<delete id="gpdelete">
 		DELETE FROM hbphoto WHERE board_num=#{gidx}
 	</delete>
 	
@@ -79,5 +79,32 @@
 	<insert id="host">
 		INSERT INTO openlist(id, gidx) VALUES(#{loginId}, #{gidx})
 	</insert>
+	
+	<select id="myGroupList" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist
+		WHERE gidx IN(
+			SELECT gidx FROM openlist WHERE id = #{param1}
+		)
+	</select>
+	
+	<delete id="gdelete">
+		DELETE FROM gboardlist WHERE gidx = #{param1}
+	</delete>
+	
+	<delete id="delopenlist">
+		DELETE FROM openlist WHERE gidx = #{param1}
+	</delete>
+	
+	<delete id="delchat">
+		DELETE FROM chat WHERE gidx = #{param1}
+	</delete>
+	
+	<delete id="delsgroup">
+		DELETE FROM sgroup WHERE gidx = #{param1}
+	</delete>
+	
+	<delete id="delsgmem">
+		DELETE FROM sgmem WHERE gidx = #{param1}
+	</delete>
 	
 </mapper>

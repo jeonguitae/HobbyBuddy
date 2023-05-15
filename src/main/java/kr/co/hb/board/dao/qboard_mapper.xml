@@ -41,13 +41,11 @@
 	<select id="qboardDetail" resultType="kr.co.hb.board.dto.QboardDTO">
       SELECT q.qboard_no, q.qboard_class, q.qboard_time, q.id, q.qboard_title, q.qboard_content, q.qboard_openchk,
 	    h.photoIdx, h.new_photo_name, r.admin_id, COALESCE(r.reply_content, '답변이 등록 되지 않았습니다.') AS reply_content, COALESCE(r.reply_time, '1999-09-09') AS reply_time
-	FROM qboard q
-	LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num
-	LEFT JOIN qboard_reply r ON q.qboard_no = r.qboard_no
-	WHERE q.qboard_no = #{param1};
-
-
-   </select>   
+		FROM qboard q
+		LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num
+		LEFT JOIN qboard_reply r ON q.qboard_no = r.qboard_no
+		WHERE q.qboard_no = #{param1};
+	</select>   
    
    <delete id="qboardDelete">
       DELETE FROM qboard WHERE qboard_no = #{param1}
@@ -77,7 +75,7 @@
          WHERE qboard_no = #{qboard_no}
    </update>
    
-    <delete id="qDeletePhoto">
+   <delete id="qDeletePhoto">
    		DELETE from hbphoto where photoIdx = #{param1} AND board_num = #{param2};
    </delete>
    
@@ -88,7 +86,7 @@
    <insert id="qboardSecretSet">
     insert into secret (writer_id, admin_id, sboard_class, sboard_title, sboard_num)
      values (#{param1},#{param2},#{param3},#{param4},#{param5})
-     </insert>
+   </insert>
    
   
 	

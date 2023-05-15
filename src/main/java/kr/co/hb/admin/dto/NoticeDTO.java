@@ -23,10 +23,7 @@ public class NoticeDTO {
 	   private String alarm_class;
 	   private int alarm_num;
 	   
-	   
-	
-	   
-	   public String getId_send() {
+    public String getId_send() {
 		return id_send;
 	}
 	public void setId_send(String id_send) {

@@ -121,9 +121,9 @@ public class GroupBoardService {
 		
 	}
 
-	public void gdelete(int gidx) {
+	public void gpdelete(int gidx) {
 		
-		dao.gdelete(gidx);
+		dao.gpdelete(gidx);
 	}
 
 	public int hostchk(String loginId) {
@@ -136,4 +136,34 @@ public class GroupBoardService {
 		return dao.host(loginId, gidx);
 	}
 
+	public ArrayList<GroupBoardDTO> myGroupList(String loginId) {
+	
+		return dao.myGroupList(loginId);
+	}
+
+	public void gdelete(int gidx) {
+		
+		dao.gdelete(gidx);
+		
+	}
+
+	public void delopenlist(int gidx) {
+		
+		dao.delopenlist(gidx);
+	}
+
+	public void delchat(int gidx) {
+
+		dao.delchat(gidx);
+	}
+
+	public void delsgroup(int gidx) {
+
+		dao.delsgroup(gidx);
+	}
+
+	public void delsgmem(int gidx) {
+		
+		dao.delsgmem(gidx);
+	}
 }
