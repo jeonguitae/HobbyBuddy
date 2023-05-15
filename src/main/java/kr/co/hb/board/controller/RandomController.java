@@ -132,10 +132,19 @@ public class RandomController {
 	@RequestMapping(value="/report.do")
 	public String reportList(Model model, @RequestParam HashMap<String, String> params) {	
 		
+		int row = Service.reList(params);
+		
+		String msg = "";
+	      if(row == 1) {
+	         msg = "신고가 완료되었습니다.";
+	      }
+	      model.addAttribute("msg",msg);
+		
+		
 		ArrayList<RandomDTO> list = Service.profileList(params);
 		logger.info("검색 조건 : " + params);
 		model.addAttribute("list",list);
-		return "redirect:/";
+		return "proList";
 	}
 	
 	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)

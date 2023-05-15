@@ -75,6 +75,11 @@ public class RandomService {
 		return list;
 	}
 
+	public int reList(HashMap<String, String> params) {
+		return dao.reList(params);
+	}
+
+
 
 
 }

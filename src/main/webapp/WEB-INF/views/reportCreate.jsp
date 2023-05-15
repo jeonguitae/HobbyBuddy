@@ -11,7 +11,7 @@
 <body>
 	<jsp:include page="gnb.jsp"/>
 	<h3>프로필 신고하기</h3>
-	<form action="report.do" method="get">
+	<form action="report.do" method="get" onsubmit="closePopup()">
 		<table>
 			<tr>
 				<th>신고 아이디</th>
@@ -45,5 +45,11 @@
 	</form>
 </body>
 <script>
+function closePopup() {
+    window.opener = self;
+    window.close();
+    alert("신고가 완료되었습니다.");
+    return true;
+  }
 </script>
 </html>

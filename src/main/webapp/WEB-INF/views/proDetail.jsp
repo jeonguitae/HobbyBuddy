@@ -84,7 +84,7 @@
          </tr>
          <tr>
             <th>경고 당한 횟수</th>
-            <td>&nbsp;&nbsp;${wcount.wcount}&nbsp;&nbsp;</td>
+            <td>&nbsp;&nbsp;${sessionScope.warning}&nbsp;&nbsp;</td>
             <td><input type="button" onclick="increaseWarningCount()" value="경고"/> </td>
          </tr>
          <tr>
@@ -103,6 +103,11 @@
 
 <script>
 
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
+
    var adminChk = "${sessionScope.adminChk}";
    
    if (adminChk === 'true') {
@@ -112,10 +117,6 @@
     }
 
 
-   var msg = "${msg}";
-   if(msg!=""){
-      alert(msg);
-   }
    
    
    var member_id = "${member.id}";

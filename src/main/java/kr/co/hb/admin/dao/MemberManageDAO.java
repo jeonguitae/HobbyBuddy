@@ -24,5 +24,4 @@ public interface MemberManageDAO {
 
 	ArrayList<MemberManageDTO> mList();
 
-
 }

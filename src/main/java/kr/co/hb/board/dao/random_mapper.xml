@@ -62,4 +62,9 @@
 		SELECT * FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</select>
 	
+	<insert id="reList" parameterType="hashmap">
+      insert into report (reporter,preporter,reptboard_class,reptboard_num,rept_title,rept_content)
+       values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
+   </insert>
+	
 </mapper>
