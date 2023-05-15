@@ -49,4 +49,14 @@ public interface GroupBoardDAO {
 
 	void delsgmem(int gidx);
 
+	ArrayList<GroupBoardDTO> sportglist();
+
+	ArrayList<GroupBoardDTO> petglist();
+
+	ArrayList<GroupBoardDTO> foodglist();
+
+	ArrayList<GroupBoardDTO> leisureglist();
+
+	ArrayList<GroupBoardDTO> etcglist();
+
 }

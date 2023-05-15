@@ -107,4 +107,24 @@
 		DELETE FROM sgmem WHERE gidx = #{param1}
 	</delete>
 	
+	<select id="sportglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist WHERE big_hb = '운동' ORDER BY gidx DESC
+	</select>
+	
+	<select id="petglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist WHERE big_hb = '반려동물' ORDER BY gidx DESC
+	</select>
+	
+	<select id="foodglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist WHERE big_hb = '맛집' ORDER BY gidx DESC
+	</select>
+	
+	<select id="leisureglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist WHERE big_hb = '여가' ORDER BY gidx DESC
+	</select>
+	
+	<select id="etcglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist WHERE big_hb = '기타' ORDER BY gidx DESC
+	</select>
+	
 </mapper>

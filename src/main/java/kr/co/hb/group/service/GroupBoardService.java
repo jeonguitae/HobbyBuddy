@@ -166,4 +166,29 @@ public class GroupBoardService {
 		
 		dao.delsgmem(gidx);
 	}
+
+	public ArrayList<GroupBoardDTO> sportglist() {
+		
+		return dao.sportglist();
+	}
+
+	public ArrayList<GroupBoardDTO> petglist() {
+		
+		return dao.petglist();
+	}
+
+	public ArrayList<GroupBoardDTO> foodglist() {
+		
+		return dao.foodglist();
+	}
+
+	public ArrayList<GroupBoardDTO> leisureglist() {
+		
+		return dao.leisureglist();
+	}
+
+	public ArrayList<GroupBoardDTO> etcglist() {
+		
+		return dao.etcglist();
+	}
 }

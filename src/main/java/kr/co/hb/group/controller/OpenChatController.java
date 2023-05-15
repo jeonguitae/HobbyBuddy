@@ -76,7 +76,7 @@ public class OpenChatController {
 		logger.info("openminage : " + openminage);
 		logger.info("openmaxage : " + openmaxage);
 		
-		boolean agechkin = memage > openminage && memage < openmaxage;
+		boolean agechkin = memage >= openminage && memage <= openmaxage;
 		boolean mannerchkin = memmannertp >= openmannertp;
 		logger.info("agechkin : " + agechkin);
 		logger.info("mannerchkin : " + mannerchkin);
