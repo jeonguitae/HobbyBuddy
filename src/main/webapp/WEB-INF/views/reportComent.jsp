@@ -12,7 +12,7 @@
 <body>
 	<jsp:include page="gnb.jsp"/>
 	<h3>쪽지 신고하기</h3>
-	<form action="reportMsg.do" method="get">
+	<form action="reportComent.do" method="get">
 		<table>
 			<tr>
 				<th>신고 아이디</th>
@@ -24,18 +24,18 @@
 			</tr>
 			<tr>
 				<th>분류</th>
-				<td><input type="text" name="reptboard_class" value="쪽지" readonly></td>
+				<td><input type="text" name="reptboard_class" value="자유" readonly></td>
 			</tr>
 			<tr>
-				<th>쪽지 번호</th>
-				<td><input type="text" name="reptboard_num" value="${msgNo}" readonly></td>
+				<th>게시판 번호</th>
+				<td><input type="text" name="reptboard_num" value="${fbNo}" readonly></td>
 			</tr>			
 			<tr>
 				<th>신고 내용</th>
-				<td><input type="text" name="rept_content" value="${msg_content}" readonly></td>
+				<td><input type="text" name="rept_content" value="${msg_content} / 댓글 번호 : ${coNo}" readonly></td>
 			</tr>
 			<tr>
-				<th>신고 제목(사유)</th>
+				<th>신고 사유</th>
 				<td><input type="text" name="rept_title" value=""></td>
 			</tr>
 			<tr>

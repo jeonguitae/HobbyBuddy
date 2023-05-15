@@ -88,7 +88,8 @@
 								<button onclick="location.href='./codelete.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">삭제</button>
 							</c:if>
 							<c:if test="${coList.id ne loginId}">
-								<button onclick="location.href='#'">신고</button>
+								<button onclick="location.href='./reportComent.go?reporter=${coList.id}&
+								reptboard_num=${dto.fbNo}&rept_content=${coList.coContent}&coNo=${coList.coNo}'">신고</button>
 							</c:if>
 							</td>	
 						</tr>
