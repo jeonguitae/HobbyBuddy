@@ -22,19 +22,24 @@ public class NoticeService {
 
 	@Autowired NoticeDAO dao;
 	
+	String root = "C:/img/upload/";	
+	
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	 	public String noticeUpdate(MultipartFile photo, HashMap<String, String> params) {
 	      
 	      int row = dao.noticeUpdate(params);
-	      int idx = Integer.parseInt(params.get("notice_idx"));	
+	      int board_num = Integer.parseInt(params.get("notice_idx"));	
+	      
+	      String id = params.get("id");
 	      
 	      if (photo != null && !photo.getOriginalFilename().equals("")) {
-	    	    noticeFileSave(idx, photo);
+	    	    noticeFileSave(id, board_num, photo);
 	    	}     
 	      
-	      String page = row > 0 ? "redirect:/noticeDetail.go?notice_idx=" + idx : "redirect:/noticeList.go";
+	      String page = row > 0 ? "redirect:/noticeDetail.go?notice_idx=" + board_num : "redirect:/noticeList.go";
 	             
+	      	      
 	        return page;
 	   }
 
@@ -44,39 +49,46 @@ public class NoticeService {
 	      
 	      NoticeDTO dto = new NoticeDTO();
 	      
-	      dto.setId(params.get("id"));	      
+	      dto.setId(params.get("id"));
 	      dto.setNotice_title(params.get("notice_title"));
 	      dto.setNotice_content(params.get("notice_content"));
 	      
 	      dao.noticeWrite(dto);
 	      
-	      int idx = dto.getNotice_idx();
+	      
+	      
+	      int board_num = dto.getNotice_idx();
+	      
+	      String id = dto.getId();
 	      
 	      if (!photo.getOriginalFilename().equals("")) {
-	         noticeFileSave(idx, photo);
+	         noticeFileSave(id, board_num, photo);
 	      }
+	
 	      
 	      return page;
 	   }
 
-	   private void noticeFileSave(int idx, MultipartFile file) {
+	   private void noticeFileSave(String id, int board_num, MultipartFile file) {
 
-	      String oriFileName = file.getOriginalFilename();
+	      String ori_photo_name = file.getOriginalFilename();
 	      
-	         String ext = oriFileName.substring(oriFileName.lastIndexOf("."));
+	         String ext = ori_photo_name.substring(ori_photo_name.lastIndexOf("."));
 
-	         String newFileName = System.currentTimeMillis()+ext;
+	         String new_photo_name = System.currentTimeMillis()+ext;
 
 	         try {
 
 	            byte[] bytes = file.getBytes();
 
-	            Path path = Paths.get("C:/img/upload/" + newFileName);
+	            Path path = Paths.get("C:/img/upload/" + new_photo_name);
 	            	            	    
 	            Files.write(path, bytes);
 	            logger.info("a" +file);
 	            
-	            dao.noticeFileWrite(idx,oriFileName,newFileName);
+	            String board_class = "공지사항";
+	            
+	            dao.noticeFileWrite(id, board_num, board_class, ori_photo_name,new_photo_name);
 	            
 	            
 	         } catch (IOException e) {
@@ -96,7 +108,7 @@ public class NoticeService {
 		   return flag;
 		 }
 
-	   public NoticeDTO noticeDetail(String notice_idx, String flag) {
+	   public NoticeDTO noticeDetail(int notice_idx, String flag) {
 	      
 	      if(flag.equals("noticeDetail")) {
 	            // 조회수 증가
@@ -113,21 +125,20 @@ public class NoticeService {
 
 	   public void noticeDelete(String notice_idx) {
 	      
-	      String newFileName = dao.noticeFindFile(notice_idx);
+	      String new_photo_name = dao.noticeFindFile(notice_idx);
 	      
 	      int row = dao.noticeDelete(notice_idx);
 	            
 	      
-	      if (newFileName != null) {
+	      if (new_photo_name != null) {
 	         if (row>0) {
-	            File file = new File("C:/img/upload/"+ newFileName);
+	            File file = new File("C:/img/upload/"+ new_photo_name);
 	            if (file.exists()) {
 	               file.delete();
 	            }
 	         }
 	      }
-	      
-	      
+
 	   }
 
 	public ArrayList<NoticeDTO> noticeSearch(HashMap<String, String> params) {
@@ -175,26 +186,36 @@ public class NoticeService {
 		
 		map.put("noticePageList", noticePageList);
 		
+
 		return map;
 	}
 
-	public void deletePhoto(String photo_idx, String notice_idx) {
+	public void deletePhoto(String photoIdx, String notice_idx) {
 		
-		logger.info(photo_idx);
-		String newFileName = dao.noticeFindFile2(photo_idx);
+		logger.info(photoIdx);
+		String new_photo_name = dao.noticeFindFile2(photoIdx);
 		
-	    if (newFileName != null) {
+	    if (new_photo_name != null) {
 	        	
-	        File files = new File("C:/img/upload/" + newFileName);
+	        File files = new File("C:/img/upload/" + new_photo_name);
 	        if (files.exists()) {
 	        	logger.info("2");
 	            files.delete();
-	            dao.deletePhoto(photo_idx,notice_idx); // photo_idx 파라미터 사용
+	            dao.deletePhoto(photoIdx,notice_idx); // photo_idx 파라미터 사용
 	        }
 	        
 	    }
 	}
-	
+
+	public ArrayList<NoticeDTO> pro_select() {
+		return dao.pro_select();
+	}
+
+	public void noticeAlarm(String id_send, String id_receive, String alarm_title, String alarm_content,
+			String alarm_class, String alarm_num) {
+		dao.noticeAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);
+		
+	}
 
 
 

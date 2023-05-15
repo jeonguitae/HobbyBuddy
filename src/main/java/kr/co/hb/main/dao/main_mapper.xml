@@ -20,4 +20,5 @@
 		UPDATE member SET pw=#{param2} WHERE id=#{param1}
 	</update>
 
+
 </mapper>

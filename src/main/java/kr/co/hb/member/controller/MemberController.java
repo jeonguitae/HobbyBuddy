@@ -110,6 +110,8 @@ public class MemberController {
 		
 		String page = "redirect:/";
 		
+		
+		
 		if(session.getAttribute("loginId") != null) {
 			MemberDTO dto = service.myProPwUpdate(session.getAttribute("loginId"));			
 			session.setAttribute("pw", dto.getPw());			

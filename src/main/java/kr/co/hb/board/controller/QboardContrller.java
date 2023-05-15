@@ -2,6 +2,8 @@ package kr.co.hb.board.controller;
 
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 
 import kr.co.hb.board.dto.QboardDTO;
 import kr.co.hb.board.service.QboardService;
@@ -49,7 +53,7 @@ public class QboardContrller {
 	@RequestMapping(value = "/qboard_write.ajax",method = RequestMethod.POST)
 	// ajasx형태로 주고 받기 위해 작성
 	@ResponseBody
-	public HashMap<String, Object> join(MultipartFile photo ,@RequestParam HashMap<String, String> params){
+	public HashMap<String, Object> qboard_write(MultipartFile photo ,@RequestParam HashMap<String, String> params){
 		logger.info("정보들 컨트롤러에 도착 : {}", params);
 		
 		logger.info("parmas true + " + params.get("qboard_openchk"));
@@ -71,8 +75,15 @@ public class QboardContrller {
 	      return page;
 	   }
 	 @RequestMapping(value = "/qboardUpdate.do", method = RequestMethod.POST)
-	   public String qboardUpdate(MultipartFile photo,@RequestParam HashMap<String, String> params) {
+	   public String qboardUpdate(HttpSession session,Model model ,MultipartFile photo,@RequestParam HashMap<String, String> params) {
 	      
+		 if (params.get("qboard_title") != null) {
+			model.addAttribute("msg","문의 제목을 입력하세요.");
+		}else if (params.get("qboard_content") != null) {
+			model.addAttribute("msg","문의 내용을 입력하세요.");
+		}
+		 
+		 
 	      return service.qboardUpdate(photo,params);
 	   }
 	 
@@ -117,6 +128,21 @@ public class QboardContrller {
 		logger.info("여긴오나?");
 		
 	      return service.qBoard_replyWrite(params);
+	   }	
+	
+	@RequestMapping(value = "/qboardSecretSet.do")
+	   public String qboardSecretSet(Model model,@RequestParam HashMap<String, String> params) {
+	      		   
+		logger.info("컨트롤러");
+		
+		  String writer_id = params.get("writer_id");
+		  String admin_id = params.get("admin_id");
+		  String sboard_class = "고객센터";
+		  String sboard_title = params.get("sboard_title");
+		  String sboard_num = params.get("sboard_num");
+		
+		   service.qboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+	      return "redirect:/qboardList.go";
 	   }
 	   
 }

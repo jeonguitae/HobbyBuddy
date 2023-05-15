@@ -72,10 +72,9 @@ public class QboardService {
      }
 	
 	HashMap<String, Object> map = new HashMap<String, Object>();
-	
-	
-	
+		
 	map.put("success", row);
+	
 	
 	return map;
 	
@@ -137,7 +136,7 @@ public class QboardService {
 		ArrayList<QboardDTO> qboardPageList = dao.qboardPageList(cnt, offset);
 		
 		map.put("qboardPageList", qboardPageList);
-		
+
 		return map;
 	}
 
@@ -172,11 +171,13 @@ public class QboardService {
 		
 			int row = dao.replyWrite(params);
 			
+			
 			logger.info("row : " + row);
-		  
-	      
+		    
+		
 		    String page = row > 0 ? "redirect:/qboardList.go" : "redirect:/qboardDetail.go?qboard_no=" + board_num;
-            
+        
+		    
 	        return page;
 	}
 
@@ -194,7 +195,8 @@ public class QboardService {
 	            }
 	         }
 	      }
-		
+	      
+
 	}
 
 	public void deletePhoto(String photoIdx, String board_num) {
@@ -214,7 +216,14 @@ public class QboardService {
 		
 	}
 
-	
+	public void qboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
+			String sboard_num) {
+		
+		logger.info("서비스");
+		dao.qboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+		
+	}
+
 
 	
 

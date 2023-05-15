@@ -11,7 +11,7 @@ public interface SmallGroupDAO {
 
 	ArrayList<SmallGroupDTO> sglist(int gidx);
 
-	int sgjoin(int sidx, String id);
+	int sgjoin(int sidx, int gidx, String id);
 
 	ArrayList<SmallGroupDTO> sgjlist(int sidx);
 

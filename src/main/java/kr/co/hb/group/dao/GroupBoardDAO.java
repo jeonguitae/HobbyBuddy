@@ -31,11 +31,22 @@ public interface GroupBoardDAO {
 
 	void filesave(String id, String board_class, String ori_photo_name, String new_photo_name, int gidx);
 
-	void gdelete(int gidx);
+	void gpdelete(int gidx);
 
 	int hostchk(String loginId);
 
 	int host(String loginId, int gidx);
 
+	ArrayList<GroupBoardDTO> myGroupList(String loginId);
+
+	void gdelete(int gidx);
+
+	void delopenlist(int gidx);
+
+	void delchat(int gidx);
+
+	void delsgroup(int gidx);
+
+	void delsgmem(int gidx);
 
 }

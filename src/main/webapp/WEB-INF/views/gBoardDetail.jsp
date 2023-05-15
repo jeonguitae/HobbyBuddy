@@ -57,11 +57,11 @@
 				<td>${board.content}</td>
 			</tr>
 			<tr>
-				<td colspan="2">
+				<th colspan="2">
 				  <button onclick="location.href='gupdate.go?gidx=${board.gidx}&id=${board.id}'">수정하기</button>
-
 				  <button onclick="location.href='greport.go?gidx=${board.gidx}'">신고하기</button>
-				</td>
+				  <button class="delete" onclick="location.href='gdelete.do?gidx=${board.gidx}&id=${board.id}'">삭제하기</button>
+				</th>
 			</tr>
 			<tr>
 				<th colspan="2">

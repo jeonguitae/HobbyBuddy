@@ -19,6 +19,7 @@ public class AlarmService {
 	
 	public ArrayList<AlarmDTO> alarmList(String id_receive) {
 		logger.info("service alarmList");
+		
 		return dao.alarmList(id_receive);
 	}
 
