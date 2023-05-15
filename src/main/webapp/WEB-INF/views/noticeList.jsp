@@ -170,6 +170,7 @@ function listPrint(list) {
 	      var date = new Date(item.notice_date);
 	      content += '<td>' + date.toLocaleDateString('ko-KR') + '</td>';
 	      content += '<td>' + item.notice_bHit + '</td>';
+	      
 	      content += '<td id="secret">' + (item.notice_chk ? '공개' : '비공개') + '</td>';
 	      content += '</tr>';
 	   });

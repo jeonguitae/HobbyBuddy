@@ -22,8 +22,8 @@
 			<col width="20%"/>
 			<col width="20%"/>
 			<col width="40%"/>
-			<col width="20%"/>
-
+			<col width="10%"/>
+			<col width="10%"/>
 		</colgroup>
 		<thead>
 			<tr>
@@ -31,12 +31,13 @@
 				<th>알림 제목</th>
 				<th>알림 내용</th>
 				<th>게시판, 번호</th>
+				<th>날짜/시간</th>
 			</tr>
 		</thead>		
 		<tbody>
 			<c:if test="${alarmList eq null}">
 				<tr>
-					<th colspan="4">알림이 없습니다.</th>
+					<th colspan="5">알림이 없습니다.</th>
 				</tr>
 			</c:if>
 						
@@ -46,6 +47,7 @@
 					<td><a href="fdetail.do?fbNo=${alarmList.alarm_num}">${alarmList.alarm_title}</a></td>
 					<td>${alarmList.alarm_content}</td>
 					<td>${alarmList.alarm_class}, ${alarmList.alarm_num}</td>
+					<td>${alarmList.alarm_time}</td>
 				</tr>
 				
 			</c:forEach>
