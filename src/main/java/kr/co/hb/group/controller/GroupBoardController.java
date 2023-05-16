@@ -162,18 +162,25 @@ public class GroupBoardController {
 	public String gdetail(Model model, @RequestParam int gidx, HttpSession session) {
 		String page = "";
 		session.setAttribute("gidx", gidx);
-		
 		logger.info("idx : " + gidx);
-		GroupBoardDTO dto = service.gdetail(gidx, "detail");
 		
+		GroupBoardDTO dto = null;
+		
+		dto = service.gdetail(gidx, "detail");
+		if(dto == null) {
+
+				dto = service.gdetail1(gidx, "detail");	
+			
+		}
 		if (dto != null) {
-			model.addAttribute("board", dto);
 			page = "redirect:/gdetail.do?gidx="+gidx;
 		}
 		
 		if (session.getAttribute("loginId")==null) {
 			page = "gBoardList";
 		}
+		
+		model.addAttribute("board", dto);
 		
 		session.setAttribute("gidx", gidx);
 		
@@ -183,7 +190,7 @@ public class GroupBoardController {
 		
 		session.removeAttribute("msg");
 		
-		return "gBoardDetail";
+		return page;
 	}
 
 	@RequestMapping(value="/gserch.do")
