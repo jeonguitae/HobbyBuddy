@@ -23,6 +23,7 @@
 
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
      <!-- <form action="myp.do" method="post"> -->
       <table>
       
@@ -119,14 +120,9 @@ if(msg != ""){
 	$('input[name="bmarkdo"]').click(function(){
 		console.log("즐겨찾기 추가하고 싶은 건 맞아?");
 		alert('즐겨찾기에 추가되었습니다.');
-	}
+	})
 	
 	var adminChk = "${sessionScope.adminChk}";
-
-
-
-
-   var adminChk = "${sessionScope.adminChk}";
    
    if (adminChk == '1') {
 	   $('#admin').css('display', 'block');

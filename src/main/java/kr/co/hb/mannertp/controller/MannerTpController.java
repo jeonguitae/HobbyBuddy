@@ -72,9 +72,9 @@ public class MannerTpController {
 			}			
 			
 		}
-		model.addAttribute("msg",msg);
-		rservice.detail(id_receive,model);
 		
-		return "prodetail";
+		rservice.detail(id_receive,model);
+		model.addAttribute("msg",msg);
+		return "proDetail";
 	}
 }
