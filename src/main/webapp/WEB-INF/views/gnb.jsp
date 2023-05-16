@@ -91,7 +91,7 @@
 <body>
 	${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 <br/><br/>
 	
-	<a href="./"><img width="100" src="/photo/HBL.png"/></a>
+	<a href="./"><img width="150" src="/photo/HBL.png"/></a>
 	<br/><br/><br/>
 	
 	<div class="menu">
