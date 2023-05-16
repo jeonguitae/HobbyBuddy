@@ -60,7 +60,7 @@
 		h.photoIdx,
 		h.new_photo_name FROM fBoard f
 		LEFT JOIN hbPhoto h ON f.fbNo =
-		h.board_num WHERE f.fbNo = #{fbNo}
+		h.board_num WHERE f.fbNo = #{fbNo} AND h.board_class="자유"
 	</select>
 
 	<delete id="fdelete">
@@ -104,8 +104,8 @@
 		VALUES(#{param2},#{param1})
 	</insert>
 
-	<select id="bmarklist" resultType="int">
-		SELECT * FROM bmark where myid=#{param1}
+	<select id="bmarklist" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT * FROM bmark where myid=#{param1} 
 	</select>
 
 	<select id="bmarkch" resultType="int">
@@ -120,7 +120,7 @@
 	
 	<select id="bmarkselect" resultType="kr.co.hb.board.dto.BoardDTO">
 		SELECT m.id ,m.name, m.age, m.area, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
-		WHERE m.id IN(SELECT memid FROM bmark WHERE myid = #{param1)
+		WHERE m.id IN(SELECT memid FROM bmark WHERE myid = #{param1})group by m.id
 		
 	</select>
 

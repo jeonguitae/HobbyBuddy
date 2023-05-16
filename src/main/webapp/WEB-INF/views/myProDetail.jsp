@@ -200,7 +200,7 @@
 			
 			
 			
-			if(data.gender == '남'){
+			if(data.gender == '남성'){
 				//attr : 정지된 속성
 				//prop : 동적인 속성(만들어진 요소)
 				$('#male').prop('checked',true);

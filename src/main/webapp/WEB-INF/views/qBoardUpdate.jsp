@@ -44,6 +44,7 @@
 </style>
 </head>
 <body>
+<jsp:include page="gnb.jsp"/>
    <h3 align="center">문의 내역 상세</h3>
    	<form action="qboardUpdate.do" method="post" enctype="multipart/form-data">
       <input type="hidden" name="qboard_no" value="${dto.qboard_no}"/>
