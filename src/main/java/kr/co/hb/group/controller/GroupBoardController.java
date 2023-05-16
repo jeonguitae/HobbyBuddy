@@ -24,6 +24,7 @@ import kr.co.hb.group.service.GroupBoardService;
 import kr.co.hb.group.service.OpenChatService;
 import kr.co.hb.member.dto.MemberDTO;
 import kr.co.hb.member.service.MemberService;
+import kr.co.hb.message.dto.MessageDTO;
 
 @Controller
 public class GroupBoardController {
@@ -60,16 +61,41 @@ public class GroupBoardController {
 		return "gBoardList";
 	}
 	
+	/*
+	 * @RequestMapping(value="/gsorting.do") public String sorting(Model
+	 * model, @RequestParam HashMap<String, String> params) {
+	 * 
+	 * logger.info("검색 조건 : " + params);
+	 * 
+	 * ArrayList<MemberDTO> big_hb = mservice.big_hb(); logger.info("big_hb : " +
+	 * big_hb); model.addAttribute("big_hb",big_hb);
+	 * 
+	 * ArrayList<GroupBoardDTO> list = service.gsorting(params);
+	 * 
+	 * model.addAttribute("list", list);
+	 * 
+	 * return "gBoardList"; }
+	 */
+	
 	@RequestMapping(value="/gsorting.do")
-	public String sorting(Model model, @RequestParam HashMap<String, String> params) {		
-				
-		logger.info("검색 조건 : " + params);
+	public String sorting(@RequestParam(value = "big_hb", required = false) String bigHb,
+            @RequestParam(value = "small_hb", required = false) String smallHb,
+            @RequestParam(value = "gender", required = false) String gender,
+            @RequestParam(value = "city", required = false) String city,
+            @RequestParam(value = "area", required = false) String area,
+            @RequestParam(value = "meeting_date", required = false) String meetingDate,
+            Model model) {		
 		
 		ArrayList<MemberDTO> big_hb = mservice.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
 		
-		ArrayList<GroupBoardDTO> list = service.gsorting(params);
+		ArrayList<GroupBoardDTO> list = service.gsorting(("".equals(bigHb) ? null : bigHb),
+                ("".equals(smallHb) ? null : smallHb),
+                ("".equals(gender) ? null : gender),
+                ("".equals(city) ? null : city),
+                ("".equals(area) ? null : area),
+                ("".equals(meetingDate) ? null : meetingDate));
 		
 		model.addAttribute("list", list);
 		
@@ -150,6 +176,12 @@ public class GroupBoardController {
 		
 		session.setAttribute("gidx", gidx);
 		
+		String msg = (String) session.getAttribute("msg");
+		
+		model.addAttribute("msg", msg);
+		
+		session.removeAttribute("msg");
+		
 		return "gBoardDetail";
 	}
 
@@ -205,11 +237,26 @@ public class GroupBoardController {
 		return service.gupdate(photo, params);
 	}
 	
-	@RequestMapping(value="/greport.go")
-	public String greList(Model model) {
+	@RequestMapping(value = "/greport.go", method = RequestMethod.GET)
+	public String msgReport(HttpSession session, Model model, @RequestParam int gidx, @RequestParam String id_send, @RequestParam String content) {
+		model.addAttribute("gidx", gidx);
+		model.addAttribute("id_send", id_send);
+		model.addAttribute("content", content);
 		
-		logger.info("start");
-		return "reportCreate";
+		return "reportGroup";
+	}
+	
+	@RequestMapping(value="/reportGroup.do")
+	public String reportGroupDo(@RequestParam HashMap<String, String> params, HttpSession session, Model model) {
+		logger.info("report param ? " + params);
+		int row = service.reportGroupDo(params);
+		String msg = "";
+		if(row == 1) {
+			msg = "신고가 완료되었습니다.";
+		}
+		session.setAttribute("msg", msg);
+		
+		return "redirect:/glist.go";
 	}
 	
 	@RequestMapping(value="gPhotodel.do")
@@ -234,9 +281,9 @@ public class GroupBoardController {
 	@RequestMapping(value="gdelete.do")
 	public String gdelete(@RequestParam HashMap<String, String> params, HttpSession session) {
 		String msg = "모임 생성자만 삭제 가능합니다";
-		
 		String id = params.get("id");
 		int gidx = Integer.parseInt(params.get("gidx"));
+		String page = "redirect:/gdetail.do?gidx=" + gidx;
 		
 		if(id.equals(session.getAttribute("loginId"))) {
 			
@@ -247,13 +294,15 @@ public class GroupBoardController {
 			
 			service.gdelete(gidx);
 			
+			page = "redirect:/glist.go";
+			
 			msg = "삭제완료";
 			
 		}
 		
 		session.setAttribute("msg", msg);
 		
-		return "redirect:/glist.go";
+		return page;
 	}
 	
 	@RequestMapping(value="/sportglist.go")

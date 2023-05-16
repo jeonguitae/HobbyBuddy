@@ -29,10 +29,9 @@ public class OpenChatController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping (value={"/openchat.go", "/listmsg.go"})
-	public String openchatForm(Model model, HttpSession session, HttpServletRequest req) {		
+	public String openchatForm(Model model, @RequestParam int gidx, HttpSession session, HttpServletRequest req) {		
 		
 		String loginId = (String)session.getAttribute("loginId");
-		int gidx = (int) session.getAttribute("gidx");
 		String page = "openChat";
 		
 		String uri = req.getRequestURI();
