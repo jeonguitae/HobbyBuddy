@@ -52,7 +52,7 @@ public interface BoardDAO {
 
 	int bmarkch(String memid, String myid);
 
-	int bmarklist(String id);
+	ArrayList<BoardDTO> bmarklist(String id);
 
 	ArrayList<BoardDTO> bmarkselect(String id);
 

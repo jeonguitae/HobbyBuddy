@@ -49,7 +49,7 @@
       <table>
          <tr>
             <th>신고 번호</th>
-            <td><a href="fdetail.do?fbNo=${dto.reptboard_num}">${dto.rept_no}</a></td>           
+            <td><a href="fdetail.do?fbNo=${dto.reptboard_num}&rept_no=${dto.rept_no}">${dto.rept_no}</a></td>           
          </tr>
          <tr>
             <th>피신고자 아이디</th>

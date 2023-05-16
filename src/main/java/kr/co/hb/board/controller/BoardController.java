@@ -172,10 +172,10 @@ public class BoardController {
 	public String bmarkgo(HttpSession session, Model model) {
 		logger.info("즐겨찾기로 이동 얍");
 		String id = (String) session.getAttribute("loginId");
-		int row =service.bmarklist(id);
-		logger.info("짜증나게 하네 진짜"+row);
+		ArrayList<BoardDTO> dto=service.bmarklist(id);
+		logger.info("짜증나게 하네 진짜");
 		
-		if (row==0) {
+		if (dto!=null) {
 			String msg = "즐겨찾기된 회원이 없습니다. 프로필 목록에서 즐겨찾기 해보세요.";
 		}
 		ArrayList<BoardDTO> bmarklist= service.bmarkselect(id);

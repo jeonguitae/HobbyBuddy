@@ -61,9 +61,9 @@ public class NoticeService {
 	      
 	      String id = dto.getId();
 	      
-	      if (!photo.getOriginalFilename().equals("")) {
-	         noticeFileSave(id, board_num, photo);
-	      }
+	      if (photo != null && !photo.getOriginalFilename().equals("")) {
+	    	   noticeFileSave(id, board_num, photo);
+	    	}
 	
 	      
 	      return page;
@@ -161,7 +161,7 @@ public class NoticeService {
 		return list;
 	}
 
-	public HashMap<String, Object> noticePageList(int page, int cnt, String search) {
+	public HashMap<String, Object> noticePageList(int page, String search) {
 		
 		
 	 logger.info("서비스");
@@ -171,7 +171,7 @@ public class NoticeService {
 		// 2page = offset : offset + 5
 		// 3page = offset : 10
 		
-		int offset = (page - 1) * cnt;
+		int offset = (page - 1) * 10;
 		
 		// 만들 수 있는 총 페이지 수 
 		// 전체 게시물 / 페이지 당 보여줄 수 
@@ -188,15 +188,15 @@ public class NoticeService {
 	      };	
 		
 		
-		int range = total%cnt == 0 ? total/cnt : (total/cnt) + 1;
+		int range = total%10 == 0 ? total/10 : (total/10) + 1;
 		
 		
 		page = page > range ? range : page;
 		
-		ArrayList<NoticeDTO> nolist = dao.nolist(cnt, offset);
+		ArrayList<NoticeDTO> nolist = dao.nolist(10, offset);
 		
 		if (search.equals("default") || search.equals("")) {
-			nolist = dao.nolist(cnt, offset);
+			nolist = dao.nolist(10, offset);
 			logger.info("서비스3");
 	         
 	      } else {

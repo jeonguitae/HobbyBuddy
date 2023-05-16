@@ -219,7 +219,7 @@ public class BoardService {
 		return dao.bmarkch(memid, myid);
 	}
 
-	public int bmarklist(String id) {
+	public ArrayList<BoardDTO> bmarklist(String id) {
 		logger.info("bmarklist왔음");
 		return dao.bmarklist(id);
 	}
