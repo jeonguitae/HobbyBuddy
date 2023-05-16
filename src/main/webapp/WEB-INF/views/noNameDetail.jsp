@@ -61,7 +61,7 @@
       </table>
       
       <br/>
-      <div id="admin">
+<%--       <div id="admin">
       <table>
       	<tr>
       		<th>정지 상태</th>
@@ -77,21 +77,21 @@
       		<td>&nbsp;&nbsp;${member.random}&nbsp;&nbsp;</td>
       		<td><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>         
       	</tr>
-      </table>
+      </table> --%>
 	</div>
    </form>
 </body>
 
 <script>
 
-	var adminChk = "${sessionScope.adminChk}";
+/* 	var adminChk = "${sessionScope.adminChk}";
 	
 	
 	if (adminChk === 'true') {
 	    document.getElementById('admin').style.display = 'block';
 	} else {
 	    document.getElementById('admin').style.display = 'none';
-	}
+	} */
 	
 	var member_id = "${member.id}";
 	HobbyList();

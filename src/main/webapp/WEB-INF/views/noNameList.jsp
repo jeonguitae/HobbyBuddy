@@ -167,10 +167,10 @@
 </body>
 <script>
 	
-	function openPopup(memberId) {
+/* 	function openPopup(memberId) {
 	    var url = 'nodetail.do?id=' + memberId;
 	    window.open(url, '_blank', 'width=1000,height=700');
-	  }
+	  } */
 		
 		
 	var msg = "${msg}";

@@ -155,7 +155,6 @@ public class RandomController {
 			
 		String page = "redirect:/list.do";
 		
-		logger.info("취미 등록 페이지 이동");
 		ArrayList<MemberDTO> big_hb = service2.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
