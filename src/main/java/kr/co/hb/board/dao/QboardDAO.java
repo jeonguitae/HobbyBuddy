@@ -34,5 +34,7 @@ public interface QboardDAO {
 
 	void secretUpdate(String sboard_class, String sboard_num);
 
+	QboardDTO qboardDetail2(String qboard_no);
+
 	
 }

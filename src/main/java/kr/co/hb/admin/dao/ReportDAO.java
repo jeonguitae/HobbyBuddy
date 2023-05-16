@@ -37,5 +37,29 @@ public interface ReportDAO {
 
 	int reportComentdo(HashMap<String, String> params);
 
+	int profileTotalCount();
+
+	int ptotalCountSearch(String search);
+
+	ArrayList<ReportDTO> report_profileList(int cnt, int offset);
+
+	int msgTotalCount();
+
+	ArrayList<ReportDTO> report_msgList(int cnt, int offset);
+
+	int msgTotalCountSearch(String search);
+
+	ArrayList<ReportDTO> profileSearch(String search);
+
+	int fTotalCount();
+
+	ArrayList<ReportDTO> fboardSearch(String search);
+
+	int gTotalCount();
+
+	int gTotalCountSearch(String search);
+
+	ArrayList<ReportDTO> msgSearch(String search);
+
 
 }

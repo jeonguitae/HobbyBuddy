@@ -45,34 +45,44 @@ public class ReportController {
 		return "report_gboardList";
 	}
 	
-	@RequestMapping(value = "/report_msg_profileList.ajax", method = RequestMethod.POST)
+	@RequestMapping(value = "/profileList.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> reportList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String search			
 			){
 		
-		return service.report_msg_profileList(Integer.parseInt(page), Integer.parseInt(cnt));
+		return service.report_profileList(Integer.parseInt(page), search);
+	}	
+	
+	@RequestMapping(value = "/msgList.ajax", method = RequestMethod.POST)
+	@ResponseBody
+	public HashMap<String, Object> reportmsgList(
+			@RequestParam String page,
+			@RequestParam String search			
+			){
+		
+		return service.report_msgList(Integer.parseInt(page), search);
 	}	
 	
 	@RequestMapping(value = "/report_fboardList.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> report_fboardList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String search			
 			){
 		
-		return service.report_fboardList(Integer.parseInt(page), Integer.parseInt(cnt));
+		return service.report_fboardList(Integer.parseInt(page), search);
 	}	
 	
 	@RequestMapping(value = "/report_gboardList.ajax", method = RequestMethod.POST)
 	@ResponseBody
 	public HashMap<String, Object> report_gboardList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String search			
 			){
 		
-		return service.report_gboardList(Integer.parseInt(page), Integer.parseInt(cnt));
+		return service.report_gboardList(Integer.parseInt(page), search);
 	}	
 	
 	@RequestMapping(value = "/report_msg_profileDetail.go")

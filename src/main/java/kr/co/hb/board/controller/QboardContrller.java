@@ -66,6 +66,11 @@ public class QboardContrller {
 	      String page = "redirect:/qboardList.go";
 	      
 	      QboardDTO dto = service.qboardDetail(qboard_no);
+	      
+	      if(dto == null) {
+	    	  
+	    	  dto = service.qboardDetail2(qboard_no);
+	      }
 	
 	      if (dto != null) {
 	         page = "qBoardDetail";
