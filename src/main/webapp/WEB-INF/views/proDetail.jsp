@@ -111,6 +111,10 @@
 </body>
 
 <script>
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
 
 	$('input[name="bmarkdo"]').click(function(){
 		console.log("즐겨찾기 추가하고 싶은 건 맞아?");
@@ -120,10 +124,7 @@
 	var adminChk = "${sessionScope.adminChk}";
 
 
-var msg = "${msg}";
-if(msg != ""){
-	alert(msg);
-}
+
 
    var adminChk = "${sessionScope.adminChk}";
    

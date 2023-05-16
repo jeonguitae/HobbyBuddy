@@ -51,6 +51,10 @@
 	var msg = "${msg}";
 	if(msg != ""){
 		alert(msg);
+		window.opener = self;
+		window.close();
+		alert("쪽지를 보냈습니다.");
+		return true;
 	}
 </script>
 </html>
