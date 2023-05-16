@@ -6,35 +6,50 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
-	table, th, td{
-		border : 1px solid black;
-		border-collapse: collapse;
-		padding : 5px 10px;
-	}
-
 </style>
-
 </head>
 <body>
-	<form action="report.do" method="post">
+	<jsp:include page="gnb.jsp"/>
+	<h3>프로필 신고하기</h3>
+	<form action="report.do" method="get" onsubmit="closePopup()">
 		<table>
 			<tr>
-				<th>신고 대상 아이디</th>
-				<td>reprotMsg.jsp로 신고해주세요~</td>
+				<th>신고 아이디</th>
+				<td><input type="text" name="reporter" value="${id}" readonly/></td>
+			</tr>
 			<tr>
-				<th>사진<th>
-						
+				<th>내 아이디</th>
+				<td><input type="text" name="preporter" value="${sessionScope.loginId}" readonly/></td>
+			</tr>
+			<tr>
+				<th>분류</th>
+				<td><input type="text" name="reptboard_class" value="프로필" readonly></td>
+			</tr>
+			<tr>
+				<th>번호</th>
+				<td><input type="text" name="reptboard_num" value="0" readonly></td>
 			</tr>			
 			<tr>
-				<th colspan="2">
-					<input type="button" onclick="location.href='./'" value="신고등록"/>
-					<input type="button" onclick="location.href='./'" value="취소"/>
-				</th>
+				<th>신고 내용</th>
+				<td><input type="text" name="rept_content" value="프로필 부적절" readonly></td>
 			</tr>
-		</table>	
+			<tr>
+				<th>신고 제목(사유)</th>
+				<td><input type="text" name="rept_title" value=""></td>
+			</tr>
+			<tr>
+				<th>신고 하기</th>
+				<td><button>신고 하기</button></td>
+			</tr>
+		</table>
 	</form>
 </body>
 <script>
-
+function closePopup() {
+    window.opener = self;
+    window.close();
+    alert("신고가 완료되었습니다.");
+    return true;
+  }
 </script>
 </html>

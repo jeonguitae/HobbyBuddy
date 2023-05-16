@@ -75,5 +75,21 @@ public class RandomService {
 		return list;
 	}
 
+	public int reList(HashMap<String, String> params) {
+		return dao.reList(params);
+	}
+
+	public int banupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.banupdate(id);
+	}
+
+	public int adminupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.adminupdate(id);
+	}
+
+
+
 
 }

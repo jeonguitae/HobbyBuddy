@@ -24,6 +24,12 @@ public interface RandomDAO {
 
 	ArrayList<RandomDTO> pnsearch(HashMap<String, String> params);
 
+	int reList(HashMap<String, String> params);
+
+	int banupdate(String id);
+
+	int adminupdate(String id);
+
 
 
 

@@ -4,6 +4,10 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
 import kr.co.hb.group.dto.GroupBoardDTO;
@@ -120,22 +125,33 @@ public class RandomController {
 	}
 	
 	@RequestMapping(value="/report.go")
-	public String reList(Model model) {		
+	public String reList(Model model, @RequestParam String id) {		
 		logger.info("start");
+		
+		model.addAttribute("id",id);
 		return "reportCreate";
 	}
 	
 	@RequestMapping(value="/report.do")
 	public String reportList(Model model, @RequestParam HashMap<String, String> params) {	
 		
+		int row = Service.reList(params);
+		
+		String msg = "";
+	      if(row == 1) {
+	         msg = "신고가 완료되었습니다.";
+	      }
+	      model.addAttribute("msg",msg);
+		
+		
 		ArrayList<RandomDTO> list = Service.profileList(params);
 		logger.info("검색 조건 : " + params);
 		model.addAttribute("list",list);
-		return "reportList";
+		return "proList";
 	}
 	
 	@RequestMapping(value = "/detail.do", method = RequestMethod.GET)
-	public String detail(@RequestParam String id,Model model) {
+	public String detail(@RequestParam String id,Model model ) {
 			
 		String page = "redirect:/list.do";
 		
@@ -153,6 +169,7 @@ public class RandomController {
 			model.addAttribute("member",dto);
 			model.addAttribute("photo",photo);
 		}
+		
 		return "proDetail";
 	}
 	
@@ -169,9 +186,16 @@ public class RandomController {
 		}
 		return "noNameDetail";
 	}
-	
+		
+		@RequestMapping(value="/banupdate.do", method = RequestMethod.GET)
+			public String banupdate(@RequestParam String id, Model model) {
+			int row = Service.banupdate(id);
+			return "redirect:/detail.do?id=" + id;
+		}
 
-	
-
-	
+		@RequestMapping(value="/adminupdate.do", method = RequestMethod.GET)
+		public String adminupdate(@RequestParam String id, Model model) {
+		int row = Service.adminupdate(id);
+		return "redirect:/detail.do?id=" + id;
+	}
 }

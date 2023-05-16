@@ -14,25 +14,13 @@
       padding: 5px 10px;
 
    }
-/*    
-   .m{
-  background-color: navy;
-  color: #ffffff;
-   }
-    */
    
 </style>
 
 </head>
 <body>
-   <%-- <jsp:include page="gnb.jsp"/> --%>
      <form action="myp.do" method="post">
       <table>
-<%--       <colgroup>
-         <col width="50%"/>
-         <col width="20%"/>
-         <col width="30%"/>
-      </colgroup> --%>
       
          <tr>
             <th rowspan="9">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -75,33 +63,34 @@
                <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=minus'"/>
                <input type="button" value="매너온도 삭제" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=del'"/>
             </td>
-         </tr>
+      	</tr>
          <tr>
             <th colspan="3">
                <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>  
                <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
-               <input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
+               <input type="button" value="프로필 신고" onclick="location.href='report.go?id=${member.id}'"/>
 <!--                <input type="button" value="뒤로가기" onclick="redirect:/profile.go"/> -->
             </th>
          </tr>
-      </table>
-      
+     		 </table>
+        
+     
       <br/>
       <div id = "admin">
       <table>
          <tr>
             <th>정지 상태</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.ban}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="button" value="정지"/></td>
+            <td rowspan="2"><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>         
          </tr>
          <tr>
             <th>경고 당한 횟수</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="button" value="경고"/> </td>
+            <td>&nbsp;&nbsp;${member.warning}&nbsp;&nbsp;</td>
          </tr>
          <tr>
             <th>랜덤매칭 동의 여부</th>
             <td>&nbsp;&nbsp;${member.random}&nbsp;&nbsp;</td>
+            <td rowspan="2"><input type="button" value=관리자 설정 onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
          </tr>
          <tr>
             <th>현재 방 생성 갯수</th>
@@ -110,13 +99,19 @@
          
       </table>
 </div>
-   </form>
+ </form>
 </body>
 
 <script>
 
-   var adminChk = "${sessionScope.adminChk}";
 
+
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
+
+   var adminChk = "${sessionScope.adminChk}";
    
    if (adminChk === 'true') {
         document.getElementById('admin').style.display = 'block';
@@ -125,10 +120,6 @@
     }
 
 
-   var msg = "${msg}";
-   if(msg!=""){
-      alert(msg);
-   }
    
    
    var member_id = "${member.id}";
