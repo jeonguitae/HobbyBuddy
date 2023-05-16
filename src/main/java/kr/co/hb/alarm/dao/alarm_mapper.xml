@@ -6,7 +6,7 @@
 <mapper namespace="kr.co.hb.alarm.dao.AlarmDAO">
 
 	<select id="alarmList" resultType="kr.co.hb.alarm.dto.AlarmDTO">
-		SELECT * FROM alarm_list WHERE id_receive = #{param1}
+		SELECT * FROM alarm_list WHERE id_receive = #{param1} order by alarm_time desc
 	</select>
 
 	<select id="alarmCount" resultType="int">
@@ -14,7 +14,7 @@
 	</select>
 	
 	<select id="beforeAlarm" resultType="kr.co.hb.alarm.dto.AlarmDTO">
-		SELECT * FROM read_alarm_list WHERE id_receive = #{param1}
+		SELECT * FROM read_alarm_list WHERE id_receive = #{param1} order by alarm_time desc
 	</select>	
 	
 	

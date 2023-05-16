@@ -5,24 +5,25 @@
 <mapper namespace="kr.co.hb.board.dao.RandomDAO">
 
 	<select id="plist" resultType="kr.co.hb.board.dto.RandomDTO">
-		SELECT m.id ,m.name, m.mannertp ,m.age, m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id group by m.id
+		SELECT m.id ,m.name, m.mannertp ,m.age, m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id WHERE ban = false
+		group by m.id
 	</select>
 
 	<select id="profileList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
-		WHERE big_hb = #{big_hb} AND small_hb = #{small_hb} AND city=#{city} AND area=#{area} AND age between #{minage} AND #{maxage} 
+		WHERE ban = false AND big_hb = #{big_hb} AND small_hb = #{small_hb} AND city=#{city} AND area=#{area} AND age between #{minage} AND #{maxage} 
 		AND((gender = #{gender} AND gender != '성별 무관')
 		    OR (gender IN ('남성', '여성') AND #{gender} = '성별 무관'))
 	</select>
 	
 	<select id="pisearch" resultType="kr.co.hb.board.dto.RandomDTO">
 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
-		WHERE m.id LIKE #{search}
+		WHERE m.id LIKE #{search}  AND ban = false
 	</select>
 	
 	<select id="pnsearch" resultType="kr.co.hb.board.dto.RandomDTO">
 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
-		WHERE m.name LIKE #{search}
+		WHERE m.name LIKE #{search}  AND ban = false
 	</select>
 	
 	<select id="randomList" parameterType="hashmap" resultType="kr.co.hb.board.dto.RandomDTO">
@@ -33,7 +34,7 @@
 		WHERE ((big_hb = #{big_hb1} AND small_hb = #{small_hb1})
 		        OR (big_hb = #{big_hb2} AND small_hb = #{small_hb2})
 		        OR (big_hb = #{big_hb3} AND small_hb = #{small_hb3}))
-		    	AND city = #{city} AND area = #{area} 
+		    	AND city = #{city} AND area = #{area} AND ban = false AND random = true
 		    	AND((gender = #{gender} AND gender != '성별 무관')
 		    	OR (gender IN ('남성', '여성') AND #{gender} = '성별 무관'))
 		    	ORDER BY RAND() LIMIT 5
@@ -44,7 +45,7 @@
 		WHERE ((big_hb = #{big_hb1} AND small_hb = #{small_hb1})
 		        OR (big_hb = #{big_hb2} AND small_hb = #{small_hb2})
 		        OR (big_hb = #{big_hb3} AND small_hb = #{small_hb3}))
-		    	AND city = #{city} AND area = #{area} 
+		    	AND city = #{city} AND area = #{area} AND ban = false AND random = true
 		    	AND((gender = #{gender} AND gender != '성별 무관')
 		    	OR (gender IN ('남성', '여성') AND #{gender} = '성별 무관'))
 		    	ORDER BY RAND() LIMIT 5
@@ -61,5 +62,19 @@
 	<select id="proPhotoList" resultType="kr.co.hb.board.dto.RandomDTO"> 
 		SELECT * FROM hbPhoto WHERE id = #{param1} and board_class = #{param2}
 	</select>
+	
+	<insert id="reList" parameterType="hashmap">
+      insert into report (reporter,preporter,reptboard_class,reptboard_num,rept_title,rept_content)
+       values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
+   	</insert>
+   
+   	<update id="banupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
+   		Update member Set ban = true Where id = #{param1}
+   	</update>
+   	
+   	<update id="adminupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
+   		Update member Set admin = true Where id = #{param1}
+   	</update>
+   
 	
 </mapper>

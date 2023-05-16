@@ -121,14 +121,7 @@ public class QboardContrller {
 				   
 	       return "redirect:/qboardUpdate.go?qboard_no=" + qboard_no;
 	       
-	}
-	@RequestMapping(value = "/qBoard_replyWrite.do")  
-	public String qBoard_replyWrite(@RequestParam HashMap<String, String> params) {
-	      
-		logger.info("여긴오나?");
-		
-	      return service.qBoard_replyWrite(params);
-	   }	
+	}	
 	
 	@RequestMapping(value = "/qboardSecretSet.do")
 	   public String qboardSecretSet(Model model,@RequestParam HashMap<String, String> params) {
@@ -142,7 +135,16 @@ public class QboardContrller {
 		  String sboard_num = params.get("sboard_num");
 		
 		   service.qboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+		   
+		   
 	      return "redirect:/qboardList.go";
 	   }
 	   
+    @RequestMapping(value = "/qBoard_replyWrite.do")  
+    public String qBoard_replyWrite(@RequestParam HashMap<String, String> params) {
+          
+        logger.info("여긴오나?");
+        
+          return service.qBoard_replyWrite(params);
+       }
 }

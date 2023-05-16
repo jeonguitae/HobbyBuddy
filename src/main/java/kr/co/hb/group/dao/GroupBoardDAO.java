@@ -49,4 +49,19 @@ public interface GroupBoardDAO {
 
 	void delsgmem(int gidx);
 
+	ArrayList<GroupBoardDTO> sportglist();
+
+	ArrayList<GroupBoardDTO> petglist();
+
+	ArrayList<GroupBoardDTO> foodglist();
+
+	ArrayList<GroupBoardDTO> leisureglist();
+
+	ArrayList<GroupBoardDTO> etcglist();
+
+	int reportGroupDo(HashMap<String, String> params);
+
+	ArrayList<GroupBoardDTO> gsorting(String bigHb, String smallHb, String gender, String city, String area,
+			String meetingDate);
+
 }

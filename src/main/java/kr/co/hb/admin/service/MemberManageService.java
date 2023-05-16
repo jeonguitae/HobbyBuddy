@@ -23,11 +23,9 @@ public class MemberManageService {
 		return dao.alist();
 	}
 	
-	public ArrayList<MemberManageDTO> memberList(HashMap<String, String> params) {
+	public ArrayList<MemberManageDTO> memberList() {
 		
-		logger.info("검색 조건 : " + params);
-		
-		return dao.memberList(params);
+		return dao.memberList();
 	}
 
 	public ArrayList<RandomDTO> msearch(HashMap<String, String> params) {
@@ -61,6 +59,16 @@ public class MemberManageService {
 		logger.info("검색 조건 : " + id + " / " + Board_class);
 		return dao.proPhotoList(id, Board_class);
 	}
+
+	public ArrayList<MemberManageDTO> adminList() {
+		
+		return dao.adminList();
+	}
+
+	public ArrayList<MemberManageDTO> mList() {
+		return dao.mList();
+	}
+
 
 
 	

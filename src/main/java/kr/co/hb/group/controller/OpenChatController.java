@@ -29,10 +29,9 @@ public class OpenChatController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@RequestMapping (value={"/openchat.go", "/listmsg.go"})
-	public String openchatForm(Model model, HttpSession session, HttpServletRequest req) {		
+	public String openchatForm(Model model, @RequestParam int gidx, HttpSession session, HttpServletRequest req) {		
 		
 		String loginId = (String)session.getAttribute("loginId");
-		int gidx = (int) session.getAttribute("gidx");
 		String page = "openChat";
 		
 		String uri = req.getRequestURI();
@@ -76,7 +75,7 @@ public class OpenChatController {
 		logger.info("openminage : " + openminage);
 		logger.info("openmaxage : " + openmaxage);
 		
-		boolean agechkin = memage > openminage && memage < openmaxage;
+		boolean agechkin = memage >= openminage && memage <= openmaxage;
 		boolean mannerchkin = memmannertp >= openmannertp;
 		logger.info("agechkin : " + agechkin);
 		logger.info("mannerchkin : " + mannerchkin);

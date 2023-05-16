@@ -59,8 +59,8 @@
 			<tr>
 				<th colspan="2">
 				  <button onclick="location.href='gupdate.go?gidx=${board.gidx}&id=${board.id}'">수정하기</button>
-				  <button onclick="location.href='greport.go?gidx=${board.gidx}'">신고하기</button>
-				  <button class="delete" onclick="location.href='gdelete.do?gidx=${board.gidx}&id=${board.id}'">삭제하기</button>
+				  <button onclick="location.href='greport.go?gidx=${board.gidx}&id_send=${board.id}&content=${board.content}'">신고하기</button>
+				  <button id="del" onclick="location.href='gdelete.do?gidx=${board.gidx}&id=${board.id}'">삭제하기</button>
 				</th>
 			</tr>
 			<tr>
@@ -78,9 +78,9 @@
 <script>
 	var msg = "${msg}";
 	if(msg != ""){
-	   alert(msg);
+	   confirm(msg);
 	}
-
+	
 	session.setAttribute("gidx", params.get("gidx"));
 	$('a[class="openchat"]').click(function(){
 		var loginId = "${sessionScope.loginId}";
@@ -88,5 +88,6 @@
 			$('a[class="openchat"]').attr('href', 'openchat.go?gidx=${board.gidx}&loginId=' + loginId)
 		}
 	});
+	
 </script>
 </html>

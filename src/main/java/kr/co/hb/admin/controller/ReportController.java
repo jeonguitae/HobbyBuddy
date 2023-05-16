@@ -1,6 +1,9 @@
 package kr.co.hb.admin.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +17,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.co.hb.admin.dto.ReportDTO;
 import kr.co.hb.admin.service.ReportService;
+import kr.co.hb.board.controller.BoardController;
+import kr.co.hb.board.dto.BoardDTO;
+import kr.co.hb.board.service.BoardService;
+import kr.co.hb.message.dto.MessageDTO;
 
 @Controller
 public class ReportController {
@@ -21,6 +28,7 @@ public class ReportController {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Autowired ReportService service;
+	@Autowired BoardService bservice;
 	
 	@RequestMapping(value="/report_msg_profileList.go")
 	public String report_msg_profileList(Model model) {
@@ -181,5 +189,43 @@ public class ReportController {
 		}
 		
 		return page;
-	}	
+	}
+	
+	@RequestMapping(value = "/reportComent.go", method = RequestMethod.GET)
+	public String reportComent(HttpSession session, Model model, 
+			@RequestParam int reptboard_num, @RequestParam String reporter, @RequestParam String rept_content, @RequestParam int coNo) {
+		model.addAttribute("reptboard_num", reptboard_num);
+		model.addAttribute("reporter", reporter);
+		model.addAttribute("rept_content",rept_content);
+		model.addAttribute("coNo",coNo);
+		return "reportComent";
+	}
+	
+	@RequestMapping(value="/reportComent.do", method=RequestMethod.GET)
+	public String reportComentdo(@RequestParam HashMap<String, String> params, @RequestParam int reptboard_num, HttpSession session, Model model) {
+		logger.info("reportComentdo param ? " + params);
+		int row = service.reportComentdo(params);
+		String msg = "";
+		if(row == 1) {
+			msg = "신고가 완료되었습니다.";
+			model.addAttribute("msg", msg);
+		}
+		
+		BoardDTO dto=bservice.detail(reptboard_num,"detail");
+		
+		if (dto != null) {
+			model.addAttribute("dto",dto);
+			model.addAttribute("fbNo",reptboard_num);
+		}
+
+		session.setAttribute("fbNo", reptboard_num);
+		
+		ArrayList<BoardDTO> coList = new ArrayList<BoardDTO>();
+		coList=bservice.coList(reptboard_num);
+		model.addAttribute("coList",coList);
+		
+		
+		
+		return "fBoardDetail";
+	}
 }

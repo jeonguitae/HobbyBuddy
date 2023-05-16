@@ -27,10 +27,12 @@ public interface QboardDAO {
 
 	String qboardFindFile2(String photoIdx);
 
-	int replyWrite(HashMap<String, String> params);
+	int qBoard_replyWrite(HashMap<String, String> params);
 
 	void qboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
 			String sboard_num);
+
+	void secretUpdate(String sboard_class, String sboard_num);
 
 	
 }

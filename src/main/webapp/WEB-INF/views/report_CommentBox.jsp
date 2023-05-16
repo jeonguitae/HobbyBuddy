@@ -63,6 +63,12 @@
                           <option value="반려">반려</option>
                      </select>
                     </td>
+                    <td>
+                     <select name="warning">
+                    	 <option value="0">경고 X</option>
+                          <option value="1">경고</option>                          
+                     </select>
+                    </td>
                </tr>               
          </table>            
          <button>신고 처리 하기</button>

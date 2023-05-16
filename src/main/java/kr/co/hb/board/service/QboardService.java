@@ -162,24 +162,7 @@ public class QboardService {
 	             
 	        return page;
 	}
-	
-	public String qBoard_replyWrite(HashMap<String, String> params) {
-					
-			int board_num = Integer.parseInt(params.get("qboard_no"));
-			
-			logger.info("board_num : " + board_num);
 		
-			int row = dao.replyWrite(params);
-			
-			
-			logger.info("row : " + row);
-		    
-		
-		    String page = row > 0 ? "redirect:/qboardList.go" : "redirect:/qboardDetail.go?qboard_no=" + board_num;
-        
-		    
-	        return page;
-	}
 
 	public void qboardDelete(String qboard_no) {
 		String new_photo_name = dao.qboardFindFile(qboard_no);
@@ -221,8 +204,25 @@ public class QboardService {
 		
 		logger.info("서비스");
 		dao.qboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+		dao.secretUpdate(sboard_class,sboard_num);
 		
 	}
+	
+    public String qBoard_replyWrite(HashMap<String, String> params) {
+        
+        int board_num = Integer.parseInt(params.get("qboard_no"));
+        
+        logger.info("board_num : " + board_num);
+    
+        int row = dao.qBoard_replyWrite(params);
+        
+        logger.info("row : " + row);
+      
+      
+        String page = row > 0 ? "redirect:/qboardList.go" : "redirect:/qboardDetail.go?qboard_no=" + board_num;
+        
+        return page;
+}
 
 
 	

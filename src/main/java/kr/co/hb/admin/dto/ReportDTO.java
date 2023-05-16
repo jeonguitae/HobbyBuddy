@@ -19,8 +19,17 @@ public class ReportDTO {
 	   private Date proc_date;
 	   private int fbNo;
 	   private int gidx;
+	   private boolean warning;
 	   
-    public int getRept_no() {
+	  
+	   
+    public boolean isWarning() {
+		return warning;
+	}
+	public void setWarning(boolean warning) {
+		this.warning = warning;
+	}
+	public int getRept_no() {
 		return rept_no;
 	}
 	public void setRept_no(int rept_no) {

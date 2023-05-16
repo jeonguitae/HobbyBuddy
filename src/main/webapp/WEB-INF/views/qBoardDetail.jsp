@@ -4,8 +4,6 @@
 <%@ page import="java.util.Date" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>\
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <html>
 <head>
 <meta charset="UTF-8">
@@ -56,7 +54,8 @@
 			<input type="hidden" name="sboard_title" value="${dto.qboard_title}">
 			<input type="hidden" name="sboard_num" value="${dto.qboard_no}">
 			<input type="hidden" name="admin_id" value="${sessionScope.loginId}">			
-			<button id="secretSet_btn">비밀글 설정</button>
+			<button id="secretSet_btn" >비밀글 설정</button>
+			
 		</form>   		
       <table>
          
@@ -98,36 +97,85 @@
                <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qboardDelete.go?qboard_no=${dto.qboard_no}';}" value="삭제" id="deleteBtn">
 			</td>    
 		</tr>
-      </table>
-      <form action="qBoard_replyWrite.do" method="post">  
-      <input type="hidden" name="qboard_no" value="${dto.qboard_no}">   	
-      <input type="hidden" name="qboard_state" value="${dto.qboard_state}">   	
-
-		<table>	      
+      </table> 
+       <form action="qBoard_replyWrite.do" method="post">
+		  <input type="hidden" name="qboard_no" value="${dto.qboard_no}">
+		  <input type="hidden" name="qboard_state" value="${dto.qboard_state}">
+		  <input type="hidden" name="admin_id" value="${sessionScope.loginId}">
+		  
+		  <table>
+		    <tr>	
+		      <th>문의 답변</th>
+		      <td>
+		        <textarea disabled="disabled" name="content" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}</textarea>
+		      </td>
+		    </tr>
 		    <tr>
-		      <th>문의 답변</th>		      
-		      <td id="after">		      	
-		      	<textarea disabled="disabled" name="qboard_reply" style="width: 400px; height: 200px; resize: none;">${dto.reply_content}</textarea></td>         
-			</tr>
-			<tr id="reply_time2">
-			  <th>답변 일시</th>
-			  <td><input type="text" name="reply_time" value="${dto.reply_time}" class="reply-time"></td>
-			</tr>
-			<tr id="admin_reply" style="display:none">
-				<th colspan="2">
-				<input type="button" onclick="location.href='qBoard_replyWrite.go'" value="답변 등록" id="listBack">
-				<input type="button" onclick="location.href='./qreplyUpdate.go?qboard_no=${dto.qboard_no}'" value="답변 수정">	
-               <input type="button" onclick="if(confirm('정말로 삭제하시겠습니까?')){location.href='./qreplyDelete.go?qboard_no=${dto.qboard_no}';}" value="답변 삭제" >
-				</th>
-			</tr>		  
-		</table>      
-      </form>
+		  		<th>관리자 아이디</th>
+		  		<td>${dto.admin_id}</td>		  		
+		  	</tr>
+		    <tr id="reply_time2">
+		      <th>답변 일시</th>
+		      <td>
+		        <input type="text" name="reply_time" value="${dto.reply_time}" class="reply-time" style="width: 400px;">
+		      </td>
+		    </tr>
+		  </table>
+		  
+		  <table>		  	
+		    <tr id="admin_reply2">
+		      <th>문의 답변</th>
+		      <td id="after">
+		        <textarea name="qboard_reply" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}</textarea>
+		      </td>
+		    </tr>
+		    
+		    <tr id="admin_reply" style="display:none">
+		      <th colspan="2">
+		        <button id="reply_btn">답변 등록</button>
+		      </th>
+		    </tr>
+		  </table>
+		</form>   
 </body>
 <script>
 
+const replyBtn = document.getElementById('reply_btn');
+const myForm = document.querySelector('form[action="qBoard_replyWrite.do"]');
 
+replyBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // 기본 동작인 form submit을 막음
 
+  const result = confirm("답변을 등록하시겠습니까?");
 
+  if (result) {
+    console.log("답변이 등록되었습니다.");
+    myForm.submit(); // 폼을 제출함
+  } else {
+    console.log("답변 등록이 취소되었습니다.");
+    return; // 취소 버튼을 눌렀을 때 함수를 종료하여 아무 동작도 수행하지 않음
+  }
+});
+
+const secretSetBtn = document.getElementById('secretSet_btn');
+
+secretSetBtn.addEventListener('click', function(event) {
+  event.preventDefault(); // 기본 동작인 form submit을 막음
+
+  const result = confirm("비밀글 설정하시겠습니까?");
+
+  if (result) {
+   
+    console.log("비밀글이 설정되었습니다.");
+
+   
+    const form = this.closest('form');
+    form.submit();
+  } else {
+  
+    console.log("비밀글 설정이 취소되었습니다.");
+  }
+});
 	var sessionID = '${sessionScope.loginId}';
 	var authorID = '${dto.id}';
 	var adminChk = '${sessionScope.adminChk}';
@@ -138,6 +186,7 @@
 	  
 	} else {
 	  document.querySelector('#admin_reply').style.display = 'none';
+	  document.querySelector('#admin_reply2').style.display = 'none';
 	  document.querySelector('#reply_time2').style.display = 'none';
 	}
 
@@ -178,13 +227,15 @@
 		  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
 			  replyTime.closest("tr").hide();
 			} else {
-			  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD");
+			  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD HH:MM:SS");
 			  if (date !== "Invalid date") {
 			    replyTime.val(date);
 			  }
 			}
 	
 		});
+	
+	
 	
 
 </script>

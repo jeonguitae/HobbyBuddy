@@ -100,7 +100,7 @@
   }
 </style>
 
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 
    window.onload = function() {
       today = new Date();
@@ -111,7 +111,7 @@
       bir.value = today;
    }
    
-</script>
+</script> -->
 </head>
 <body>
    <jsp:include page="gnb.jsp"/>
@@ -122,12 +122,13 @@
              <th>취미</th>
 	         <td>
 	            <select name="big_hb">
+	            	<option value="">x</option>
 	               <c:forEach items="${big_hb}" var="b">
 	                  <option value="${b.big_hb}">${b.big_hb}</option>      
 	               </c:forEach>
 	            </select>
 	            <select name="small_hb">
-	           		 <option>x</option>
+	           		 <option value="">x</option>
 	            </select>
 	           </td>
       		</tr>
@@ -144,6 +145,7 @@
                <th>지역</th>
                <td>
                   <select name="city">
+                 	  <option value="">x</option>
                       <option value="서울특별시">서울특별시</option>
                       <option value="인천광역시">인천광역시</option>
                       <option value="경기도">경기도</option>
@@ -164,6 +166,7 @@
                   </select>
                
                   <select name="area">
+                  	 <option value="">x</option>
                      <option value="종로구">종로구</option>
                      <option value="중구">중구</option>
                      <option value="용산구">용산구</option>

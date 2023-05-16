@@ -14,11 +14,11 @@
 	<input type="button" value="회원가입" class="loginIdChk" onclick="location.href='join.go'"/>
 	<input type="button" value="로그아웃" class="loginIdChk2" onclick="location.href='logout.go'"/>
 	
-	<input type="button" value="운동" onclick="location.href='join.go'"/>
-	<input type="button" value="반려동물" onclick="location.href='join.go'"/>	
-	<input type="button" value="맛집" onclick="location.href='join.go'"/>	
-	<input type="button" value="여가" onclick="location.href='join.go'"/>	
-	<input type="button" value="기타" onclick="location.href='join.go'"/>
+	<input type="button" value="운동" onclick="location.href='sportglist.go'"/>
+	<input type="button" value="반려동물" onclick="location.href='petglist.go'"/>	
+	<input type="button" value="맛집" onclick="location.href='foodglist.go'"/>	
+	<input type="button" value="여가" onclick="location.href='leisureglist.go'"/>	
+	<input type="button" value="기타" onclick="location.href='etcglist.go'"/>
 	
 
 	

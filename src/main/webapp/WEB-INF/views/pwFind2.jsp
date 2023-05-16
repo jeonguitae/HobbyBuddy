@@ -35,7 +35,7 @@
 	      </tr>
 	      <tr>
 	         <th>본인확인 답변</th>
-	         <td><input type="text" name="chkresp"></td>
+	         <td><input type="text" name="chkresp" placeholder="답변을 입력해주세요 !"></td>
 	      </tr>
 	      <tr>
 	         <th colspan="2">

@@ -13,6 +13,7 @@ public class RandomDTO {
 	private String big_hb;
 	private String small_hb;
 	private boolean random;
+	private int warning;
 	
 	
 	
@@ -87,6 +88,12 @@ public class RandomDTO {
 	}
 	public void setArea(String area) {
 		this.area = area;
+	}
+	public int getWarning() {
+		return warning;
+	}
+	public void setWarning(int warning) {
+		this.warning = warning;
 	}
 
 	

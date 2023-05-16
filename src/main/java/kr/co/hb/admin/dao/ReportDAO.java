@@ -35,5 +35,7 @@ public interface ReportDAO {
 
 	void gcommentWrite(HashMap<String, String> params);
 
+	int reportComentdo(HashMap<String, String> params);
+
 
 }

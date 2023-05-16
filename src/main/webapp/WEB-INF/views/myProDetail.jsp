@@ -320,7 +320,7 @@
 		      }
 		      ,error:function(e){
 		         console.log(e);
-		      }
+		      }-
 		   });      
 		})
 	function areaDraw(area){
