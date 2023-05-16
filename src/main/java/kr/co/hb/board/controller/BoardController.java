@@ -77,7 +77,6 @@ public class BoardController {
 	public String fBoardCreate(HttpSession session){
 		logger.info("write");
 		String id = (String) session.getAttribute("loginId");
-		
 		return "fBoardCreate";
 	}
 	@RequestMapping(value="/fwrite.do")
@@ -197,9 +196,24 @@ public class BoardController {
 			logger.info("북마크함?"+ memid);
 			logger.info("bmarkdo 됐으면 row는 1"+row);
 		}
+		if(row1 == 1){
+			logger.info("이미 즐겨찾기됨"+msg);
+		}
 		model.addAttribute("msg", msg);
 		
 		return "redirect:/bmarklist.go";
+	}
+	
+	@RequestMapping(value="/bcancel.do")
+	public String bcancel(@RequestParam String memid,@RequestParam String myid, Model model) {
+		int row=service.bcancel(myid,memid);
+		logger.info("해제할거당"+row);
+		return "redirect:/bmarklist.go";
+	}
+	@RequestMapping(value="/frept.go")
+	public String freptgo(@RequestParam int fbNo, Model model) {
+		model.addAttribute("fbNo", fbNo);
+		return "report_fboardDetail";
 	}
 	/*
 	 * @RequestMapping(value="/bmarkselect.do") public String

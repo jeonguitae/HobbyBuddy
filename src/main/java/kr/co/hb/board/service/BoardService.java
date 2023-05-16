@@ -229,6 +229,10 @@ public class BoardService {
 		return dao.bmarkselect(id);
 	}
 
+	public int bcancel(String myid, String memid) {
+		return dao.bcancel(myid, memid);
+	}
+
 
 	
 	
