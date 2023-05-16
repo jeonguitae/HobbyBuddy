@@ -134,8 +134,8 @@
 			<c:forEach items="${list}" var="member">
 				<tr>
 					
-					<td><%-- <a href="detail.do?id=${member.id}">${member.id}</a> --%>
-						<a href="javascript:void(0);" onclick="openPopup('${member.id}');">${member.id}</a>
+					<td><a href="detail.do?id=${member.id}">${member.id}</a>
+						<%-- <a href="javascript:void(0);" onclick="openPopup('${member.id}');">${member.id}</a> --%>
 					</td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>
@@ -162,10 +162,10 @@
 </body>
 <script>
 
-	function openPopup(memberId) {
+/* 	function openPopup(memberId) {
 	    var url = 'detail.do?id=' + memberId;
 	    window.open(url, '_blank', 'width=1000,height=700');
-	  }
+	  } */
 	
 	var msg = "${msg}";
 	if(msg != ""){
