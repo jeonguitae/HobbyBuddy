@@ -4,14 +4,14 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="resources/css/css.css">
-<title>쪽지 신고하기</title>
+<title>댓글 신고하기</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
 </style>
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-	<h3>쪽지 신고하기</h3>
+	<h3>댓글 신고하기</h3>
 	<form action="reportComent.do" method="get">
 		<table>
 			<tr>
