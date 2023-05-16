@@ -39,11 +39,11 @@
 	</select>
 	
 	<select id="qboardDetail" resultType="kr.co.hb.board.dto.QboardDTO">
-      SELECT q.qboard_no, q.qboard_class, q.qboard_time, q.id, q.qboard_title, q.qboard_content, q.qboard_openchk,
+      SELECT q.qboard_no, q.qboard_class, q.qboard_time, q.id, q.qboard_title, q.qboard_content, q.qboard_openchk, q.qboard_reply, q.reply_time,
 	    h.photoIdx, h.new_photo_name 
 		FROM qboard q
 		LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num		
-		WHERE q.qboard_no = #{param1};
+		WHERE q.qboard_no = #{param1} AND h.photoidx = #{param2}
 	</select>   
    
    <delete id="qboardDelete">
@@ -78,8 +78,8 @@
    		DELETE from hbphoto where photoIdx = #{param1} AND board_num = #{param2};
    </delete>
    
-   <update id="replyWrite" parameterType="HashMap">
-   		update qboard set qboard_state = true, qboard_reply = #{qboard_reply}, reply_time=now() where qboard_no = #{qboard_no}
+   <update id="qBoard_replyWrite" parameterType="HashMap">
+   		update qboard set qboard_state = true, qboard_reply = #{qboard_reply}, admin_id = #{admin_id}, reply_time=now() where qboard_no = #{qboard_no}
    </update>
    
    <insert id="qboardSecretSet">
