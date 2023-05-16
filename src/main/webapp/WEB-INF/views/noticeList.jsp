@@ -149,13 +149,13 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
 		<br/><br id="beforeAlarm"/>
 		<br/><br/><hr/><br/><br/>
       <h2 align="center">공지사항 리스트</h2>
-      게시물 갯수 : 
+      <!-- 게시물 갯수 : 
          <select id="pagePerNum">
             <option value="10">10</option>
             <option value="20">20</option>
             <option value="30">30</option>
             <option value="40">40</option>
-         </select>
+         </select> -->
          <br/>
 		   <input type ="text" id="noticeboardSearchInput" placeholder="제목을 입력">
 		   <button id ="noticeboardSearchButton">검색</button>
@@ -348,7 +348,7 @@ function listCall(page){
       url:'noticeList.ajax',
       data:{
           'page':page,
-            'cnt':$('#pagePerNum').val() 
+            /* 'cnt':$('#pagePerNum').val()  */
             'search':searchText
       },
       dataType:'json',
