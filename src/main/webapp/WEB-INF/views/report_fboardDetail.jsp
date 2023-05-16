@@ -44,20 +44,20 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">자유게시판 신고</h3>
-   <form action="freport.do">
+   <h3 align="center">모임 신고 상세</h3>
+   
       <table>
          <tr>
             <th>신고 번호</th>
-            <td><a href="fdetail.do?fbNo=${dto.reptboard_num}&rept_no=${dto.rept_no}">${dto.rept_no}</a></td>           
+            <td><a href="gdetail.do?gidx=${dto.reptboard_num}&rept_no=${dto.rept_no}">${dto.rept_no}</a></td>           
          </tr>
          <tr>
             <th>피신고자 아이디</th>
-            <td>${dto.memid}</td>
+            <td>${dto.preporter}</td>
          </tr>
          <tr>
-            <th>게시판종류</th>
-            <td>자유게시판<input type="hidden" name="board_class" value="${dto.reptboard_class}"></td>
+            <th>신고 게시판 종류</th>
+            <td>${dto.reptboard_class}</td>
          </tr>
          <tr>
 		  	<th>신고 제목</th>
@@ -71,11 +71,51 @@
             <th>신고 일시</th>
             <td><fmt:formatDate value="${dto.rept_date}" pattern="yyyy/MM/dd" /></td>
          </tr>
+         <tr>
+            <th>처리자</th>
+            <td>${dto.admin_id}</td>
+         </tr>
+         <tr>
+            <th>처리 상태</th>
+            <td>${dto.rept_state}</td>
+         </tr>
+         <tr>
+            <th>처리 사유</th>
+            <td>${dto.proc_content}</td>
+         </tr>
+          
       </table> 
-      
-      </form>
-         <button id="freportdo">신고하기</button>
-         <input type="button" onclick="location.href='report_fboardList.go'" value="취소">                  
+      <hr>	    
+	  <form action="report_gCommentWrite.do" method="post">
+         <input type="hidden" name="rept_no" value="${dto.rept_no}">
+         <table>
+               <tr>
+                  <th>관리자 아이디</th>
+                  <td><input type="text" name="admin_id" value="${sessionScope.loginId}" readonly></td>
+               </tr>
+               <tr>
+                  <th>처리사유</th>
+                  <td><textarea name="proc_content"></textarea></td>
+               </tr>
+               <tr>
+                  <th>처리상태</th>
+                   <td>
+                     <select name="rept_state">
+                          <option value="선택">선택</option>
+                          <option value="처리완료">처리완료</option>
+                          <option value="반려">반려</option>
+                     </select>
+                     &nbsp;&nbsp;&nbsp;&nbsp;
+                     <select name="warning">
+                    	 <option value="0">경고 X</option>
+                          <option value="1">경고</option>                          
+                     </select>
+                    </td>
+               </tr>               
+         </table>            
+         <button id="confirmButton">신고 처리 하기</button>
+         <input type="button" onclick="location.href='report_gboardList.go'" value="취소">                 
+      </form>  
 </body>
 <script>
     

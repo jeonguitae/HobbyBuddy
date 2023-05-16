@@ -165,6 +165,10 @@
 	</c:if>
 </body>
 <script>
+var msg = "${msg}";
+if(msg != ""){
+	alert(msg);
+}
 	function showAlert() {
 		alert("로그인이 필요한 페이지입니다.");
 		location.href='./login.go';

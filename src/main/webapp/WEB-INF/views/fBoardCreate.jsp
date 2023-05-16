@@ -32,6 +32,7 @@
 </script>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
 	<form action="fwrite.do" method="post" enctype="multipart/form-data">
 		<table>
 		<colgroup>

@@ -52,8 +52,7 @@
 			<tr>
 				<th colspan="2">	
 					<input type="button" onclick="location.href='./flist.go'" value="리스트"/>
-					<input type="button" onclick="location.href='./frept.go?fbNo=${dto.fbNo}'" value="신고"/>
-				</th>
+					<button onclick="location.href='frept.go?fbNo=${dto.fbNo}&memid=${dto.id}&myid=${sessionScope.loginId}'">신고하기</button>
 			</tr>
 			</c:if>
 			
@@ -69,9 +68,15 @@
 				
 			</tr>
 			</c:if>
-		</table>	
-		
-		
+		</table>
+		<form class="secretSet" method="post" action="fboardSecretSet.do?fbNo=${dto.fbNo}">
+			<input type="hidden" name="writer_id" value="${dto.id}">
+			<input type="hidden" name="sboard_title" value="${dto.title}">
+			<input type="hidden" name="sboard_num" value="${dto.fbNo}">
+			<input type="hidden" name="admin_id" value="${sessionScope.loginId}">			
+			<button id="secretSet_btn" >비밀글 설정</button>
+			
+		</form>	
 		<br><br>
 		<p>댓글 쓰기</p>
 		<br>
@@ -111,6 +116,7 @@ var msg = "${msg}";
 if(msg != ""){
 	alert(msg);
 }
+
 
 </script>
 </html>

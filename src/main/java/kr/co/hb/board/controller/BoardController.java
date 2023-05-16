@@ -1,11 +1,9 @@
 package kr.co.hb.board.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
-import javax.swing.AbstractListModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,17 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.context.annotation.RequestScope;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.fasterxml.jackson.annotation.ObjectIdGenerators.StringIdGenerator;
 
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.board.service.BoardService;
-import kr.co.hb.group.dto.GroupBoardDTO;
 import kr.co.hb.member.dto.MemberDTO;
 import kr.co.hb.member.service.MemberService;
 
@@ -37,13 +29,19 @@ public class BoardController {
 	@Autowired MemberService service2;
 	
 	@RequestMapping(value="/flist.go")
-	public String list(Model model) {		
+	public String list(Model model, HttpSession session) {		
 		logger.info("listcall");
 		ArrayList<MemberDTO> big_hb = mservice.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb",big_hb);
 		ArrayList<BoardDTO> list = service.list();
 		model.addAttribute("list", list);
+		
+		String msg = (String) session.getAttribute("msg");
+		
+		model.addAttribute("msg", msg);
+		
+		session.removeAttribute("msg");
 		
 		return "fBoardList";
 	}
@@ -90,18 +88,21 @@ public class BoardController {
 		logger.info("상세페이지로 넘어는 옴?");
 		//flag에 따라 조회수 해야 하니까
 		
-		BoardDTO dto=service.detail(fbNo,"detail");
+		BoardDTO dto = null;
 		
-		if (dto != null) {
-			model.addAttribute("dto",dto);
-			model.addAttribute("fbNo",fbNo);
-			page = "fBoardDetail";
+		dto=service.detail(fbNo,"detail");
+		
+		if (dto == null) {
+			dto=service.detail1(fbNo,"detail");
 		}
 		if (session.getAttribute("loginId")==null) {
 			page = "fBoardList";			
 		}
 		session.setAttribute("fbNo", fbNo);
 		
+		model.addAttribute("dto",dto);
+		model.addAttribute("fbNo",fbNo);
+		page = "fBoardDetail";
 		ArrayList<BoardDTO> coList = new ArrayList<BoardDTO>();
 		coList=service.coList(fbNo);
 		model.addAttribute("coList",coList);
@@ -211,11 +212,60 @@ public class BoardController {
 		return "redirect:/bmarklist.go";
 	}
 	@RequestMapping(value="/frept.go")
-	public String freptgo(@RequestParam int fbNo, Model model) {
+	public String freptgo(@RequestParam int fbNo,@RequestParam String memid,@RequestParam String myid,Model model) {
 		model.addAttribute("fbNo", fbNo);
-		return "report_fboardDetail";
+		model.addAttribute("memid", memid);
+		model.addAttribute("myid", myid);
+		logger.info("fbNo" + fbNo);
+		logger.info("memid" + memid);
+		logger.info("myid" + myid);
+		logger.info("신고 가기 전에"+fbNo +memid +myid);
+		return "reportfBoard";
 	}
-	/*
+	@RequestMapping(value="/freport.do")
+	public String freportdo(@RequestParam HashMap<String, String> params, Model model) {
+		int row=service.freportdo(params);
+		logger.info("params : " + params);
+		logger.info("신고할거야"+row);
+		if (row==1) {
+			String msg = "신고 접수되었습니다.";
+			model.addAttribute("msg", msg);
+		}
+		
+		return "redirect:/flist.go";
+	}
+	
+	@RequestMapping(value = "/fboardSecretSet.do")
+	   public String fboardSecretSet(Model model,@RequestParam HashMap<String, String> params, HttpSession session) {
+	      		   
+		logger.info("컨트롤러");
+		
+		String loginId = (String) session.getAttribute("loginId");
+		String msg = "관리자만 비밀글 설정이 가능합니다";
+		
+		int adminchk = service.adminchk(loginId);
+		logger.info("adminchk : " + adminchk);
+		
+		if(adminchk == 1) {
+			
+			String writer_id = params.get("writer_id");
+			String admin_id = params.get("admin_id");
+			String sboard_class = "자유";
+			String sboard_title = params.get("sboard_title");
+			String sboard_num = params.get("sboard_num");
+			
+			service.fboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+			msg = "비밀글 설정 완료";
+		}
+		
+		   session.setAttribute("msg", msg);
+		   
+	      return "redirect:/flist.go";
+	   }
+	
+	
+	
+ 	/*
 	 * @RequestMapping(value="/bmarkselect.do") public String
 	 * bmarkselect(HashMap<String, String> params) { service.bmarkselect(params); }
 	 */

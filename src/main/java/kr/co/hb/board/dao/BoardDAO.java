@@ -58,6 +58,15 @@ public interface BoardDAO {
 
 	int bcancel(String myid, String memid);
 
+	int freportdo(HashMap<String, String> params);
+
+	BoardDTO detail1(int fbNo);
+
+	void fboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
+			String sboard_num);
+
+	int adminchk(String loginId);
+
 
 	
 

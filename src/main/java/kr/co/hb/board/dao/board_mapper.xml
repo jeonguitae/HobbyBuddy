@@ -5,9 +5,14 @@
 
 <mapper namespace="kr.co.hb.board.dao.BoardDAO">
 	<select id="list" resultType="kr.co.hb.board.dto.BoardDTO">
-		SELECT fbNo, title, id, fbTime,
-		bhit
-		FROM fBoard ORDER BY fbNo DESC
+		SELECT *
+		  FROM fBoard f
+		  WHERE f.fbNo NOT IN (
+		  SELECT f.fbNo
+		  FROM fBoard f
+		  INNER JOIN secret s ON f.fbNo = s.sboard_num
+		  WHERE s.secret_state = 1 
+	  	)
 	</select>
 
 	<select id="fsorting" resultType="kr.co.hb.board.dto.BoardDTO">
@@ -49,7 +54,7 @@
 	</insert>
 
 	<update id="uphit">
-		UPDATE fBoard SET bhit = bhit+1
+		UPDATE fboard SET bhit = bhit+1
 		WHERE fbNo = #{fbNo}
 	</update>
 
@@ -61,6 +66,10 @@
 		h.new_photo_name FROM fBoard f
 		LEFT JOIN hbPhoto h ON f.fbNo =
 		h.board_num WHERE f.fbNo = #{fbNo} AND h.board_class="자유"
+	</select>
+	
+	<select id="detail1" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT * FROM fboard WHERE fbNo = #{param1}
 	</select>
 
 	<delete id="fdelete">
@@ -127,4 +136,18 @@
 	<delete id="bcancel" >
 		DELETE FROM bmark WHERE myid=#{param1} AND memid=#{param2} 
 	</delete>
+	
+	<insert id="freportdo" parameterType="hashmap">
+		INSERT INTO report(preporter, reporter, reptboard_class, reptboard_num, rept_title, rept_content) 
+		VALUES (#{preporter},#{reporter},#{reptboard_class}, #{reptboard_num}, #{rept_title},#{rept_content})
+	</insert>
+	
+	 <insert id="fboardSecretSet">
+	     insert into secret (writer_id, admin_id, sboard_class, sboard_title, sboard_num)
+	     values (#{param1},#{param2},#{param3},#{param4},#{param5})
+   </insert>
+   
+   <select id="adminchk" resultType="int">
+   		SELECT admin FROM member WHERE id = #{param1}
+   </select>
 </mapper>

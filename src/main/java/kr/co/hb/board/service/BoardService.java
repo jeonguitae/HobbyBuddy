@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.co.hb.board.dao.BoardDAO;
+import kr.co.hb.board.dao.QboardDAO;
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.group.dto.GroupBoardDTO;
 @Service
@@ -26,6 +27,7 @@ public class BoardService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@Autowired BoardDAO dao;
+	@Autowired QboardDAO qdao;
 	
 	public ArrayList<BoardDTO> list() {
 		return dao.list();
@@ -231,6 +233,33 @@ public class BoardService {
 
 	public int bcancel(String myid, String memid) {
 		return dao.bcancel(myid, memid);
+	}
+
+	public int freportdo(HashMap<String, String> params) {
+		return dao.freportdo(params);
+	}
+
+	public BoardDTO detail1(int fbNo, String flag) {
+		
+		if (flag.equals("detail")) {
+			dao.uphit(fbNo);
+		}
+		
+		return dao.detail1(fbNo);
+	}
+
+	public void fboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
+			String sboard_num) {
+		
+		logger.info("서비스");
+		dao.fboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+		qdao.secretUpdate(sboard_class,sboard_num);
+		
+	}
+
+	public int adminchk(String loginId) {
+	
+		return dao.adminchk(loginId);
 	}
 
 

@@ -29,6 +29,7 @@
 </script>
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
 	<form action="fupdate.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="fbNo" value="${dto.fbNo}"/>
 		<table>
