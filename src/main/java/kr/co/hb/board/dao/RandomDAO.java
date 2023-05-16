@@ -30,6 +30,10 @@ public interface RandomDAO {
 
 	int adminupdate(String id);
 
+	int bupdate(String id);
+
+	int aupdate(String id);
+
 
 
 

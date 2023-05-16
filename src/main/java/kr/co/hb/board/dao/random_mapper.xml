@@ -72,9 +72,16 @@
    		Update member Set ban = true Where id = #{param1}
    	</update>
    	
+   	<update id="bupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
+   		Update member Set ban = false Where id = #{param1}
+   	</update>
+   	
    	<update id="adminupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
    		Update member Set admin = true Where id = #{param1}
    	</update>
    
+   <update id="aupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
+   		Update member Set admin = false Where id = #{param1}
+   	</update>
 	
 </mapper>
