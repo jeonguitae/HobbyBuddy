@@ -80,8 +80,10 @@ public class QboardContrller {
 	      return page;
 	   }
 	 @RequestMapping(value = "/qboardUpdate.do", method = RequestMethod.POST)
-	   public String qboardUpdate(HttpSession session,Model model ,MultipartFile photo,@RequestParam HashMap<String, String> params) {
+	   public String qboardUpdate(HttpSession session, Model model ,MultipartFile photo,@RequestParam HashMap<String, String> params) {
 	      
+		 logger.info("컨트롤러 도착");
+		 
 		 if (params.get("qboard_title") != null) {
 			model.addAttribute("msg","문의 제목을 입력하세요.");
 		}else if (params.get("qboard_content") != null) {

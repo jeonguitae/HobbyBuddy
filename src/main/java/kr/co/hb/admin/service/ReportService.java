@@ -113,8 +113,12 @@ public class ReportService {
 		return map;
 	}
 
-	public ReportDTO report_msg_profileDetail(String rept_no) {
-		return dao.report_msg_profileDetail(rept_no);
+	public ReportDTO report_profileDetail(String rept_no) {
+		return dao.report_profileDetail(rept_no);
+	}
+	
+	public ReportDTO report_msgDetail(String rept_no) {
+		return dao.report_msgDetail(rept_no);
 	}
 	
 	public ReportDTO report_fboardDetail(String rept_no) {
@@ -153,6 +157,14 @@ public class ReportService {
 		// 만들 수 있는 총 페이지 수 
 		// 전체 게시물 / 페이지 당 보여줄 수 
 		int total = dao.fTotalCount();
+		if (search.equals("default") || search.equals("")) {
+	         total = dao.fTotalCount();
+	         logger.info("서비스1");
+	         
+	      } else {
+	         total = dao.fTotalCountSearch(search);
+	         logger.info("서비스2");
+	      };
 		int range = total%10 == 0 ? total/10 : (total/10) + 1;
 		
 		
@@ -192,16 +204,6 @@ public class ReportService {
 		// 만들 수 있는 총 페이지 수 
 		// 전체 게시물 / 페이지 당 보여줄 수 
 		int total = dao.gTotalCount();
-		int range = total%10 == 0 ? total/10 : (total/10) + 1;
-		
-		
-		page = page > range ? range : page;
-		
-		
-		
-		ArrayList<ReportDTO> report_gboardList = dao.report_gboardList(10, offset);
-
-		
 		if (search.equals("default") || search.equals("")) {
 	         total = dao.gTotalCount();
 	         logger.info("서비스1");
@@ -209,7 +211,25 @@ public class ReportService {
 	      } else {
 	         total = dao.gTotalCountSearch(search);
 	         logger.info("서비스2");
+	         
 	      };
+		logger.info("토탈카운트 실행");
+		int range = total%10 == 0 ? total/10 : (total/10) + 1;
+		
+		
+		page = page > range ? range : page;
+		
+		ArrayList<ReportDTO> report_gboardList = dao.report_gboardList(10, offset);
+				
+			if (search.equals("default") || search.equals("")) {
+				report_gboardList = dao.report_gboardList(10, offset);
+				logger.info("서비스3");
+		         
+		      } else {
+		    	  report_gboardList = dao.gboardSearch(search);
+		    	  logger.info("서비스4");
+		      }	
+		
 	      
 		map.put("currPage", page);
 		map.put("pages", range);
@@ -222,7 +242,7 @@ public class ReportService {
 	public String pcommentWrite(HashMap<String, String> params) {
 		  logger.info("서비스 도착");
 		
-		  String page = "redirect:/report_msg_profileList.go";       
+		  String page = "redirect:/report_profileList.go";       
 	      
 	      dao.pcommentWrite(params);	            
 
@@ -255,6 +275,17 @@ public class ReportService {
 
 	public int reportComentdo(HashMap<String, String> params) {
 		return dao.reportComentdo(params);
+	}
+
+	public String mcommentWrite(HashMap<String, String> params) {
+		logger.info("서비스 도착");
+		
+		  String page = "redirect:/report_msgdList.go";       
+	      
+	      dao.mcommentWrite(params);	            
+
+	      return page;
+		
 	}
 
 }

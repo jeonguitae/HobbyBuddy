@@ -148,6 +148,9 @@ public class QboardService {
 	}
 
 	public String qboardUpdate(MultipartFile photo, HashMap<String, String> params) {
+		
+		logger.info("서비스 도착");
+		
 			int row = dao.qboardUpdate(params);
 	      int board_num = Integer.parseInt(params.get("qboard_no"));	
 	      

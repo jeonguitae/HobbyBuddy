@@ -157,30 +157,17 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
 		<br/><br id="beforeAlarm"/>
 		<br/><br/><hr/><br/><br/>
       <h2 align="center">자유게시판 신고 관리 리스트</h2>
-      게시물 갯수 : 
-         <select id="pagePerNum">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-         </select>
-      <form action="search.do">
-      
-         <select name="report">
-            <option value="default">선택</option>
-            <option value="rept_title">제목</option>
-            <option value="reporter">작성자</option>
-         </select>
-      
-         <input type="text" name="report_Search">
-         <button>검색</button>
-      </form>                            
+         <br/>
+		   <input type ="text" id="fboardSearchInput" placeholder="피신고자 아이디를 입력해 주세요.">
+		   <button id ="fboardSearchButton">검색</button>
+		
+		 <br/>                      
       <table>
          <thead>
             <tr>
                <th>신고 번호</th>
                <th>신고 분류</th>
-               <th>신고자 아이디</th>
+               <th>피신고자 아이디</th>
                <th>신고 제목</th>
                <th>신고 일시</th>
                <th>처리 상태</th>                        
@@ -304,7 +291,7 @@ function alarmListRead(){
 		}		
 	});		
 }
-
+var searchText = 'default';
 var showPage = 1;
 
 listCall(showPage);
@@ -316,7 +303,11 @@ listCall(showPage);
    $('#pagination').twbsPagination('destroy');
 }); 
 
- 
+ $('#fboardSearchButton').click(function(){
+	   searchText = $('#fboardSearchInput').val();
+	   listCall(showPage);
+	   $('#pagination').twbsPagination('destroy');
+	});
 
 /* $('#search_btn').click(function() {
 	var searchClass = $("#search_Class").val();
@@ -332,7 +323,7 @@ function listCall(page){
       url:'report_fboardList.ajax',
       data:{
           'page':page,
-            'cnt':$('#pagePerNum').val()          
+          'search':searchText  
       },
       dataType:'json',
       success:function(data){
@@ -372,7 +363,7 @@ function listPrint(list){
 	      content += '<tr>';
 	      content += '<td>'+'<input type="hidden" value="'+item.fbNo+'">'+item.rept_no+'</td>';
 	      content += '<td>'+item.reptboard_class+'</td>';
-	      content += '<td>'+item.reporter+'</td>';
+	      content += '<td>'+item.preporter+'</td>';
 	      content += '<td><a href="report_fboardDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
 	      var date = new Date(item.rept_date);
 	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';

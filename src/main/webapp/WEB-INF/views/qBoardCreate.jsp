@@ -96,7 +96,7 @@ function qboard_write(){
 	
 	if ($id.val()=="") {
 		alert('세션이 만료되었습니다, 다시 로그인 해주세요.');
-		$id.focus();
+		location='./qboardList.go'
 	}else if ($qboard_class.val() == "question_default") {
 		alert('문의 종류를 선택하세요.');
 		$qboard_class.focus();

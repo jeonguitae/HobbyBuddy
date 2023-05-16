@@ -29,7 +29,7 @@
       display: inline-block;
    }
    colgroup {
-      width: 30%;
+      width: 50%;
    }
    #paging{
       text-align: center;
@@ -105,7 +105,10 @@
 	.menu{
 		display:inline;
 	}
-   
+   .container {
+    display: flex;
+    justify-content: center;
+  }
    
 </style>
 <head>
@@ -151,9 +154,9 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
 		<input type="button" value="이전 알림 보기" class="beforeAlarm" onclick="location.href='beforeAlarm.go'"/>
 		<br/><br id="beforeAlarm"/>
 		<br/><br/><hr/><br/><br/>
-      <h2 align="center">쪽지/프로필 신고 관리 리스트</h2>
+      <h2 align="center">프로필 신고 관리 리스트</h2>
       <br/>
-		   <input type ="text" id="profileSearchInput" placeholder="제목을 입력해 주세요.">
+		   <input type ="text" id="profileSearchInput" placeholder="피신고자 아이디를 입력해 주세요.">
 		   <button id ="profileSearchButton">검색</button>
 		
 		 <br/>                          
@@ -162,6 +165,7 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
             <tr>
                <th>신고 번호</th>
                <th>신고 분류</th>
+               <th>피신고자 아이디</th>
                <th>신고자 아이디</th>
                <th>신고 제목</th>
                <th>신고 일시</th>
@@ -173,7 +177,7 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
          <tbody id="list">             
          </tbody>
             <tr>
-               <td colspan="8" id="paging">   
+               <td colspan="9" id="paging">   
                   <!--    플러그인 사용   (twbsPagination)   -->
                   <div class="container" style="justify-content: center; display: flex;">                           
                      <nav aria-label="Page navigation" style="text-align:center">
@@ -360,10 +364,11 @@ function listPrint(list){
 	   var content='';
 	   list.forEach(function(item,idx){
 	      content += '<tr>';
-	      content += '<td>'+item.rept_no+'</td>';
+	      content += '<td>'+'<input type="hidden" value="'+item.id+'">'+item.rept_no+'</td>';
 	      content += '<td>'+item.reptboard_class+'</td>';
 	      content += '<td>'+item.preporter+'</td>';
-	      content += '<td><a href="report_msg_profileDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
+	      content += '<td>'+item.reporter+'</td>';
+	      content += '<td><a href="report_profileDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
 	      var date = new Date(item.rept_date);
 	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
 	      content += '<td>'+item.rept_state+'</td>';
