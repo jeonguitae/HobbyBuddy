@@ -34,7 +34,7 @@
       </tr>
       <tr>
          <th colspan="2">
-            <button onclick="login()">login</button>
+            <button onclick="login()">로그인</button>
             <button onclick="location.href='join.go'">회원가입</button>
             <button onclick="location.href='idFind.go'">아이디 찾기</button>
             <button onclick="location.href='pwFind.go'">비밀번호 찾기</button>

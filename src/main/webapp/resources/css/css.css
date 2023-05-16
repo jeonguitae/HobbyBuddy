@@ -6,9 +6,10 @@ body {
   color: #333333; /* 폰트색 검정 */
   font-family: Arial, sans-serif; /* 글꼴 Arial */
   text-align: center; /* 모든 요소들 중앙 정렬 */
-  margin-left:350;
-  margin-right:350;
-  margin-top:40; 
+  margin-left:450;
+  margin-right:450;
+  margin-top:40;
+  
 }
 b {
   font-weight: 900;
