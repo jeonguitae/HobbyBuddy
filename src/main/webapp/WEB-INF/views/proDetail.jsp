@@ -19,7 +19,7 @@
 
 </head>
 <body>
-     <form action="myp.do" method="post">
+     <!-- <form action="myp.do" method="post"> -->
       <table>
       
          <tr>
@@ -64,15 +64,13 @@
                <input type="button" value="매너온도 삭제" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=del'"/>
             </td>
       	</tr>
-<<<<<<< HEAD
-      	<tr>
-      		<th colspan="3">
-      		   <input type="button" name="bmarkdo" value="즐겨찾기" onclick="location.href='bmark.do?myid=${sessionScope.loginId}&memid=${member.id}'">
-=======
+      <!-- 	<tr>
+      		<th colspan="3"> -->
+      		 <%--   <input type="button" name="bmarkdo" value="즐겨찾기" onclick="location.href='bmark.do?myid=${sessionScope.loginId}&memid=${member.id}'"> --%>
          <tr>
             <th colspan="3">
-               <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>  
->>>>>>> origin/master
+             <input type="button" name="bmarkdo" value="즐겨찾기" onclick="location.href='bmark.do?myid=${sessionScope.loginId}&memid=${member.id}'">
+           <%--     <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>   --%>
                <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
                <input type="button" value="프로필 신고" onclick="location.href='report.go?id=${member.id}'"/>
 <!--                <input type="button" value="뒤로가기" onclick="redirect:/profile.go"/> -->
@@ -84,28 +82,28 @@
       <br/>
       <div id = "admin">
       <table>
+      	<tr>
+      		<th>관리자 여부</th>
+      		<td>${member.admin}</td>
+      		<td><input type="button" value="관리자 설정" onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
+      	</tr>
          <tr>
             <th>정지 상태</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.ban}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td rowspan="2"><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>         
+            <td>${member.ban}</td>
+            <td><input type="button" value="관리자 해지" onclick="location.href='aupdate.do?id=${member.id}'"/></td>
          </tr>
          <tr>
             <th>경고 당한 횟수</th>
-            <td>&nbsp;&nbsp;${member.warning}&nbsp;&nbsp;</td>
+            <td>${member.warning}</td>
+            <td><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>   
          </tr>
          <tr>
             <th>랜덤매칭 동의 여부</th>
-            <td>&nbsp;&nbsp;${member.random}&nbsp;&nbsp;</td>
-            <td rowspan="2"><input type="button" value="관리자 설정" onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
-         </tr>
-         <tr>
-            <th>현재 방 생성 갯수</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-         </tr>
-         
+            <td>${member.random}</td>
+            <td><input type="button" value="정지 해제" onclick="location.href='bupdate.do?id=${member.id}'"/></td>
       </table>
 </div>
- </form>
+ <!-- </form> -->
 </body>
 
 <script>

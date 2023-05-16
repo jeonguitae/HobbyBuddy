@@ -100,7 +100,7 @@
 	</delete>
 
 	<insert id="bmarkdo">
-		INSERT INTO bmark (myid, memid)
+		INSERT INTO bmark(myid, memid)
 		VALUES(#{param2},#{param1})
 	</insert>
 
