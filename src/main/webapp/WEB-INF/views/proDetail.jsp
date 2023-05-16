@@ -19,7 +19,7 @@
 
 </head>
 <body>
-     <form action="myp.do" method="post">
+     <!-- <form action="myp.do" method="post"> -->
       <table>
       
          <tr>
@@ -64,15 +64,13 @@
                <input type="button" value="매너온도 삭제" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=del'"/>
             </td>
       	</tr>
-<<<<<<< HEAD
-      	<tr>
-      		<th colspan="3">
-      		   <input type="button" name="bmarkdo" value="즐겨찾기" onclick="location.href='bmark.do?myid=${sessionScope.loginId}&memid=${member.id}'">
-=======
+      <!-- 	<tr>
+      		<th colspan="3"> -->
+      		 <%--   <input type="button" name="bmarkdo" value="즐겨찾기" onclick="location.href='bmark.do?myid=${sessionScope.loginId}&memid=${member.id}'"> --%>
          <tr>
             <th colspan="3">
-               <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>  
->>>>>>> origin/master
+             <input type="button" name="bmarkdo" value="즐겨찾기" onclick="location.href='bmark.do?myid=${sessionScope.loginId}&memid=${member.id}'">
+           <%--     <button id="bmark" onclick="location.href=bmark.do?myid=${sessionScope.loginId}&memid=${mimber.id}">즐겨찾기</button>   --%>
                <input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
                <input type="button" value="프로필 신고" onclick="location.href='report.go?id=${member.id}'"/>
 <!--                <input type="button" value="뒤로가기" onclick="redirect:/profile.go"/> -->
@@ -105,7 +103,7 @@
             <td><input type="button" value="정지 해제" onclick="location.href='bupdate.do?id=${member.id}'"/></td>
       </table>
 </div>
- </form>
+ <!-- </form> -->
 </body>
 
 <script>
