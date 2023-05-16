@@ -56,6 +56,8 @@ public interface BoardDAO {
 
 	ArrayList<BoardDTO> bmarkselect(String id);
 
+	int bcancel(String myid, String memid);
+
 
 	
 

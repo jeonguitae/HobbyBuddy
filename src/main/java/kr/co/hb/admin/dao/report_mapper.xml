@@ -18,7 +18,7 @@
 	<select id="report_fboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
 	
 	    select r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date, f.fbNo from report r, fboard f 
-	    WHERE r.reptboard_num = f.fbNo AND reptboard_class = '자유게시판'		 
+	    WHERE r.reptboard_num = f.fbNo AND reptboard_class = '자유'		 
 		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
 		LIMIT #{param1} OFFSET #{param2}
 

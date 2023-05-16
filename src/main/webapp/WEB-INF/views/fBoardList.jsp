@@ -167,6 +167,7 @@
 <script>
 	function showAlert() {
 		alert("로그인이 필요한 페이지입니다.");
+		location.href='./login.go';
 	}
 /* 
 	//선택이 안 됐다고 value가 null은 아닌가봐
