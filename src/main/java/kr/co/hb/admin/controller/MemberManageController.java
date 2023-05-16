@@ -92,5 +92,29 @@ public class MemberManageController {
 		}
 		return "memberDetail";
 	}
+	
+	@RequestMapping(value="/banupdate.do", method = RequestMethod.GET)
+	public String banupdate(@RequestParam String id, Model model) {
+	int row = service.banupdate(id);
+	return "redirect:/detail.do?id=" + id;
+	}
+	
+	@RequestMapping(value="/bupdate.do", method = RequestMethod.GET)
+	public String bupdate(@RequestParam String id, Model model) {
+	int row = service.bupdate(id);
+	return "redirect:/detail.do?id=" + id;
+	}
+	
+	@RequestMapping(value="/adminupdate.do", method = RequestMethod.GET)
+	public String adminupdate(@RequestParam String id, Model model) {
+	int row = service.adminupdate(id);
+	return "redirect:/detail.do?id=" + id;
+	}
+	
+	@RequestMapping(value="/aupdate.do", method = RequestMethod.GET)
+	public String aupdate(@RequestParam String id, Model model) {
+	int row = service.aupdate(id);
+	return "redirect:/detail.do?id=" + id;
+	}
 
 }
