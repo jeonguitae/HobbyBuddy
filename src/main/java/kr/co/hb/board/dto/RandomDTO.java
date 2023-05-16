@@ -14,9 +14,17 @@ public class RandomDTO {
 	private String small_hb;
 	private boolean random;
 	private int warning;
+	private boolean admin;
 	
 	
 	
+	
+	public boolean isAdmin() {
+		return admin;
+	}
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 	public boolean isRandom() {
 		return random;
 	}

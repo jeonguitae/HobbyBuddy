@@ -66,22 +66,17 @@
       	<tr>
       		<th>정지 상태</th>
       		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.ban}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-      		<td rowspan="4"><input type="button" value="회원 정지"/></td>
+      		<td rowspan="2"><input type="button" value="관리자 설정" onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
       	</tr>
       	<tr>
       		<th>경고 당한 횟수</th>
       		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-      		<td><input type="button" value="경고"/> </td>
       	</tr>
       	<tr>
       		<th>랜덤매칭 동의 여부</th>
       		<td>&nbsp;&nbsp;${member.random}&nbsp;&nbsp;</td>
+      		<td><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>         
       	</tr>
-      	<tr>
-      		<th>현재 방 생성 갯수</th>
-      		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-      	</tr>
-      	
       </table>
 	</div>
    </form>
