@@ -90,7 +90,7 @@
          <tr>
             <th>랜덤매칭 동의 여부</th>
             <td>&nbsp;&nbsp;${member.random}&nbsp;&nbsp;</td>
-            <td rowspan="2"><input type="button" value=관리자 설정 onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
+            <td rowspan="2"><input type="button" value="관리자 설정" onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
          </tr>
          <tr>
             <th>현재 방 생성 갯수</th>
