@@ -75,12 +75,14 @@ public class MessaegeController {
 	
 	@RequestMapping(value="/msgChat.do", method=RequestMethod.GET)
 	public String msgChatDo(@RequestParam HashMap<String, String> params, HttpSession session, Model model) {
+		logger.info("msgChatDo : " + params);	
 		service.msgChatDo(params);
 		
 		String id = (String) session.getAttribute("loginId");
 		logger.info("msgList call : " + id);		
 		ArrayList<MessageDTO> msgList = service.msgList(id);
 		model.addAttribute("msgList", msgList);
+		model.addAttribute("msg", "쪽지를 보냈습니다 !");
 		return "msgList";
 	}
 	

@@ -190,7 +190,7 @@ public class GroupBoardController {
 		
 		session.removeAttribute("msg");
 		
-		return page;
+		return "gBoardDetail";
 	}
 
 	@RequestMapping(value="/gserch.do")
