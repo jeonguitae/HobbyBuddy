@@ -79,25 +79,19 @@ public class RandomService {
 		return dao.reList(params);
 	}
 
-	public int banupdate(String id) {
-		logger.info("아이디 : " + id );
-		return dao.banupdate(id);
-	}
-
-	public int adminupdate(String id) {
-		logger.info("아이디 : " + id );
-		return dao.adminupdate(id);
-	}
-
-	public int bupdate(String id) {
-		logger.info("아이디 : " + id );
-		return dao.bupdate(id);
-	}
-
-	public int aupdate(String id) {
-		logger.info("아이디 : " + id );
-		return dao.aupdate(id);
-	}
+	/*
+	 * public int banupdate(String id) { logger.info("아이디 : " + id ); return
+	 * dao.banupdate(id); }
+	 * 
+	 * public int adminupdate(String id) { logger.info("아이디 : " + id ); return
+	 * dao.adminupdate(id); }
+	 * 
+	 * public int bupdate(String id) { logger.info("아이디 : " + id ); return
+	 * dao.bupdate(id); }
+	 * 
+	 * public int aupdate(String id) { logger.info("아이디 : " + id ); return
+	 * dao.aupdate(id); }
+	 */
 
 
 

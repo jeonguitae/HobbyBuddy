@@ -110,10 +110,6 @@
 		        <textarea disabled="disabled" name="content" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}</textarea>
 		      </td>
 		    </tr>
-		    <tr>
-		  		<th>관리자 아이디</th>
-		  		<td>${dto.admin_id}</td>		  		
-		  	</tr>
 		    <tr id="reply_time2">
 		      <th>답변 일시</th>
 		      <td>
@@ -218,6 +214,22 @@ secretSetBtn.addEventListener('click', function(event) {
 	} else {
 	  deleteBtn.style.display = 'none';
 	}
+	
+	$(document).ready(function() {
+		  // reply-time 클래스를 가진 input 요소를 선택합니다.
+		  var replyTime = $(".reply-time");
+	
+		  // 해당 값이 "1999-09-09 00:00:00.000"인 경우에는 해당 요소를 숨깁니다.
+		  if (replyTime.val() === "Thu Sep 09 00:00:00 KST 1999") {
+			  replyTime.closest("tr").hide();
+			} else {
+			  var date = moment(replyTime.val(), "ddd MMM DD HH:mm:ss z YYYY").format("YY/MM/DD HH:MM:SS");
+			  if (date !== "Invalid date") {
+			    replyTime.val(date);
+			  }
+			}
+	
+		});
 	
 	$(document).ready(function() {
 		  // reply-time 클래스를 가진 input 요소를 선택합니다.

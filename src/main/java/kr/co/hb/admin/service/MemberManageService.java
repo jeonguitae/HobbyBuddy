@@ -69,6 +69,26 @@ public class MemberManageService {
 		return dao.mList();
 	}
 
+	public int banupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.banupdate(id);
+	}
+
+	public int adminupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.adminupdate(id);
+	}
+
+	public int bupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.bupdate(id);
+	}
+
+	public int aupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.aupdate(id);
+	}
+
 
 
 	

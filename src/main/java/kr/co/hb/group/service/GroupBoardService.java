@@ -203,4 +203,13 @@ public class GroupBoardService {
 
 		return dao.gsorting(bigHb, smallHb, gender, city, area, meetingDate);
 	}
+
+	public GroupBoardDTO gdetail1(int gidx, String flag) {
+		
+		if (flag.equals("detail")) {
+			dao.uphit(gidx);
+		}
+		
+		return dao.gdetail1(gidx);
+	}
 }

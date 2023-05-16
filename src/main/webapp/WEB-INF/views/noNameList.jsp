@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<jsp:include page="gnb.jsp"/>
 	<div class="profile">
 		<form action="noNameList.do" method="get">
 			<table>

@@ -68,7 +68,7 @@
        values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
    	</insert>
    
-   	<update id="banupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
+<!--    	<update id="banupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
    		Update member Set ban = true Where id = #{param1}
    	</update>
    	
@@ -82,6 +82,6 @@
    
    <update id="aupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
    		Update member Set admin = false Where id = #{param1}
-   	</update>
+   	</update> -->
 	
 </mapper>

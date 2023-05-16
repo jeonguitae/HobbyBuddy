@@ -64,4 +64,6 @@ public interface GroupBoardDAO {
 	ArrayList<GroupBoardDTO> gsorting(String bigHb, String smallHb, String gender, String city, String area,
 			String meetingDate);
 
+	GroupBoardDTO gdetail1(int gidx);
+
 }
