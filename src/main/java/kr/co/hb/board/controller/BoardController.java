@@ -173,6 +173,8 @@ public class BoardController {
 		logger.info("즐겨찾기로 이동 얍");
 		String id = (String) session.getAttribute("loginId");
 		int row =service.bmarklist(id);
+		logger.info("짜증나게 하네 진짜"+row);
+		
 		if (row==0) {
 			String msg = "즐겨찾기된 회원이 없습니다. 프로필 목록에서 즐겨찾기 해보세요.";
 		}
@@ -193,6 +195,7 @@ public class BoardController {
 			int row=service.bmarkdo(memid, myid);
 			msg = "즐겨찾기되었습니다."; 
 			logger.info("북마크함?"+ memid);
+			logger.info("bmarkdo 됐으면 row는 1"+row);
 		}
 		model.addAttribute("msg", msg);
 		
