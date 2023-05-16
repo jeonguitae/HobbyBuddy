@@ -12,13 +12,7 @@
          *
        FROM notice ORDER BY notice_date DESC
    </select>
-   
-   <select id="noticeSearch" resultType="kr.co.hb.admin.dto.NoticeDTO">
-		SELECT * 
-		FROM notice 
-		WHERE notice_title = #{notice_title} AND id = #{id}
-	</select>
-   
+    
    <insert 
       useGeneratedKeys="true"
       keyColumn="notice_idx"
@@ -70,16 +64,8 @@
          SET notice_title = #{notice_title}
          , notice_content = #{notice_content}
          WHERE notice_idx = #{notice_idx}
-   </update>  
+   </update>     
    
-   <select id="nolist" resultType="kr.co.hb.admin.dto.NoticeDTO">
-		SELECT *
-			FROM notice ORDER BY notice_idx DESC LIMIT #{param1} OFFSET #{param2}
-	</select>
-		
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(notice_idx) FROM notice 
-	</select>
 	<select id="noticeTitle" resultType="kr.co.hb.admin.dto.NoticeDTO">
 		SELECT * FROM notice
 		WHERE notice_title LIKE #{notice_Search}
@@ -115,6 +101,23 @@
        values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
    </insert>   
       
+      
+   <select id="noticeSearch" resultType="kr.co.hb.admin.dto.NoticeDTO">
+		SELECT * 
+		FROM notice 
+		WHERE notice_title = #{notice_title} AND id = #{id}
+	</select>
+	
+	
+   <select id="nolist" resultType="kr.co.hb.admin.dto.NoticeDTO">
+		SELECT *
+			FROM notice ORDER BY notice_idx DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+	<select id="totalCount" resultType="int">
+		SELECT COUNT(notice_idx) FROM notice 
+	</select>
+	
    <select id="nolistSearch" resultType="kr.co.hb.admin.dto.NoticeDTO">
       SELECT
          *

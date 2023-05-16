@@ -46,6 +46,10 @@
 		WHERE q.qboard_no = #{param1} AND h.board_class = '고객센터'
 	</select>   
    
+   <select id="qboardDetail2" resultType="kr.co.hb.board.dto.QboardDTO">
+   	SELECT * FROM qboard WHERE qboard_no = #{param1}
+   </select>
+   
    <delete id="qboardDelete">
       DELETE FROM qboard WHERE qboard_no = #{param1}
    </delete>

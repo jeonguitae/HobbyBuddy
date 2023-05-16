@@ -14,9 +14,7 @@
    table, th, td{
       border: 1px solid black;
       border-collapse: collapse;
-      padding: 5px 10px;
-      
-      
+      padding: 5px 10px;  
    }
    button{
       margin: 5px;
@@ -34,7 +32,7 @@
       width: 30%;
    }
    #paging{
-            text-align: center;
+      text-align: center;
    }
    #profileIcon{
 		display:inline;
@@ -118,7 +116,7 @@
  <title th:text="${pageTitle}">Default Page Title</title>
 </head>
 <body>      
-      ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 <br/><br/>
+${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCount2"> ${sessionScope.alarmCount}</span> 개 <br/><br/>
 	
 	<a href="./"><img width="100" src="/photo/HBL.png"/></a>
 	<br/><br/><br/>
@@ -153,25 +151,12 @@
 		<input type="button" value="이전 알림 보기" class="beforeAlarm" onclick="location.href='beforeAlarm.go'"/>
 		<br/><br id="beforeAlarm"/>
 		<br/><br/><hr/><br/><br/>
-      <h2 align="center">모임 신고 관리 리스트</h2>
-      게시물 갯수 : 
-         <select id="pagePerNum">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-         </select>
-      <form action="search.do">
-      
-         <select name="report">
-            <option value="default">선택</option>
-            <option value="rept_title">제목</option>
-            <option value="reporter">작성자</option>
-         </select>
-      
-         <input type="text" name="report_Search">
-         <button>검색</button>
-      </form>                            
+      <h2 align="center">쪽지/프로필 신고 관리 리스트</h2>
+      <br/>
+		   <input type ="text" id="profileSearchInput" placeholder="제목을 입력해 주세요.">
+		   <button id ="profileSearchButton">검색</button>
+		
+		 <br/>                          
       <table>
          <thead>
             <tr>
@@ -302,6 +287,7 @@ function alarmListRead(){
 	});		
 }
 
+var searchText = 'default';
 var showPage = 1;
 
 listCall(showPage);
@@ -312,6 +298,12 @@ listCall(showPage);
    // 그래서 pagePerNum이 변경되면 부수고 다시 만들어야 한다.
    $('#pagination').twbsPagination('destroy');
 }); 
+ 
+ $('#profileSearchButton').click(function(){
+	   searchText = $('#profileSearchInput').val();
+	   listCall(showPage);
+	   $('#pagination').twbsPagination('destroy');
+	});
 
  
 
@@ -326,15 +318,16 @@ listCall(showPage);
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'report_gboardList.ajax',
+      url:'profileList.ajax',
       data:{
           'page':page,
+            /* 'cnt':$('#pagePerNum').val()     */     
           'search':searchText
       },
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.report_gboardList);
+         listPrint(data.report_profileList);
 
          
          // 총 페이지 수
@@ -370,7 +363,7 @@ function listPrint(list){
 	      content += '<td>'+item.rept_no+'</td>';
 	      content += '<td>'+item.reptboard_class+'</td>';
 	      content += '<td>'+item.preporter+'</td>';
-	      content += '<td><a href="report_gboardDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
+	      content += '<td><a href="report_msg_profileDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
 	      var date = new Date(item.rept_date);
 	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';
 	      content += '<td>'+item.rept_state+'</td>';

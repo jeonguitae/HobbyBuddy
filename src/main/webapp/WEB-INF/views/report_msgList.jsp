@@ -152,24 +152,11 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
 		<br/><br id="beforeAlarm"/>
 		<br/><br/><hr/><br/><br/>
       <h2 align="center">쪽지/프로필 신고 관리 리스트</h2>
-      게시물 갯수 : 
-         <select id="pagePerNum">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-         </select>
-      <form action="search.do">
-      
-         <select name="report">
-            <option value="default">선택</option>
-            <option value="rept_title">제목</option>
-            <option value="reporter">작성자</option>
-         </select>
-      
-         <input type="text" name="report_Search">
-         <button>검색</button>
-      </form>                            
+      <br/>
+		   <input type ="text" id="msgSearchInput" placeholder="피신고자 아이디를 입력해 주세요.">
+		   <button id ="msgSearchButton">검색</button>
+		
+		 <br/>                          
       <table>
          <thead>
             <tr>
@@ -300,6 +287,7 @@ function alarmListRead(){
 	});		
 }
 
+var searchText = 'default';
 var showPage = 1;
 
 listCall(showPage);
@@ -310,6 +298,12 @@ listCall(showPage);
    // 그래서 pagePerNum이 변경되면 부수고 다시 만들어야 한다.
    $('#pagination').twbsPagination('destroy');
 }); 
+ 
+ $('#msgSearchButton').click(function(){
+	   searchText = $('#msgSearchInput').val();
+	   listCall(showPage);
+	   $('#pagination').twbsPagination('destroy');
+	});
 
  
 
@@ -324,15 +318,16 @@ listCall(showPage);
 function listCall(page){
    $.ajax({
       type:'post',
-      url:'report_msg_profileList.ajax',
+      url:'msgList.ajax',
       data:{
           'page':page,
-            'cnt':$('#pagePerNum').val()          
+            /* 'cnt':$('#pagePerNum').val()     */     
+          'search':searchText
       },
       dataType:'json',
       success:function(data){
          console.log(data);
-         listPrint(data.report_msg_profileList);
+         listPrint(data.report_msgList);
 
          
          // 총 페이지 수
@@ -367,7 +362,7 @@ function listPrint(list){
 	      content += '<tr>';
 	      content += '<td>'+item.rept_no+'</td>';
 	      content += '<td>'+item.reptboard_class+'</td>';
-	      content += '<td>'+item.reporter+'</td>';
+	      content += '<td>'+item.preporter+'</td>';
 	      content += '<td><a href="report_msg_profileDetail.go?rept_no='+item.rept_no+'">'+item.rept_title+'</td>';
 	      var date = new Date(item.rept_date);
 	      content += '<td>'+date.toLocaleDateString('ko-KR')+'</td>';

@@ -224,6 +224,10 @@ public class QboardService {
         return page;
 }
 
+	public QboardDTO qboardDetail2(String qboard_no) {
+		return dao.qboardDetail2(qboard_no);
+	}
+
 
 	
 

@@ -5,17 +5,27 @@
 
 <mapper namespace="kr.co.hb.admin.dao.ReportDAO">
 	
-	<select id="report_msg_profileList" resultType="kr.co.hb.admin.dto.ReportDTO">
+	<!-- <select id="report_msgList" resultType="kr.co.hb.admin.dto.ReportDTO">
 	
 	    SELECT r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date
 		FROM report r
-		WHERE reptboard_class = '쪽지' OR reptboard_class = '프로필' 
+		WHERE reptboard_class = '쪽지' 
 		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
 		LIMIT #{param1} OFFSET #{param2}
 
 	</select>
 	
-	<select id="report_fboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
+	<select id="report_profileList" resultType="kr.co.hb.admin.dto.ReportDTO">
+	
+	    SELECT r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date
+		FROM report r
+		WHERE reptboard_class = '프로필' 
+		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
+		LIMIT #{param1} OFFSET #{param2}
+
+	</select> -->
+	
+	<!-- <select id="report_fboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
 	
 	    select r.rept_no, r.preporter, r.reporter, r.admin_id, r.reptboard_class, r.reptboard_num, r.rept_title, r.rept_content, r.rept_date, r.rept_state, r.proc_content, r.proc_date, f.fbNo from report r, fboard f 
 	    WHERE r.reptboard_num = f.fbNo AND reptboard_class = '자유'		 
@@ -31,10 +41,19 @@
 		ORDER BY CASE WHEN admin_id IS NULL THEN 0 ELSE 1 END, admin_id DESC, rept_no DESC
 		LIMIT #{param1} OFFSET #{param2}
 
-	</select>
+	</select> -->
 	
-	<select id="totalCount" resultType="int">
-		SELECT COUNT(rept_no) FROM report 
+	<select id="profileTotalCount" resultType="int">
+		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '프로필' 
+	</select>
+	<select id="msgTotalCount" resultType="int">
+		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '쪽지' 
+	</select>
+	<select id="fboardTotalCount" resultType="int">
+		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '자유' 
+	</select>
+	<select id="gboardTotalCount" resultType="int">
+		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '모임' 
 	</select>
 	
 	<select id="report_msg_profileDetail" resultType="kr.co.hb.admin.dto.ReportDTO">
@@ -89,7 +108,78 @@
 		 values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
 	</insert>
 	
+	<!-- <select id="profileSearch" resultType="kr.co.hb.admin.dto.ReportDTO">
+		SELECT * 
+		FROM report 
+		WHERE preporter = #{preporter}
+	</select> -->
 	
+   <select id="report_profileList" resultType="kr.co.hb.admin.dto.ReportDTO">
+		SELECT *
+			FROM report ORDER BY rept_no DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+   <select id="profileSearch" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT * FROM report where preporter LIKE CONCAT('%' #{search} '%')
+   </select>         
+      
+   <select id="pTotalCountSearch" resultType="int">
+      SELECT COUNT(rept_no) FROM report
+         WHERE preporter LIKE CONCAT('%' #{param1} '%')
+   </select>
+   
+   
+   
+   
+   <select id="report_msgList" resultType="kr.co.hb.admin.dto.ReportDTO">
+		SELECT *
+			FROM report ORDER BY rept_no DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+   <select id="msgSearch" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT
+         *
+      FROM report where preporter LIKE CONCAT('%' #{search} '%')
+   </select>         
+      
+   <select id="mTotalCountSearch" resultType="int">
+      SELECT COUNT(rept_no) FROM report
+         WHERE preporter LIKE CONCAT('%' #{param1} '%')
+   </select>
+   
+   
+   
+   <select id="report_fboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
+		SELECT *
+			FROM report ORDER BY rept_no DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+   <select id="fboardSearch" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT
+         *
+      FROM report where preporter LIKE CONCAT('%' #{search} '%')
+   </select>         
+      
+   <select id="fTotalCountSearch" resultType="int">
+      SELECT COUNT(rept_no) FROM report
+         WHERE preporter LIKE CONCAT('%' #{param1} '%')
+   </select>
+   
+   <select id="report_gboardList" resultType="kr.co.hb.admin.dto.ReportDTO">
+		SELECT *
+			FROM report ORDER BY rept_no DESC LIMIT #{param1} OFFSET #{param2}
+	</select>
+		
+   <select id="gboardSearch" resultType="kr.co.hb.admin.dto.ReportDTO">
+      SELECT
+         *
+      FROM report where preporter LIKE CONCAT('%' #{search} '%')
+   </select>         
+      
+   <select id="gTotalCountSearch" resultType="int">
+      SELECT COUNT(rept_no) FROM report
+         WHERE preporter LIKE CONCAT('%' #{param1} '%')
+   </select>
    
 	
 	
