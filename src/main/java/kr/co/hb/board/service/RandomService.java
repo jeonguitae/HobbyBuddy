@@ -84,6 +84,11 @@ public class RandomService {
 		return dao.banupdate(id);
 	}
 
+	public int adminupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.adminupdate(id);
+	}
+
 
 
 

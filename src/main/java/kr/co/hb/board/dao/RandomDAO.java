@@ -28,6 +28,8 @@ public interface RandomDAO {
 
 	int banupdate(String id);
 
+	int adminupdate(String id);
+
 
 
 

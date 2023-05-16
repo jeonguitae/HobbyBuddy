@@ -193,4 +193,9 @@ public class RandomController {
 			return "redirect:/detail.do?id=" + id;
 		}
 
+		@RequestMapping(value="/adminupdate.do", method = RequestMethod.GET)
+		public String adminupdate(@RequestParam String id, Model model) {
+		int row = Service.adminupdate(id);
+		return "redirect:/detail.do?id=" + id;
+	}
 }
