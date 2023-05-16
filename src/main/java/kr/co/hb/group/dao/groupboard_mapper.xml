@@ -5,7 +5,14 @@
 <mapper namespace="kr.co.hb.group.dao.GroupBoardDAO">
 
 	<select id="glist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist ORDER BY gidx DESC
+		SELECT *
+		FROM gboardlist g
+		WHERE g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
 	</select>
 	
 	<!-- <select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -145,5 +152,14 @@
         AND (area = #{param5} OR #{param5} IS NULL)
         AND (meeting_date = #{param6} OR #{param6} IS NULL)
 	</select>
+	
+	<select id="adminchk" resultType="int">
+   		SELECT admin FROM member WHERE id = #{param1}
+   </select>
+   
+   <insert id="gboardSecretSet">
+      insert into secret (writer_id, admin_id, sboard_class, sboard_title, sboard_num)
+      values (#{param1},#{param2},#{param3},#{param4},#{param5})
+   </insert>
 	
 </mapper>

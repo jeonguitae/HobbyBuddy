@@ -212,4 +212,15 @@ public class GroupBoardService {
 		
 		return dao.gdetail1(gidx);
 	}
+
+	public int adminchk(String loginId) {
+		
+		return dao.adminchk(loginId);
+	}
+
+	public void gboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
+			String sboard_num) {
+		dao.gboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+		
+	}
 }
