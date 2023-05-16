@@ -212,6 +212,23 @@ public class BoardService {
 			dao.coAlarm(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num);		
 		}
 	}
+
+	
+
+	public int bmarkch(String memid, String myid) {
+		return dao.bmarkch(memid, myid);
+	}
+
+	public int bmarklist(String id) {
+		return dao.bmarklist(id);
+	}
+
+
+	public ArrayList<BoardDTO> bmarkselect(String id) {
+		return dao.bmarkselect(id);
+	}
+
+
 	
 	
 	
