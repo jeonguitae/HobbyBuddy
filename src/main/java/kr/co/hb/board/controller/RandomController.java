@@ -4,6 +4,8 @@ package kr.co.hb.board.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.board.dto.RandomDTO;
 import kr.co.hb.board.service.RandomService;
 import kr.co.hb.group.dto.GroupBoardDTO;
@@ -183,6 +186,11 @@ public class RandomController {
 		}
 		return "noNameDetail";
 	}
-	
-	
+		
+		@RequestMapping(value="/banupdate.do", method = RequestMethod.GET)
+			public String banupdate(@RequestParam String id, Model model) {
+			int row = Service.banupdate(id);
+			return "redirect:/detail.do?id=" + id;
+		}
+
 }

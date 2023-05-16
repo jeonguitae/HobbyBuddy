@@ -65,6 +65,11 @@
 	<insert id="reList" parameterType="hashmap">
       insert into report (reporter,preporter,reptboard_class,reptboard_num,rept_title,rept_content)
        values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
-   </insert>
+   	</insert>
+   
+   	<update id="banupdate" parameterType="kr.co.hb.board.dto.RandomDTO">
+   		Update member Set ban = true Where id = #{param1}
+   	</update>
+   
 	
 </mapper>

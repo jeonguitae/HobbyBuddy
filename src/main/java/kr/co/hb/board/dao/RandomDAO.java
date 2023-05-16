@@ -26,6 +26,8 @@ public interface RandomDAO {
 
 	int reList(HashMap<String, String> params);
 
+	int banupdate(String id);
+
 
 
 

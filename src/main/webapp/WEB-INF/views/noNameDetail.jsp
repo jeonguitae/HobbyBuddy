@@ -66,7 +66,7 @@
       	<tr>
       		<th>정지 상태</th>
       		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.ban}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-      		<td><input type="button" value="정지"/></td>
+      		<td rowspan="4"><input type="button" value="회원 정지"/></td>
       	</tr>
       	<tr>
       		<th>경고 당한 횟수</th>

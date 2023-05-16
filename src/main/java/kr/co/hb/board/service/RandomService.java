@@ -79,6 +79,11 @@ public class RandomService {
 		return dao.reList(params);
 	}
 
+	public int banupdate(String id) {
+		logger.info("아이디 : " + id );
+		return dao.banupdate(id);
+	}
+
 
 
 

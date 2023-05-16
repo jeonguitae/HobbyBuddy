@@ -72,20 +72,23 @@
 <!--                <input type="button" value="뒤로가기" onclick="redirect:/profile.go"/> -->
             </th>
          </tr>
-      </table>
-      
+     		 </table>
+        
+     
       <br/>
       <div id = "admin">
       <table>
          <tr>
             <th>정지 상태</th>
             <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.ban}&nbsp;&nbsp;&nbsp;&nbsp;</td>
-            <td><input type="button" value="정지"/></td>
+            <td rowspan="4"><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>
+
+            
+            
          </tr>
          <tr>
             <th>경고 당한 횟수</th>
-            <td>&nbsp;&nbsp;${sessionScope.warning}&nbsp;&nbsp;</td>
-            <td><input type="button" onclick="increaseWarningCount()" value="경고"/> </td>
+            <td>&nbsp;&nbsp;${member.warning}&nbsp;&nbsp;</td>
          </tr>
          <tr>
             <th>랜덤매칭 동의 여부</th>
@@ -98,7 +101,7 @@
          
       </table>
 </div>
-   </form>
+ </form>
 </body>
 
 <script>
