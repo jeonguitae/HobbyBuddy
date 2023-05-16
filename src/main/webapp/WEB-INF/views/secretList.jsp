@@ -152,24 +152,11 @@
 		<br/><br id="beforeAlarm"/>
 		<br/><br/><hr/><br/><br/>
       <h2 align="center">비밀글 처리 관리</h2>
-      게시물 갯수 : 
-         <select id="pagePerNum">
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-         </select>
-      <form action="search.do">
-      
-         <select name="secret">
-            <option value="default">선택</option>
-            <option value="sobard_title">제목</option>
-            <option value="writer_id">작성자</option>
-         </select>
-      
-         <input type="text" name="secret_Search">
-         <button>검색</button>
-      </form>                            
+      <br/>
+	   <input type ="text" id="secretSearchInput" placeholder="게시판 종류 또는 아이디를 입력해 주세요.">
+	   <button id ="secretSearchButton">검색</button>
+	
+	 <br/>                
       <table>
          <thead>
             <tr>
@@ -303,7 +290,7 @@ var msg = "${msg}";
 if(msg!=""){
    alert(msg);
 }
-
+var searchText = 'default';
 var showPage = 1;
 
 listCall(showPage);
@@ -315,7 +302,11 @@ listCall(showPage);
    $('#pagination').twbsPagination('destroy');
 }); 
 
- 
+ $('#secretSearchButton').click(function(){
+	   searchText = $('#secretSearchInput').val();
+	   listCall(showPage);
+	   $('#pagination').twbsPagination('destroy');
+	});
 
 /* $('#search_btn').click(function() {
 	var searchClass = $("#search_Class").val();
@@ -331,7 +322,7 @@ function listCall(page){
       url:'secretList.ajax',
       data:{
           'page':page,
-            'cnt':$('#pagePerNum').val()          
+          'search':searchText           
       },
       dataType:'json',
       success:function(data){
