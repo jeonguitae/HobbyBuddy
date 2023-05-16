@@ -61,9 +61,9 @@ public class NoticeService {
 	      
 	      String id = dto.getId();
 	      
-	      if (!photo.getOriginalFilename().equals("")) {
-	         noticeFileSave(id, board_num, photo);
-	      }
+	      if (photo != null && !photo.getOriginalFilename().equals("")) {
+	    	   noticeFileSave(id, board_num, photo);
+	    	}
 	
 	      
 	      return page;

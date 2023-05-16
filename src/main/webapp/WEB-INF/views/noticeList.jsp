@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="resources/css/css.css">
 <style>
    table, th, td{
-      border: 1px solid black;
+      /* border: 1px solid black; */
       border-collapse: collapse;
       padding: 5px 10px; 
    }
@@ -157,7 +157,7 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
             <option value="40">40</option>
          </select> -->
          <br/>
-		   <input type ="text" id="noticeboardSearchInput" placeholder="제목을 입력">
+		   <input type ="text" id="noticeboardSearchInput" placeholder="제목을 입력해 주세요.">
 		   <button id ="noticeboardSearchButton">검색</button>
 		
 		 <br/>
@@ -178,9 +178,10 @@ ${sessionScope.loginId} 님 안녕하세요 ? / 새 알림 : <span id="alarmCoun
                <th>번호</th>
                <th>작성자</th>
                <th>제목</th>
-               <th id="sortDate">작성일<i class="fas fa-sort"></i></th>
+               <th id="sortDate">작성일</th>
+               <!-- <i class="fas fa-sort"></i> -->
                <th>조회수</th>                      
-               <th id="sortChk">공개여부<i class="fas fa-sort"></i></th>                      
+               <th id="sortChk">공개여부</th>                      
             </tr>            
          </thead>
          <tbody id="list">             
@@ -386,9 +387,9 @@ function listCall(page){
 function listPrint(list) {
 	   var content = '';
 	   list.forEach(function(item, idx) {
-	      content += '<tr>';
+		   content += '<tr style="color: red;">';
 	      content += '<td>' + item.notice_idx + '</td>';
-	      content += '<td><a href="noticeDetail.go?notice_idx=' + item.notice_idx + '">' + item.id + '</a></td>';
+	      content += '<td>' + item.id + '</td>';
 	      content += '<td><a href="noticeDetail.go?notice_idx=' + item.notice_idx + '">' + item.notice_title + '</a></td>';
 	      var date = new Date(item.notice_date);
 	      content += '<td>' + date.toLocaleDateString('ko-KR') + '</td>';
@@ -421,7 +422,7 @@ function listPrint(list) {
 
 
 
-var dateSortOrder = -1; 
+/* var dateSortOrder = -1; 
 var chkSortOrder = -1; 
 
 $('#sortDate').click(function() {
@@ -473,6 +474,6 @@ $('#sortChk').click(function() {
       }
    });
 });
-
+ */
 </script>
 </html>

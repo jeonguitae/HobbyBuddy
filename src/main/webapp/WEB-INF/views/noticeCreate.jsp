@@ -50,8 +50,8 @@
          <tr>
             <th>사진</th>
             <td>
-               <input type="file" name="photo" multiple="multiple">               
-            </td>
+	          <input type="file" name="photo">
+	        </td>
          </tr>         
          <tr>            
             <th colspan="2">               

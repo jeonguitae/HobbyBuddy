@@ -41,6 +41,20 @@
    #listBack{
    	background: aqua;
    }
+   .photo-cell {
+    width: 20%;
+    height: 0;
+    padding-bottom: 100%; /* 셀의 높이를 셀의 가로 너비와 같게 조절 */
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .photo-cell img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 이미지가 셀에 꽉 차도록 조절 */
+  }
 </style>
 </head>
 <body>
@@ -75,10 +89,10 @@
          </tr>
          
          <c:if test="${dto.new_photo_name ne null }">
-            <tr>
-               <th>사진</th>
-               <td> <img src="/photo/${dto.new_photo_name}" width="100"/></td>         
-            </tr>
+         	<th>사진</th>
+            <td class="photo-cell">
+		      <img src="/photo/${dto.new_photo_name}">
+		    </td>
          </c:if>            
          <tr>
             <th colspan="2">
