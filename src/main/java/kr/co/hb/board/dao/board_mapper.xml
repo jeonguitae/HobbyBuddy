@@ -124,4 +124,7 @@
 		
 	</select>
 
+	<delete id="bcancel" >
+		DELETE FROM bmark WHERE myid=#{param1} AND memid=#{param2} 
+	</delete>
 </mapper>

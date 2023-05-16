@@ -21,6 +21,7 @@
 
 </head>
 <body>
+	<jsp:include page="gnb.jsp"/>
 	<div class="profile">
 		<form action="profile.do" method="get">
 			<table>

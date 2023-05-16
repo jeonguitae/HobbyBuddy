@@ -31,6 +31,7 @@
 				<th>지역</th>
 				<th>취미</th>
 				<th>성별</th>
+				<th>해제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,10 +43,11 @@
 					<td>${member.area}</td>
 					<td>${member.small_hb}</td>
 					<td>${member.gender}</td>
+					<td><input type="button" name="cancel" value="해제" onclick="location.href='bcancel.do?myid=${sessionScope.loginId}&memid=${member.id}'"/></td>
 				</tr>			
 			</c:forEach>
 				<tr>
-	                  <td class="psearch" colspan="8">      
+	                  <td class="psearch" colspan="9">      
 	                     <form action="psearch.do">
 	                        <input type="text" name="search" value=""/>
 	                        <select name="ssorting">
@@ -61,10 +63,10 @@
 	
 </body>
 <script>
-	var msg = "${msg}";
+	var msg = "${not empty msg ? msg : ''}";
 	if (msg !== "") {
-    	alert(msg);
-	}
+        alert(msg);
+    }
 	
 	var loginId = "${sessionScope.loginId}";   
 	myHobbyList();
