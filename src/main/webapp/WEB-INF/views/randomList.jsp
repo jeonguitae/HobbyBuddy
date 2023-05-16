@@ -15,7 +15,7 @@
 </style>
 
 </head>
-	
+	<jsp:include page="gnb.jsp"/>
 	<body>
 		<div class="profile">
 			<form action="randomList.do" method="get">

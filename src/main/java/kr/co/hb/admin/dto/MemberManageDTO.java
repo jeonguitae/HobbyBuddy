@@ -15,9 +15,7 @@ public class MemberManageDTO {
 	private String big_hb;
 	private String small_hb;
 	private boolean random;
-	
-	
-	
+	private String warning;
 
 	public boolean isRandom() {
 		return random;
@@ -96,6 +94,12 @@ public class MemberManageDTO {
 	}
 	public void setBan(boolean ban) {
 		this.ban = ban;
+	}
+	public String getWarning() {
+		return warning;
+	}
+	public void setWarning(String warning) {
+		this.warning = warning;
 	}
 	
 }
