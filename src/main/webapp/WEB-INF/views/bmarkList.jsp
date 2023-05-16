@@ -25,7 +25,6 @@
 	<table>
 		<thead>
 			<tr>
-				<th>프로필 사진</th>
 				<th>아이디</th>
 				<th>이름</th>
 				<th>나이</th>
@@ -37,8 +36,6 @@
 		<tbody>
 			<c:forEach items="${list}" var="member">
 				<tr>
-					
-					<td>프로필 사진 자리</td>
 					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
 					<td>${member.name}</td>
 					<td>${member.age}</td>
@@ -64,10 +61,9 @@
 	
 </body>
 <script>
-	
 	var msg = "${msg}";
-	if(msg != ""){
-	   alert(msg);
+	if (msg !== "") {
+    	alert(msg);
 	}
 	
 	var loginId = "${sessionScope.loginId}";   

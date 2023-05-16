@@ -86,7 +86,7 @@
 
 	<select id="coList" resultType="kr.co.hb.board.dto.BoardDTO">
 		SELECT fbNo, id, coContent,
-		coTime, coNo FROM comment where fbNo =#{param1}
+		coTime, coNo FROM comment where fbNo =#{param1} ORDER BY coTime DESC
 	</select>
 
 	<insert id="cowrite" parameterType="hashmap">
@@ -104,10 +104,24 @@
 		VALUES(#{param2},#{param1})
 	</insert>
 
+	<select id="bmarklist" resultType="int">
+		SELECT * FROM bmark where myid=#{param1}
+	</select>
+
+	<select id="bmarkch" resultType="int">
+		SELECT COUNT(listnum) FROM bmark WHERE myid=#{param2} and memid=#{param1}
+	</select>
+
 	<insert id="coAlarm">
 		insert into alarm_list
 		(id_send,id_receive,alarm_title,alarm_content,alarm_class,alarm_num)
 		values (#{param1},#{param2},#{param3},#{param4},#{param5},#{param6})
 	</insert>
+	
+	<select id="bmarkselect" resultType="kr.co.hb.board.dto.BoardDTO">
+		SELECT m.id ,m.name, m.age, m.area, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
+		WHERE m.id IN(SELECT memid FROM bmark WHERE myid = #{param1)
+		
+	</select>
 
 </mapper>

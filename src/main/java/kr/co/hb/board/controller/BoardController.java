@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
+import javax.swing.AbstractListModel;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +34,7 @@ public class BoardController {
 	
 	@Autowired BoardService service;
 	@Autowired MemberService mservice;
-	
+	@Autowired MemberService service2;
 	
 	@RequestMapping(value="/flist.go")
 	public String list(Model model) {		
@@ -168,19 +169,40 @@ public class BoardController {
 	}
 
 	@RequestMapping(value="/bmarklist.go")
-	public String bmarkgo(HttpSession session) {
+	public String bmarkgo(HttpSession session, Model model) {
 		logger.info("즐겨찾기로 이동 얍");
 		String id = (String) session.getAttribute("loginId");
+		int row =service.bmarklist(id);
+		if (row==0) {
+			String msg = "즐겨찾기된 회원이 없습니다. 프로필 목록에서 즐겨찾기 해보세요.";
+		}
+		ArrayList<BoardDTO> bmarklist= service.bmarkselect(id);
+		/* ArrayList<MemberDTO> big_hb = service2.big_hb(); */
+		model.addAttribute("list", bmarklist);
 		return "bmarkList";
 	}
 	
 	@RequestMapping(value="/bmark.do")
 	public String bmarkdo(@RequestParam String memid,@RequestParam String myid, Model model) {
-		int row=service.bmarkdo(memid, myid);
-		logger.info("북마크함?"+ memid);
 		
-		return "bmarkList";
+		int row1= service.bmarkch(memid, myid);
+		String msg = "이미 즐겨찾기한 회원입니다.";
+		logger.info("비마크 : " + memid + myid);
+		logger.info("row1"+row1);
+		if (row1 == 0) {
+			int row=service.bmarkdo(memid, myid);
+			msg = "즐겨찾기되었습니다."; 
+			logger.info("북마크함?"+ memid);
+		}
+		model.addAttribute("msg", msg);
+		
+		return "redirect:/bmarklist.go";
 	}
+	/*
+	 * @RequestMapping(value="/bmarkselect.do") public String
+	 * bmarkselect(HashMap<String, String> params) { service.bmarkselect(params); }
+	 */
+	
 }
 	 
 

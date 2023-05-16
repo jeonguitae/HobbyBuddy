@@ -50,6 +50,15 @@ public interface BoardDAO {
 	void coAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
 			String alarm_num);
 
+	int bmarkch(String memid, String myid);
+
+	int bmarklist(String id);
+
+	ArrayList<BoardDTO> bmarkselect(String id);
+
+
+	
+
 	
 	
 
