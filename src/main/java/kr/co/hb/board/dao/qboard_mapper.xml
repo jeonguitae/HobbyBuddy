@@ -43,7 +43,7 @@
 	    h.photoIdx, h.new_photo_name 
 		FROM qboard q
 		LEFT JOIN hbPhoto h ON q.qboard_no = h.board_num		
-		WHERE q.qboard_no = #{param1} AND h.photoidx = #{param2}
+		WHERE q.qboard_no = #{param1}
 	</select>   
    
    <delete id="qboardDelete">

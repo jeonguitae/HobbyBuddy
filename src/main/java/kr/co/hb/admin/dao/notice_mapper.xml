@@ -44,7 +44,7 @@
       select n.notice_idx, n.notice_bHit, n.id, n.notice_date, n.notice_title,n.notice_content,n.notice_chk
          ,p.photoIdx, p.new_photo_name
       FROM notice n LEFT JOIN hbphoto p ON n.notice_idx= p.board_num 
-      WHERE n.notice_idx = #{param1}   
+      WHERE n.notice_idx = #{param1} AND p.board_class = '공지사항'  
    </select>
    
    <delete id="noticeDelete">
