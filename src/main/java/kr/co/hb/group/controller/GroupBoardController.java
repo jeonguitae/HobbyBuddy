@@ -161,6 +161,7 @@ public class GroupBoardController {
 	@RequestMapping(value="/gdetail.do")
 	public String gdetail(Model model, @RequestParam int gidx, HttpSession session) {
 		String page = "";
+		session.setAttribute("gidx", gidx);
 		
 		logger.info("idx : " + gidx);
 		GroupBoardDTO dto = service.gdetail(gidx, "detail");

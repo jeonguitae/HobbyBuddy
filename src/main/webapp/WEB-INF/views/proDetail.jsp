@@ -15,6 +15,10 @@
 
    }
    
+   #admin{
+   	display: none;
+   }
+   
 </style>
 
 </head>
@@ -81,27 +85,27 @@
      
       <br/>
       <div id = "admin">
-      <table>
-      	<tr>
-      		<th>관리자 여부</th>
-      		<td>${member.admin}</td>
-      		<td><input type="button" value="관리자 설정" onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
-      	</tr>
-         <tr>
-            <th>정지 상태</th>
-            <td>${member.ban}</td>
-            <td><input type="button" value="관리자 해지" onclick="location.href='aupdate.do?id=${member.id}'"/></td>
-         </tr>
-         <tr>
-            <th>경고 당한 횟수</th>
-            <td>${member.warning}</td>
-            <td><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>   
-         </tr>
-         <tr>
-            <th>랜덤매칭 동의 여부</th>
-            <td>${member.random}</td>
-            <td><input type="button" value="정지 해제" onclick="location.href='bupdate.do?id=${member.id}'"/></td>
-      </table>
+	      <table>
+	      	<tr>
+	      		<th>관리자여부</th>
+	      		<td>${member.admin}</td>
+	      		<td><input type="button" value="관리자 설정" onclick="location.href='adminupdate.do?id=${member.id}'"/></td>
+	      	</tr>
+	         <tr>
+	            <th>정지 상태</th>
+	            <td>${member.ban}</td>
+<%-- 	            <td><input type="button" value="관리자 해지" onclick="location.href='aupdate.do?id=${member.id}'"/></td> --%>
+	         </tr>
+	         <tr>
+	            <th>경고 당한 횟수</th>
+	            <td>${member.warning}</td>
+	            <td><input type="button" value="회원 정지" onclick="location.href='banupdate.do?id=${member.id}'"/></td>   
+	         </tr>
+	         <tr>
+	            <th>랜덤매칭 동의 여부</th>
+	            <td>${member.random}</td>
+<%-- 	            <td><input type="button" value="정지 해제" onclick="location.href='bupdate.do?id=${member.id}'"/></td> --%>
+	      </table>
 </div>
  <!-- </form> -->
 </body>
@@ -123,12 +127,9 @@ if(msg != ""){
 
    var adminChk = "${sessionScope.adminChk}";
    
-   if (adminChk === 'true') {
-        document.getElementById('admin').style.display = 'block';
-    } else {
-        document.getElementById('admin').style.display = 'none';
+   if (adminChk == '1') {
+	   $('#admin').css('display', 'block');
     }
-
 
    
    

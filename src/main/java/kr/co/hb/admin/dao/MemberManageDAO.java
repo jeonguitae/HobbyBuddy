@@ -24,4 +24,12 @@ public interface MemberManageDAO {
 
 	ArrayList<MemberManageDTO> mList();
 
+	int banupdate(String id);
+
+	int adminupdate(String id);
+
+	int bupdate(String id);
+
+	int aupdate(String id);
+
 }

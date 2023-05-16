@@ -66,7 +66,7 @@ public class QboardContrller {
 	      String page = "redirect:/qboardList.go";
 	      
 	      QboardDTO dto = service.qboardDetail(qboard_no);
-	      
+	
 	      if (dto != null) {
 	         page = "qBoardDetail";
 	         model.addAttribute("dto", dto);

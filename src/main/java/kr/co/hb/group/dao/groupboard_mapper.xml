@@ -17,7 +17,7 @@
 	<select id="gdetail" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT g.gidx, g.id, g.subject, g.minage, g.maxage, g.city, g.area, g.meeting_date, g.content, g.mannertp, g.maxmem, g.big_hb, g.small_hb
 		,h.photoIdx, h.new_photo_name FROM gboardlist g
-		LEFT JOIN hbPhoto h ON g.gidx = h.board_num WHERE g.gidx = #{gidx}
+		LEFT JOIN hbPhoto h ON g.gidx = h.board_num WHERE g.gidx = #{gidx} AND h.board_class = '모임'
 	</select>
 	
 	<insert 
