@@ -220,6 +220,7 @@ public class BoardService {
 	}
 
 	public int bmarklist(String id) {
+		logger.info("bmarklist왔음");
 		return dao.bmarklist(id);
 	}
 
