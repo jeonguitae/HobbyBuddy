@@ -60,7 +60,7 @@
 		h.photoIdx,
 		h.new_photo_name FROM fBoard f
 		LEFT JOIN hbPhoto h ON f.fbNo =
-		h.board_num WHERE f.fbNo = #{fbNo}
+		h.board_num WHERE f.fbNo = #{fbNo} AND h.board_class="자유"
 	</select>
 
 	<delete id="fdelete">
