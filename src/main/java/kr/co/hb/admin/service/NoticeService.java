@@ -161,8 +161,10 @@ public class NoticeService {
 		return list;
 	}
 
-	public HashMap<String, Object> noticePageList(int page, int cnt) {
+	public HashMap<String, Object> noticePageList(int page, int cnt, String search) {
 		
+		
+	 logger.info("서비스");
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		// 1page = offset : 0
@@ -174,17 +176,38 @@ public class NoticeService {
 		// 만들 수 있는 총 페이지 수 
 		// 전체 게시물 / 페이지 당 보여줄 수 
 		int total = dao.totalCount();
+		
+		
+		if (search.equals("default") || search.equals("")) {
+	         total = dao.totalCount();
+	         logger.info("서비스1");
+	         
+	      } else {
+	         total = dao.ntotalCountSearch(search);
+	         logger.info("서비스2");
+	      };	
+		
+		
 		int range = total%cnt == 0 ? total/cnt : (total/cnt) + 1;
 		
 		
 		page = page > range ? range : page;
 		
+		ArrayList<NoticeDTO> nolist = dao.nolist(cnt, offset);
+		
+		if (search.equals("default") || search.equals("")) {
+			nolist = dao.nolist(cnt, offset);
+			logger.info("서비스3");
+	         
+	      } else {
+	    	  nolist = dao.nolistSearch(search);
+	    	  logger.info("서비스4");
+	      }
+		
 		map.put("currPage", page);
-		map.put("pages", range);
+		map.put("pages", range);		
 		
-		ArrayList<NoticeDTO> noticePageList = dao.noticePageList(cnt, offset);
-		
-		map.put("noticePageList", noticePageList);
+		map.put("nolist", nolist);
 		
 
 		return map;

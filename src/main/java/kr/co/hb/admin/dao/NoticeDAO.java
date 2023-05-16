@@ -27,8 +27,6 @@ public interface NoticeDAO {
 
 	int totalCount();
 
-	ArrayList<NoticeDTO> noticePageList(int cnt, int offset);
-
 	ArrayList<NoticeDTO> noticeTitle(HashMap<String, String> params);
 
 	ArrayList<NoticeDTO> noticeId(HashMap<String, String> params);
@@ -47,6 +45,12 @@ public interface NoticeDAO {
 
 	void noticeAlarm(String id_send, String id_receive, String alarm_title, String alarm_content, String alarm_class,
 			String alarm_num);
+
+	int ntotalCountSearch(String search);
+
+	ArrayList<NoticeDTO> nolist(int cnt, int offset);
+
+	ArrayList<NoticeDTO> nolistSearch(String search);
 
 
 	

@@ -30,10 +30,13 @@ public class NoitceController {
 	@ResponseBody
 	public HashMap<String, Object> noticeList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String cnt,
+			@RequestParam String search
 			){
 		
-		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt));
+		logger.info("컨트롤러 등장");
+		
+		return service.noticePageList(Integer.parseInt(page), Integer.parseInt(cnt),search);
 	}	
 	
 	@RequestMapping(value = "/update_chk.ajax", method = RequestMethod.POST)
@@ -124,10 +127,24 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/noticeUpdate.do", method = RequestMethod.POST)
-	   public String noticeUpdate(MultipartFile photo,@RequestParam HashMap<String, String> params) {
-	      
-	      return service.noticeUpdate(photo,params);
+	   public String noticeUpdate(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
+	       
+		   String success = "redirect:/noticeList.go";		   
+		   
+	       if (params.get("notice_title") == null || params.get("notice_title").equals("")) {
+	           model.addAttribute("msg", "제목에 공백을 넣을 수 없습니다.");
+	       } else if (params.get("notice_content") == null || params.get("notice_content").equals("")) {
+	           model.addAttribute("msg", "내용에 공백을 넣을 수 없습니다.");
+	       } else {
+	           model.addAttribute("msg", "정상적으로 작성 되었습니다.");	 
+	           
+	           success = service.noticeUpdate(photo, params);
+	       }
+	       
+	       return success;
 	   }
+
+
 	   
 	   @RequestMapping(value = "/noticeDetail.go")
 	   public String noticeDetail(Model model, @RequestParam int notice_idx) {
