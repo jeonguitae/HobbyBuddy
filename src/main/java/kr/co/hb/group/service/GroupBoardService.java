@@ -30,12 +30,13 @@ public class GroupBoardService {
 		return dao.glist();
 	}
 	
-	public ArrayList<GroupBoardDTO> gsorting(HashMap<String, String> params) {
-		
-		logger.info("검색 조건 : " + params);
-		
-		return dao.gsorting(params);
-	}
+	/*
+	 * public ArrayList<GroupBoardDTO> gsorting(HashMap<String, String> params) {
+	 * 
+	 * logger.info("검색 조건 : " + params);
+	 * 
+	 * return dao.gsorting(params); }
+	 */
 	public int gwrite(GroupBoardDTO dto) {
 		
 		logger.info("생성 데이터 : " + dto);
@@ -190,5 +191,16 @@ public class GroupBoardService {
 	public ArrayList<GroupBoardDTO> etcglist() {
 		
 		return dao.etcglist();
+	}
+
+	public int reportGroupDo(HashMap<String, String> params) {
+		
+		return dao.reportGroupDo(params);
+	}
+
+	public ArrayList<GroupBoardDTO> gsorting(String bigHb, String smallHb, String gender, String city, String area,
+			String meetingDate) {
+
+		return dao.gsorting(bigHb, smallHb, gender, city, area, meetingDate);
 	}
 }

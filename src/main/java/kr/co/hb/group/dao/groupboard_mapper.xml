@@ -8,11 +8,11 @@
 		SELECT * FROM gboardlist ORDER BY gidx DESC
 	</select>
 	
-	<select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+	<!-- <select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * 
 		FROM gboardlist 
 		WHERE big_hb = #{big_hb} AND small_hb = #{small_hb} AND gender = #{gender} AND city = #{city} AND area = #{area} AND meeting_date = #{meeting_date}
-	</select>
+	</select> -->
 	
 	<select id="gdetail" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT g.gidx, g.id, g.subject, g.minage, g.maxage, g.city, g.area, g.meeting_date, g.content, g.mannertp, g.maxmem, g.big_hb, g.small_hb
@@ -125,6 +125,21 @@
 	
 	<select id="etcglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
 		SELECT * FROM gboardlist WHERE big_hb = '기타' ORDER BY gidx DESC
+	</select>
+	
+	<insert id="reportGroupDo" parameterType="hashmap">
+		insert into report (reporter, preporter, reptboard_class, reptboard_num, rept_title, rept_content)
+		 values (#{reporter},#{preporter},#{reptboard_class},#{reptboard_num},#{rept_title},#{rept_content})
+	</insert>
+	
+	<select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
+		SELECT * FROM gboardlist
+        WHERE (big_hb = #{param1} OR #{param1} IS NULL)
+        AND (small_hb = #{param2} OR #{param2} IS NULL)
+        AND (gender = #{param3} OR #{param3} IS NULL)
+        AND (city = #{param4} OR #{param4} IS NULL)
+        AND (area = #{param5} OR #{param5} IS NULL)
+        AND (meeting_date = #{param6} OR #{param6} IS NULL)
 	</select>
 	
 </mapper>
