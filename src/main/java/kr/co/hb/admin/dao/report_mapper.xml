@@ -49,10 +49,10 @@
 	<select id="msgTotalCount" resultType="int">
 		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '쪽지' 
 	</select>
-	<select id="fboardTotalCount" resultType="int">
+	<select id="fTotalCount" resultType="int">
 		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '자유' 
 	</select>
-	<select id="gboardTotalCount" resultType="int">
+	<select id="gTotalCount" resultType="int">
 		SELECT COUNT(rept_no) FROM report WHERE reptboard_class = '모임' 
 	</select>
 	
