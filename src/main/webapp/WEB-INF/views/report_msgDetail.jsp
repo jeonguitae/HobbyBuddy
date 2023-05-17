@@ -6,45 +6,61 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <html>
-<head>
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
-	table, th, td{
+	  table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
    }
-   button{
+
+   button {
       margin: 5px;
    }
+
    table {
       width: 500px;
    }
-   input[type="text"]{
-      width: 40%;   
+
+   input[type="text"] {
+      width: 40%;
    }
-   #search{
+
+   #search {
       display: inline-block;
    }
+
    colgroup {
       width: 30%;
    }
-   #chkBtn{
-   	 float: left;
+
+   #chkBtn {
+      float: left;
    }
-   #rightt{
-   	float: right;
+
+   #rightt {
+      float: right;
    }
-   #listBack{
-   	background: aqua;
+
+   #listBack {
+      background: aqua;
+   }
+
+   /* 추가된 스타일 */
+   textarea {
+      width: 100%;
+      height: 100px;
    }
 </style>
+<head>
 </head>
 <body>
-	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">쪽지 신고 상세</h3>
+<jsp:include page="gnb.jsp"/>
+   <h1 align="center">쪽지 신고 상세</h1>
    
       <table>
          <tr>

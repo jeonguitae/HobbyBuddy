@@ -13,35 +13,51 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="resources/css/css.css">
 <style>
-   table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
-            padding: 5px 10px;
-        }
+   table {
+  border-collapse: collapse;
+  width: 100%;
+}
 
-        button {
-            margin: 5px;
-        }
+th, td {
+  border: 1px solid black;
+  padding: 8px;
+}
 
-        table {
-            width: 1000px;
-        }
+th:first-child,
+td:first-child {
+  border-left: none;
+}
 
-        input[type="text"] {
-            width: 40%;
-        }
+th:last-child,
+td:last-child {
+  border-right: none;
+}
 
-        #search {
-            display: inline-block;
-        }
+button {
+  margin: 5px;
+}
 
-        colgroup {
-            width: 30%;
-        }
+input[type="text"] {
+  width: 40%;
+}
 
-        #paging {
-            text-align: center;
-        }
+#search {
+  display: inline-block;
+}
+
+colgroup {
+  width: 30%;
+}
+
+#paging {
+  text-align: center;
+}
+
+th:nth-child(4),
+td:nth-child(4) {
+  width: 25%;
+}
+
    
       
 </style>
@@ -54,7 +70,9 @@
 		   <input type ="text" id="fboardSearchInput" placeholder="피신고자 아이디를 입력해 주세요.">
 		   <button id ="fboardSearchButton">검색</button>
 		
-		 <br/>                      
+		 <br/>      
+		 <br>
+	<br>                
       <table>
          <thead>
             <tr>

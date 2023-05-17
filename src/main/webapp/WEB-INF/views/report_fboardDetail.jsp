@@ -11,35 +11,50 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
-	table, th, td{
+	  table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
    }
-   button{
+
+   button {
       margin: 5px;
    }
+
    table {
       width: 500px;
    }
-   input[type="text"]{
-      width: 40%;   
+
+   input[type="text"] {
+      width: 40%;
    }
-   #search{
+
+   #search {
       display: inline-block;
    }
+
    colgroup {
       width: 30%;
    }
-   #chkBtn{
-   	 float: left;
+
+   #chkBtn {
+      float: left;
    }
-   #rightt{
-   	float: right;
+
+   #rightt {
+      float: right;
    }
-   #listBack{
-   	background: aqua;
+
+   #listBack {
+      background: aqua;
    }
+
+   /* 추가된 스타일 */
+   textarea {
+      width: 100%;
+      height: 100px;
+   }
+
 </style>
 </head>
 <body>
