@@ -180,13 +180,19 @@
 	table[class="memlist"] {
 	  top: 300px;
 	  right: 0px;
-	  width: 50%;
+	  width: 15%;
+	  position: absolute;
+	  margin-right: 10%;
+	  margin-top: 0%;
 	}
 	
 	table[class="sglist"] {
 	  top: 350px;
 	  left: 0;
 	  width: 50%;
+	  position: absolute;
+	  margin-left: 18%;
+	  margin-top: 20%;
 	}
 	
 	textraea[name="msg"]{
@@ -235,7 +241,9 @@
 		<thead>
 			<tr>
 				<th hidden>방 번호</th>
-				<th colspan="6">소모임 리스트</th>
+				<th colspan="6">소모임 리스트
+					
+				</th>
 			</tr>
 			
 			<tr>
@@ -250,9 +258,7 @@
 		<tbody id="sglist">
 	
 		</tbody>
-	</table>
-		
-			<button onclick="location.href='sgwrite.go?gidx=${sessionScope.gidx}'">소모임 생성</button>		
+	</table>	
 </body>
 <script>
 	
