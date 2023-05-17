@@ -122,7 +122,7 @@ public class AlarmController {
 			page = "msgList";
 		}
 		
-		if(alarm_class.equals("공지")) {
+		if(alarm_class.equals("공지사항")) {
 			NoticeDTO dto = nservice.noticeDetail(alarm_num, "noticeDetail");
 			model.addAttribute("dto",dto);
 			service.alarmListRead(alarm_no);

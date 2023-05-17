@@ -41,6 +41,10 @@
       WHERE n.notice_idx = #{param1} AND p.board_class = '공지사항'  
    </select>
    
+   <select id="noticeDetail1" resultType="kr.co.hb.admin.dto.NoticeDTO">
+  	 SELECT * FROM notice WHERE notice_idx = #{param1}
+   </select>
+   
    <delete id="noticeDelete">
       DELETE FROM notice WHERE notice_idx = #{param1}
    </delete>

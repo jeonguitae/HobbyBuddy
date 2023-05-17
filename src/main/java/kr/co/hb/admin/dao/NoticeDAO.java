@@ -52,6 +52,8 @@ public interface NoticeDAO {
 
 	ArrayList<NoticeDTO> nolistSearch(String search);
 
+	NoticeDTO noticeDetail1(int notice_idx);
+
 
 	
 	

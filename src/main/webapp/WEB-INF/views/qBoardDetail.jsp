@@ -107,7 +107,7 @@
 		    <tr>	
 		      <th>문의 답변</th>
 		      <td>
-		        <textarea disabled="disabled" name="content" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}</textarea>
+		        <textarea disabled="disabled" name="content" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}.</textarea>
 		      </td>
 		    </tr>
 		    <tr id="reply_time2">
@@ -122,7 +122,7 @@
 		    <tr id="admin_reply2">
 		      <th>문의 답변</th>
 		      <td id="after">
-		        <textarea name="qboard_reply" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}</textarea>
+		        <textarea name="qboard_reply" id="contentInput" style="width: 800px; height: 400px; resize: none;">${dto.qboard_reply}.</textarea>
 		      </td>
 		    </tr>
 		    
