@@ -84,9 +84,9 @@ public class QboardContrller {
 	      
 		 logger.info("컨트롤러 도착");
 		 
-		 if (params.get("qboard_title") != null) {
+		 if (params.get("qboard_title") == null || params.get("qboard_title").equals("")) {
 			model.addAttribute("msg","문의 제목을 입력하세요.");
-		}else if (params.get("qboard_content") != null) {
+		}else if (params.get("qboard_content") == null || params.get("qboard_content").equals("")) {
 			model.addAttribute("msg","문의 내용을 입력하세요.");
 		}
 		 

@@ -139,6 +139,8 @@ public class ReportController {
 		
 		String page = "redirect:/report_gboardList.go";
 		
+		logger.info("gboardDetail 도착");
+		
 		ReportDTO dto = service.report_gboardDetail(rept_no);
 		
 		if (dto != null) {
@@ -150,15 +152,15 @@ public class ReportController {
 	}
 	
 	@RequestMapping(value = "/report_mCommentWrite.do", method = RequestMethod.POST)
-	public String report_pCommentWrite(Model model, @RequestParam HashMap<String, String> params) {
+	public String report_mCommentWrite(Model model, @RequestParam HashMap<String, String> params) {
 
-	    String page = "report_msg_profileDetail";
+	    String page = "report_msgDetail";
 
 	    logger.info("컨트롤러 입장");
-	    if (params.get("admin_id").equals("")) {
+	    if (params.get("admin_id").equals("")|| params.get("admin_id") == null) {
 			page = "redirect:/report_msg_profileDetail.go?rept_no=" + params.get("rept_no");
 	        model.addAttribute("msg","세션이 종료되었습니다. 다시 로그인 해주세요.");
-		}else if (params.get("proc_content").equals("")) {	        
+		}else if (params.get("proc_content").equals("")|| params.get("proc_content") == null) {	        
 	        page = "redirect:/report_msg_profileDetail.go?rept_no=" + params.get("rept_no");
 	        model.addAttribute("msg","처리사유를 입력하세요.");
 	    }else if (params.get("rept_state").equals("선택")) {
@@ -179,10 +181,10 @@ public class ReportController {
 		String page = "report_fboardDetail";
 		
 		logger.info("컨트롤러 입장");
-		if (params.get("admin_id").equals("")) {
+		if (params.get("admin_id").equals("") || params.get("admin_id") == null) {
 			page = "redirect:/report_fboardDetail.go?rept_no=" + params.get("rept_no");
 			model.addAttribute("msg","세션이 종료되었습니다. 다시 로그인 해주세요.");
-		}else if (params.get("proc_content").equals("")) {	        
+		}else if (params.get("proc_content").equals("")|| params.get("proc_content") == null) {	        
 			page = "redirect:/report_fboardDetail.go?rept_no=" + params.get("rept_no");
 			model.addAttribute("msg","처리사유를 입력하세요.");
 		}else if (params.get("rept_state").equals("선택")) {
@@ -198,15 +200,15 @@ public class ReportController {
 	}	
 	
 	@RequestMapping(value = "/report_gCommentWrite.do", method = RequestMethod.POST)
-	public String report_mCommentWrite(Model model, @RequestParam HashMap<String, String> params) {
+	public String report_gCommentWrite(Model model, @RequestParam HashMap<String, String> params) {
 		
 		String page = "report_gboardDetail";
 		
 		logger.info("컨트롤러 입장");
-		if (params.get("admin_id").equals("")) {
+		if (params.get("admin_id").equals("")|| params.get("admin_id") == null) {
 			page = "redirect:/report_gboardDetail.go?rept_no=" + params.get("rept_no");
 			model.addAttribute("msg","세션이 종료되었습니다. 다시 로그인 해주세요.");
-		}else if (params.get("proc_content").equals("")) {	        
+		}else if (params.get("proc_content").equals("")|| params.get("proc_content") == null) {	        
 			page = "redirect:/report_gboardDetail.go?rept_no=" + params.get("rept_no");
 			model.addAttribute("msg","처리사유를 입력하세요.");
 		}else if (params.get("rept_state").equals("선택")) {
@@ -216,6 +218,30 @@ public class ReportController {
 			logger.info("업데이트 컨트롤러 메소드 실행");
 			service.gcommentWrite(params);
 			page = "redirect:/report_gboardList.go";
+		}
+		
+		return page;
+	}
+	
+	@RequestMapping(value = "/report_pCommentWrite.do", method = RequestMethod.POST)
+	public String report_pCommentWrite(Model model, @RequestParam HashMap<String, String> params) {
+		
+		String page = "report_profileDetail";
+		
+		logger.info("컨트롤러 입장");
+		if (params.get("admin_id").equals("")|| params.get("admin_id") == null) {
+			page = "redirect:/report_gboardDetail.go?rept_no=" + params.get("rept_no");
+			model.addAttribute("msg","세션이 종료되었습니다. 다시 로그인 해주세요.");
+		}else if (params.get("proc_content").equals("")|| params.get("proc_content") == null) {	        
+			page = "redirect:/report_gboardDetail.go?rept_no=" + params.get("rept_no");
+			model.addAttribute("msg","처리사유를 입력하세요.");
+		}else if (params.get("rept_state").equals("선택")) {
+			page = "redirect:/report_gboardDetail.go?rept_no=" + params.get("rept_no");
+			model.addAttribute("msg","처리상태를 선택하세요.");
+		}else {
+			logger.info("업데이트 컨트롤러 메소드 실행");
+			service.pcommentWrite(params);
+			page = "redirect:/report_profileList.go";
 		}
 		
 		return page;
