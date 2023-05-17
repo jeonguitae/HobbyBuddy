@@ -77,7 +77,16 @@ public class NoitceController {
 	
 	
 	@RequestMapping(value = {"/nboard.go","/noticeList.go"})
-	public String noticePage2() {
+	public String noticePage2(Model model,HttpSession session) {
+		
+		String msg = (String) session.getAttribute("msg");
+		model.addAttribute("msg",msg);
+		
+		session.removeAttribute("msg");
+		
+		
+		
+		
 		return "noticeList";
 	}
 	
@@ -126,18 +135,22 @@ public class NoitceController {
 	   }
 	   
 	   @RequestMapping(value = "/noticeUpdate.do", method = RequestMethod.POST)
-	   public String noticeUpdate(Model model, MultipartFile photo, @RequestParam HashMap<String, String> params) {
+	   public String noticeUpdate(Model model, HttpSession session,MultipartFile photo, @RequestParam HashMap<String, String> params) {
 	       
-		   String success = "redirect:/noticeList.go";		   
+		   int board_num = Integer.parseInt(params.get("notice_idx"));
+		   String success = "redirect:/noticeUpdate.go?notice_idx=" + board_num;		   
 		   
 	       if (params.get("notice_title") == null || params.get("notice_title").equals("")) {
-	           model.addAttribute("msg", "제목에 공백을 넣을 수 없습니다.");
-	       } else if (params.get("notice_content") == null || params.get("notice_content").equals("")) {
-	           model.addAttribute("msg", "내용에 공백을 넣을 수 없습니다.");
-	       } else {
-	           model.addAttribute("msg", "정상적으로 작성 되었습니다.");	 
 	           
-	           success = service.noticeUpdate(photo, params);
+	          session.setAttribute("msg","제목에 공백을 넣을 수 없습니다.");   	
+	          
+	       } else if (params.get("notice_content") == null || params.get("notice_content").equals("")) {
+	    	   session.setAttribute("msg", "내용에 공백을 넣을 수 없습니다.");
+	       } else {
+	    	   session.setAttribute("msg", "정상적으로 작성 되었습니다.");	 
+	           
+	           service.noticeUpdate(photo, params);
+	           success = "redirect:/noticeDetail.go?notice_idx=" + board_num;
 	       }
 	       
 	       return success;
@@ -146,32 +159,44 @@ public class NoitceController {
 
 	   
 	   @RequestMapping(value = "/noticeDetail.go")
-	   public String noticeDetail(Model model, @RequestParam int notice_idx) {
+	   public String noticeDetail(HttpSession session ,Model model, @RequestParam int notice_idx) {
 	      
-	      String page = "redirect:/noticeList.go";
+	      String page = "noticeDetail";
+	      NoticeDTO dto = null;
 	      
-	      NoticeDTO dto = service.noticeDetail(notice_idx, "noticeDetail");
+	      dto = service.noticeDetail(notice_idx, "noticeDetail");
 	      
-	      if (dto != null) {
-	         page = "noticeDetail";
-	         model.addAttribute("dto", dto);
+	      if (dto == null) {
+	         dto = service.noticeDetail1(notice_idx);
 	      }
+	      
+	      	model.addAttribute("dto", dto);
+	        String msg = (String) session.getAttribute("msg");
+			model.addAttribute("msg",msg);
+			
+			session.removeAttribute("msg");
 	      
 	      return page;
 	   }
 	   
 	   @RequestMapping(value = "/noticeUpdate.go")
-	   public String updateForm(Model model, @RequestParam int notice_idx) {
+	   public String updateForm(HttpSession session, Model model, @RequestParam int notice_idx) {
 	      
-	      String page = "redirect:/noticeList.go";
+	      String page = "noticeUpdate";
+	      NoticeDTO dto = null;
+	      dto = service.noticeDetail(notice_idx, "update");
 	      
-	      NoticeDTO dto = service.noticeDetail(notice_idx, "update");
-	      
-	      if (dto != null) {
-	         page = "noticeUpdate";
-	         model.addAttribute("dto",dto);
+	      if (dto == null) {
+	    	  dto = service.noticeDetail1(notice_idx);
 	      }
 	      
+	      model.addAttribute("dto",dto);
+	      
+	      String msg = (String) session.getAttribute("msg");
+			model.addAttribute("msg",msg);
+			
+			session.removeAttribute("msg");
+			
 	      return page;
 	   }	   
 	   

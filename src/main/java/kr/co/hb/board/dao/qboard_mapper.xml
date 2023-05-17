@@ -95,6 +95,18 @@
    	UPDATE secret SET secret_state = 1 WHERE sboard_class = #{param1} AND sboard_num = #{param2}
    </update>
    
-  
+ <select id="qboardSearch" resultType="kr.co.hb.board.dto.QboardDTO">
+  SELECT *
+  FROM qboard
+  WHERE qboard_title LIKE CONCAT('%', #{search}, '%')
+     OR qboard_class LIKE CONCAT('%', #{search}, '%')
+</select>
+
+<select id="qtotalCountSearch" resultType="int">
+  SELECT COUNT(qboard_no)
+  FROM qboard
+  WHERE qboard_title LIKE CONCAT('%', #{param1}, '%')
+     OR qboard_class LIKE CONCAT('%', #{param1}, '%')
+</select>
 	
 </mapper>

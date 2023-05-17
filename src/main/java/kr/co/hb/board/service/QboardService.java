@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.hb.admin.dto.ReportDTO;
 import kr.co.hb.board.dao.QboardDAO;
 import kr.co.hb.board.dto.QboardDTO;
 
@@ -113,27 +114,47 @@ public class QboardService {
 		
 	}
 
-	public HashMap<String, Object> qboardPageList(int page, int cnt) {
+	public HashMap<String, Object> qboardPageList(int page, String search) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		// 1page = offset : 0
 		// 2page = offset : offset + 5
 		// 3page = offset : 10
 		
-		int offset = (page - 1) * cnt;
+		int offset = (page - 1) * 10;
 		
 		// 만들 수 있는 총 페이지 수 
 		// 전체 게시물 / 페이지 당 보여줄 수 
 		int total = dao.totalCount();
-		int range = total%cnt == 0 ? total/cnt : (total/cnt) + 1;
+		
+		if (search.equals("default") || search.equals("")) {
+	         total = dao.totalCount();
+	         logger.info("서비스1");
+	         
+	      } else {
+	         total = dao.qtotalCountSearch(search);
+	         logger.info("서비스2");
+	      };
+	      
+		int range = total%10 == 0 ? total/10 : (total/10) + 1;
 		
 		
 		page = page > range ? range : page;
 		
-		map.put("currPage", page);
-		map.put("pages", range);
+		ArrayList<QboardDTO> qboardPageList = dao.qboardPageList(10, offset);
 		
-		ArrayList<QboardDTO> qboardPageList = dao.qboardPageList(cnt, offset);
+		if (search.equals("default") || search.equals("")) {
+			qboardPageList = dao.qboardPageList(10, offset);
+			logger.info("서비스3");
+	         
+	      } else {
+	    	  qboardPageList = dao.qboardSearch(search);
+	    	  logger.info("서비스4");
+	      }
+		
+		map.put("currPage", page);
+		map.put("pages", range);		
+		
 		
 		map.put("qboardPageList", qboardPageList);
 
