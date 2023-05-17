@@ -122,6 +122,7 @@
 		<input type="button" value="고객센터" onclick="location.href='qboard.go'"/>&nbsp;
 		<input type="button" value="공지사항" onclick="location.href='nboard.go'"/>
 	</div>
+	<br/><br/><br/>
 
 </body>
 

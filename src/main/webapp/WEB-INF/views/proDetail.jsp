@@ -114,10 +114,10 @@
 <script>
 
 
-	$('input[name="bmarkdo"]').click(function(){
+	/* $('input[name="bmarkdo"]').click(function(){
 		console.log("즐겨찾기 추가하고 싶은 건 맞아?");
 		alert('즐겨찾기에 추가되었습니다.');
-	})
+	}) */
 	
 	var adminChk = "${sessionScope.adminChk}";
 

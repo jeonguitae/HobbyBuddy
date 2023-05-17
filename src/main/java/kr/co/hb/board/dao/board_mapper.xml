@@ -16,27 +16,48 @@
 	</select>
 
 	<select id="fsorting" resultType="kr.co.hb.board.dto.BoardDTO">
-		SELECT *FROM fBoard WHERE
-		big_hb = #{big_hb} AND small_hb = #{small_hb}
+		SELECT *
+		  FROM fBoard f
+		  WHERE f.big_hb = #{big_hb} AND f.small_hb = #{small_hb} AND f.fbNo NOT IN (
+		  SELECT f.fbNo
+		  FROM fBoard f
+		  INNER JOIN secret s ON f.fbNo = s.sboard_num
+		  WHERE s.secret_state = 1 
+	  	)
 	</select>
 
 
 	<select id="tsearch" resultType="kr.co.hb.board.dto.BoardDTO">
-		SELECT * FROM fBoard
-		WHERE title
-		LIKE #{search}
+		SELECT *
+		  FROM fBoard f
+		  WHERE f.title LIKE #{search} AND f.fbNo NOT IN (
+		  SELECT f.fbNo
+		  FROM fBoard f
+		  INNER JOIN secret s ON f.fbNo = s.sboard_num
+		  WHERE s.secret_state = 1 
+	  	)
 	</select>
 
 	<select id="isearch" resultType="kr.co.hb.board.dto.BoardDTO">
-		SELECT * FROM fBoard
-		WHERE id
-		LIKE #{search}
+		SELECT *
+		  FROM fBoard f
+		  WHERE f.id LIKE #{search} AND f.fbNo NOT IN (
+		  SELECT f.fbNo
+		  FROM fBoard f
+		  INNER JOIN secret s ON f.fbNo = s.sboard_num
+		  WHERE s.secret_state = 1 
+	  	)
 	</select>
 
 	<select id="csearch" resultType="kr.co.hb.board.dto.BoardDTO">
-		SELECT * FROM fBoard
-		WHERE
-		bContent LIKE #{search}
+		SELECT *
+		  FROM fBoard f
+		  WHERE f.bContent LIKE #{search} AND f.fbNo NOT IN (
+		  SELECT f.fbNo
+		  FROM fBoard f
+		  INNER JOIN secret s ON f.fbNo = s.sboard_num
+		  WHERE s.secret_state = 1 
+	  	)
 	</select>
 
 	<insert useGeneratedKeys="true" keyColumn="fbNo"

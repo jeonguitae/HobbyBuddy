@@ -182,22 +182,22 @@ public class BoardService {
 		ArrayList<BoardDTO> list = null;
 		
 		if(params.get("fsearch").equals("title")) {
-			String wildcard = "%" + params.get("fsearch") + "%";
-			params.replace("fsearch", wildcard);
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
 			list = dao.tsearch(params);
 		}
 		
 		if(params.get("fsearch").equals("id")) {
 			
-			String wildcard = "%" + params.get("fsearch") + "%";
-			params.replace("fsearch", wildcard);
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
 			list = dao.isearch(params);
 		}
 		
 		if(params.get("fsearch").equals("bContent")) {
 			
-			String wildcard = "%" + params.get("fsearch") + "%";
-			params.replace("fsearch", wildcard);
+			String wildcard = "%" + params.get("search") + "%";
+			params.replace("search", wildcard);
 			list = dao.csearch(params);
 		}
 		
@@ -241,9 +241,9 @@ public class BoardService {
 
 	public BoardDTO detail1(int fbNo, String flag) {
 		
-		if (flag.equals("detail")) {
-			dao.uphit(fbNo);
-		}
+		/*
+		 * if (flag.equals("detail")) { dao.uphit(fbNo); }
+		 */
 		
 		return dao.detail1(fbNo);
 	}

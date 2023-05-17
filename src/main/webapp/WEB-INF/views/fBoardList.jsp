@@ -33,6 +33,7 @@
 	
 	table.first, table.second {
 		margin: 20px auto;
+		border-collapse: collapse;
 	}
 	
 	table.second {
@@ -57,7 +58,9 @@
 		color: #222;
 		text-decoration: none;
 	}
-	
+	.fbutton{
+		 background-color: #22c55e;
+	}
 	table.second input[type="submit"], table.first button, table.first input[type="submit"] {
 		padding: 10px 20px;
 		background-color: #333;
@@ -66,13 +69,17 @@
 		border-radius: 5px;
 		cursor: pointer;
 	}
-	
+	table.first{
+		border-collapse: collapse;
+	}
 	table.first button {
 		margin-left: 10px;
 	}
-	
 	table.first input[type="radio"], table.first input[type="checkbox"] {
 		margin-right: 10px;
+	}
+	input[name="search"]{
+		margin-left: 400px;
 	}
 </style>
 </head>
@@ -83,7 +90,7 @@
 	<table class="first">
 			<tr>
 	         <td colspan="2">
-	            <select name="big_hb">
+	            <select name="big_hb" style="margin-left: 560px;">
 	               <c:forEach items="${big_hb}" var="b">
 	                  <option value="${b.big_hb}">${b.big_hb}</option>      
 	               </c:forEach>
@@ -91,10 +98,11 @@
 	            <select name="small_hb">
 	           		 <option>x</option>
 	            </select>
+	            <button class="fbutton">검색</button>
 	           </td>
       		</tr>
 	</table>
-		<button class="fbutton">검색</button>
+		
 	 </form>
    </div>
 	<table class="second">
@@ -126,11 +134,11 @@
 			<c:forEach items="${list}" var="bbs">
 				<c:if test="${not empty sessionScope.loginId}">
 					<tr>
-						<td>${bbs.fbNo}</td>
-						<td><a href="fdetail.do?fbNo=${bbs.fbNo}" id="login">${bbs.title}</a></td>
-						<td>${bbs.id}</td>
-						<td>${bbs.fbTime}</td>
-						<td>${bbs.bhit}</td>
+						<td style="text-align: center;">${bbs.fbNo}</td>
+						<td style="text-align: center;"><a href="fdetail.do?fbNo=${bbs.fbNo}" id="login">${bbs.title}</a></td>
+						<td style="text-align: center;">${bbs.id}</td>
+						<td style="text-align: center;">${bbs.fbTime}</td>
+						<td style="text-align: center;">${bbs.bhit}</td>
 					</tr>
 				</c:if> 
 				<c:if test="${empty sessionScope.loginId}">

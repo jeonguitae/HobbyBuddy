@@ -40,25 +40,18 @@
 			<col width="80%">
 		</colgroup>
 			<tr>
-				<th>분류</th>
-				<td>
-				<select name="bhobby">
-					<option value="운동">운동</option>
-					<option value="맛집">맛집</option>
-					<option value="반려동물">반려동물</option>
-					<option value="여가">여가</option>
-				</select>
-				<select name="mhobby">
-					<option value="헬스">헬스</option>
-					<option value="축구">축구</option>
-					<option value="야구">야구</option>
-					<option value="풋살">풋살</option>
-					<option value="탁구">탁구</option>
-					<option value="골프">골프</option>
-					<option value="테니스">테니스</option>
-				</select>
-				</td>
-			</tr>
+                  <th>취미</th>
+                  <td>
+                     <select id=big_hb name="big_hb">
+                        <c:forEach items="${big_hb}" var="b">
+                           <option value="${b.big_hb}">${b.big_hb}</option>      
+                        </c:forEach>
+                     </select>
+                     <select id="small_hb" name="small_hb">
+                           <option>x</option>
+                     </select>
+                    </td>
+            </tr>
 			<tr>
 				<th>제목</th>
 				<td><input class="title" type="text" name="title"/></td>
@@ -87,51 +80,81 @@
 	</form>
 </body>
 <script>
-	
-	$('select[name="bhobby"]').on('change',function(){
-		var val = $(this).val();
-		var content = '';
-		
-		if (val == '운동') {
-			content += '<option value="헬스">헬스</option>'
-			content += '<option value="축구">축구</option>'
-			content += '<option value="야구">야구</option>'
-			content += '<option value="풋살">풋살</option>'
-			content += '<option value="탁구">탁구</option>'
-			content += '<option value="골프">골프</option>'
-			content += '<option value="테니스">테니스</option>'
-			content += '<option value="선택 안함">선택 안함</option>'
-		}
-		
-		else if(val == '맛집'){
-	         content += '<option value="식사">식사</option>'
-	         content += '<option value="술">술</option>'
-		     content += '<option value="카페">카페</option>'
-	         content += '<option value="선택 안함">선택 안함</option>'
-	      }
-	      
-	    else if(val == '반려동물'){
-	    	content += '<option value="산책">산책</option>'
-		    content += '<option value="쇼핑">쇼핑</option>'
-			content += '<option value="미용">미용</option>'
-		    content += '<option value="선택 안함">선택 안함</option>'
-	    
-	    }
-	    else if(val == '여가'){
-	    	
-	    	content += '<option value="영화">영화</option>'
-		    content += '<option value="게임">게임</option>'
-			content += '<option value="노래방">노래방</option>'
-			content += '<option value="보드게임">보드게임</option>'
-			content += '<option value="방탈출">방탈출</option>'
-		    content += '<option value="선택 안함">선택 안함</option>'
-	    }
+var loginId = "${sessionScope.loginId}";   
+myHobbyList();
+function myHobbyList(){
+   console.log("loginId : " + loginId);
+   $.ajax({
+      type:'get',
+      url:'myHobbyList.ajax',
+      data:{id:loginId},
+      dataType:'json',
+      success:function(data){
+         console.log("data, myHobbyList : " + data.myHobbyList);
+         console.log("data, login : " + data.login);
+         if(!true){
+            alert('로그인이 필요한 서비스 입니다.');
+            location.href='./';
+         }else{
+            myHobbyListDraw(data.myHobbyList);
+         }
+      },
+      error:function(e){
+         console.log(e);
+      }
+   });   
+}
 
-		$('select[name="mhobby"]').html(content);
-		});
-	
-	$('.writefin').on('click',function(){
-		alert("글이 저장되었습니다.");
-	})
+
+function myHobbyListDraw(myHobbyList){
+   console.log("myHobbyList : " + myHobbyList);
+   var content = '';
+   myHobbyList.forEach(function(item,index){
+      content += '<tr>';
+      content += '<td><input type="checkbox" value="'+item.my_hobby_no+'"/></td>';
+      content+='<td>'+item.big_hb + " / " + item.small_hb+'</td>';
+      content += '</tr>';
+      console.log(item.my_hobby_no);
+   });
+   
+   $('#myHobbyList').empty();
+   $('#myHobbyList').append(content);
+}
+
+$('#big_hb').on('change', function(e){
+    var big_hb = $('#big_hb').val();      
+    console.log("big_hb ? " + big_hb);      
+    $.ajax({
+       type: 'get'
+       ,url: 'big_hb.ajax'
+       ,data:{'big_hb':big_hb}
+       ,dataType:'json'
+       ,success:function(data){
+          console.log("big_hb data : " + data.small_hb);
+          if(data != ""){
+             console.log("big_hb 취미 호출");
+             small_hbDraw(data.small_hb);
+          } else {
+             alert('오류가 발생하였습니다.');
+          }
+       }
+       ,error:function(e){
+          console.log(e);
+       }
+    });
+})
+
+	function small_hbDraw(small_hb){
+ 		console.log("small_hb : " + small_hb);
+		 var content = '';
+		 small_hb.forEach(function(item,index){
+		    content +='<option value="'+item.small_hb+'">'+item.small_hb+'</option>';
+		 });
+		 $('#small_hb').empty();
+		 $('#small_hb').append(content);
+		}
+			$('.writefin').on('click',function(){
+				alert("글이 저장되었습니다.");
+			})
 </script>
 </html>
