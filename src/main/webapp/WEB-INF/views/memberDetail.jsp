@@ -14,35 +14,45 @@
 
    }
    
+body {
+    background-color: #f0fff0;
+    color: #333333;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-left: 100;
+    margin-right: 100;
+    margin-top: 60;
+}
+   
 </style>
 
 </head>
 <body>
   	<form action="memberdetail.do" method="post">
-  
+   <div class="table-container">
       <table>
 
       	<tr>
-      		<th rowspan="9">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+      		<th rowspan="9"><img src="/photo/${photo.new_photo_name}"/>
       		</th>
       		<th>아이디</th>
-      		<td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      		<td>${member.id}</td>
       	</tr>
       	<tr>
       		<th>이름</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.name}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.name}</td>
       	</tr>
       	<tr>
             <th>나이</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.age}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.age}</td>
       	</tr>
       	<tr>
             <th>성별</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.gender}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.gender}</td>
       	</tr>
       	<tr>
             <th>지역</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.area}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.area}</td>
       	</tr>
       	<tr>
             <th>취미</th>
@@ -50,17 +60,17 @@
       	</tr>      	
       	<tr>
             <th>매너온도</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.mannertp}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.mannertp}</td>
       	</tr>
       	<tr>
             <th>자기소개</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.intr}</td>
       	</tr>
 
       </table>
-      
       <br/>
-      
+  </div>
+   <div class="table-container">    
  <table>
 	      	<tr>
 	      		<th>관리자여부</th>
@@ -82,7 +92,7 @@
 	            <td>${member.random}</td>
 	            <td><input type="button" value="정지 해제" onclick="location.href='bupdate.do?id=${member.id}'"/></td>
 	      </table>
-
+</div>
    </form>
 </body>
 

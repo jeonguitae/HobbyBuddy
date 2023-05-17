@@ -86,7 +86,7 @@
           
       </table> 
       <hr>	    
-	  <form action="report_gCommentWrite.do" method="post">
+	  <form action="report_fCommentWrite.do" method="post">
          <input type="hidden" name="rept_no" value="${dto.rept_no}">
          <table>
                <tr>

@@ -12,42 +12,49 @@
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
-
+      margin-top : 200px;
+      
    }
-   
+ 
+ 	body{
+ 	
+ 		margin-right :700px;
+ 		margin-left : 700px;
+ 	}
    #admin{
    	display: none;
    }
    
+   
 </style>
 
 </head>
+<jsp:include page="gnb.jsp"/>
 <body>
-	<jsp:include page="gnb.jsp"/>
      <!-- <form action="myp.do" method="post"> -->
       <table>
       
          <tr>
-            <th rowspan="9">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/photo/${photo.new_photo_name}"/>&nbsp;&nbsp;&nbsp;&nbsp;
+            <th rowspan="9"><img src="/photo/${photo.new_photo_name}"/>
             </th>
             <th>아이디</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.id}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.id}</td>
          </tr>
          <tr>
             <th>이름</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.name}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.name}</td>
          </tr>
          <tr>
             <th>나이</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.age}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.age}</td>
          </tr>
          <tr>
             <th>성별</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.gender}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.gender}</td>
          </tr>
          <tr>
             <th>지역</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.area}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.area}</td>
          </tr>
          <tr>
             <th>취미</th>
@@ -55,11 +62,11 @@
          </tr>         
          <tr>
             <th>매너온도</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.mannertp}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.mannertp}</td>
          </tr>
          <tr>
             <th>자기소개</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.intr}</td>
          </tr>
          <tr>
             <th>매너온도</th>

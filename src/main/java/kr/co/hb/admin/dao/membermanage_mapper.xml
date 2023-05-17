@@ -19,17 +19,17 @@
 	</select>
 	
 	<select id="mList" parameterType="hashmap" resultType="kr.co.hb.admin.dto.MemberManageDTO">
-		SELECT * FROM member WHERE admin = 0
+		SELECT * FROM member WHERE admin = 0 
 	</select>
 	
 	<select id="misearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">
 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
-		WHERE m.id LIKE #{search}
+		WHERE m.id LIKE #{search} group by m.id 
 	</select>
 	
 	<select id="mnsearch" resultType="kr.co.hb.admin.dto.MemberManageDTO">
 		SELECT m.id ,m.name ,m.age , m.area, h.big_hb, h.small_hb ,m.gender FROM member m inner join my_hobby_list h on m.id = h.id
-		WHERE m.name LIKE #{search}
+		WHERE m.name LIKE #{search} group by m.id
 	</select>
 	
 	<select id="mdetail" resultType="kr.co.hb.admin.dto.MemberManageDTO">
