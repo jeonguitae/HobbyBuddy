@@ -44,7 +44,7 @@ public class NoitceController {
 			@RequestParam("flag") String flag,@RequestParam("notice_title") String notice_title,@RequestParam("notice_content") String notice_content) {
 	    logger.info("notice_chk : " + notice_chk);
 
-		if(notice_chk.equals("true")) {
+		if(notice_chk.equals("false")) {
 			ArrayList<NoticeDTO> dto = service.pro_select();
 			
 			logger.info("pro_select : " + dto);
@@ -57,7 +57,7 @@ public class NoitceController {
 					String id_receive = noticeDTO.getId();
 					String alarm_title = notice_title;
 					String alarm_content = notice_content;
-					String alarm_class = "공지";
+					String alarm_class = "공지사항";
 					String alarm_num = notice_idx;
 					
 					logger.info("전 : " + id_send+id_receive+alarm_title+alarm_content+alarm_class+alarm_num);

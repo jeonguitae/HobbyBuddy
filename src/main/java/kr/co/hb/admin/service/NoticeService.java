@@ -101,18 +101,18 @@ public class NoticeService {
 	   
 	   public String notice_ChkUpdate(String notice_idx, String flag) {
 		   if (flag.equals("true")) {
-		     dao.notice_ChkOn(notice_idx);
+			 dao.notice_ChkOn(notice_idx);
 		   } else {
 		     dao.notice_ChkOff(notice_idx);
 		   }
 		   return flag;
-		 }
+	    }
 
 	   public NoticeDTO noticeDetail(int notice_idx, String flag) {
 	      
 	      if(flag.equals("noticeDetail")) {
 	            // 조회수 증가
-	            dao.noticeUpHit(notice_idx);
+	             dao.noticeUpHit(notice_idx);
 	         }
 	      
 	      return dao.noticeDetail(notice_idx);
