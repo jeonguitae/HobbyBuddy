@@ -16,10 +16,57 @@
 	td[class="msearch"]{
       margin-top: 5px;
  	  }
+ 	  
+ 	  table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 5px 10px;
+		text-align: center;
+	}
+
+	th {
+		background-color: lightgray;
+	}
+
+	td[class="msearch"] {
+		margin-top: 5px;
+	}
+
+	a {
+		color: blue;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	a:hover {
+		color: darkblue;
+	}
+
+	.memberList table {
+		margin-bottom: 20px;
+	}
+
+	.memberList input[type="checkbox"],
+	.memberList input[type="submit"] {
+		margin-left: 10px;
+	}
+
+	.msearch input[type="text"],
+	.msearch select {
+		margin-right: 10px;
+	}
 </style>
 
 </head>
+	<jsp:include page="gnb.jsp"/>
+
 <body>
+
+	<br/>	<br/>	<br/>	<br/>	<br/>	<br/>	<br/>
 	<div class="memberList">
 		<form action="memberList.do" method="get">
 			<table>
@@ -27,10 +74,15 @@
 				<tr>
 					<th>구분</th>
 					<td>
-						<input type="checkbox" name="admin" value="true"/>     관리자
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="checkbox" name="admin" value="true"/>     관리자&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<input type="checkbox" name="member" value="false"/>     회원
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<input type="submit" value="검색"/>
 					</td>
+						
 				</tr>
+
 <!--  				<tr>
 					<th>경고횟수</th>
 					<td>
@@ -47,13 +99,25 @@
 						<input type="checkbox" name="ban" value="true"/>     정지 회원
 					</td>
 				</tr> -->
-				<tr>
-					<th colspan="2">
-						<input type="submit" value="검색"/>
-					</th>
-				</tr>
 			</table>
 		</form>
+			<table>
+					<tr>
+						<th>검색</th>
+	                  	<td class="msearch">      
+	                  	   <form action="msearch.do">
+	                        <input type="text" name="search" value=""/>
+	                        <select name="ssorting">
+	                           <option value="id">아이디</option>
+	                           <option value="name">이름</option>
+	                        </select>
+	                        &nbsp;&nbsp;&nbsp;&nbsp;
+	                        <input type="submit" value="검색"/>
+	                        </td>
+	                     </form>
+	                  </td>
+	               </tr>
+			</table>
 	</div>
 		<table>
 			<thead>
@@ -78,19 +142,6 @@
 						<td>${member.ban}</td>
 					</tr>			
 				</c:forEach>
-				
-					<tr>
-	                  <td class="msearch" colspan="8">      
-	                     <form action="msearch.do">
-	                        <input type="text" name="search" value=""/>
-	                        <select name="ssorting">
-	                           <option value="id">아이디</option>
-	                           <option value="name">이름</option>
-	                        </select>
-	                        <input type="submit" value="검색"/>
-	                     </form>
-	                  </td>
-	               </tr>
 			</tbody>
 	</table>
 </body>
