@@ -9,36 +9,47 @@
 <link rel="stylesheet" href="resources/css/css.css">
 
 <style>
+
    table, th, td{
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
+      margin-top : 200px;
+      
    }
+ 
+ 	body{
+ 	
+ 		margin-right :700px;
+ 		margin-left : 700px;
+ 	}
+
 </style>
 
 </head>
+<jsp:include page="gnb.jsp"/>
+
 <body>
    <form action="myp.do" method="post">
       <table>
-      
       	<tr>
       		<th>아이디</th>
-      		<td>&nbsp;&nbsp;&nbsp;&nbsp;익명&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      		<td>익명</td>
             <th rowspan="3">
             	<input type="button" value="쪽지 보내기" onclick="location.href='msgChat.go?id_receive=${member.id}'"/>
             </th>
       	</tr>
       	<tr>
             <th>나이</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.age}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.age}</td>
       	</tr>
       	<tr>
             <th>성별</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.gender}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.gender}</td>
       	</tr>
       	<tr>
             <th>지역</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.area}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.area}</td>
             <th rowspan="2">
       			<input type="button" value="프로필 신고" onclick="location.href='./report.go'"/>
       		</th>
@@ -49,14 +60,14 @@
       	</tr>
       	<tr>
             <th>매너온도</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.mannertp}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.mannertp}</td>
 <!--             <th rowspan="2">
       			<input type="button" value="뒤로가기" onclick="redirect:/profile.go"/>
       		</th> -->
       	</tr>
       	<tr>
             <th>자기소개</th>
-            <td>&nbsp;&nbsp;&nbsp;&nbsp;${member.intr}&nbsp;&nbsp;&nbsp;&nbsp;</td>
+            <td>${member.intr}</td>
       	</tr>
       </table>
       

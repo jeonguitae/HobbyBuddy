@@ -31,10 +31,10 @@ public class QboardContrller {
 	@ResponseBody
 	public HashMap<String, Object> qboardList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String search				
 			){
 		
-		return service.qboardPageList(Integer.parseInt(page), Integer.parseInt(cnt));
+		return service.qboardPageList(Integer.parseInt(page), search);
 	}	
 	
 	
@@ -80,11 +80,13 @@ public class QboardContrller {
 	      return page;
 	   }
 	 @RequestMapping(value = "/qboardUpdate.do", method = RequestMethod.POST)
-	   public String qboardUpdate(HttpSession session,Model model ,MultipartFile photo,@RequestParam HashMap<String, String> params) {
+	   public String qboardUpdate(HttpSession session, Model model ,MultipartFile photo,@RequestParam HashMap<String, String> params) {
 	      
-		 if (params.get("qboard_title") != null) {
+		 logger.info("컨트롤러 도착");
+		 
+		 if (params.get("qboard_title") == null || params.get("qboard_title").equals("")) {
 			model.addAttribute("msg","문의 제목을 입력하세요.");
-		}else if (params.get("qboard_content") != null) {
+		}else if (params.get("qboard_content") == null || params.get("qboard_content").equals("")) {
 			model.addAttribute("msg","문의 내용을 입력하세요.");
 		}
 		 
@@ -99,8 +101,14 @@ public class QboardContrller {
 		 
 	      String page = "redirect:/qboardList.go";
 	      
-	      QboardDTO dto = service.qboardDetail(qboard_no);
+	      QboardDTO dto = null;
 	      
+	      dto = service.qboardDetail(qboard_no);
+	      
+	      if(dto == null) {
+	    	  
+	    	  dto = service.qboardDetail2(qboard_no);
+	      }
 	      if (dto != null) {
 	    	  logger.info("업데이트 가자는 컨트롤러");
 	         page = "qBoardUpdate";

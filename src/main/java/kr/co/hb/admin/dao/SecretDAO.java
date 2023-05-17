@@ -16,4 +16,10 @@ public interface SecretDAO {
 
 	void secretSet(int sboard_num);
 
+	int sTotalCount();
+
+	int sTotalCountSearch(String search);
+
+	ArrayList<SecretDTO> secretSearch(String search);
+
 }

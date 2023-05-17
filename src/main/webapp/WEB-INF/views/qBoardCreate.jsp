@@ -7,21 +7,21 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <link rel="stylesheet" href="resources/css/commons.css">
 <style>
-	table, th, td{
+	table, th, td {
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;     
    }
-   button{
+   button {
       margin: 5px;
    }
    table {
       width: 500px;
    }
-   input[type="text"]{
+   input[type="text"] {
       width: 40%;   
    }
-   #search{
+   #search {
       display: inline-block;
    }
    colgroup {
@@ -96,7 +96,7 @@ function qboard_write(){
 	
 	if ($id.val()=="") {
 		alert('세션이 만료되었습니다, 다시 로그인 해주세요.');
-		$id.focus();
+		location='./qboardList.go'
 	}else if ($qboard_class.val() == "question_default") {
 		alert('문의 종류를 선택하세요.');
 		$qboard_class.focus();

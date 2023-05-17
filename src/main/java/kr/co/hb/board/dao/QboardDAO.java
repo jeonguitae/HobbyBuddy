@@ -36,5 +36,9 @@ public interface QboardDAO {
 
 	QboardDTO qboardDetail2(String qboard_no);
 
+	int qtotalCountSearch(String search);
+
+	ArrayList<QboardDTO> qboardSearch(String search);
+
 	
 }

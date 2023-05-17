@@ -240,6 +240,11 @@ public class NoticeService {
 		
 	}
 
+	public NoticeDTO noticeDetail1(int notice_idx) {
+		// TODO Auto-generated method stub
+		return dao.noticeDetail1(notice_idx);
+	}
+
 
 
 }

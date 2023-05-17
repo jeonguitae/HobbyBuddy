@@ -226,12 +226,13 @@ public class GroupBoardController {
 			}
 		
 		//그 fbNo갖고 있는 애를 update로 보내야하니까
-		GroupBoardDTO dto = service.gdetail(gidx, "update");
-		if (dto!=null) {
-			
-			model.addAttribute("board", dto);
+		GroupBoardDTO dto = null;
+		dto = service.gdetail(gidx, "update");
+		if (dto == null) {
+			dto = service.gdetail1(gidx, "update");
 		}
 		
+		model.addAttribute("board", dto);
 		ArrayList<MemberDTO> big_hb = mservice.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb", big_hb);
@@ -358,6 +359,33 @@ public class GroupBoardController {
 		return "gBoardList";
 	}
 	
+	@RequestMapping(value = "/gboardSecretSet.do")
+	   public String gboardSecretSet(Model model,@RequestParam HashMap<String, String> params, HttpSession session) {
+	      		   
+		logger.info("컨트롤러");
+		
+		String loginId = (String) session.getAttribute("loginId");
+		String msg = "관리자만 비밀글 설정이 가능합니다";
+		
+		int adminchk = service.adminchk(loginId);
+		logger.info("adminchk : " + adminchk);
+		
+		if(adminchk == 1) {
+			
+			String writer_id = params.get("writer_id");
+			String admin_id = params.get("admin_id");
+			String sboard_class = "모임";
+			String sboard_title = params.get("sboard_title");
+			String sboard_num = params.get("sboard_num");
+			
+			service.gboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+			msg = "비밀글 설정 완료";
+		}
+		
+		   session.setAttribute("msg", msg);
+		   
+	      return "redirect:/glist.go";
+	   }
 	
 
 }

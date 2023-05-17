@@ -23,7 +23,7 @@ public interface ReportDAO {
 
 	ReportDTO report_fboardDetail(String rept_no);
 
-	ReportDTO report_msg_profileDetail(String rept_no);
+	/* ReportDTO report_profileDetail(String rept_no); */
 
 	ArrayList<ReportDTO> report_gboardList(int cnt, int offset);
 
@@ -60,6 +60,16 @@ public interface ReportDAO {
 	int gTotalCountSearch(String search);
 
 	ArrayList<ReportDTO> msgSearch(String search);
+
+	int fTotalCountSearch(String search);
+
+	ArrayList<ReportDTO> gboardSearch(String search);
+
+	ReportDTO report_profileDetail(String rept_no);
+
+	ReportDTO report_msgDetail(String rept_no);
+
+	void mcommentWrite(HashMap<String, String> params);
 
 
 }

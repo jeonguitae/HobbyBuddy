@@ -39,17 +39,17 @@
    }
    #listBack{
    	background: aqua;
-   }
+   }   
 </style>
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">쪽지/프로필 신고 상세</h3>
+   <h3 align="center">프로필 신고 상세</h3>
    
       <table>
          <tr>
             <th>신고 번호</th>
-            <td>${dto.rept_no}</td>
+            <td><a href="detail.do?id=${dto.preporter}&rept_no=${dto.rept_no}">${dto.rept_no}</a></td>
          </tr>
          <tr>
             <th>신고 번호</th>
@@ -58,6 +58,10 @@
          <tr>
             <th>피신고자 아이디</th>
             <td>${dto.preporter}</td>
+         </tr>
+         <tr>
+            <th>신고자 아이디</th>
+            <td>${dto.reporter}</td>
          </tr>
          <tr>
             <th>신고 게시판 종류</th>
@@ -118,7 +122,7 @@
                </tr>               
          </table>            
          <button id="confirmButton">신고 처리 하기</button>
-         <input type="button" onclick="location.href='report_msg_profileList.go'" value="취소" id="cancel">                 
+         <input type="button" onclick="location.href='report_profileList.go'" value="취소" id="cancel">                 
       </form>  
 </body>
 <script>

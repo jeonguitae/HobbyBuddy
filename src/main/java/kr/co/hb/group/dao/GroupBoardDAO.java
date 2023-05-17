@@ -66,4 +66,9 @@ public interface GroupBoardDAO {
 
 	GroupBoardDTO gdetail1(int gidx);
 
+	int adminchk(String loginId);
+
+	void gboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
+			String sboard_num);
+
 }

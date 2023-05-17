@@ -74,6 +74,15 @@
 				</th>
 			</tr>
 		</table>
+		
+		<form class="secretSet" method="post" action="gboardSecretSet.do">
+			<input type="hidden" name="writer_id" value="${board.id}">
+			<input type="hidden" name="sboard_title" value="${board.subject}">
+			<input type="hidden" name="sboard_num" value="${board.gidx}">
+			<input type="hidden" name="admin_id" value="${sessionScope.loginId}">			
+			<button id="secretSet_btn" >비밀글 설정</button>
+			
+		</form>	
 </body>
 <script>
 	var msg = "${msg}";

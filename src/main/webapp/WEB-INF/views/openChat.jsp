@@ -55,26 +55,31 @@
 	
 	textarea[name="msg"] {
 	  border: none;
-	  width: calc(100% - 450px);
+	  width: calc(100% - 1250px);
 	  height: 40px;
+	  left: 10px;
 	  resize: none;
 	  padding: 10px;
 	  font-size: 14px;
 	  border-radius: 20px;
 	  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	  margin-right: 10px;
+	  position: absolute;
+	  margin-left: 430px;
 	}
 	
 	button.send {
 	  border: none;
 	  background-color: #0088ff;
 	  color: white;
-	  width: 60px;
+	  width: 80px;
 	  height: 40px;
 	  border-radius: 20px;
 	  font-size: 14px;
 	  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 	  cursor: pointer;
+	  position: absolute;
+	  margin-left: 400px;
 	}
 	
 	button.join {
@@ -182,6 +187,10 @@
 	  top: 350px;
 	  left: 0;
 	  width: 50%;
+	}
+	
+	textraea[name="msg"]{
+		left :10px;
 	}
 	
 </style>

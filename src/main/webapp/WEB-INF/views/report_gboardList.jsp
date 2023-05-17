@@ -309,8 +309,8 @@ listCall(showPage);
 	   $('#pagination').twbsPagination('destroy');
 }); */
 
-$('#fboardSearchButton').click(function(){
-	   searchText = $('#fboardSearchInput').val();
+$('#gboardSearchButton').click(function(){
+	   searchText = $('#gboardSearchInput').val();
 	   listCall(showPage);
 	   $('#pagination').twbsPagination('destroy');
 	});

@@ -24,10 +24,10 @@ public class SecretController {
 	@ResponseBody
 	public HashMap<String, Object> secretList(
 			@RequestParam String page,
-			@RequestParam String cnt			
+			@RequestParam String search			
 			){
 		
-		return service.secretPageList(Integer.parseInt(page), Integer.parseInt(cnt));
+		return service.secretPageList(Integer.parseInt(page), search);
 	}	
 	
 	/*

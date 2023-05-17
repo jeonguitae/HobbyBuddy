@@ -16,11 +16,11 @@
 		<table>
 			<tr>
 				<th>신고 아이디</th>
-				<td><input type="text" name="reporter" value="${id_send}" readonly/></td>
+				<td><input type="text" name="preporter" value="${id_send}" readonly/></td>
 			</tr>
 			<tr>
 				<th>내 아이디</th>
-				<td><input type="text" name="preporter" value="${sessionScope.loginId}" readonly/></td>
+				<td><input type="text" name="reporter" value="${sessionScope.loginId}" readonly/></td>
 			</tr>
 			<tr>
 				<th>분류</th>
