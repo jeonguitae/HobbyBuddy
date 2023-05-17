@@ -34,16 +34,16 @@
 	input[name="coContent"]{
 		width : 800;
 	}
+	
+	#comment{
+		position: absolute;
+		margin-left: 19%;
+	}
 </style>
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
 		<table id="writing">
-			<tr>
-				<th>분류</th>
-				<td>${dto.big_hb} - ${dto.small_hb}</td>
-			
-			</tr>
 			<tr>
 				<th>제목</th>
 				<td>${dto.title}</td>

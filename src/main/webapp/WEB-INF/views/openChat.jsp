@@ -242,7 +242,7 @@
 			<tr>
 				<th hidden>방 번호</th>
 				<th colspan="6">소모임 리스트
-					
+					<button onclick="location.href='sgwrite.go?gidx=${sessionScope.gidx}'">소모임 생성</button>  
 				</th>
 			</tr>
 			

@@ -125,7 +125,6 @@
 						<th>구분</th>
 						<th>아이디</th>
 						<th>이름</th>
-						<th>경고횟수</th>
 						<th>정지여부</th>	
 					</tr>
                </thead>
@@ -134,11 +133,8 @@
 				<c:forEach items="${list}" var="member">
 					<tr>
 						<td>${member.admin}</td>
-						<td>
-							<a href="javascript:void(0);" onclick="openPopup('${member.id}');">${member.id}</a>
-						</td>
+						<td><a href="mdetail.do?id=${member.id}">${member.id}</a></td>
 						<td>${member.name}</td>
-						<td>경고횟수 자리</td>
 						<td>${member.ban}</td>
 					</tr>			
 				</c:forEach>
@@ -146,10 +142,10 @@
 	</table>
 </body>
 <script>
-	
+/* 	
 	function openPopup(memberId) {
 	    var url = 'mdetail.do?id=' + memberId;
 	    window.open(url, '_blank', 'width=`1000,height=700');
-	  }
+	  } */
 </script>
 </html>

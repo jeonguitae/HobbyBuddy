@@ -72,8 +72,11 @@ public class BoardController {
 		return "fBoardList";
 	}
 	@RequestMapping(value="/fwrite.go")
-	public String fBoardCreate(HttpSession session){
+	public String fBoardCreate(HttpSession session, Model model){
 		logger.info("write");
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+	    logger.info("big_hb : " + big_hb);
+	    model.addAttribute("big_hb",big_hb);
 		String id = (String) session.getAttribute("loginId");
 		return "fBoardCreate";
 	}
@@ -99,6 +102,9 @@ public class BoardController {
 			dto=service.detail1(fbNo,"detail");
 		}
 		if (session.getAttribute("loginId")==null) {
+			ArrayList<MemberDTO> big_hb = service2.big_hb();
+		    logger.info("big_hb : " + big_hb);
+		    model.addAttribute("big_hb",big_hb);
 			page = "fBoardList";			
 		}
 		session.setAttribute("fbNo", fbNo);
@@ -110,6 +116,7 @@ public class BoardController {
 		coList=service.coList(fbNo);
 		model.addAttribute("coList",coList);
 		logger.info("coList"+coList);
+		
 		return page;			
 	}
 	
