@@ -8,21 +8,31 @@
       <link rel="stylesheet" href="resources/css/css.css">
 
    <style>
-		table, th, td{
-			border : 1px solid black;
+   	.container {
+  		display: flex;
+ 	 	justify-content: center;
+		}
+		.bmarklist, th, td{
+			border : 1px solid red;
 			border-collapse: collapse;
 			padding : 5px 10px;
 		}
-		
+		.bmarklist{
+			width : 800px;
+		}
 		td[class="psearch"]{
-      margin-top: 5px;
+      		margin-top: 5px;
+ 	  }
+ 	  input[name="search"]{
+ 	  		margin-left: 200px;
  	  }
 	</style>
 
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-	<table>
+	<div class="container">
+	<table class = "bmarklist">
 		<thead>
 			<tr>
 				<th>아이디</th>
@@ -35,15 +45,20 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:if test="${list.size() == 0}">
+				<tr>
+					<th colspan="7">즐겨찾기한 회원이 없습니다. 즐겨찾기를 등록해보세요.</th>
+				</tr>
+			</c:if>
 			<c:forEach items="${list}" var="member">
 				<tr>
-					<td><a href="detail.do?id=${member.id}">${member.id}</a></td>
-					<td>${member.name}</td>
-					<td>${member.age}</td>
-					<td>${member.area}</td>
-					<td>${member.small_hb}</td>
-					<td>${member.gender}</td>
-					<td><input type="button" name="cancel" value="해제" onclick="location.href='bcancel.do?myid=${sessionScope.loginId}&memid=${member.id}'"/></td>
+					<td style="text-align: center;"><a href="detail.do?id=${member.id}">${member.id}</a></td>
+					<td style="text-align: center;">${member.name}</td>
+					<td style="text-align: center;">${member.age}</td>
+					<td style="text-align: center;">${member.area}</td>
+					<td style="text-align: center;">${member.small_hb}</td>
+					<td style="text-align: center;">${member.gender}</td>
+					<td style="text-align: center;"><input type="button" name="cancel" value="해제" onclick="location.href='bcancel.do?myid=${sessionScope.loginId}&memid=${member.id}'"style="display: block; margin: 0 auto;"/></td>
 				</tr>			
 			</c:forEach>
 				<tr>
@@ -60,11 +75,11 @@
 	               </tr>
 		</tbody>
 	</table>
-	
+	</div>
 </body>
 <script>
-	var msg = "${not empty msg ? msg : ''}";
-	if (msg !== "") {
+	var msg = "${msg}";
+	if (msg != "") {
         alert(msg);
     }
 	

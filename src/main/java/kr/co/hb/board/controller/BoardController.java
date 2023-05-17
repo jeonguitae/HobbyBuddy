@@ -78,8 +78,11 @@ public class BoardController {
 		return "fBoardCreate";
 	}
 	@RequestMapping(value="/fwrite.do")
-	public String fwrite(MultipartFile photo,@RequestParam HashMap<String, String> params){
+	public String fwrite(MultipartFile photo,@RequestParam HashMap<String, String> params, Model model){
 		logger.info("fwrite"+params);
+		ArrayList<MemberDTO> big_hb = service2.big_hb();
+	    logger.info("big_hb : " + big_hb);
+	    model.addAttribute("big_hb",big_hb);
 		return service.fwrite(photo,params,null);
 	}
 	@RequestMapping(value="/fdetail.do")
@@ -120,11 +123,15 @@ public class BoardController {
 	public String updateform(Model model,@RequestParam int fbNo) {
 		String page = "redirect:/flist.go";
 		//그 fbNo갖고 있는 애를 update로 보내야하니까
-		BoardDTO dto =service.detail(fbNo,"update");
-		if (dto!=null) {
-			model.addAttribute("dto",dto);
+		BoardDTO dto = null;
+		dto =service.detail(fbNo,"update");
+		
+		if (dto == null) {
+			
+			dto =service.detail1(fbNo,"update");
 			
 		}
+		model.addAttribute("dto",dto);
 		logger.info("업뎃가기 전"+dto);
 		return "fBoardUpdate";
 	}
@@ -172,20 +179,26 @@ public class BoardController {
 	public String bmarkgo(HttpSession session, Model model) {
 		logger.info("즐겨찾기로 이동 얍");
 		String id = (String) session.getAttribute("loginId");
-		ArrayList<BoardDTO> dto=service.bmarklist(id);
-		logger.info("짜증나게 하네 진짜");
+		ArrayList<BoardDTO> dto = service.bmarklist(id);
+		/* logger.info("짜증나게 하네 진짜"); */
 		
-		if (dto!=null) {
-			String msg = "즐겨찾기된 회원이 없습니다. 프로필 목록에서 즐겨찾기 해보세요.";
-		}
 		ArrayList<BoardDTO> bmarklist= service.bmarkselect(id);
+		/*
+		 * if (bmarklist == null) { msg = "즐겨찾기된 회원이 없습니다. 프로필 목록에서 즐겨찾기 해보세요."; }
+		 */
 		/* ArrayList<MemberDTO> big_hb = service2.big_hb(); */
 		model.addAttribute("list", bmarklist);
+		
+		String msg = (String) session.getAttribute("msg");
+		
+		model.addAttribute("msg", msg);
+		
+		session.removeAttribute("msg");
 		return "bmarkList";
 	}
 	
 	@RequestMapping(value="/bmark.do")
-	public String bmarkdo(@RequestParam String memid,@RequestParam String myid, Model model) {
+	public String bmarkdo(@RequestParam String memid,@RequestParam String myid, HttpSession session) {
 		
 		int row1= service.bmarkch(memid, myid);
 		String msg = "이미 즐겨찾기한 회원입니다.";
@@ -200,7 +213,7 @@ public class BoardController {
 		if(row1 == 1){
 			logger.info("이미 즐겨찾기됨"+msg);
 		}
-		model.addAttribute("msg", msg);
+		session.setAttribute("msg", msg);
 		
 		return "redirect:/bmarklist.go";
 	}

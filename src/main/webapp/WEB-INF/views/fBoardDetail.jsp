@@ -6,11 +6,33 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <style>
+/*
 	#writing, th, td{
 	border : 1px solid black;
 	}
+	#writing{
+		width : 750px;
+	}
+	th{
+		width : 150px;	
+	}
 	#comment{
-	border : none;
+		width : 750px;
+		border : none;
+	}
+	input[name="coContent"]{
+		width : 
+	}*/
+	
+	#writing, #comment{
+		margin-left: 220;
+		width: 900;
+	}
+	hr {
+		width: 900;	
+	}
+	input[name="coContent"]{
+		width : 800;
 	}
 </style>
 </head>
@@ -78,7 +100,7 @@
 			
 		</form>	
 		<br><br>
-		<p>댓글 쓰기</p>
+		<h3>댓글 쓰기</h3><hr/>
 		<br>
 		<form class="comment" method="post" action="cowrite.do?fbNo=${dto.fbNo}">
 			<input type="hidden" name="id_receive" value="${dto.id}">
@@ -96,14 +118,15 @@
 							<%-- <th class="coNo" hidden>${coList.coNo}</th> --%>
 							<th>${coList.id}</th>
 							<td>${coList.coContent}</td>
-							<td>${coList.coTime}</td>
+							<td style="text-align: center;">${coList.coTime}</td>
 							<td>
 							<c:if test="${coList.id eq loginId}">
-								<button onclick="location.href='./coupdate.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">수정</button>
-								<button onclick="location.href='./codelete.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'">삭제</button>
+								<button onclick="location.href='./codelete.go?coNo=${coList.coNo}&fbNo=${dto.fbNo}'"
+								style="display: block; margin: 0 auto;">삭제</button>
 							</c:if>
 							<c:if test="${coList.id ne loginId}">
-								<button onclick="location.href='./reportComent.go?reporter=${coList.id}&reptboard_num=${dto.fbNo}&rept_content=${coList.coContent}&coNo=${coList.coNo}'">신고</button>								
+								<button onclick="location.href='./reportComent.go?reporter=${coList.id}&reptboard_num=${dto.fbNo}&rept_content=${coList.coContent}&coNo=${coList.coNo}'"
+								style="display: block; margin: 0 auto;">신고</button>								
 							</c:if>
 							</td>	
 						</tr>
