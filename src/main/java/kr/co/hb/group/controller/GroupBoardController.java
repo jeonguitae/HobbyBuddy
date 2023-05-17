@@ -226,12 +226,13 @@ public class GroupBoardController {
 			}
 		
 		//그 fbNo갖고 있는 애를 update로 보내야하니까
-		GroupBoardDTO dto = service.gdetail(gidx, "update");
-		if (dto!=null) {
-			
-			model.addAttribute("board", dto);
+		GroupBoardDTO dto = null;
+		dto = service.gdetail(gidx, "update");
+		if (dto == null) {
+			dto = service.gdetail1(gidx, "update");
 		}
 		
+		model.addAttribute("board", dto);
 		ArrayList<MemberDTO> big_hb = mservice.big_hb();
 		logger.info("big_hb : " + big_hb);
 		model.addAttribute("big_hb", big_hb);
@@ -373,7 +374,7 @@ public class GroupBoardController {
 			
 			String writer_id = params.get("writer_id");
 			String admin_id = params.get("admin_id");
-			String sboard_class = "자유";
+			String sboard_class = "모임";
 			String sboard_title = params.get("sboard_title");
 			String sboard_num = params.get("sboard_num");
 			
@@ -383,7 +384,7 @@ public class GroupBoardController {
 		
 		   session.setAttribute("msg", msg);
 		   
-	      return "redirect:/flist.go";
+	      return "redirect:/glist.go";
 	   }
 	
 

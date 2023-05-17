@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.co.hb.board.dao.QboardDAO;
 import kr.co.hb.board.dto.BoardDTO;
 import kr.co.hb.group.dao.GroupBoardDAO;
 import kr.co.hb.group.dto.GroupBoardDTO;
@@ -23,6 +24,7 @@ import kr.co.hb.group.dto.GroupBoardDTO;
 public class GroupBoardService {
 	
 	@Autowired GroupBoardDAO dao;
+	@Autowired QboardDAO qdao;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	public ArrayList<GroupBoardDTO> glist() {
@@ -221,6 +223,7 @@ public class GroupBoardService {
 	public void gboardSecretSet(String writer_id, String admin_id, String sboard_class, String sboard_title,
 			String sboard_num) {
 		dao.gboardSecretSet(writer_id,admin_id,sboard_class,sboard_title,sboard_num);
+		qdao.secretUpdate(sboard_class,sboard_num);
 		
 	}
 }

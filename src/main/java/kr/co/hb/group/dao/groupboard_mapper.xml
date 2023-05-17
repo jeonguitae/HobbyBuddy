@@ -13,6 +13,7 @@
 		INNER JOIN secret s ON g.gidx = s.sboard_num
 		WHERE s.secret_state = 1 
 	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<!-- <select id="gsorting" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -40,18 +41,41 @@
 	</insert>
 	
 	<select id="gsserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist
-		WHERE subject LIKE #{serch} 
+		<!-- SELECT * FROM gboardlist
+		WHERE subject LIKE #{serch}  -->
+		
+		SELECT *
+		FROM gboardlist g
+		WHERE g.subject LIKE #{serch} AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<select id="gwserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist
-		WHERE id LIKE #{serch}
-	</select>
+		SELECT *
+		FROM gboardlist g
+		WHERE g.id LIKE #{serch} AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC	</select>
 	
 	<select id="gcserch" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist
-		WHERE content LIKE #{serch}
+		SELECT *
+		FROM gboardlist g
+		WHERE g.content LIKE #{serch} AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<select id="gboardpagelist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
@@ -119,23 +143,65 @@
 	</delete>
 	
 	<select id="sportglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist WHERE big_hb = '운동' ORDER BY gidx DESC
+		<!-- SELECT * FROM gboardlist WHERE big_hb = '운동' ORDER BY gidx DESC -->
+		
+		SELECT *
+		FROM gboardlist g
+		WHERE g.big_hb = '운동' AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<select id="petglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist WHERE big_hb = '반려동물' ORDER BY gidx DESC
+		SELECT *
+		FROM gboardlist g
+		WHERE g.big_hb = '반려동물' AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<select id="foodglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist WHERE big_hb = '맛집' ORDER BY gidx DESC
+		SELECT *
+		FROM gboardlist g
+		WHERE g.big_hb = '맛집' AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<select id="leisureglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist WHERE big_hb = '여가' ORDER BY gidx DESC
+		SELECT *
+		FROM gboardlist g
+		WHERE g.big_hb = '여가' AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<select id="etcglist" resultType="kr.co.hb.group.dto.GroupBoardDTO">
-		SELECT * FROM gboardlist WHERE big_hb = '기타' ORDER BY gidx DESC
+		SELECT *
+		FROM gboardlist g
+		WHERE g.big_hb = '기타' AND g.gidx NOT IN (
+		SELECT g.gidx
+		FROM gboardlist g
+		INNER JOIN secret s ON g.gidx = s.sboard_num
+		WHERE s.secret_state = 1 
+	  	)
+	  	ORDER BY g.gidx DESC
 	</select>
 	
 	<insert id="reportGroupDo" parameterType="hashmap">
