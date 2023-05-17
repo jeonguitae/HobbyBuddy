@@ -31,7 +31,7 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">공지사항 등록</h3>
+   <h1 align="center">공지사항 등록</h1>
    <form action="noticeWrite.do" method="post" enctype="multipart/form-data">
       <table>      
       
@@ -41,11 +41,11 @@
          </tr>               
          <tr>
             <th>공지사항 제목</th>
-            <td><input type="text" name="notice_title"></td>
+            <td><input type="text" name="notice_title" width="750px"></td>
          </tr>
          <tr>
             <th>공지사항 내용</th>
-            <td><textarea name="notice_content"></textarea></td>
+            <td><textarea name="notice_content" style="width: 500px; height: 250px"></textarea></td>
          </tr>
          <tr>
             <th>사진</th>

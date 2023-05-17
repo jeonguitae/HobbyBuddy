@@ -16,12 +16,13 @@
       border: 1px solid black;
       border-collapse: collapse;
       padding: 5px 10px;
+      
+   }
+   table{
+   		width: 50%;
    }
    button{
       margin: 5px;
-   }
-   table {
-      width: 500px;
    }
    input[type="text"]{
       width: 40%;   
@@ -54,8 +55,7 @@
 			<input type="hidden" name="sboard_title" value="${dto.qboard_title}">
 			<input type="hidden" name="sboard_num" value="${dto.qboard_no}">
 			<input type="hidden" name="admin_id" value="${sessionScope.loginId}">			
-			<button id="secretSet_btn" >비밀글 설정</button>
-			
+			<button id="secretSet_btn" style="float: right;" >비밀글 설정</button>			
 		</form>   		
       <table>
          
@@ -64,7 +64,7 @@
             <td>${dto.qboard_class}</td>
             <c:if test="${not empty dto.new_photo_name}">
 		    <td rowspan="7">
-		    	<img src="/photo/${dto.new_photo_name}" width="500"/>
+		    	<img src="/photo/${dto.new_photo_name}" width="400"/>
 		    </td>
 		    
 		</c:if>
