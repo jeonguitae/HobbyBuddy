@@ -72,16 +72,18 @@
 	<br>
       <h2 align="center" style="color: maroon;;">고객센터</h2>     
       
-       <button onclick="location.href='qBoardWrite.go'" id="write_btn">문의하기</button>        
+       <button onclick="location.href='qBoardWrite.go'" id="write_btn">문의하기</button>  
+       <br>
+       <br>      
       <table>
          <thead>
             <tr>
                <th>번호</th>
-               <th id="sortClass">문의종류<i class="fas fa-sort"></i></th>
+               <th id="sortClass">문의종류</th>
                <th>제목</th>
                <th>작성자</th>
-               <th id="sortDate">작성일<i class="fas fa-sort"></i></th>                                     
-               <th id="sortChk">공개여부<i class="fas fa-sort"></i></th>
+               <th id="sortDate">작성일</th>                                     
+               <th id="sortChk">공개여부</th>
                <th>답변 여부</th>
                <!-- <th id="secret_col">비밀글 여부</th>   -->             
             </tr>            

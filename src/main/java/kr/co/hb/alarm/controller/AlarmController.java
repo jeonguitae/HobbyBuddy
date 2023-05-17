@@ -123,7 +123,9 @@ public class AlarmController {
 		}
 		
 		if(alarm_class.equals("공지사항")) {
+			logger.info("공지 alarm_num" + alarm_num);
 			NoticeDTO dto = nservice.noticeDetail(alarm_num, "noticeDetail");
+			logger.info("dto string.. : " + dto);
 			model.addAttribute("dto",dto);
 			service.alarmListRead(alarm_no);
 			page = "noticeDetail";

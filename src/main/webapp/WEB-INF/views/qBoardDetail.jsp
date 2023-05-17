@@ -48,7 +48,7 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">문의 내역</h3>
+      <h1 align="center">문의 내역</h1>
    		<form class="secretSet" method="post" action="qboardSecretSet.do?qboard_no=${dto.qboard_no}">
 			<input type="hidden" name="writer_id" value="${dto.id}">
 			<input type="hidden" name="sboard_title" value="${dto.qboard_title}">
@@ -62,6 +62,12 @@
          <tr>
             <th>문의 종류</th>
             <td>${dto.qboard_class}</td>
+            <c:if test="${not empty dto.new_photo_name}">
+		    <td rowspan="7">
+		    	<img src="/photo/${dto.new_photo_name}" width="500"/>
+		    </td>
+		    
+		</c:if>
          </tr>
          <tr>
             <th>작성자</th>
@@ -84,12 +90,7 @@
             <td>${dto.qboard_openchk ? '공개' : '비공개'}</td>
          </tr>
          
-         <c:if test="${not empty dto.new_photo_name}">
-		    <tr>
-		        <th>사진</th>
-		        <td><img src="/photo/${dto.new_photo_name}" width="100"/></td>
-		    </tr>
-		</c:if>
+         
 		<tr>
 			<td colspan="2">				
 				<input type="button" onclick="location.href='qboardList.go'" value="리스트로 돌아가기" id="listBack">
