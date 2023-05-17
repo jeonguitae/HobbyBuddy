@@ -45,7 +45,7 @@
 </head>
 <body>
 	<jsp:include page="gnb.jsp"/>
-   <h3 align="center">공지사항 상세</h3>
+   <h1 align="center">공지사항 상세</h1>
    
       <table>
          
@@ -77,7 +77,7 @@
          <c:if test="${dto.new_photo_name ne null }">
          	<th>사진</th>
             <td>
-		      <img src="/photo/${dto.new_photo_name}">
+		      <img src="/photo/${dto.new_photo_name}" width="500">
 		    </td>
          </c:if>            
          <tr>

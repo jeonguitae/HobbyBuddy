@@ -10,42 +10,42 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <style>
 	table, th, td{
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 5px 10px;
-   }
-   button{
-      margin: 5px;
-   }
-   table {
-      width: 500px;
-   }
-   input[type="text"]{
-      width: 40%;   
-   }
-   #search{
-      display: inline-block;
-   }
-   colgroup {
-      width: 30%;
-   }
-   #chkBtn{
-   	 float: left;
-   }
-   #rightt{
-   	float: right;
-   }
-   #listBack{
-   	background: aqua;
-   }
-   #after_qboard{
-   	display: none;
-   }
+		border: 1px solid black;
+		border-collapse: collapse;
+		padding: 5px 10px;
+	}
+	button{
+		margin: 5px;
+	}
+	table {
+		width: 500px;
+	}
+	input[type="text"]{
+		width: 40%;   
+	}
+	#search{
+		display: inline-block;
+	}
+	colgroup {
+		width: 30%;
+	}
+	#chkBtn{
+		float: left;
+	}
+	#rightt{
+		float: right;
+	}
+	#listBack{
+		background: aqua;
+	}
+	#after_qboard{
+		display: none;
+	}
 </style>
 </head>
 <body>
 <jsp:include page="gnb.jsp"/>
-   <h3 align="center">문의 내역 상세</h3>
+   <h1 align="center">문의 내역 상세</h1>
    	<form action="qboardUpdate.do" method="post" enctype="multipart/form-data">
       <input type="hidden" name="qboard_no" value="${dto.qboard_no}"/>
       <table>
@@ -66,11 +66,11 @@
          </tr>         
 		 <tr>
             <th>문의 제목</th>
-            <td><input type="text" name="qboard_title" value="${dto.qboard_title}"></td>
+            <td><input type="text" name="qboard_title" value="${dto.qboard_title}" style="width: 500px"></td>
          </tr>
 		 <tr>
             <th>문의 내용</th>
-            <td><textarea name="qboard_content">${dto.qboard_content}</textarea></td>
+            <td><textarea name="qboard_content" style="height: 150px; width: 500px">${dto.qboard_content}</textarea></td>
          </tr>
          <tr>
             <th>공개 여부</th>
@@ -88,7 +88,7 @@
 	                  <input type="file" name="photo" multiple="multiple">
 	               </c:if>
 	               <c:if test="${dto.new_photo_name ne null}">
-					  <img src="/photo/${dto.new_photo_name}" width="100"/>
+					  <img src="/photo/${dto.new_photo_name}" width="500"/>
 					  ${dto.new_photo_name}
 					  <input type="hidden" name="photoIdx" value="${dto.photoIdx}">
 					  <a href="QdeletePhoto.do?photoIdx=${dto.photoIdx}&qboard_no=${dto.qboard_no}">사진 삭제</a>				  		  

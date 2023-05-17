@@ -13,31 +13,35 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="resources/css/css.css">
 <style>
-   table, th, td{
-      border: 1px solid black;
-      border-collapse: collapse;
-      padding: 5px 10px;
-      
-      
-   }
-   button{
-      margin: 5px;
-   }
-   table {
-      width: 1000px;
-   }
-   input[type="text"]{
-      width: 40%;   
-   }
-   #search{
-      display: inline-block;
-   }
-   colgroup {
-      width: 30%;
-   }
-   #paging{
+   table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px 10px;
+        }
+
+        button {
+            margin: 5px;
+        }
+
+        table {
+            width: 1000px;
+        }
+
+        input[type="text"] {
+            width: 40%;
+        }
+
+        #search {
+            display: inline-block;
+        }
+
+        colgroup {
+            width: 30%;
+        }
+
+        #paging {
             text-align: center;
-   }
+        }
    
       
 </style>
@@ -79,6 +83,7 @@
       </table>
       
 	</body>
+
 <script>
 var loginId = "${sessionScope.loginId}";
 var adminChk = "${sessionScope.adminChk}";

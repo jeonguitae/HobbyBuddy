@@ -43,11 +43,11 @@
          </tr>               
          <tr>
             <th>공지사항 제목</th>
-            <td><input type="text" name="notice_title" value="${dto.notice_title}"></td>
+            <td><input type="text" name="notice_title" value="${dto.notice_title}" width="500"></td>
          </tr>
          <tr>
             <th>공지사항 내용</th>
-            <td><textarea name="notice_content">${dto.notice_content}</textarea></td>
+            <td><textarea name="notice_content" style="width: 700px; height: 400px">${dto.notice_content}</textarea></td>
          </tr>
          <tr>
             <th>사진</th>
@@ -57,7 +57,7 @@
                   <input type="file" name="photo" multiple="multiple">
                </c:if>
                <c:if test="${dto.new_photo_name ne null}">
-				  <img src="/photo/${dto.new_photo_name}" width="100"/>
+				  <img src="/photo/${dto.new_photo_name}" width="500"/>
 				  ${dto.new_photo_name}
 				  <input type="hidden" name="photoIdx" value="${dto.photoIdx}">
 				  <a href="deletePhoto.do?photoIdx=${dto.photoIdx}&notice_idx=${dto.notice_idx}">사진 삭제</a>				  		  
