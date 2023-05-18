@@ -103,8 +103,8 @@ function qboard_write(){
 	}else if ($qboard_title.val() == "") {
 		alert('문의 제목을 입력하세요.');
 		$qboard_title.focus();
-	}else if ($qboard_title.val().length > 20) {
-		alert('문의 제목은 20자 이내로 작성해주세요.');
+	}else if ($qboard_title.val().length > 100) {
+		alert('문의 제목은 100자 이내로 작성해주세요.');
 		$qBoard_title.focus();
 	}else if ($qboard_content.val() == "") {
 		alert('문의 내용을 입력하세요.')
