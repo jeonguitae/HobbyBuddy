@@ -72,7 +72,7 @@
             <th>매너온도</th>
             <td>
                <input type="button" value="매너온도 + 1" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=plus'"/>
-               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=minus'"/>
+               <input type="button" value="매너온도 - 1" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=minus'"/><br/>
                <input type="button" value="매너온도 삭제" onclick="location.href='mannertp.do?id_receive=${member.id}&tp_cal=del'"/>
             </td>
       	</tr>

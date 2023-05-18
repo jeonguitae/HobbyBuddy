@@ -192,7 +192,7 @@
 	  width: 50%;
 	  position: absolute;
 	  margin-left: 18%;
-	  margin-top: 20%;
+	  margin-top: 23%;
 	}
 	
 	textraea[name="msg"]{
@@ -231,7 +231,7 @@
 			<c:forEach items="${list}" var="bbs">
 				<tr>
 					<td class="gidx" hidden>${bbs.gidx}</td>
-					<th class="id">${bbs.id}</th>
+					<th class="id"><a href="detail.do?id=${bbs.id}">${bbs.id}</a></th>
 				</tr>
 			</c:forEach>
 		</tbody>

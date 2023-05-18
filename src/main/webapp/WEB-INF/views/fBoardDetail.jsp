@@ -39,6 +39,11 @@
 		position: absolute;
 		margin-left: 19%;
 	}
+	
+	#writing{
+		
+		margin-left: 28%;
+	}
 </style>
 </head>
 <body>
